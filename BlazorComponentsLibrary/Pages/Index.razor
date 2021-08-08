@@ -1,0 +1,106 @@
+﻿@page "/"
+@using IWorkTooMuch.Blazor.Components.Interfaces
+@using Model
+
+<div class="wrapper">
+
+    @if (entities == null)
+    {
+        <p>Loading...</p>
+    }
+    else
+    {
+        <SelectSuggestedEntity Title="Suggested Select" EnterSelectsEntity="true" Suggestions="entities" />
+    }
+
+
+    @if (entities == null)
+    {
+        <p>Loading...</p>
+    }
+    else
+    {
+        <SelectSuggestedEntity Title="Suggested Select" MinLengthForSuggestions="3" Suggestions="suggestions" OnEnterPressed="ProvideSuggestions" />
+    }
+
+
+    <div style="width: max-content;">
+        <InputLabel Title="Message Text">
+            <input @bind-value="input" />
+        </InputLabel>
+        <div class="btnbox">
+            <button class="btn btn-primary" @onclick="() => Notify(1)">Test Default</button>
+            <button class="btn btn-success" @onclick="() => Notify(2)">Test Success</button>
+            <button class="btn btn-warning" @onclick="() => Notify(3)">Test Warning</button>
+            <button class="btn btn-danger" @onclick="() => Notify(4)">Test Danger</button>
+        </div>
+    </div>
+
+
+</div>
+@code{
+
+    [CascadingParameter]
+    public Notifier Notifier { get; set; }
+
+    public string input { get; set; }
+
+    private void Notify(int num)
+    {
+        switch (num)
+        {
+            case 1:
+                Notifier.ProcessNotification("Default", input);
+                break;
+            case 2:
+                Notifier.ProcessSuccess("Succcess", input);
+                break;
+            case 3:
+                Notifier.ProcessWarning("Warning", input);
+                break;
+            case 4:
+                Notifier.ProcessError(new Exception(input));
+                break;
+        }
+    }
+
+    private List<IEntity> entities;
+
+    private List<IEntity> suggestions;
+
+    protected override void OnInitialized()
+    {
+        entities = new();
+
+        for (int i = 0; i < 25; i++)
+            entities.Add(new Entity()
+            {
+                Id = i,
+                Name = $"entity {i}"
+            });
+
+        base.OnInitialized();
+    }
+
+    private async Task ProvideSuggestions(string search)
+    {
+        int totalOptions = 10000;
+
+        int mySuggestions = totalOptions / (search.Length * 2);
+
+        if (mySuggestions > 1000)
+            Notifier.ProcessError(new Exception("More than 1000 suggestions found; please narrow search"));
+
+        await Task.Delay(500);
+
+        suggestions = new();
+
+        for (int i = 0; i < mySuggestions; i++)
+            suggestions.Add(new Entity()
+            {
+                Id = i,
+                Name = $"entity {i}"
+            });
+    }
+
+}

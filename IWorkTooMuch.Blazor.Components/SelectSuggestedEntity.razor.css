@@ -1,0 +1,115 @@
+﻿::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: lightgray;
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.wrapper {
+    width: max-content;
+}
+
+input {
+    margin: 0;
+    width: 100%;
+    padding: 0 1rem;
+}
+
+label {
+    margin: 0;
+    font-size: smaller;
+    color: gray;
+}
+
+.error-msg {
+    color: red;
+    font-size: smaller;
+    margin-left: 2rem;
+}
+
+
+table {
+    font-size: x-small;
+    width: 100%;
+    border: solid 1px black;
+    border-top: none;
+}
+
+thead {
+    display: block;
+}
+
+tbody {
+    display: block;
+    overflow-y: scroll;
+    max-height: 100px;
+}
+
+    tbody td:nth-child(1) {
+        text-align: center;
+    }
+
+thead th:nth-child(1) {
+    padding-left: 8px;
+    padding-right: 8px;
+    text-align: center;
+}
+
+thead th:nth-child(2), tbody td:nth-child(2) {
+    width: 100%;
+}
+
+tbody tr {
+    cursor: pointer;
+}
+
+tbody .selected {
+    background-color: #f8ecec;
+}
+
+
+.selection-tags {
+    display: flex;
+    gap: .2rem;
+    flex-wrap: wrap;
+    padding: .2rem;
+}
+
+    .selection-tags > div {
+        position: relative;
+        background-color: #85c552;
+        width: max-content;
+        padding: 0 .5rem;
+        font-size: smaller;
+        border-radius: 5rem;
+        color: white;
+        cursor: no-drop;
+    }
+
+    .selection-tags div .my-tooltip {
+        display: none;
+        position: absolute;
+        background-color: rgba(0, 0, 0, 0.75);
+        width: max-content;
+        padding: .2rem .5rem;
+        color: white;
+        z-index: 1;
+        top: 105%;
+        border-radius: 10px;
+        left: -5%;
+    }
+
+    .selection-tags > div:hover {
+        background-color: lightpink;
+    }
+
+        .selection-tags > div:hover .my-tooltip {
+            display: block;
+        }

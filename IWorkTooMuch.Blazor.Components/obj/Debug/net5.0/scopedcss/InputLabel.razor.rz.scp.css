@@ -1,0 +1,9 @@
+label[b-w122qstzx4] {
+    font-size: smaller;
+    color:gray;
+}
+
+label[b-w122qstzx4] {
+    display: flex;
+    flex-direction: column;
+}

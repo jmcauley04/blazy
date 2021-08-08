@@ -1,0 +1,115 @@
+[b-hw50cm3xyw]::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+}
+
+[b-hw50cm3xyw]::-webkit-scrollbar-thumb {
+    background: lightgray;
+    border-radius: 10px;
+}
+
+[b-hw50cm3xyw]::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.wrapper[b-hw50cm3xyw] {
+    width: max-content;
+}
+
+input[b-hw50cm3xyw] {
+    margin: 0;
+    width: 100%;
+    padding: 0 1rem;
+}
+
+label[b-hw50cm3xyw] {
+    margin: 0;
+    font-size: smaller;
+    color: gray;
+}
+
+.error-msg[b-hw50cm3xyw] {
+    color: red;
+    font-size: smaller;
+    margin-left: 2rem;
+}
+
+
+table[b-hw50cm3xyw] {
+    font-size: x-small;
+    width: 100%;
+    border: solid 1px black;
+    border-top: none;
+}
+
+thead[b-hw50cm3xyw] {
+    display: block;
+}
+
+tbody[b-hw50cm3xyw] {
+    display: block;
+    overflow-y: scroll;
+    max-height: 100px;
+}
+
+    tbody td:nth-child(1)[b-hw50cm3xyw] {
+        text-align: center;
+    }
+
+thead th:nth-child(1)[b-hw50cm3xyw] {
+    padding-left: 8px;
+    padding-right: 8px;
+    text-align: center;
+}
+
+thead th:nth-child(2)[b-hw50cm3xyw], tbody td:nth-child(2)[b-hw50cm3xyw] {
+    width: 100%;
+}
+
+tbody tr[b-hw50cm3xyw] {
+    cursor: pointer;
+}
+
+tbody .selected[b-hw50cm3xyw] {
+    background-color: #f8ecec;
+}
+
+
+.selection-tags[b-hw50cm3xyw] {
+    display: flex;
+    gap: .2rem;
+    flex-wrap: wrap;
+    padding: .2rem;
+}
+
+    .selection-tags > div[b-hw50cm3xyw] {
+        position: relative;
+        background-color: #85c552;
+        width: max-content;
+        padding: 0 .5rem;
+        font-size: smaller;
+        border-radius: 5rem;
+        color: white;
+        cursor: no-drop;
+    }
+
+    .selection-tags div .my-tooltip[b-hw50cm3xyw] {
+        display: none;
+        position: absolute;
+        background-color: rgba(0, 0, 0, 0.75);
+        width: max-content;
+        padding: .2rem .5rem;
+        color: white;
+        z-index: 1;
+        top: 105%;
+        border-radius: 10px;
+        left: -5%;
+    }
+
+    .selection-tags > div:hover[b-hw50cm3xyw] {
+        background-color: lightpink;
+    }
+
+        .selection-tags > div:hover .my-tooltip[b-hw50cm3xyw] {
+            display: block;
+        }

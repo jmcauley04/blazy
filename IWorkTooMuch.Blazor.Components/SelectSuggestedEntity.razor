@@ -1,0 +1,54 @@
+﻿<div class="wrapper" @onmouseleave="() => { showTable = false; errorMsg = string.Empty; inputText = string.Empty; }">
+
+    <label>
+
+        <span>
+            @Title
+            @if (!string.IsNullOrEmpty(errorMsg))
+            {
+                <span class="error-msg">@errorMsg</span>
+            }
+        </span>
+        <input @bind-value="inputText" @onkeyup="ProcessKeyUp" @onfocusin="() => showTable = true" @onclick="() => showTable = true" @ref="InputElement" />
+
+    </label>
+
+    <table hidden="@(!showTable)">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (Suggestions == null)
+            {
+                <tr>
+                    <td></td>
+                    <td>Loading...</td>
+                </tr>
+            }
+            else
+            {
+                @foreach (var entity in Suggestions)
+                {
+                    <tr @onclick="() => ToggleSelect(entity)" class="@(Selections.Contains(entity) ? "selected" : "")">
+                        <td>@entity.Id</td>
+                        <td>@entity.Name</td>
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
+
+    <div class="selection-tags">
+        @foreach (var selection in Selections)
+        {
+            <div @onclick="() => RemoveSelection(selection)">
+                @selection.Id
+                <div class="my-tooltip">@selection.Name</div>
+            </div>
+        }
+    </div>
+
+</div>
