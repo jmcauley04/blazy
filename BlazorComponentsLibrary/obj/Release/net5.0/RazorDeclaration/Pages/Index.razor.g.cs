@@ -13,91 +13,91 @@ namespace BlazorComponentsLibrary.Pages
     using System.Threading.Tasks;
     using Microsoft.AspNetCore.Components;
 #nullable restore
-#line 1 "C:\Users\Michael Cauley\source\repos\BlazorComponentsLibrary\BlazorComponentsLibrary\_Imports.razor"
+#line 1 "C:\Users\Michael Cauley\source\repos\blazor-components\BlazorComponentsLibrary\_Imports.razor"
 using System.Net.Http;
 
 #line default
 #line hidden
 #nullable disable
 #nullable restore
-#line 2 "C:\Users\Michael Cauley\source\repos\BlazorComponentsLibrary\BlazorComponentsLibrary\_Imports.razor"
+#line 2 "C:\Users\Michael Cauley\source\repos\blazor-components\BlazorComponentsLibrary\_Imports.razor"
 using Microsoft.AspNetCore.Authorization;
 
 #line default
 #line hidden
 #nullable disable
 #nullable restore
-#line 3 "C:\Users\Michael Cauley\source\repos\BlazorComponentsLibrary\BlazorComponentsLibrary\_Imports.razor"
+#line 3 "C:\Users\Michael Cauley\source\repos\blazor-components\BlazorComponentsLibrary\_Imports.razor"
 using Microsoft.AspNetCore.Components.Authorization;
 
 #line default
 #line hidden
 #nullable disable
 #nullable restore
-#line 4 "C:\Users\Michael Cauley\source\repos\BlazorComponentsLibrary\BlazorComponentsLibrary\_Imports.razor"
+#line 4 "C:\Users\Michael Cauley\source\repos\blazor-components\BlazorComponentsLibrary\_Imports.razor"
 using Microsoft.AspNetCore.Components.Forms;
 
 #line default
 #line hidden
 #nullable disable
 #nullable restore
-#line 5 "C:\Users\Michael Cauley\source\repos\BlazorComponentsLibrary\BlazorComponentsLibrary\_Imports.razor"
+#line 5 "C:\Users\Michael Cauley\source\repos\blazor-components\BlazorComponentsLibrary\_Imports.razor"
 using Microsoft.AspNetCore.Components.Routing;
 
 #line default
 #line hidden
 #nullable disable
 #nullable restore
-#line 6 "C:\Users\Michael Cauley\source\repos\BlazorComponentsLibrary\BlazorComponentsLibrary\_Imports.razor"
+#line 6 "C:\Users\Michael Cauley\source\repos\blazor-components\BlazorComponentsLibrary\_Imports.razor"
 using Microsoft.AspNetCore.Components.Web;
 
 #line default
 #line hidden
 #nullable disable
 #nullable restore
-#line 7 "C:\Users\Michael Cauley\source\repos\BlazorComponentsLibrary\BlazorComponentsLibrary\_Imports.razor"
+#line 7 "C:\Users\Michael Cauley\source\repos\blazor-components\BlazorComponentsLibrary\_Imports.razor"
 using Microsoft.AspNetCore.Components.Web.Virtualization;
 
 #line default
 #line hidden
 #nullable disable
 #nullable restore
-#line 8 "C:\Users\Michael Cauley\source\repos\BlazorComponentsLibrary\BlazorComponentsLibrary\_Imports.razor"
+#line 8 "C:\Users\Michael Cauley\source\repos\blazor-components\BlazorComponentsLibrary\_Imports.razor"
 using Microsoft.JSInterop;
 
 #line default
 #line hidden
 #nullable disable
 #nullable restore
-#line 9 "C:\Users\Michael Cauley\source\repos\BlazorComponentsLibrary\BlazorComponentsLibrary\_Imports.razor"
+#line 9 "C:\Users\Michael Cauley\source\repos\blazor-components\BlazorComponentsLibrary\_Imports.razor"
 using BlazorComponentsLibrary;
 
 #line default
 #line hidden
 #nullable disable
 #nullable restore
-#line 10 "C:\Users\Michael Cauley\source\repos\BlazorComponentsLibrary\BlazorComponentsLibrary\_Imports.razor"
+#line 10 "C:\Users\Michael Cauley\source\repos\blazor-components\BlazorComponentsLibrary\_Imports.razor"
 using BlazorComponentsLibrary.Shared;
 
 #line default
 #line hidden
 #nullable disable
 #nullable restore
-#line 11 "C:\Users\Michael Cauley\source\repos\BlazorComponentsLibrary\BlazorComponentsLibrary\_Imports.razor"
+#line 11 "C:\Users\Michael Cauley\source\repos\blazor-components\BlazorComponentsLibrary\_Imports.razor"
 using IWorkTooMuch.Blazor.Components;
 
 #line default
 #line hidden
 #nullable disable
 #nullable restore
-#line 2 "C:\Users\Michael Cauley\source\repos\BlazorComponentsLibrary\BlazorComponentsLibrary\Pages\Index.razor"
+#line 2 "C:\Users\Michael Cauley\source\repos\blazor-components\BlazorComponentsLibrary\Pages\Index.razor"
 using IWorkTooMuch.Blazor.Components.Interfaces;
 
 #line default
 #line hidden
 #nullable disable
 #nullable restore
-#line 3 "C:\Users\Michael Cauley\source\repos\BlazorComponentsLibrary\BlazorComponentsLibrary\Pages\Index.razor"
+#line 3 "C:\Users\Michael Cauley\source\repos\blazor-components\BlazorComponentsLibrary\Pages\Index.razor"
 using Model;
 
 #line default
@@ -112,7 +112,7 @@ using Model;
         }
         #pragma warning restore 1998
 #nullable restore
-#line 26 "C:\Users\Michael Cauley\source\repos\BlazorComponentsLibrary\BlazorComponentsLibrary\Pages\Index.razor"
+#line 28 "C:\Users\Michael Cauley\source\repos\blazor-components\BlazorComponentsLibrary\Pages\Index.razor"
       
 
     [CascadingParameter]
@@ -141,8 +141,12 @@ using Model;
 
     private List<IEntity> entities;
 
-    protected override void OnInitialized()
+    private List<IEntity> suggestions;
+
+    protected override async Task OnInitializedAsync()
     {
+        await Task.Delay(2000);
+
         entities = new();
 
         for (int i = 0; i < 25; i++)
@@ -151,9 +155,33 @@ using Model;
                 Id = i,
                 Name = $"entity {i}"
             });
-
-        base.OnInitialized();
     }
+
+    private async Task ProvideSuggestions(string search)
+    {
+        int totalOptions = 10000;
+
+        int mySuggestions = totalOptions / (search.Length * 2);
+
+        if (mySuggestions > 1000)
+        {
+            Notifier.ProcessError(new Exception("More than 1000 suggestions found; please narrow search"));
+            suggestions = new();
+            return;
+        }
+
+        await Task.Delay(3000);
+
+        suggestions = new();
+
+        for (int i = 0; i < mySuggestions; i++)
+            suggestions.Add(new Entity()
+            {
+                Id = i,
+                Name = $"entity {i}"
+            });
+    }
+
 
 #line default
 #line hidden
