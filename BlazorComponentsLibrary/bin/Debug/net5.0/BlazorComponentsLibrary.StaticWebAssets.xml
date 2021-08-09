@@ -1,5 +1,0 @@
-﻿<StaticWebAssets Version="1.0">
-  <ContentRoot BasePath="/" Path="C:\Users\Michael Cauley\source\repos\blazor-components\BlazorComponentsLibrary\obj\Debug\net5.0\scopedcss\bundle\" />
-  <ContentRoot BasePath="_content/IWorkTooMuch.Blazor.Components" Path="C:\Users\Michael Cauley\source\repos\blazor-components\IWorkTooMuch.Blazor.Components\obj\Debug\net5.0\scopedcss\projectbundle\" />
-  <ContentRoot BasePath="_content/IWorkTooMuch.Blazor.Components" Path="C:\Users\Michael Cauley\source\repos\blazor-components\IWorkTooMuch.Blazor.Components\wwwroot\" />
-</StaticWebAssets>
