@@ -4,36 +4,23 @@
 
 <div class="wrapper">
 
-    @if (entities == null)
-    {
-        <p>Loading...</p>
-    }
-    else
-    {
-        <SelectSuggestedEntity Title="Suggested Select" EnterSelectsEntity="true" Suggestions="entities" />
-    }
+    <SelectEntityListed Title="Static List Select" Suggestions="entities" />
 
-
-    @if (entities == null)
-    {
-        <p>Loading...</p>
-    }
-    else
-    {
-        <SelectSuggestedEntity Title="Suggested Select" MinLengthForSuggestions="3" Suggestions="suggestions" OnEnterPressed="ProvideSuggestions" />
-    }
-
+    <SelectEntitySuggested Title="Suggested Select" MinLengthForSuggestions="3" @bind-Suggestions="suggestions" OnEnterPressed="ProvideSuggestions" />
 
     <div style="width: max-content;">
+
         <InputLabel Title="Message Text">
             <input @bind-value="input" />
         </InputLabel>
+
         <div class="btnbox">
             <button class="btn btn-primary" @onclick="() => Notify(1)">Test Default</button>
             <button class="btn btn-success" @onclick="() => Notify(2)">Test Success</button>
             <button class="btn btn-warning" @onclick="() => Notify(3)">Test Warning</button>
             <button class="btn btn-danger" @onclick="() => Notify(4)">Test Danger</button>
         </div>
+
     </div>
 
 
@@ -68,8 +55,10 @@
 
     private List<IEntity> suggestions;
 
-    protected override void OnInitialized()
+    protected override async Task OnInitializedAsync()
     {
+        await Task.Delay(2000);
+
         entities = new();
 
         for (int i = 0; i < 25; i++)
@@ -78,8 +67,6 @@
                 Id = i,
                 Name = $"entity {i}"
             });
-
-        base.OnInitialized();
     }
 
     private async Task ProvideSuggestions(string search)
@@ -89,9 +76,13 @@
         int mySuggestions = totalOptions / (search.Length * 2);
 
         if (mySuggestions > 1000)
+        {
             Notifier.ProcessError(new Exception("More than 1000 suggestions found; please narrow search"));
+            suggestions = new();
+            return;
+        }
 
-        await Task.Delay(500);
+        await Task.Delay(3000);
 
         suggestions = new();
 

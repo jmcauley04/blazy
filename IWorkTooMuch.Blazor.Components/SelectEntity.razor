@@ -13,33 +13,25 @@
 
     </label>
 
-    <table hidden="@(!showTable)">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Name</th>
-            </tr>
-        </thead>
-        <tbody>
-            @if (Suggestions == null)
-            {
-                <tr>
-                    <td></td>
-                    <td>Loading...</td>
-                </tr>
-            }
-            else
-            {
+    @if (showLoading)
+    {
+        <div class="loading-text">@LoadingText</div>
+    }
+
+    <div class="suggestions-grid" hidden="@(!showTable)">
+        @if (Suggestions != null)
+        {
+            <div class="body">
                 @foreach (var entity in Suggestions)
                 {
-                    <tr @onclick="() => ToggleSelect(entity)" class="@(Selections.Contains(entity) ? "selected" : "")">
-                        <td>@entity.Id</td>
-                        <td>@entity.Name</td>
-                    </tr>
+                    <div @onclick="() => ToggleSelect(entity)" class="@(Selections.Contains(entity) ? "selected" : "")">
+                        <span><code>@entity.Id</code></span>
+                        <span>@entity.Name</span>
+                    </div>
                 }
-            }
-        </tbody>
-    </table>
+            </div>
+        }
+    </div>
 
     <div class="selection-tags">
         @foreach (var selection in Selections)

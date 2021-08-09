@@ -1,12 +1,9 @@
 /* _content/IWorkTooMuch.Blazor.Components/InputLabel.razor.rz.scp.css */
 label[b-w122qstzx4] {
-    font-size: smaller;
-    color:gray;
-}
-
-label[b-w122qstzx4] {
     display: flex;
     flex-direction: column;
+    font-size: smaller;
+    color: gray;
 }
 /* _content/IWorkTooMuch.Blazor.Components/Notifier.razor.rz.scp.css */
 .notification-wrapper[b-55tf5bkcd1] {
@@ -65,92 +62,52 @@ label[b-w122qstzx4] {
     background-color: rgba(240, 220, 104, 0.5);
     border: solid 1px goldenrod;
 }
-/* _content/IWorkTooMuch.Blazor.Components/SelectSuggestedEntity.razor.rz.scp.css */
-[b-hw50cm3xyw]::-webkit-scrollbar {
+/* _content/IWorkTooMuch.Blazor.Components/SelectEntity.razor.rz.scp.css */
+[b-1flfxq69dk]::-webkit-scrollbar {
     width: 10px;
     height: 10px;
 }
 
-[b-hw50cm3xyw]::-webkit-scrollbar-thumb {
+[b-1flfxq69dk]::-webkit-scrollbar-thumb {
     background: lightgray;
     border-radius: 10px;
 }
 
-[b-hw50cm3xyw]::-webkit-scrollbar-track {
+[b-1flfxq69dk]::-webkit-scrollbar-track {
     background: transparent;
 }
 
-.wrapper[b-hw50cm3xyw] {
-    width: max-content;
+.wrapper[b-1flfxq69dk] {
+    height: max-content;
 }
 
-input[b-hw50cm3xyw] {
+input[b-1flfxq69dk] {
     margin: 0;
     width: 100%;
     padding: 0 1rem;
 }
 
-label[b-hw50cm3xyw] {
+label[b-1flfxq69dk] {
     margin: 0;
     font-size: smaller;
     color: gray;
+    width: 100%;
 }
 
-.error-msg[b-hw50cm3xyw] {
+.error-msg[b-1flfxq69dk] {
     color: red;
     font-size: smaller;
     margin-left: 2rem;
 }
 
-
-table[b-hw50cm3xyw] {
-    font-size: x-small;
-    width: 100%;
-    border: solid 1px black;
-    border-top: none;
-}
-
-thead[b-hw50cm3xyw] {
-    display: block;
-}
-
-tbody[b-hw50cm3xyw] {
-    display: block;
-    overflow-y: scroll;
-    max-height: 100px;
-}
-
-    tbody td:nth-child(1)[b-hw50cm3xyw] {
-        text-align: center;
-    }
-
-thead th:nth-child(1)[b-hw50cm3xyw] {
-    padding-left: 8px;
-    padding-right: 8px;
-    text-align: center;
-}
-
-thead th:nth-child(2)[b-hw50cm3xyw], tbody td:nth-child(2)[b-hw50cm3xyw] {
-    width: 100%;
-}
-
-tbody tr[b-hw50cm3xyw] {
-    cursor: pointer;
-}
-
-tbody .selected[b-hw50cm3xyw] {
-    background-color: #f8ecec;
-}
-
-
-.selection-tags[b-hw50cm3xyw] {
+.selection-tags[b-1flfxq69dk] {
     display: flex;
     gap: .2rem;
     flex-wrap: wrap;
     padding: .2rem;
 }
 
-    .selection-tags > div[b-hw50cm3xyw] {
+    .selection-tags > div[b-1flfxq69dk] {
         position: relative;
         background-color: #85c552;
         width: max-content;
@@ -161,7 +118,7 @@ tbody .selected[b-hw50cm3xyw] {
         cursor: no-drop;
     }
 
-    .selection-tags div .my-tooltip[b-hw50cm3xyw] {
+    .selection-tags div .my-tooltip[b-1flfxq69dk] {
         display: none;
         position: absolute;
         background-color: rgba(0, 0, 0, 0.75);
@@ -169,15 +126,57 @@ tbody .selected[b-hw50cm3xyw] {
         padding: .2rem .5rem;
         color: white;
         z-index: 1;
-        top: 105%;
+        top: 110%;
         border-radius: 10px;
         left: -5%;
     }
 
-    .selection-tags > div:hover[b-hw50cm3xyw] {
+    .selection-tags > div:hover[b-1flfxq69dk] {
         background-color: lightpink;
     }
 
-        .selection-tags > div:hover .my-tooltip[b-hw50cm3xyw] {
+        .selection-tags > div:hover .my-tooltip[b-1flfxq69dk] {
             display: block;
+        }
+
+.loading-text[b-1flfxq69dk] {
+    color: gray;
+    font-size: x-small;
+}
+
+.body[b-1flfxq69dk] {
+    font-size: small;
+    display: grid;
+    grid-template-columns: max-content auto;
+    overflow-y: scroll;
+    max-height: 100px;
+    width: 100%;
+    border: solid 1px black;
+    border-top: none;
+}
+
+    .body > div[b-1flfxq69dk] {
+        display: grid;
+        grid-column: 1 / -1;
+        cursor: pointer;
+        display: grid;
+        grid-template-columns: minmax(2.5rem, max-content) auto;
+    }
+
+        .body > div > span:nth-child(1)[b-1flfxq69dk] {
+            justify-self: center;
+            padding: 0 .3rem;
+        }
+
+        .body > div:hover[b-1flfxq69dk] {
+            background-color: lightyellow;
+        }
+
+    .body > .selected[b-1flfxq69dk] {
+        background-color: #dcfdc1;
+    }
+
+        .body > .selected:hover[b-1flfxq69dk] {
+            background-color: lightpink;
+            cursor: no-drop;
         }

@@ -35,7 +35,6 @@ C:\Users\Michael Cauley\source\repos\blazor-components\IWorkTooMuch.Blazor.Compo
 C:\Users\Michael Cauley\source\repos\blazor-components\IWorkTooMuch.Blazor.Components\bin\Debug\net5.0\IWorkTooMuch.Blazor.Components.dll
 C:\Users\Michael Cauley\source\repos\blazor-components\IWorkTooMuch.Blazor.Components\bin\Debug\net5.0\ref\IWorkTooMuch.Blazor.Components.dll
 C:\Users\Michael Cauley\source\repos\blazor-components\IWorkTooMuch.Blazor.Components\bin\Debug\net5.0\IWorkTooMuch.Blazor.Components.pdb
-C:\Users\Michael Cauley\source\repos\blazor-components\IWorkTooMuch.Blazor.Components\obj\Debug\net5.0\IWorkTooMuch.Blazor.Components.csproj.AssemblyReference.cache
 C:\Users\Michael Cauley\source\repos\blazor-components\IWorkTooMuch.Blazor.Components\obj\Debug\net5.0\IWorkTooMuch.Blazor.Components.GeneratedMSBuildEditorConfig.editorconfig
 C:\Users\Michael Cauley\source\repos\blazor-components\IWorkTooMuch.Blazor.Components\obj\Debug\net5.0\IWorkTooMuch.Blazor.Components.AssemblyInfoInputs.cache
 C:\Users\Michael Cauley\source\repos\blazor-components\IWorkTooMuch.Blazor.Components\obj\Debug\net5.0\IWorkTooMuch.Blazor.Components.AssemblyInfo.cs
@@ -43,7 +42,6 @@ C:\Users\Michael Cauley\source\repos\blazor-components\IWorkTooMuch.Blazor.Compo
 C:\Users\Michael Cauley\source\repos\blazor-components\IWorkTooMuch.Blazor.Components\obj\Debug\net5.0\IWorkTooMuch.Blazor.Components.RazorComponent.input.cache
 C:\Users\Michael Cauley\source\repos\blazor-components\IWorkTooMuch.Blazor.Components\obj\Debug\net5.0\RazorDeclaration\_Imports.razor.g.cs
 C:\Users\Michael Cauley\source\repos\blazor-components\IWorkTooMuch.Blazor.Components\obj\Debug\net5.0\RazorDeclaration\Notifier.razor.g.cs
-C:\Users\Michael Cauley\source\repos\blazor-components\IWorkTooMuch.Blazor.Components\obj\Debug\net5.0\RazorDeclaration\SelectSuggestedEntity.razor.g.cs
 C:\Users\Michael Cauley\source\repos\blazor-components\IWorkTooMuch.Blazor.Components\obj\Debug\net5.0\IWorkTooMuch.Blazor.Components.RazorComponent.output.cache
 C:\Users\Michael Cauley\source\repos\blazor-components\IWorkTooMuch.Blazor.Components\obj\Debug\net5.0\RazorDeclaration\IWorkTooMuch.Blazor.Components.dll
 C:\Users\Michael Cauley\source\repos\blazor-components\IWorkTooMuch.Blazor.Components\obj\Debug\net5.0\IWorkTooMuch.Blazor.Components.TagHelpers.input.cache
@@ -51,11 +49,9 @@ C:\Users\Michael Cauley\source\repos\blazor-components\IWorkTooMuch.Blazor.Compo
 C:\Users\Michael Cauley\source\repos\blazor-components\IWorkTooMuch.Blazor.Components\obj\Debug\net5.0\IWorkTooMuch.Blazor.Components.RazorCoreGenerate.cache
 C:\Users\Michael Cauley\source\repos\blazor-components\IWorkTooMuch.Blazor.Components\obj\Debug\net5.0\Razor\_Imports.razor.g.cs
 C:\Users\Michael Cauley\source\repos\blazor-components\IWorkTooMuch.Blazor.Components\obj\Debug\net5.0\Razor\Notifier.razor.g.cs
-C:\Users\Michael Cauley\source\repos\blazor-components\IWorkTooMuch.Blazor.Components\obj\Debug\net5.0\Razor\SelectSuggestedEntity.razor.g.cs
 C:\Users\Michael Cauley\source\repos\blazor-components\IWorkTooMuch.Blazor.Components\obj\Debug\net5.0\staticwebassets\IWorkTooMuch.Blazor.Components.StaticWebAssets.Manifest.cache
 C:\Users\Michael Cauley\source\repos\blazor-components\IWorkTooMuch.Blazor.Components\obj\Debug\net5.0\staticwebassets\IWorkTooMuch.Blazor.Components.StaticWebAssets.xml
 C:\Users\Michael Cauley\source\repos\blazor-components\IWorkTooMuch.Blazor.Components\obj\Debug\net5.0\scopedcss\Notifier.razor.rz.scp.css
-C:\Users\Michael Cauley\source\repos\blazor-components\IWorkTooMuch.Blazor.Components\obj\Debug\net5.0\scopedcss\SelectSuggestedEntity.razor.rz.scp.css
 C:\Users\Michael Cauley\source\repos\blazor-components\IWorkTooMuch.Blazor.Components\obj\Debug\net5.0\scopedcss\bundle\IWorkTooMuch.Blazor.Components.styles.css
 C:\Users\Michael Cauley\source\repos\blazor-components\IWorkTooMuch.Blazor.Components\obj\Debug\net5.0\scopedcss\projectbundle\IWorkTooMuch.Blazor.Components.bundle.scp.css
 C:\Users\Michael Cauley\source\repos\blazor-components\IWorkTooMuch.Blazor.Components\obj\Debug\net5.0\IWorkTooMuch.Blazor.Components.RazorTargetAssemblyInfo.cache
@@ -65,3 +61,7 @@ C:\Users\Michael Cauley\source\repos\blazor-components\IWorkTooMuch.Blazor.Compo
 C:\Users\Michael Cauley\source\repos\blazor-components\IWorkTooMuch.Blazor.Components\obj\Debug\net5.0\RazorDeclaration\InputLabel.razor.g.cs
 C:\Users\Michael Cauley\source\repos\blazor-components\IWorkTooMuch.Blazor.Components\obj\Debug\net5.0\Razor\InputLabel.razor.g.cs
 C:\Users\Michael Cauley\source\repos\blazor-components\IWorkTooMuch.Blazor.Components\obj\Debug\net5.0\scopedcss\InputLabel.razor.rz.scp.css
+C:\Users\Michael Cauley\source\repos\blazor-components\IWorkTooMuch.Blazor.Components\obj\Debug\net5.0\RazorDeclaration\SelectEntity.razor.g.cs
+C:\Users\Michael Cauley\source\repos\blazor-components\IWorkTooMuch.Blazor.Components\obj\Debug\net5.0\Razor\SelectEntity.razor.g.cs
+C:\Users\Michael Cauley\source\repos\blazor-components\IWorkTooMuch.Blazor.Components\obj\Debug\net5.0\scopedcss\SelectEntity.razor.rz.scp.css
+C:\Users\Michael Cauley\source\repos\blazor-components\IWorkTooMuch.Blazor.Components\obj\Debug\net5.0\IWorkTooMuch.Blazor.Components.csproj.AssemblyReference.cache

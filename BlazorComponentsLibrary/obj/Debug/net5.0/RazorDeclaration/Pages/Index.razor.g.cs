@@ -112,7 +112,7 @@ using Model;
         }
         #pragma warning restore 1998
 #nullable restore
-#line 41 "C:\Users\Michael Cauley\source\repos\blazor-components\BlazorComponentsLibrary\Pages\Index.razor"
+#line 28 "C:\Users\Michael Cauley\source\repos\blazor-components\BlazorComponentsLibrary\Pages\Index.razor"
       
 
     [CascadingParameter]
@@ -143,8 +143,10 @@ using Model;
 
     private List<IEntity> suggestions;
 
-    protected override void OnInitialized()
+    protected override async Task OnInitializedAsync()
     {
+        await Task.Delay(2000);
+
         entities = new();
 
         for (int i = 0; i < 25; i++)
@@ -153,8 +155,6 @@ using Model;
                 Id = i,
                 Name = $"entity {i}"
             });
-
-        base.OnInitialized();
     }
 
     private async Task ProvideSuggestions(string search)
@@ -164,9 +164,13 @@ using Model;
         int mySuggestions = totalOptions / (search.Length * 2);
 
         if (mySuggestions > 1000)
+        {
             Notifier.ProcessError(new Exception("More than 1000 suggestions found; please narrow search"));
+            suggestions = new();
+            return;
+        }
 
-        await Task.Delay(500);
+        await Task.Delay(3000);
 
         suggestions = new();
 
