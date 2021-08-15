@@ -4,7 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace IWorkTooMuch.Blazor.Components
+namespace SEG.Components.Blazor
 {
     public struct Notification
     {
@@ -95,6 +95,22 @@ namespace IWorkTooMuch.Blazor.Components
 
             Logger.LogError("Error:ProcessError - Type: {Type} Message: {Message}",
                 ex.GetType(), ex.Message);
+
+            StateHasChanged();
+
+            InvokeAsync(async () => await CloseAfterDelay(notification));
+        }
+
+        public void ProcessDanger(string title, string message)
+        {
+            Notification notification = new()
+            {
+                Title = title,
+                Message = message,
+                Type = NotificationType.Error
+            };
+
+            Notifications.Add(notification);
 
             StateHasChanged();
 

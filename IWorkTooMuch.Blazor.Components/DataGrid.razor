@@ -1,0 +1,130 @@
+﻿@using System.Data
+@using SEG.Components.Blazor.DataGridSupporters.Components
+
+<div class="table">
+
+    @if (NeedHeader)
+    {
+        <div class="table-header">
+            <div class="table-toolbar">
+                @if (CanAddRow)
+                {
+                    <button>
+                        <SVGElement Type="SVGType.PlusLg" />
+                        Add
+                    </button>
+                }
+                @if (CanDeleteRow)
+                {
+                    <button>
+                        <SVGElement Type="SVGType.TrashFill" />
+                        Delete
+                    </button>
+                }
+                @if (CanEditRow)
+                {
+                    <button>
+                        <SVGElement Type="SVGType.PencilFill" />
+                        Edit
+                    </button>
+                }
+                @if (CanDownload)
+                {
+                    <button>
+                        <SVGElement Type="SVGType.Download" />
+                        Download
+                    </button>
+                }
+                @if (CanImport)
+                {
+                    <button>
+                        <SVGElement Type="SVGType.FileEarmarkSpreadsheetFill" />
+                        Import
+                    </button>
+                }
+                @if (!string.IsNullOrEmpty(TemplatePath))
+                {
+                    <button>
+                        <SVGElement Type="SVGType.Grid3x3" />
+                        Template
+                    </button>
+                }
+
+                @CustomToolbarButtons
+
+            </div>
+        </div>
+    }
+
+    <div class="table-body">
+
+        @if (DataSource != null)
+        {
+            <div class="data-grid" style="@DataGridColumnStyle">
+                @foreach (var cellDefinition in ColumnHeaderDefinitions())
+                {
+                    <ColumnHeader CanFilterColumns="true" HeaderDefinition="cellDefinition" @bind-SelectedColumn="ActiveMenuColumnNum" @bind-DataGridAction="ActiveDataGridAction" @bind-SortOrder="SortOrder" @bind-SortColumn="SortColumn" @bind-Filters="Filters" />
+                }
+
+                @foreach (var cellDefinition in CellValueDefinitions())
+                {
+                    <div class="cell @cellDefinition.cssClass @GetDynamicCellClass(cellDefinition.rowNum, cellDefinition.colNum)"
+                         @onmouseenter="() => SetHoverCell(true, cellDefinition.rowNum, cellDefinition.colNum)"
+                         @onmouseleave="() => SetHoverCell(false, cellDefinition.rowNum, cellDefinition.colNum)"
+                         @onclick="() => SetClickedCell(cellDefinition.rowNum, cellDefinition.colNum)">
+                        @cellDefinition.value
+                    </div>
+                }
+
+                @for (int i = 5 - ViewRowCount; i > 0; i--)
+                {
+                    <div class="dummy-row"></div>
+                }
+
+                @if (ShowAggregateRow)
+                {
+                    @foreach (var footerDefinition in ColumnFooterDefinitions())
+                    {
+                        <ColumnFooter FooterDefinition="footerDefinition" @bind-SelectedColumn="ActiveMenuColumnNum" @bind-DataGridAction="ActiveDataGridAction" />
+                    }
+                }
+            </div>
+        }
+    </div>
+
+    @if (NeedFooter)
+    {
+        <div class="table-footer">
+
+            @if (DataSource != null && RowsPerPage > 0)
+            {
+                <div class="paging-toolbar">
+                    @if (pageCount > 5)
+                    {
+                        <button @onclick="() => SkipToEnd(false)">
+                            <SVGElement Type="SVGType.SkipBackwardFill" />
+                        </button>
+                        <button @onclick="() => FastForward(-5)">
+                            <SVGElement Type="SVGType.SkipStartFill" />
+                        </button>
+                    }
+
+                    @foreach (var pageBtnDefinition in PageBtnDefinitions())
+                    {
+                        <button @onclick="() => SetPage(pageBtnDefinition.PageNumber)" class="@pageBtnDefinition.cssClass">@(pageBtnDefinition.PageNumber + 1)</button>
+                    }
+
+                    @if (pageCount > 5)
+                    {
+                        <button @onclick="() => FastForward(5)">
+                            <SVGElement Type="SVGType.SkipEndFill" />
+                        </button>
+                        <button @onclick="() => SkipToEnd(true)">
+                            <SVGElement Type="SVGType.SkipForwardFill" />
+                        </button>
+                    }
+                </div>
+            }
+        </div>
+    }
+</div>

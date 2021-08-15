@@ -1,0 +1,15 @@
+﻿<FilterMenuWrapper AcceptClicked="ApplyFilters" ClearClicked="ClearFilters">
+
+    <DropdownEnumSelect Options="Qualifiers" @bind-SelectedValue="SelectedQualifier" T="Qualifier" />
+
+    <div class="selections-row">
+        <input @bind="SelectedOption_0" type="date" />
+        @if (SelectedQualifier == Qualifier.Between || SelectedQualifier == Qualifier.NotBetween)
+        {
+            <p>&amp;</p>
+            <input @bind="SelectedOption_1" type="date" />
+        }
+    </div>
+
+
+</FilterMenuWrapper>

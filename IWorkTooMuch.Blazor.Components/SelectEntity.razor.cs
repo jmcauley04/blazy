@@ -1,12 +1,11 @@
-﻿
-using IWorkTooMuch.Blazor.Components.Interfaces;
-using Microsoft.AspNetCore.Components;
+﻿using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Web;
+using SEG.Components.Blazor.Interfaces;
 using System.Collections.Generic;
 
-namespace IWorkTooMuch.Blazor.Components
+namespace SEG.Components.Blazor
 {
-    public abstract partial class SelectEntity
+    public abstract partial class SelectEntity<T> where T : IEntity
     {
         protected virtual bool showLoading => Suggestions == null;
         private bool showTable { get; set; }
@@ -23,15 +22,15 @@ namespace IWorkTooMuch.Blazor.Components
         public string LoadingText { get; set; } = "Loading...";
 
         [Parameter]
-        public List<IEntity> Selections { get; set; } = new();
+        public List<T> Selections { get; set; } = new();
 
         [Parameter]
-        public EventCallback<List<IEntity>> SelectionsChanged { get; set; }
+        public EventCallback<List<T>> SelectionsChanged { get; set; }
 
         [Parameter]
-        public List<IEntity> Suggestions { get; set; }
+        public List<T> Suggestions { get; set; }
 
-        private void ToggleSelect(IEntity entity)
+        private void ToggleSelect(T entity)
         {
             if (Selections.Contains(entity))
                 Selections.Remove(entity);
@@ -50,7 +49,7 @@ namespace IWorkTooMuch.Blazor.Components
 
         protected abstract void ProcessEnter();
 
-        private void RemoveSelection(IEntity selection)
+        private void RemoveSelection(T selection)
         {
             Selections.Remove(selection);
             SelectionsChanged.InvokeAsync(Selections);

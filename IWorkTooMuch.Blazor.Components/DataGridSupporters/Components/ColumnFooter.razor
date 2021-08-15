@@ -1,0 +1,27 @@
+﻿@using SEG.Components.Blazor.DataGridSupporters
+
+<div class="column-footer @FooterDefinition.cssClass">
+    <span>@_value</span>
+    @if (FooterDefinition.aggregate != null && FooterDefinition.aggregate.GetAggregateOptions().Count > 0)
+    {
+        <button @onclick="() => SetSelectedColumn(FooterDefinition.colNum)">
+            <SVGElement Type="SVGType.CalculatorFill" />
+
+            @if (FooterDefinition.colNum == SelectedColumn && DataGridAction == DataGridAction.Aggregate)
+            {
+                <ul class="aggregate-options">
+                    @foreach (var option in FooterDefinition.aggregate.GetAggregateOptions())
+                    {
+                        <li @onclick="() => SetAggregation(option)" @onclick:stopPropagation="true">
+                            <span>@option</span>
+                            @if (option == FooterDefinition.aggregate.SelectedAggregate)
+                            {
+                                <SVGElement Type="SVGType.Check2" />
+                            }
+                        </li>
+                    }
+                </ul>
+            }
+        </button>
+    }
+</div>

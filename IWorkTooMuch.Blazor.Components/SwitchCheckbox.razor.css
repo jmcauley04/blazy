@@ -1,0 +1,63 @@
+﻿.slider > label {
+    display: inline-block;
+    height: 20px;
+    min-width:50px;
+    background-color: #477a85;
+    border-radius: 5px;
+    position: relative;
+    cursor: pointer;
+    transition: 0.5s;
+    box-shadow: 0 0 20px #477a8550;
+    margin: auto;
+    float:right;
+}
+
+.slider > .disabled {
+    background-color: #86b0b9;
+}
+
+    .slider > label::after {
+        text-align: center;
+        content: "";
+        width: 14px;
+        height: 14px;
+        background-color: #e8f5f7;
+        position: absolute;
+        border-radius: 3px;
+        top: 3px;
+        left: 3px;
+        transition: 0.5s;
+    }
+
+.slider-unchecked label:after {
+    left: calc(100% - 3px);
+    transform: translateX(-100%);
+}
+
+.slider-unchecked label {
+    background-color: rgb(165, 165, 165);
+}
+
+.slider-unchecked .disabled {
+    background-color: rgb(210, 210, 210);
+}
+
+label:active:after {
+    width: 16px;
+}
+
+.slider-square > label {
+    border-radius: 0px;
+}
+
+    .slider-square > label::after {
+        border-radius: 0px;
+    }
+
+.slider-round > label {
+    border-radius: 25px;
+}
+
+    .slider-round > label::after {
+        border-radius: 25px;
+    }

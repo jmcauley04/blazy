@@ -1,0 +1,9 @@
+﻿<FilterMenuWrapper AcceptClicked="ApplyFilters" ClearClicked="ClearFilters">
+
+    <DropdownEnumSelect Options="Qualifiers" @bind-SelectedValue="SelectedQualifier" T="Qualifier" />
+
+    <div class="selections-row">
+        <input type="text" @bind="SelectedOption_0" />
+    </div>
+
+</FilterMenuWrapper>

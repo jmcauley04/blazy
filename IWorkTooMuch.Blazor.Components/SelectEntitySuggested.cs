@@ -1,10 +1,10 @@
-﻿using IWorkTooMuch.Blazor.Components.Interfaces;
-using Microsoft.AspNetCore.Components;
+﻿using Microsoft.AspNetCore.Components;
+using SEG.Components.Blazor.Interfaces;
 using System.Collections.Generic;
 
-namespace IWorkTooMuch.Blazor.Components
+namespace SEG.Components.Blazor
 {
-    public partial class SelectEntitySuggested : SelectEntity
+    public partial class SelectEntitySuggested<T> : SelectEntity<T> where T : IEntity
     {
         protected override bool showLoading => base.showLoading && pendingSuggestions;
 
@@ -15,7 +15,7 @@ namespace IWorkTooMuch.Blazor.Components
         public EventCallback<string> OnEnterPressed { get; set; }
 
         [Parameter]
-        public EventCallback<List<IEntity>> SuggestionsChanged { get; set; }
+        public EventCallback<List<T>> SuggestionsChanged { get; set; }
 
         private string previousSearch = string.Empty;
         private bool pendingSuggestions { get; set; } = false;

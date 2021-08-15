@@ -1,0 +1,54 @@
+﻿@using SEG.Components.Blazor.DataGridSupporters.Filters
+
+<div class="column-header @HeaderDefinition.cssClass" @onclick="Sort">
+    <span>
+        @HeaderDefinition.value
+        @if (SortColumn == HeaderDefinition.colNum)
+        {
+            if (SortOrder == SortOrder.Ascending)
+            {
+                <SVGElement Type="SVGType.SortDown" />
+            }
+            if (SortOrder == SortOrder.Descending)
+            {
+                <SVGElement Type="SVGType.SortUp" />
+            }
+        }
+    </span>
+    @if (CanFilterColumns)
+    {
+        <button @onmouseup="ToggleFilterMenu" @onclick:stopPropagation="true">
+            @if (Filters.Any(x => x.ColumnName == HeaderDefinition.DataColumn.ColumnName && !string.IsNullOrEmpty(x.Clause)))
+            {
+                <SVGElement Type="SVGType.FunnelFill" />
+            }
+            else
+            {
+                <SVGElement Type="SVGType.Funnel" />
+            }
+            @if (FilterMenuOpen)
+            {
+                if (HeaderDefinition.DataColumn.DataType == typeof(bool))
+                {
+                    <BooleanFilterMenu Filter="filter" OnApplyPushed="(f) => SetFilter(f)" OnClearPushed="(f) => ClearFilter(f)" />
+                }
+                if (HeaderDefinition.DataColumn.DataType == typeof(DateTime))
+                {
+                    <DatetimeFilterMenu Filter="filter" OnApplyPushed="(f) => SetFilter(f)" OnClearPushed="(f) => ClearFilter(f)" />
+                }
+                if (HeaderDefinition.DataColumn.DataType == typeof(string))
+                {
+                    <StringFilterMenu Filter="filter" OnApplyPushed="(f) => SetFilter(f)" OnClearPushed="(f) => ClearFilter(f)" />
+                }
+                if (HeaderDefinition.DataColumn.DataType == typeof(int))
+                {
+                    <NumericalFilterMenu Filter="filter" OnApplyPushed="(f) => SetFilter(f)" OnClearPushed="(f) => ClearFilter(f)" T="int" />
+                }
+                if (HeaderDefinition.DataColumn.DataType == typeof(double))
+                {
+                    <NumericalFilterMenu Filter="filter" OnApplyPushed="(f) => SetFilter(f)" OnClearPushed="(f) => ClearFilter(f)" T="double" />
+                }
+            }
+        </button>
+    }
+</div>

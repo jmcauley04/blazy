@@ -1,0 +1,9 @@
+﻿@typeparam T
+
+<select @bind="OptionIndex">
+    @foreach (var opt in Options)
+    {
+        <option value="@(Options.IndexOf(opt))">@GetDisplayValue(opt)</option>
+    }
+</select>
+

@@ -1,0 +1,14 @@
+﻿<div class="filter-menu" @onclick:stopPropagation @onmouseup:stopPropagation>
+    <span>
+        <SVGElement Type="SVGType.FunnelFill" />
+        Filters
+    </span>
+
+    @ChildContent
+
+    <div class="btn-bar">
+        <button @onclick="ClearClicked">Clear</button>
+        <button @onclick="AcceptClicked">Apply</button>
+    </div>
+
+</div>

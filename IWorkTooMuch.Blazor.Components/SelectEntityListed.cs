@@ -1,27 +1,54 @@
-﻿using System.Linq;
+﻿using SEG.Components.Blazor.Interfaces;
+using System.Linq;
 
-namespace IWorkTooMuch.Blazor.Components
+namespace SEG.Components.Blazor
 {
-    public class SelectEntityListed : SelectEntity
+    public class SelectEntityListed<T> : SelectEntity<T> where T : IEntity
     {
         protected override void ProcessEnter()
         {
-            if (int.TryParse(inputText, out int result))
+            var localError = string.Empty;
+            int errors = 0;
+
+            if (Suggestions == null)
             {
-                var entity = Suggestions.FirstOrDefault(e => e.Id == result);
-                if (entity == null)
-                    errorMsg = "Id value not found";
-                else if (Selections.Contains(entity))
-                    errorMsg = "Entity already selected";
+                errorMsg = "Still loading...";
+                return;
+            }
+
+            foreach (var str in inputText.Split(','))
+            {
+                if (int.TryParse(str, out int result))
+                {
+                    var entity = Suggestions.FirstOrDefault(e => e.Id == result);
+                    if (entity == null)
+                    {
+                        errors++;
+                        localError = $"Id value not found: {str}";
+                    }
+                    else if (Selections.Contains(entity))
+                    {
+                        if (string.IsNullOrEmpty(localError))
+                            localError = "Entity already selected";
+                    }
+                    else
+                    {
+                        inputText = string.Empty;
+                        Selections.Add(entity);
+                        SelectionsChanged.InvokeAsync(Selections);
+                    }
+                }
                 else
                 {
-                    inputText = string.Empty;
-                    Selections.Add(entity);
-                    SelectionsChanged.InvokeAsync(Selections);
+                    errors++;
+                    localError = $"Invalid Id value form: {str}";
                 }
             }
-            else
-                errorMsg = "Invalid Id value form";
+
+            if (!string.IsNullOrEmpty(localError))
+                errorMsg = errors <= 1 ? localError : "Multiple input errors";
+
+
         }
     }
 }
