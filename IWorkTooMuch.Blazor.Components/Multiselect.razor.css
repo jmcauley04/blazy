@@ -1,0 +1,75 @@
+﻿.wrapper {
+    position: relative;
+}
+
+    .wrapper > input[type="checkbox"] {
+        display: none;
+    }
+
+    .wrapper > label {
+        display: inline-block;
+        background-color: white;
+        width: 100%;
+        height: 1.5em;
+        border: solid rgb(114, 114, 114) 1px;
+        margin: 0;
+        padding: 0;
+    }
+
+    .wrapper > label > span {
+        padding-left: 2em;
+    }
+
+        .wrapper > label::after {
+            float: right;
+            content: "";
+            width: 0;
+            height: 0;
+            margin-top: 0.5em;
+            margin-right: 0.3em;
+            border-left: 0.4em solid transparent;
+            border-right: 0.4em solid transparent;
+            border-top: 0.4em solid rgb(40, 40, 40);
+        }
+
+    .wrapper > ul {
+        display: grid;
+        visibility: collapse;
+        position: absolute;
+        background-color: white;
+        list-style: none;
+        margin: 0 -5px 0 0;
+        padding: 0.2em 0.5em;
+        width: 100%;
+        top: calc(100% - 0.2em);
+        border: solid rgb(114, 114, 114) 1px;
+        max-height: 30vh;
+        z-index: 10;
+    }
+
+    .wrapper li {
+        display: grid;
+        padding-left: 1.6em;
+        text-indent: -1.6em;
+    }
+
+        .wrapper li > label {
+            user-select: none;
+            cursor: pointer;
+            width: 100%;
+            padding: .2rem 0;
+            margin: 0;
+        }
+
+        .wrapper li:hover {
+            background-color: rgb(220, 220, 220);
+        }
+
+    .wrapper > input:checked + label::after {
+        border-bottom: 0.4em solid rgb(40, 40, 40);
+        border-top: none;
+    }
+
+    .wrapper > input:checked ~ ul {
+        visibility: visible;
+    }

@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Components;
 using System.Threading.Tasks;
 
-namespace SEG.Components.Blazor
+namespace IWorkTooMuch.Blazor.Components
 {
     public enum SwitchShape
     {

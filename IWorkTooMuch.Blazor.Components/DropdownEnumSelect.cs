@@ -1,7 +1,7 @@
-﻿using SEG.Components.Blazor.Extensions;
+﻿using IWorkTooMuch.Blazor.Components.Extensions;
 using System;
 
-namespace SEG.Components.Blazor
+namespace IWorkTooMuch.Blazor.Components
 {
     public class DropdownEnumSelect<T> : DropdownSelect<T>
         where T : Enum

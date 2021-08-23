@@ -1,6 +1,6 @@
 ﻿using System.Data;
 
-namespace SEG.Components.Blazor.DataGridSupporters
+namespace IWorkTooMuch.Blazor.Components.DataGridSupporters
 {
     public class HeaderDefinition : CellDefinition
     {

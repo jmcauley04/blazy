@@ -2,7 +2,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace SEG.Components.Blazor.DataGridSupporters.Components
+namespace IWorkTooMuch.Blazor.Components.DataGridSupporters.Components
 {
     public partial class ColumnHeader
     {

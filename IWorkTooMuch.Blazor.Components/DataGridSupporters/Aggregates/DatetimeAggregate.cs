@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 
-namespace SEG.Components.Blazor.DataGridSupporters.Aggregates
+namespace IWorkTooMuch.Blazor.Components.DataGridSupporters.Aggregates
 {
     public class DatetimeAggregate : Aggregate
     {

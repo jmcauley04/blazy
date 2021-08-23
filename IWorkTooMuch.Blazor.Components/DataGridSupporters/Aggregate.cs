@@ -1,10 +1,10 @@
-﻿using SEG.Components.Blazor.DataGridSupporters.Aggregates;
+﻿using IWorkTooMuch.Blazor.Components.DataGridSupporters.Aggregates;
 using System;
 using System.Collections.Generic;
 using System.Data;
 
 
-namespace SEG.Components.Blazor.DataGridSupporters
+namespace IWorkTooMuch.Blazor.Components.DataGridSupporters
 {
     public enum AggregateOption
     {

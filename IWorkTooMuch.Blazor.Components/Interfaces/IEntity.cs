@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace SEG.Components.Blazor.Interfaces
+namespace IWorkTooMuch.Blazor.Components.Interfaces
 {
     public interface IEntity : IEquatable<IEntity>
     {

@@ -1,0 +1,19 @@
+﻿<h3>GrandParentComponent</h3>
+
+I provide and cascade the value;
+My value is: @value
+
+<CascadingValue Value="value" Name="GrandparentValue">
+    <CascadingValue Value="SetValue" Name="GrandparentValueChanged" TValue="Action<int>">
+        <ParentComponent />
+    </CascadingValue>
+</CascadingValue>
+
+@code {
+    public int value { get; set; } = 0;
+
+    public void SetValue(int newValue)
+    {
+        value = newValue;
+    }
+}

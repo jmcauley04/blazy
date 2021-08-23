@@ -4,7 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace SEG.Components.Blazor
+namespace IWorkTooMuch.Blazor.Components
 {
     public struct Notification
     {

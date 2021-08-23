@@ -1,9 +1,9 @@
 ﻿using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Web;
-using SEG.Components.Blazor.Interfaces;
+using IWorkTooMuch.Blazor.Components.Interfaces;
 using System.Collections.Generic;
 
-namespace SEG.Components.Blazor
+namespace IWorkTooMuch.Blazor.Components
 {
     public abstract partial class SelectEntity<T> where T : IEntity
     {

@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Components.Web;
 using System;
 
-namespace SEG.Components.Blazor
+namespace IWorkTooMuch.Blazor.Components
 {
     [EventHandler("onmouseleave", typeof(MouseEventArgs), true, true)]
     [EventHandler("onmouseenter", typeof(MouseEventArgs), true, true)]

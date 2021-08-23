@@ -1,8 +1,8 @@
 ﻿using Microsoft.AspNetCore.Components;
-using SEG.Components.Blazor.Interfaces;
+using IWorkTooMuch.Blazor.Components.Interfaces;
 using System.Collections.Generic;
 
-namespace SEG.Components.Blazor
+namespace IWorkTooMuch.Blazor.Components
 {
     public partial class SelectEntitySuggested<T> : SelectEntity<T> where T : IEntity
     {

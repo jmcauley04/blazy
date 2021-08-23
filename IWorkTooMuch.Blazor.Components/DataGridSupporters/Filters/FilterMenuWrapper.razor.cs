@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Components;
 
-namespace SEG.Components.Blazor.DataGridSupporters.Filters
+namespace IWorkTooMuch.Blazor.Components.DataGridSupporters.Filters
 {
     public partial class FilterMenuWrapper
     {

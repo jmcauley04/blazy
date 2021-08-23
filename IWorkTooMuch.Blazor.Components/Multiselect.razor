@@ -1,0 +1,20 @@
+﻿<div class="wrapper" @onmouseleave="() => IsOpen = false">
+    <input name="dropdown-checkbox" id="dropdown-checkbox" type="checkbox" @bind="IsOpen" />
+    <label for="dropdown-checkbox"><span>@SelectText</span></label>
+    <ul class="styled-scroll primary-shadow">
+        @if (Entities != null)
+        {
+            foreach (var entity in Entities)
+            {
+                <li>
+                    <label>
+                        <input type="checkbox"
+                               checked="@SelectedEntities.Contains(entity)"
+                               @onclick="() => ToggleEntity(entity)" />
+                        @entity.Name
+                    </label>
+                </li>
+            }
+        }
+    </ul>
+</div>

@@ -1,7 +1,7 @@
-﻿using SEG.Components.Blazor.Interfaces;
+﻿using IWorkTooMuch.Blazor.Components.Interfaces;
 using System.Linq;
 
-namespace SEG.Components.Blazor
+namespace IWorkTooMuch.Blazor.Components
 {
     public class SelectEntityListed<T> : SelectEntity<T> where T : IEntity
     {

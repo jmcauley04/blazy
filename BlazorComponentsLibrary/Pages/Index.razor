@@ -4,9 +4,15 @@
 
 <div class="wrapper">
 
-    <SelectEntityListed Title="Static List Select" Suggestions="entities" />
+    <div style="width:400px">
+        <InputLabel Title="Multiselect box">
+            <Multiselect Entities="entities" />
+        </InputLabel>
+    </div>
 
-    <SelectEntitySuggested Title="Suggested Select" MinLengthForSuggestions="3" @bind-Suggestions="suggestions" OnEnterPressed="ProvideSuggestions" />
+    <SelectEntityListed Title="Static List Select" Suggestions="entities" T="IEntity" />
+
+    <SelectEntitySuggested Title="Suggested Select" MinLengthForSuggestions="3" @bind-Suggestions="suggestions" OnEnterPressed="ProvideSuggestions" T="IEntity" />
 
     <div style="width: max-content;">
 
@@ -22,7 +28,6 @@
         </div>
 
     </div>
-
 
 </div>
 @code{

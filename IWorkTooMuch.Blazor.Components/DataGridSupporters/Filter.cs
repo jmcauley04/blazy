@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 
-namespace SEG.Components.Blazor.DataGridSupporters
+namespace IWorkTooMuch.Blazor.Components.DataGridSupporters
 {
     public enum Qualifier
     {

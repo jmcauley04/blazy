@@ -1,11 +1,11 @@
 ﻿using Microsoft.AspNetCore.Components;
-using SEG.Components.Blazor.DataGridSupporters;
+using IWorkTooMuch.Blazor.Components.DataGridSupporters;
 using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 
-namespace SEG.Components.Blazor
+namespace IWorkTooMuch.Blazor.Components
 {
     public enum SelectStyle
     {

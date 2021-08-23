@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Components;
 
-namespace SEG.Components.Blazor.DataGridSupporters.Components
+namespace IWorkTooMuch.Blazor.Components.DataGridSupporters.Components
 {
     public partial class ColumnFooter
     {

@@ -1,4 +1,4 @@
-﻿namespace SEG.Components.Blazor.DataGridSupporters
+﻿namespace IWorkTooMuch.Blazor.Components.DataGridSupporters
 {
     public class FooterDefinition : CellDefinition
     {
