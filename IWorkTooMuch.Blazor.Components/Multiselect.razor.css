@@ -17,7 +17,7 @@
     }
 
     .wrapper > label > span {
-        padding-left: 2em;
+        padding-left: .5em;
     }
 
         .wrapper > label::after {
@@ -47,19 +47,17 @@
         z-index: 10;
     }
 
-    .wrapper li {
+    .wrapper li > label {
+        user-select: none;
+        cursor: pointer;
+        width: 100%;
+        padding: .2rem 0;
+        margin: 0;
         display: grid;
-        padding-left: 1.6em;
-        text-indent: -1.6em;
+        grid-template-columns: min-content auto;
+        align-items: center;
+        gap: .5em;
     }
-
-        .wrapper li > label {
-            user-select: none;
-            cursor: pointer;
-            width: 100%;
-            padding: .2rem 0;
-            margin: 0;
-        }
 
         .wrapper li:hover {
             background-color: rgb(220, 220, 220);
