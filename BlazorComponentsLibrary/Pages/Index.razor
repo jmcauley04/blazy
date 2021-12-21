@@ -4,16 +4,6 @@
 
 <div class="wrapper">
 
-    <div style="width:400px">
-        <InputLabel Title="Multiselect box">
-            <Multiselect Entities="entities" />
-        </InputLabel>
-    </div>
-
-    <SelectEntityListed Title="Static List Select" Suggestions="entities" T="IEntity" />
-
-    <SelectEntitySuggested Title="Suggested Select" MinLengthForSuggestions="3" @bind-Suggestions="suggestions" OnEnterPressed="ProvideSuggestions" T="IEntity" />
-
     <div style="width: max-content;">
 
         <InputLabel Title="Message Text">
@@ -29,11 +19,21 @@
 
     </div>
 
+    <Blazyor.Components.BlazyButton OnClick="() => modalIsOpen = true">Open Modal</Blazyor.Components.BlazyButton>
+
+
 </div>
 @code{
 
     [CascadingParameter]
     public Notifier Notifier { get; set; }
+
+    bool modalIsOpen { get; set; } = true;
+
+    void OnSave()
+    {
+        
+    }
 
     public string input { get; set; }
 
@@ -54,49 +54,6 @@
                 Notifier.ProcessError(new Exception(input));
                 break;
         }
-    }
-
-    private List<IEntity> entities;
-
-    private List<IEntity> suggestions;
-
-    protected override async Task OnInitializedAsync()
-    {
-        await Task.Delay(2000);
-
-        entities = new();
-
-        for (int i = 0; i < 25; i++)
-            entities.Add(new Entity()
-            {
-                Id = i,
-                Name = $"entity {i}"
-            });
-    }
-
-    private async Task ProvideSuggestions(string search)
-    {
-        int totalOptions = 10000;
-
-        int mySuggestions = totalOptions / (search.Length * 2);
-
-        if (mySuggestions > 1000)
-        {
-            Notifier.ProcessError(new Exception("More than 1000 suggestions found; please narrow search"));
-            suggestions = new();
-            return;
-        }
-
-        await Task.Delay(3000);
-
-        suggestions = new();
-
-        for (int i = 0; i < mySuggestions; i++)
-            suggestions.Add(new Entity()
-            {
-                Id = i,
-                Name = $"entity {i}"
-            });
     }
 
 }

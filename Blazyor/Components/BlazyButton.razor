@@ -1,0 +1,71 @@
+﻿@inherits BlazyBase
+
+<button 
+    class="@btnClass @CssClass" 
+    style="@CssStyle"
+    type="@Type"
+    disabled="@isLoading"
+    @onclick="onClick" >
+
+    @if(ChildContent != null)
+    {
+        @ChildContent
+    }
+
+</button>
+
+@code {
+    public enum ButtonType
+    {
+        Button,
+        Submit,
+        Reset
+    }
+
+    public enum ButtonRank
+    {
+        Primary,
+        Secondary,
+        Success,
+        Danger,
+        Warning,
+        Info,
+        Light,
+        Dark
+    }
+
+    [Parameter]
+    public ButtonType Type { get; set; } = ButtonType.Button;
+
+    [Parameter]
+    public ButtonRank Rank { get; set; } = ButtonRank.Primary;
+
+    [Parameter]
+    public bool Outline { get; set; } = false;
+
+    [Parameter]
+    public RenderFragment? ChildContent { get; set; }
+
+    [Parameter]
+    public EventCallback OnClick { get; set; }
+
+    private string btnClass => $"btn btn-{(Outline ? "outline-" : string.Empty)}{Rank.ToString().ToLower()}";
+
+    private bool isLoading;
+
+    private async Task onClick()
+    {
+        if (isLoading)
+            return;
+
+        try
+        {
+            isLoading = true;
+            await OnClick.InvokeAsync();
+        }
+        finally
+        {
+            isLoading = false;
+        }
+    }
+}

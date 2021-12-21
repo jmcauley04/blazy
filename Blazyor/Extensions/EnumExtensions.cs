@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Reflection;
 
-namespace IWorkTooMuch.Blazor.Components.Extensions
+namespace Blazyor.Extensions
 {
     public static class EnumExtensions
     {
@@ -11,7 +11,7 @@ namespace IWorkTooMuch.Blazor.Components.Extensions
         {
             Type genericEnumType = GenericEnum.GetType();
             MemberInfo[] memberInfo = genericEnumType.GetMember(GenericEnum.ToString());
-            if (memberInfo != null && memberInfo.Length > 0)
+            if ((memberInfo != null && memberInfo.Length > 0))
             {
                 var _Attribs = memberInfo[0].GetCustomAttributes(typeof(System.ComponentModel.DescriptionAttribute), false);
                 if ((_Attribs != null && _Attribs.Count() > 0))

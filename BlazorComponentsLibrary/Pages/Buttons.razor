@@ -1,0 +1,38 @@
+﻿@page "/buttons"
+
+<h3>Buttons</h3>
+
+<BlazyTable>
+    <TableHead>
+        <tr>
+            <th>Rank</th>
+            <th>Type</th>
+            <th>Outline</th>
+            <th>Button</th>
+        </tr>
+    </TableHead>
+    <TableBody>
+        @foreach(var outline in new []{ false, true })
+        {            
+            @foreach(var rank in Enum.GetValues<BlazyButton.ButtonRank>())
+            {
+                @foreach(var type in Enum.GetValues<BlazyButton.ButtonType>())
+                {
+                    <tr>
+                        <td>@rank.GetDescription()</td>
+                        <td>@type.GetDescription()</td>
+                        <td>@outline</td>
+                        <td><BlazyButton Rank="rank" Type="type" Outline="outline" OnClick="OnClick">Example</BlazyButton></td>
+                    </tr>
+                }
+            }
+        }
+    </TableBody>
+</BlazyTable>
+
+@code {
+    async Task OnClick()
+    {
+        await Task.Delay(1000);
+    }
+}

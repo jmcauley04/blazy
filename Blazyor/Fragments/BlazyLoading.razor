@@ -1,0 +1,43 @@
+﻿<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 99 74" >
+    <g transform="translate(12,-12)">
+        <g>
+        <text x="0" y="50">
+            @Text
+            <animate begin=".5s" attributeName="fill" values="rgb(102,45,128);transparent;transparent;rgb(224,34,77);rgb(224,34,77);transparent;transparent;rgb(102,45,128);rgb(102,45,128);" dur="8s" repeatCount="indefinite" />
+        </text>
+        </g>
+
+        <path d="M 1 25 a 24 24 30, 0, 0, 48 48 a 24 24 30, 0, 0, -48 -48"
+        stroke="lightgrey" stroke-width="0" transform="translate(50,0)"
+        fill="none" id="theMotionPath"/>
+
+        <g transform="translate(0,0)">
+            <path d="M -0 -0 a 34 34 0, 0, 0, -34 34" stroke-linecap="round"       
+                stroke="rgb(38,164,217)" 
+                fill="transparent"
+                transform="rotate(180, 0, 0)">        
+                <animateMotion dur="4s" repeatCount="indefinite" rotate="auto">
+                    <mpath href="#theMotionPath"/>
+                </animateMotion>            
+                <animate attributeName="stroke-width" values="6;2;6" dur="4s" repeatCount="indefinite" />
+            </path>        
+        </g>
+
+        <g transform="translate(25,0), rotate(180,25,49)">
+            <path d="M 0 0 a 34 34 0, 0, 0, -34 34" stroke-linecap="round" 
+                stroke="rgb(238,161,23)" 
+                fill="transparent"
+                transform="rotate(-180, 0, 0)"> 
+                <animateMotion dur="4s" repeatCount="indefinite" rotate="auto">
+                    <mpath href="#theMotionPath"/>
+                </animateMotion>        
+                <animate attributeName="stroke-width" values="6;2;6" dur="4s" repeatCount="indefinite" />
+            </path>  
+        </g>
+    </g>
+</svg>
+
+@code {
+    [Parameter]
+    public string Text { get; set; } = "Loading...";
+}
