@@ -33,12 +33,18 @@
                         <td>
                             @if(EditingItem?.Equals(item) ?? false)
                             {
-                                <BlazyButton>Save</BlazyButton>
-                                <BlazyButton OnClick="Cancel">Cancel</BlazyButton>
+                                <BlazyButton>
+                                    <Blazyor.Fragments.BlazyIcon Icon="Fragments.BlazyIcon.IconType.OI_Check" />
+                                </BlazyButton>
+                                <BlazyButton OnClick="Cancel">
+                                    <Blazyor.Fragments.BlazyIcon Icon="Fragments.BlazyIcon.IconType.OI_Ban" />
+                                </BlazyButton>
                             }
                             else
                             {
-                                <BlazyButton OnClick="() => EditItem(item)">Edit</BlazyButton>
+                                <BlazyButton OnClick="() => EditItem(item)">
+                                    <Blazyor.Fragments.BlazyIcon Icon="Fragments.BlazyIcon.IconType.OI_Pencil" />
+                                </BlazyButton>
                             }
                         </td>
                     } 

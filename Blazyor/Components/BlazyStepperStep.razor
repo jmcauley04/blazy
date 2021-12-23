@@ -1,0 +1,26 @@
+﻿@implements IDisposable
+
+@code {
+    [Parameter]
+    public string Title { get; set; } = string.Empty;
+
+    [Parameter]
+    public RenderFragment? ChildContent { get; set; }
+
+    [CascadingParameter]
+    BlazyStepper? BlazyStepper { get; set; }
+
+    protected override void OnInitialized()
+    {
+        if (BlazyStepper != null)
+            BlazyStepper.AddStep(this);
+
+        base.OnInitialized();
+    }
+
+    public void Dispose()
+    {
+        if (BlazyStepper != null)
+            BlazyStepper.RemoveStep(this);
+    }
+}

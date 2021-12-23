@@ -4,23 +4,6 @@
 
 <div class="wrapper">
 
-    <div style="width: max-content;">
-
-        <InputLabel Title="Message Text">
-            <input @bind-value="input" />
-        </InputLabel>
-
-        <div class="btnbox">
-            <button class="btn btn-primary" @onclick="() => Notify(1)">Test Default</button>
-            <button class="btn btn-success" @onclick="() => Notify(2)">Test Success</button>
-            <button class="btn btn-warning" @onclick="() => Notify(3)">Test Warning</button>
-            <button class="btn btn-danger" @onclick="() => Notify(4)">Test Danger</button>
-        </div>
-
-    </div>
-
-    <Blazyor.Components.BlazyButton OnClick="() => modalIsOpen = true">Open Modal</Blazyor.Components.BlazyButton>
-
 
 </div>
 @code{

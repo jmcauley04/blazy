@@ -4,7 +4,7 @@
     class="@btnClass @CssClass" 
     style="@CssStyle"
     type="@Type"
-    disabled="@isLoading"
+    disabled="@(isLoading || Disabled)"
     @onclick="onClick" >
 
     @if(ChildContent != null)
@@ -22,8 +22,9 @@
         Reset
     }
 
-    public enum ButtonRank
+    public enum ButtonStyle
     {
+        Transparent,
         Primary,
         Secondary,
         Success,
@@ -38,7 +39,7 @@
     public ButtonType Type { get; set; } = ButtonType.Button;
 
     [Parameter]
-    public ButtonRank Rank { get; set; } = ButtonRank.Primary;
+    public ButtonStyle Style { get; set; } = ButtonStyle.Transparent;
 
     [Parameter]
     public bool Outline { get; set; } = false;
@@ -49,7 +50,10 @@
     [Parameter]
     public EventCallback OnClick { get; set; }
 
-    private string btnClass => $"btn btn-{(Outline ? "outline-" : string.Empty)}{Rank.ToString().ToLower()}";
+    [Parameter]
+    public bool Disabled { get; set; }
+
+    private string btnClass => $"btn btn-{(Outline ? "outline-" : string.Empty)}{Style.ToString().ToLower()}";
 
     private bool isLoading;
 

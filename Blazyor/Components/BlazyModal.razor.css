@@ -6,3 +6,10 @@
     color: darkslategray;
     font-weight: bold;
 }
+
+.modal-header span {
+    font-weight: bold;
+    color: #333;
+    line-height: 1em;
+    font-size: 1.5em;
+}
