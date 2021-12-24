@@ -69,6 +69,7 @@
     public void RemoveStep(BlazyStepperStep step)
     {
         Steps.Remove(step);
+        StateHasChanged();
     }
 
     void MoveToStep(int index)
