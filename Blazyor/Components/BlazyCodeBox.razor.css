@@ -1,0 +1,17 @@
+﻿div {
+    background-color:rgba(30,30,30);
+    padding: 1em;
+}
+
+p {
+    margin:0;
+    padding: 0;
+}
+
+pre {
+    color: white;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: max-content auto;
+}

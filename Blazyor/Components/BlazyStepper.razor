@@ -7,7 +7,7 @@
                     var index = i;
                     var step = Steps[i];
                     <li>
-                        <BlazyButton OnClick="() => MoveToStep(index)">
+                        <BlazyButton Disabled="index > 0 && !Steps[index-1].IsValid()" OnClick="() => MoveToStep(index)">
                             <div class="d-flex">
                                 @if(index == selectedIndex)
                                 {
@@ -34,7 +34,7 @@
                                     }
                                     @if(index < Steps.Count - 1)
                                     {
-                                        <BlazyButton OnClick="() => MoveToStep(index + 1)"><strong>Next</strong></BlazyButton>
+                                        <BlazyButton OnClick="() => MoveToStep(index + 1)" Disabled="!step.IsValid()"><strong>Next</strong></BlazyButton>
                                     }
                                     else
                                     {

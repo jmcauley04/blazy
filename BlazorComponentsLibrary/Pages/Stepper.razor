@@ -5,11 +5,14 @@
 <div style="max-width: 30vw;">
 
     <BlazyStepper>
-        <BlazyStepperStep Title="Fill out your name">
-            <BlazyInputText Label="Name *" Placeholder="Last Name, First Name" />
+        <BlazyStepperStep Title="Fill out your name" IsValid="() => !string.IsNullOrEmpty(name)">
+            <BlazyInputText Label="Name *" Placeholder="Last Name, First Name" @bind-Value="name" />
         </BlazyStepperStep>
-        <BlazyStepperStep Title="Fill out your address">
-            <BlazyInputText Label="Address *" Placeholder="Ex. 1 Main St, New York, NY" />
+        <BlazyStepperStep Title="Fill out your address" IsValid="() => !string.IsNullOrEmpty(address)">
+            <BlazyInputText Label="Address *" Placeholder="Ex. 1 Main St, New York, NY" @bind-Value="address" />
+        </BlazyStepperStep>
+        <BlazyStepperStep Title="Fill out your email" IsValid="IsValidEmail">
+            <BlazyInputText Label="Email *" Placeholder="email@domain.com" @bind-Value="email" />
         </BlazyStepperStep>
         <BlazyStepperStep Title="Done">
             <p>You are now done.</p>
@@ -46,5 +49,12 @@
 </BlazyStepper>
 
 @code {
+    string name = string.Empty;
+    string address = string.Empty;
+    string email = string.Empty;
 
+    bool IsValidEmail()
+    {
+        return email.Contains("@") && email.Contains(".");
+    }
 }

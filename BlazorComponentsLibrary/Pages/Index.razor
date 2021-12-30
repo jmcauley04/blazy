@@ -3,11 +3,47 @@
 @using Model
 
 <div class="wrapper">
-    <BlazyInputText Label="Name *"
-        Placeholder="Last Name, First Name" />
 
+        <h3>
+            BlazyCodeBox
+        </h3>
+    <BlazyCodeBox Code="@codeTxt" />
 </div>
 @code{
+
+    string codeTxt = @"[Parameter]
+public string Code { get; set; } = string.Empty;
+
+var root = CSharpSyntaxTree.ParseText(Code).GetRoot();
+var nodes = root.DescendantNodesAndTokens().ToList();
+
+foreach(var node in nodes)
+{
+    var span = node.Span;
+    int origLength = span.Length;
+    var styledText = string.Empty;
+
+    if(node.Kind().ToString().Contains(""Keyword""))
+        styledText = Styled(text.Substring(span.Start + offset, span.End - span.Start), Colors[SyntaxColor.Blue]);
+    else
+        switch (node.Kind())
+        {   
+            case SyntaxKind.IdentifierToken:
+                if (node.Parent?.Kind() == SyntaxKind.LocalFunctionStatement)
+                    styledText = Styled(text.Substring(span.Start + offset, span.End - span.Start), Colors[SyntaxColor.Yellow]);
+                    else continue;
+                break;
+                case SyntaxKind.IdentifierName:                        
+                    styledText = Styled(text.Substring(span.Start + offset, span.End - span.Start), Colors[SyntaxColor.Green]);
+                    break;
+            default:
+                continue;
+        }
+
+    text = text.Substring(0, span.Start + offset) + styledText + text.Substring(span.End + offset);
+    offset += styledText.Length - origLength;
+}";
+
 
     [CascadingParameter]
     public Notifier Notifier { get; set; }

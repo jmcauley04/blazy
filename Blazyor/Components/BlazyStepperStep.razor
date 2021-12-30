@@ -10,6 +10,9 @@
     [Parameter]
     public RenderFragment? ChildContent { get; set; }
 
+    [Parameter]
+    public Func<bool> IsValid { get; set; } = () => true;
+
     protected override void OnInitialized()
     {
         if (BlazyStepper != null)
