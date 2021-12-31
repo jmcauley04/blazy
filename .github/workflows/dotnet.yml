@@ -17,14 +17,6 @@ jobs:
       uses: actions/setup-dotnet@v1.9.0
       with:
         dotnet-version: 6.x
-        
-    - name: Restore dependencies
-      run: dotnet restore
-    - name: Build
-      run: dotnet build --no-restore
-    - name: Test
-      run: dotnet test --no-build --verbosity normal
-           
       
     # publishes Blazor project to the release-folder
     - name: Publish .NET Core Project
