@@ -1,0 +1,60 @@
+﻿@page "/stepper"
+<h3>Stepper</h3>
+
+<h5>3 steps</h5>
+<div style="max-width: 30vw;">
+
+    <BlazyStepper>
+        <BlazyStepperStep Title="Fill out your name" IsValid="() => !string.IsNullOrEmpty(name)">
+            <BlazyInputText Label="Name *" Placeholder="Last Name, First Name" @bind-Value="name" />
+        </BlazyStepperStep>
+        <BlazyStepperStep Title="Fill out your address" IsValid="() => !string.IsNullOrEmpty(address)">
+            <BlazyInputText Label="Address *" Placeholder="Ex. 1 Main St, New York, NY" @bind-Value="address" />
+        </BlazyStepperStep>
+        <BlazyStepperStep Title="Fill out your email" IsValid="IsValidEmail">
+            <BlazyInputText Label="Email *" Placeholder="email@domain.com" @bind-Value="email" />
+        </BlazyStepperStep>
+        <BlazyStepperStep Title="Done">
+            <p>You are now done.</p>
+        </BlazyStepperStep>
+    </BlazyStepper>
+</div>
+
+<h5>8 steps</h5>
+<BlazyStepper>
+    <BlazyStepperStep Title="Fill out your name">
+        <input />
+    </BlazyStepperStep>
+    <BlazyStepperStep Title="Fill out your address">
+        <input />
+    </BlazyStepperStep>
+    <BlazyStepperStep Title="Fill out your step">
+        <input />
+    </BlazyStepperStep>
+    <BlazyStepperStep Title="Fill out your step">
+        <input />
+    </BlazyStepperStep>
+    <BlazyStepperStep Title="Fill out your step">
+        <input />
+    </BlazyStepperStep>
+    <BlazyStepperStep Title="Fill out your step">
+        <input />
+    </BlazyStepperStep>
+    <BlazyStepperStep Title="Fill out your step">
+        <input />
+    </BlazyStepperStep>
+    <BlazyStepperStep Title="Done">
+        <p>You are now done.</p>
+    </BlazyStepperStep>
+</BlazyStepper>
+
+@code {
+    string name = string.Empty;
+    string address = string.Empty;
+    string email = string.Empty;
+
+    bool IsValidEmail()
+    {
+        return email.Contains("@") && email.Contains(".");
+    }
+}

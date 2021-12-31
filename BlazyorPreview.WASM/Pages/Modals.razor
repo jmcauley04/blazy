@@ -1,0 +1,69 @@
+﻿@page "/modals"
+
+<h3>Modals</h3>
+
+<BlazyTable>
+    <TableHead>
+        <tr>
+            <th>Width</th>
+            <th>Saveable</th>
+            <th></th>
+        </tr>
+    </TableHead>
+    <TableBody>        
+        @foreach(var saveable in new [] { true, false })
+        {    
+            @foreach(var width in Enum.GetValues<BlazyModal.Width>())
+            {
+                <tr>
+                    <td>@width.GetDescription()</td>
+                    <td>@saveable</td>
+                    <td><BlazyButton Style="BlazyButton.ButtonStyle.Primary" OnClick="() => OpenModal(width, saveable)">Test</BlazyButton></td>
+                </tr>                
+            }
+        }
+    </TableBody>
+</BlazyTable>
+
+
+<BlazyModal @bind-IsOpen="isOpen" MaxWidth="maxWidth">
+    <ModalHeader>
+        Modal of width @maxWidth.GetDescription()
+    </ModalHeader>
+    <ModalBody>
+        @bodyText
+    </ModalBody>    
+</BlazyModal>
+
+<BlazyModal @bind-IsOpen="isSaveableOpen" MaxWidth="maxWidth" OnSave="OnSave">
+    <ModalHeader>
+        Saveable Modal of width @maxWidth.GetDescription()
+    </ModalHeader>
+    <ModalBody>
+        @bodyText
+    </ModalBody>    
+</BlazyModal>
+
+@code {
+    private BlazyModal.Width maxWidth = BlazyModal.Width.Default;
+    private bool isOpen = false;
+    private bool isSaveableOpen = false;
+
+    void OpenModal(BlazyModal.Width width, bool saveable)
+    {
+        maxWidth = width;
+
+        if (saveable)
+            isSaveableOpen = true;
+        else
+            isOpen = true;
+    }
+
+    async Task OnSave()
+    {
+        await Task.Delay(1000);
+    }
+
+    private string bodyText = @"Body is a renderfragment and can be supplied as complex HTML.  A footer is automatically generated unless a ModalFooter renderfragment is provided.  
+    The automatically generated footer includes a close button that can be mapped to an OnClose delegate.  If OnSave is given a parameter, a save button will be populated.";
+}
