@@ -1,0 +1,183 @@
+/* _content/Blazyor/Components/BlazyButton.razor.rz.scp.css */
+button:focus[b-28eiqvcokg] {
+    outline: none;
+    box-shadow: none;
+}
+
+button.btn-transparent:hover[b-28eiqvcokg],
+button.btn-outline-transparent:hover[b-28eiqvcokg] {
+   background-color: rgb(0,0,0,.1);
+}
+/* _content/Blazyor/Components/BlazyCodeBox.razor.rz.scp.css */
+div[b-vab6xfokl8] {
+    background-color:rgba(30,30,30);
+    padding: 1em;
+}
+
+p[b-vab6xfokl8] {
+    margin:0;
+    padding: 0;
+}
+
+pre[b-vab6xfokl8] {
+    color: white;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: max-content auto;
+}
+/* _content/Blazyor/Components/BlazyInputText.razor.rz.scp.css */
+div[b-zk0u5ihue8] {
+    position: relative;
+}
+
+label[b-zk0u5ihue8] {
+    position: absolute;
+    color: #c04;
+    top: 1.2em;
+    left: .8em;
+    transition: top .2s ease-out, font-size .2s ease-out;
+}
+
+input[b-zk0u5ihue8] {
+    padding: 1.6em .8em .4em .8em;
+    border: none;
+    border-bottom: 2px solid #c04;
+    background-color: #f1f1f1;
+    width: 100%;
+}
+
+input:focus[b-zk0u5ihue8] {
+    outline:none;
+}
+
+label.small[b-zk0u5ihue8] {
+    top: .6em;
+    font-size: .8em;
+}
+
+.valid-input label.focused[b-zk0u5ihue8] {
+    color: darkblue;
+}
+
+.valid-input input:hover[b-zk0u5ihue8] {
+    border-bottom: 2px solid #333;
+}
+
+.valid-input input:focus[b-zk0u5ihue8] {
+    border-bottom: 2px solid darkblue;
+}
+
+.valid-input label[b-zk0u5ihue8] {
+    color: #333;
+}
+
+.valid-input input[b-zk0u5ihue8] {
+    border-bottom: 1px solid #333;
+}
+/* _content/Blazyor/Components/BlazyModal.razor.rz.scp.css */
+[b-ga7ahv63d3] .btn-close {
+    background-color: transparent;
+    border: none;
+    font-size: 1.6em;
+    line-height: .8em;
+    color: darkslategray;
+    font-weight: bold;
+}
+
+.modal-header span[b-ga7ahv63d3] {
+    font-weight: bold;
+    color: #333;
+    line-height: 1em;
+    font-size: 1.5em;
+}
+/* _content/Blazyor/Components/BlazyStepper.razor.rz.scp.css */
+
+
+.d-flex[b-jyun8hdt3w] {
+    column-gap: 1em;
+    font-size: .8em;
+    font-weight: bold;
+    color: #333;
+    padding: 1em 0;
+}
+
+li[b-jyun8hdt3w] {
+    display: grid;
+}
+
+ul[b-jyun8hdt3w] {
+    padding-left: 5px;
+    list-style: none;
+    display: grid;
+}
+
+.pill[b-jyun8hdt3w] {
+    background-color: #3f51b5;
+    border-radius: 50%;
+    height: 1.5em;
+    width: 1.5em;
+    display: grid;
+    justify-content: center;
+    color: white;
+    align-items: center;
+}
+
+.pill[b-jyun8hdt3w]  span {
+    font-size: .8em;
+    margin-bottom:.2em;
+}
+
+.content[b-jyun8hdt3w] {
+    padding: 1em;
+    transition: padding .2s, max-height .2s;
+    overflow: hidden;
+    max-height: 200px;
+}
+
+.content-holder[b-jyun8hdt3w] {
+    position: relative;
+    margin-left: 1.3em;
+}
+
+    li:nth-last-child(n+2) .content[b-jyun8hdt3w]::before {
+        content: "";
+        position: absolute;
+        left: 0;
+        border-left: 1px solid #ccc;
+        top: -.6em;
+        bottom: -.6em;
+    }
+
+.collapsed[b-jyun8hdt3w] {
+    max-height: 0;
+    padding: 0 1em;
+}
+
+.btn-bar[b-jyun8hdt3w] {
+    display: flex;
+    column-gap: 1em;
+    margin-top: 1em;
+}
+
+strong[b-jyun8hdt3w] {
+    font-size: .8em;
+}
+/* _content/Blazyor/Components/BlazyTable.razor.rz.scp.css */
+table[b-s9ga4saq99] {
+    width: 100%;
+}
+
+[b-s9ga4saq99] td,
+[b-s9ga4saq99] th {
+    padding: .1em .5em;
+}
+
+thead[b-s9ga4saq99]  tr:nth-child(2n+1) {
+    background-color: rgb(5,39,103);
+    color: white;
+}
+
+tbody[b-s9ga4saq99]  tr:nth-child(2n+1){
+    background-color: #eee;
+}
