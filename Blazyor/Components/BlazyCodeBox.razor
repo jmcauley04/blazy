@@ -144,19 +144,20 @@
 
     string AddLineNumbers(string text)
     {
-            var lineIndex = 1;
-            string lineIndexNumber(int i) => $"<div style='{Colors[SyntaxColor.Blue]} padding-right: 1em; text-align: right;'>{i}</div><div>";
-            var maxRepeat = 200;
-            var repeats = 0;
-            var result = lineIndexNumber(lineIndex++) + text;
-                        
-            int nextFind = result.IndexOf(Environment.NewLine, 0);
-            while(nextFind > -1 && repeats < maxRepeat)
-            {                
-                result = result.Substring(0, nextFind) + $"</div>{Environment.NewLine}{lineIndexNumber(lineIndex++)}" + result.Substring(nextFind + 2);
-                nextFind = result.IndexOf(Environment.NewLine, nextFind + lineIndex.ToString().Length + 6);
-                repeats++;
-            }
+        var lineIndex = 1;
+        string lineIndexNumber(int i) => $"<div style='{Colors[SyntaxColor.Blue]} padding-right: 1em; text-align: right;'>{i}</div><div>";
+        var maxRepeat = 200;
+        var repeats = 0;
+        var result = lineIndexNumber(lineIndex++) + text;
+
+        int nextFind = result.IndexOf(Environment.NewLine, 0);
+        while(nextFind > -1 && repeats < maxRepeat)
+        {
+            string codeSide = result.Substring(Math.Min(nextFind + 1, result.Length));
+            result = result.Substring(0, nextFind) + $"</div>{Environment.NewLine}{lineIndexNumber(lineIndex++)}" + codeSide;
+            nextFind = result.IndexOf(Environment.NewLine, nextFind + lineIndex.ToString().Length + 6);
+            repeats++;
+        }
             result += "</div>";
 
             return result;

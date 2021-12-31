@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.31919.166
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Blazyor", "Blazyor\Blazyor.csproj", "{2EC7FD35-B443-495E-9A10-80A6936734AB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Blazyor", "Blazyor\Blazyor.csproj", "{2EC7FD35-B443-495E-9A10-80A6936734AB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlazyorPreview.WASM", "BlazyorPreview.WASM\BlazyorPreview.WASM.csproj", "{A6C923C3-0FC6-4542-9854-60504CCA955F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlazyorPreview.WASM", "BlazyorPreview.WASM\BlazyorPreview.WASM.csproj", "{A6C923C3-0FC6-4542-9854-60504CCA955F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
