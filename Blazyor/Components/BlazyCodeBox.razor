@@ -105,7 +105,7 @@
                 }
                 try
                 {
-                    prevKind = nodes[nodes.IndexOf(node) - 1].Kind();
+                    prevKind = nodes[nodes.IndexOf(node) - 2].Kind();
                 }
                 catch
                 {
@@ -116,18 +116,18 @@
                     case SyntaxKind.IdentifierToken:
                         if (nextKind == SyntaxKind.ArgumentList)
                             styledText = Styled(text.Substring(span.Start + offset, span.End - span.Start), Colors[SyntaxColor.Yellow]);
-                            else if(nextKind == SyntaxKind.DotToken)
+                        else if (nextKind == SyntaxKind.DotToken)
                             styledText = Styled(text.Substring(span.Start + offset, span.End - span.Start), Colors[SyntaxColor.Green]);
-                        else continue;
+                        else if (prevKind != SyntaxKind.DotToken)
+                            styledText = Styled(text.Substring(span.Start + offset, span.End - span.Start), Colors[SyntaxColor.LightBlue]);
+                        else
+                            continue;
                         break;
                     case SyntaxKind.IdentifierName:
                         if (parentKind.ToString().Contains("Expression"))
-                            continue;// styledText = Styled(text.Substring(span.Start + offset, span.End - span.Start), Colors[SyntaxColor.LightBlue]);
-                        else
-                        {
-                            styledText = Styled(text.Substring(span.Start + offset, span.End - span.Start), Colors[SyntaxColor.Blue]);
-                            Console.WriteLine($"{Code.Substring(span.Start, span.Length)} - {node.Kind()} : {parentKind}");
-                        }
+                            continue;
+                        else                        
+                            styledText = Styled(text.Substring(span.Start + offset, span.End - span.Start), Colors[SyntaxColor.Blue]);                        
                         break;
                     default:
                         continue;
