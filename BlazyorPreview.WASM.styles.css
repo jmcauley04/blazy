@@ -18,10 +18,14 @@ main[b-zkiscx8m1c] {
 .top-row[b-zkiscx8m1c] {
     background-color: #f7f7f7;
     border-bottom: 1px solid #d6d5d5;
-    justify-content: flex-end;
     height: 3.5rem;
     display: flex;
     align-items: center;
+}
+
+.top-row a[b-zkiscx8m1c]{
+    flex-grow:1;
+    text-align: right;
 }
 
     .top-row[b-zkiscx8m1c]  a, .top-row[b-zkiscx8m1c]  .btn-link {
