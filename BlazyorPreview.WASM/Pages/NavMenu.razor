@@ -1,0 +1,171 @@
+﻿@page "/navmenu"
+<h3>NavMenu</h3>
+
+<h5>Flex with Dropdown on Hover</h5>
+<BlazyNavMenu Links="@Links" />
+
+<BlazyCodeBox Code="@_code" IsToggled="true" />
+
+@code {
+    string _code = @"<BlazyNavMenu Links=""@Links"" />
+
+@code {
+    BlazyNavMenu.BlazyNavLink[] Links = new BlazyNavMenu.BlazyNavLink[]
+    {
+        new () {Text = ""HOME"", Href = """"},
+        new () {Text = ""SCHOOL"", Sublinks = new BlazyNavMenu.BlazyNavLink[]
+            {
+                new () {Text = ""ANNOUNCEMENTS"", Href = """"},
+                new () {Text = ""APPLICATION"", Href = """"},
+                new () {Text = ""FILE UPLOAD VALIDATOR"", Href = """"},
+                new () {Text = ""GROWTH MANAGEMENT"", Href = """"},
+                new () {Text = ""GROWTH SCENARIO"", Href = """"},
+                new () {Text = ""LANDSCAPE SURVEY"", Href = """"},
+                new () {Text = ""MANAGE FUNDING SOURCES"", Href = """"},
+                new () {Text = ""MANAGE TOPICS"", Href = """"},
+                new () {Text = ""PROFILE"", Href = """"},
+                new () {Text = ""STUDENT ROSTER"", Href = """"},
+            }
+        },
+        new () {Text = ""NETWORKS"", Sublinks = new BlazyNavMenu.BlazyNavLink[]
+            {
+                new () {Text = ""AGENDA"", Href = """"},
+                new () {Text = ""ASSIGNMENTS"", Href = """"},
+                new () {Text = ""EVENTS"", Sublinks = new BlazyNavMenu.BlazyNavLink[]
+                {
+                    new () {Text = ""DETAILS"", Href = """"},
+                    new () {Text = ""CREATE"", Href = """"},
+                    new () {Text = ""MANAGE"", Href = """"},
+                    new () {Text = ""EVENTS"", Sublinks = new BlazyNavMenu.BlazyNavLink[]
+                        {
+                            new () {Text = ""DETAILS"", Href = """"},
+                            new () {Text = ""CREATE"", Href = """"},
+                            new () {Text = ""MANAGE"", Href = """"},
+                        }
+                    }
+                }
+            },
+                new () {Text = ""LOGISTICS"", Href = """"},
+                new () {Text = ""MANAGE"", Href = """"},
+                new () {Text = ""MASTER TOPICS"", Href = """"},
+                new () {Text = ""QUESTION EDITOR"", Href = """"},
+            }
+        },
+        new () {Text = ""STUDENT SCORES"", Sublinks = new BlazyNavMenu.BlazyNavLink[]
+            {
+                new () {Text = ""MANUAL MATCH"", Href = """"},
+            }
+        },
+        new () {Text = ""REPORTS"", Sublinks = new BlazyNavMenu.BlazyNavLink[]
+            {
+                new () {Text = ""ADMINISTRATOR INCENTIVES"", Href = """"},
+                new () {Text = ""COACHES"", Href = """"},
+                new () {Text = ""DATA INCONSISTENCY"", Href = """"},
+                new () {Text = ""ENROLLMENT"", Href = """"},
+                new () {Text = ""EVENT ATTENDANCE"", Href = """"},
+                new () {Text = ""INCENTIVE COMMENTS"", Href = """"},
+                new () {Text = ""MENTOR REQUEST"", Href = """"},
+                new () {Text = ""MISSING SCORES"", Href = """"},
+            }
+        },
+        new () {Text = ""USER ADMINISTRATION"", Sublinks = new BlazyNavMenu.BlazyNavLink[]
+            {
+                new () {Text = ""COACH REVIEW"", Href = """"},
+                new () {Text = ""COACH VETTING"", Href = """"},
+                new () {Text = ""FINANCIAL EDGE"", Href = """"},
+                new () {Text = ""MERGE"", Href = """"},
+                new () {Text = ""ROLES"", Href = """"},
+                new () {Text = ""USERS"", Href = """"},
+            }
+        },
+        new () {Text = ""PROFILE"", Sublinks = new BlazyNavMenu.BlazyNavLink[]
+            {
+                new () {Text = ""CHANGE PASSWORD"", Href = """"},
+                new () {Text = ""COACHING OPTIONS"", Href = """"},
+                new () {Text = ""CONTACT INFO"", Href = """"},
+                new () {Text = ""WORK INFO"", Href = """"},
+            }
+        },
+    };
+
+}";
+    
+        BlazyNavMenu.BlazyNavLink[] Links = new BlazyNavMenu.BlazyNavLink[]
+            {
+            new () {Text = "HOME", Href = ""},
+            new () {Text = "SCHOOL", Sublinks = new BlazyNavMenu.BlazyNavLink[]
+                {
+                    new () {Text = "ANNOUNCEMENTS", Href = ""},
+                    new () {Text = "APPLICATION", Href = ""},
+                    new () {Text = "FILE UPLOAD VALIDATOR", Href = ""},
+                    new () {Text = "GROWTH MANAGEMENT", Href = ""},
+                    new () {Text = "GROWTH SCENARIO", Href = ""},
+                    new () {Text = "LANDSCAPE SURVEY", Href = ""},
+                    new () {Text = "MANAGE FUNDING SOURCES", Href = ""},
+                    new () {Text = "MANAGE TOPICS", Href = ""},
+                    new () {Text = "PROFILE", Href = ""},
+                    new () {Text = "STUDENT ROSTER", Href = ""},
+                }
+            },
+            new () {Text = "NETWORKS", Sublinks = new BlazyNavMenu.BlazyNavLink[]
+                {
+                    new () {Text = "AGENDA", Href = ""},
+                    new () {Text = "ASSIGNMENTS", Href = ""},
+                    new () {Text = "EVENTS", Sublinks = new BlazyNavMenu.BlazyNavLink[]
+                    {
+                        new () {Text = "DETAILS", Href = ""},
+                        new () {Text = "CREATE", Href = ""},
+                        new () {Text = "MANAGE", Href = ""},
+                        new () {Text = "EVENTS", Sublinks = new BlazyNavMenu.BlazyNavLink[]
+                            {
+                                new () {Text = "DETAILS", Href = ""},
+                                new () {Text = "CREATE", Href = ""},
+                                new () {Text = "MANAGE", Href = ""},
+                            }
+                        }
+                    }
+                },
+                    new () {Text = "LOGISTICS", Href = ""},
+                    new () {Text = "MANAGE", Href = ""},
+                    new () {Text = "MASTER TOPICS", Href = ""},
+                    new () {Text = "QUESTION EDITOR", Href = ""},
+                }
+            },
+            new () {Text = "STUDENT SCORES", Sublinks = new BlazyNavMenu.BlazyNavLink[]
+                {
+                    new () {Text = "MANUAL MATCH", Href = ""},
+                }
+            },
+            new () {Text = "REPORTS", Sublinks = new BlazyNavMenu.BlazyNavLink[]
+                {
+                    new () {Text = "ADMINISTRATOR INCENTIVES", Href = ""},
+                    new () {Text = "COACHES", Href = ""},
+                    new () {Text = "DATA INCONSISTENCY", Href = ""},
+                    new () {Text = "ENROLLMENT", Href = ""},
+                    new () {Text = "EVENT ATTENDANCE", Href = ""},
+                    new () {Text = "INCENTIVE COMMENTS", Href = ""},
+                    new () {Text = "MENTOR REQUEST", Href = ""},
+                    new () {Text = "MISSING SCORES", Href = ""},
+                }
+            },
+            new () {Text = "USER ADMINISTRATION", Sublinks = new BlazyNavMenu.BlazyNavLink[]
+                {
+                    new () {Text = "COACH REVIEW", Href = ""},
+                    new () {Text = "COACH VETTING", Href = ""},
+                    new () {Text = "FINANCIAL EDGE", Href = ""},
+                    new () {Text = "MERGE", Href = ""},
+                    new () {Text = "ROLES", Href = ""},
+                    new () {Text = "USERS", Href = ""},
+                }
+            },
+            new () {Text = "PROFILE", Sublinks = new BlazyNavMenu.BlazyNavLink[]
+                {
+                    new () {Text = "CHANGE PASSWORD", Href = ""},
+                    new () {Text = "COACHING OPTIONS", Href = ""},
+                    new () {Text = "CONTACT INFO", Href = ""},
+                    new () {Text = "WORK INFO", Href = ""},
+                }
+            },
+
+            };
+}

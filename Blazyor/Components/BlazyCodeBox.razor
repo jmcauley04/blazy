@@ -3,18 +3,30 @@
 @using Microsoft.CodeAnalysis.CSharp.Syntax
 @using Microsoft.CodeAnalysis.Text
 
-<div>
-    @if(!string.IsNullOrEmpty(Code))
-    {        
-        <pre>
-            @((MarkupString)_code)
-        </pre>
-    }
-</div>
+@if(IsToggled){    
+    <BlazyButton OnClick="ToggleCode">@(_hidden ? "Show code" : "Hide code")</BlazyButton>
+}
+
+@if(!IsToggled || !_hidden)
+{
+    <div>
+        @if(!string.IsNullOrEmpty(Code))
+        {        
+                <pre>
+                    @((MarkupString)_code)
+                </pre>            
+        }
+    </div>
+}
 
 @code {
     [Parameter]
     public string Code { get; set; } = string.Empty;
+
+    [Parameter]
+    public bool IsToggled { get; set; } = false;
+
+    bool _hidden = true;
 
     List<TextSpan>? ColoredSpans;
     string _code = string.Empty;
@@ -49,9 +61,18 @@
     }
 
     protected override void OnInitialized()
-    {        
-        ColorizeText();
+    {
+        if (string.IsNullOrEmpty(_code) && !IsToggled)
+            ColorizeText();
         base.OnInitialized();
+    }
+
+    void ToggleCode()
+    {
+        if (string.IsNullOrEmpty(_code) && _hidden)
+            ColorizeText();
+
+        _hidden = !_hidden;
     }
 
     void ColorizeText()

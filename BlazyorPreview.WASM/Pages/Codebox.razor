@@ -8,49 +8,6 @@
     string _code = @"[Parameter]
 public string Code { get; set; } = string.Empty;
 
-List<TextSpan>? ColoredSpans;
-string _code = string.Empty;
-
-enum SyntaxColor
-{
-    Green,
-    Blue,
-    LightBlue,
-    Yellow,
-    Pink,
-    Brown
-}
-
-Dictionary<SyntaxColor, string> Colors = new Dictionary<SyntaxColor, string>
-    {
-        {SyntaxColor.Green, ""color: rgb(58, 192, 176);""},
-        {SyntaxColor.Blue, ""color: rgb(86, 156, 214);""},
-        {SyntaxColor.Yellow, ""color: rgb(220, 220, 170);""},
-        {SyntaxColor.Pink, ""color: rgb(216, 150, 180);""},
-        {SyntaxColor.Brown, ""color: rgb(212, 151, 120);""},
-        {SyntaxColor.LightBlue, ""color: rgb(154, 220, 254);""},
-    };
-
-enum StyleType {
-    LineIndex,
-    Keyword,
-    Variable,
-    Method,
-}
-
-protected override void OnInitialized()
-{        
-    ColorizeText();
-    base.OnInitialized();
-}
-
-void ColorizeText()
-{
-    string code = Code ?? string.Empty;
-    code = ColorizeTextKinds(code);
-    _code = AddLineNumbers(code);
-}
-
 string ColorizeTextKinds(string text)
 {
     ColoredSpans = new();
@@ -72,10 +29,7 @@ string ColorizeTextKinds(string text)
 
         if (kind.ToString().Contains(""Keyword""))
         {
-            if (parentKind.ToString().Contains(""Statement"") || parentKind.ToString().Contains(""Clause"") || parentKind.ToString().Contains(""Label""))
-                styledText = Styled(text.Substring(span.Start + offset, span.End - span.Start), Colors[SyntaxColor.Pink]);
-            else
-                styledText = Styled(text.Substring(span.Start + offset, span.End - span.Start), Colors[SyntaxColor.Blue]);
+            styledText = Styled(text.Substring(span.Start + offset, span.End - span.Start), Colors[SyntaxColor.Pink]);
         }
         else if (kind == SyntaxKind.Attribute)
             styledText = Styled(text.Substring(span.Start + offset, span.End - span.Start), Colors[SyntaxColor.Green]);
@@ -83,24 +37,6 @@ string ColorizeTextKinds(string text)
             styledText = Styled(text.Substring(span.Start + offset, span.End - span.Start), Colors[SyntaxColor.Brown]);
         else
         {                
-            SyntaxKind? nextKind = null;
-            SyntaxKind? prevKind = null;
-            try
-            {
-                nextKind = nodes[nodes.IndexOf(node) + 1].Kind();
-            }
-            catch
-            {
-                nextKind = null;
-            }
-            try
-            {
-                prevKind = nodes[nodes.IndexOf(node) - 2].Kind();
-            }
-            catch
-            {
-                prevKind = null;
-            }
             switch (node.Kind())
             {
                 case SyntaxKind.IdentifierToken:
