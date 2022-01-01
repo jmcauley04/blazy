@@ -1,0 +1,55 @@
+﻿<div class="page">
+    
+    <nav class="@navClass">
+        @NavFragment
+    </nav>
+
+    <div class="@topRowClass top-row">       
+        @TopRowFragment
+    </div>
+
+    <main class="@mainClass">
+        <article class="@bodyClass">            
+            @BodyFragment
+        </article>
+        @if(AsideFragment != null)
+        {
+            <aside>
+                @AsideFragment
+            </aside>            
+        }
+
+        @if(FooterFragment != null)
+        {            
+            <footer>
+                @FooterFragment
+            </footer>
+        }
+    </main>
+
+</div>
+
+@code {
+    [Parameter]
+    public RenderFragment? NavFragment { get; set; }
+
+    [Parameter]
+    public RenderFragment? BodyFragment { get; set; }
+
+    [Parameter]
+    public RenderFragment? AsideFragment { get; set; }
+
+    [Parameter]
+    public RenderFragment? TopRowFragment { get; set; }
+
+    [Parameter]
+    public RenderFragment? FooterFragment { get; set; }
+
+    string topRowClass => NavFragment == null ? "span-cols-2" : "";
+
+    string navClass => TopRowFragment == null ? "" : "span-rows-2";
+
+    string mainClass => NavFragment == null ? "span-cols-2" : "";
+
+    string bodyClass => AsideFragment == null ? "span-cols-2" : "";
+}

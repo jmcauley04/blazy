@@ -1,12 +1,13 @@
 ﻿@inherits LayoutComponentBase
 
-<div class="page">
-    <div class="sidebar">
-        <NavMenu />
-    </div>
-
-    <main>
-        <div class="top-row px-4">            
+<Blazyor.Components.Layout.BlazyLayout>
+    <NavFragment>        
+        <div class="nav-wrapper">
+            <NavMenu />
+        </div>
+    </NavFragment>
+    <TopRowFragment>
+        <div class="top-row">
             <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" height="40px" viewBox="0 0 32 32" >
                 <linearGradient id="Gradient2" x1="0" x2="0" y1="0" y2="1">
                     <stop offset="0%" stop-color="rgb(5, 39, 103)"/>
@@ -37,9 +38,8 @@
             </svg>
             <a href="https://docs.microsoft.com/aspnet/" target="_blank">About</a>
         </div>
-
-        <article class="content px-4">
-            @Body
-        </article>
-    </main>
-</div>
+    </TopRowFragment>
+    <BodyFragment>
+        @Body
+    </BodyFragment>
+</Blazyor.Components.Layout.BlazyLayout>

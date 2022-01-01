@@ -1,0 +1,54 @@
+﻿.page {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-auto-rows: min-content;
+    height: 100vh;
+}
+
+.span-rows-2 {
+    grid-row: span 2;
+}
+
+.span-cols-2 {
+    grid-column: span 2;
+}
+
+.span-cols-3 {
+    grid-column: span 3;
+}
+
+main {
+    overflow-y: auto;
+    display: grid;
+}
+
+main * {
+    padding: 1em;
+}
+
+nav {
+    grid-column: 1 / -1;
+}
+
+footer {
+    grid-column: 1 / -1;
+    background-color: lightgray;
+}
+
+@media (min-width: 641px) {
+    .page {
+        grid-template-columns: auto 1fr;
+        grid-template-rows: auto 1fr auto;
+    }
+
+    nav {
+        min-height: 100vh;
+        display: grid;
+        grid-column: 1;
+    }
+
+    main {
+        grid-template-columns: auto minmax(min-content, auto);
+    }
+
+}

@@ -1,6 +1,7 @@
 ﻿div {
-    background-color:rgba(30,30,30);
+    background-color: rgba(30,30,30);
     padding: 1em;
+    display: grid;
 }
 
 p {
@@ -14,4 +15,6 @@ pre {
     padding: 0;
     display: grid;
     grid-template-columns: max-content auto;
+    width: 100%;
+    overflow-x: auto;
 }
