@@ -1,17 +1,7 @@
 @import '_content/Blazyor/Blazyor.bundle.scp.css';
 
 /* /Shared/MainLayout.razor.rz.scp.css */
-.page[b-zkiscx8m1c] {
-    position: relative;
-    display: flex;
-    flex-direction: column;
-}
-
-main[b-zkiscx8m1c] {
-    flex: 1;
-}
-
-.sidebar[b-zkiscx8m1c] {
+.nav-wrapper[b-zkiscx8m1c] {
     background-image: linear-gradient(180deg, rgb(5, 39, 103) 0%, #3a0647 70%);
 }
 
@@ -58,17 +48,6 @@ main[b-zkiscx8m1c] {
 }
 
 @media (min-width: 641px) {
-    .page[b-zkiscx8m1c] {
-        flex-direction: row;
-    }
-
-    .sidebar[b-zkiscx8m1c] {
-        width: 250px;
-        height: 100vh;
-        position: sticky;
-        top: 0;
-    }
-
     .top-row[b-zkiscx8m1c] {
         position: sticky;
         top: 0;
