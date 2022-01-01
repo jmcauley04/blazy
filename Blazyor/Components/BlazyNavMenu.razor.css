@@ -4,18 +4,17 @@
     padding: 0;
 }
 
-.wrapper > ul {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: left;
-}
-
 .nav-item {
     position: relative;
     font-size: 0.8rem;
     padding: 0;
     cursor: pointer;
 }
+
+    .nav-item .nav-item ul {
+        left: 20%;
+        top: 70%;
+    }
 
     .nav-item ::deep a {
         color: #666666;
@@ -37,11 +36,6 @@
         box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 6px -1px, rgba(0, 0, 0, 0.06) 0px 2px 4px -1px;
     }
 
-    .nav-item .nav-item ul {
-        left: 90%;
-        top: 0;
-    }
-
     .nav-item:hover > ul {
         display: block;
     }
@@ -53,7 +47,7 @@
     .nav-item ::deep a:hover {
         color: black;
     }
-
+        
     .nav-item ::deep a > .oi {
         font-size: .9em;
         padding-left: 1em;
@@ -64,3 +58,19 @@
     .nav-item ::deep a > .label {
         flex-grow: 1;
     }
+
+
+
+@media (min-width: 641px) {
+
+    .wrapper > ul {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: left;
+    }
+
+    .nav-item .nav-item ul {
+        left: 20%;
+        top:70%;
+    }
+}
