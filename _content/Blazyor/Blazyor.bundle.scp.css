@@ -98,18 +98,17 @@ ul[b-0sv9o39pmh] {
     padding: 0;
 }
 
-.wrapper > ul[b-0sv9o39pmh] {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: left;
-}
-
 .nav-item[b-0sv9o39pmh] {
     position: relative;
     font-size: 0.8rem;
     padding: 0;
     cursor: pointer;
 }
+
+    .nav-item .nav-item ul[b-0sv9o39pmh] {
+        left: 20%;
+        top: 70%;
+    }
 
     .nav-item[b-0sv9o39pmh]  a {
         color: #666666;
@@ -131,11 +130,6 @@ ul[b-0sv9o39pmh] {
         box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 6px -1px, rgba(0, 0, 0, 0.06) 0px 2px 4px -1px;
     }
 
-    .nav-item .nav-item ul[b-0sv9o39pmh] {
-        left: 90%;
-        top: 0;
-    }
-
     .nav-item:hover > ul[b-0sv9o39pmh] {
         display: block;
     }
@@ -147,7 +141,7 @@ ul[b-0sv9o39pmh] {
     .nav-item[b-0sv9o39pmh]  a:hover {
         color: black;
     }
-
+        
     .nav-item[b-0sv9o39pmh]  a > .oi {
         font-size: .9em;
         padding-left: 1em;
@@ -158,6 +152,22 @@ ul[b-0sv9o39pmh] {
     .nav-item[b-0sv9o39pmh]  a > .label {
         flex-grow: 1;
     }
+
+
+
+@media (min-width: 641px) {
+
+    .wrapper > ul[b-0sv9o39pmh] {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: left;
+    }
+
+    .nav-item .nav-item ul[b-0sv9o39pmh] {
+        left: 20%;
+        top:70%;
+    }
+}
 /* _content/Blazyor/Components/BlazyStepper.razor.rz.scp.css */
 
 
