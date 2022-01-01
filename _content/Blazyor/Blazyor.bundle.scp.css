@@ -91,6 +91,73 @@ label.small[b-zk0u5ihue8] {
     line-height: 1em;
     font-size: 1.5em;
 }
+/* _content/Blazyor/Components/BlazyNavMenu.razor.rz.scp.css */
+ul[b-0sv9o39pmh] {
+    list-style: none;
+    position: relative;
+    padding: 0;
+}
+
+.wrapper > ul[b-0sv9o39pmh] {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: left;
+}
+
+.nav-item[b-0sv9o39pmh] {
+    position: relative;
+    font-size: 0.8rem;
+    padding: 0;
+    cursor: pointer;
+}
+
+    .nav-item[b-0sv9o39pmh]  a {
+        color: #666666;
+        border-radius: 4px;
+        display: flex;
+        align-items: center;
+        line-height: 1.2rem;
+        padding: .5em 1.5em;
+    }
+
+    .nav-item ul[b-0sv9o39pmh] {
+        display: none;
+        position: absolute;
+        border: solid 1px #eee;
+        border-radius: 5px;
+        z-index: 10;
+        background-color: white;
+        line-height: 1rem;
+        box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 6px -1px, rgba(0, 0, 0, 0.06) 0px 2px 4px -1px;
+    }
+
+    .nav-item .nav-item ul[b-0sv9o39pmh] {
+        left: 90%;
+        top: 0;
+    }
+
+    .nav-item:hover > ul[b-0sv9o39pmh] {
+        display: block;
+    }
+
+    .nav-item[b-0sv9o39pmh]  a.active {
+        background-color: #eee;
+    }
+
+    .nav-item[b-0sv9o39pmh]  a:hover {
+        color: black;
+    }
+
+    .nav-item[b-0sv9o39pmh]  a > .oi {
+        font-size: .9em;
+        padding-left: 1em;
+        padding-bottom: .3em;
+        color: gray;
+    }
+
+    .nav-item[b-0sv9o39pmh]  a > .label {
+        flex-grow: 1;
+    }
 /* _content/Blazyor/Components/BlazyStepper.razor.rz.scp.css */
 
 
