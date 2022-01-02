@@ -1,20 +1,17 @@
 ﻿@using Blazyor.Fragments
 @using Microsoft.AspNetCore.Components.Routing
 
-<div class="wrapper">    
-
-    @RenderLink(Links)
-
-</div>
+@RenderLink(Links)
 
 @code{
+
     RenderFragment RenderLink(IEnumerable<BlazyNavLink> links) {
         return __builder =>
         {
             <ul>
                 @foreach (var lm in links)
                 {
-                    if (lm.Sublinks == null)
+                    if (lm.Sublinks == null && lm.OnClick == null)
                     {
                         <li class="nav-item">            
                             <NavLink class="nav-link" href="@lm.Href" Match="@lm.LinkMatch">
@@ -22,20 +19,28 @@
                             </NavLink>
                         </li>
                     }
+                    else if (lm.Sublinks == null && lm.OnClick != null)
+                    {
+                        <li class="nav-item">            
+                            <NavLink class="nav-link" @onclick="@(() => lm.OnClick!.Invoke())" Match="@lm.LinkMatch">
+                                <span class="label">@lm.Text</span>
+                            </NavLink>
+                        </li>                    
+                    }
                     else
                     {
-                        <li class="nav-item"> 
+                        <li class="nav-item" @onclick="() => SetSublinkStyle(lm)"> 
                             <NavLink class="nav-link">
                                 <span class="label">@lm.Text</span> <BlazyIcon Icon="BlazyIcon.IconType.Caret_Bottom" />
                             </NavLink>
-
-                            @RenderLink(lm.Sublinks)
-                        
+                            <div class="sublinks" style="@lm.SublinksStyle">
+                                @RenderLink(lm.Sublinks)
+                            </div>
                         </li>
                     }
 
                 }
-            </ul>
+        </ul>
         };
     }
 }

@@ -1,13 +1,15 @@
-﻿@page "/navmenu"
+﻿@using Blazyor.Components.Abstractions
+
+@page "/navmenu"
 <h3>NavMenu</h3>
 
 <h5>Flex with Dropdown on Hover</h5>
-<BlazyNavMenu Links="@Links" />
+<BlazyTopNav Links="@Links" />
 
 <BlazyCodeBox Code="@_code" IsToggled="true" />
 
 @code {
-    string _code = @"<BlazyNavMenu Links=""@Links"" />
+    string _code = @"<BlazyTopNav Links=""@Links"" />
 
 @code {
     BlazyNavMenu.BlazyNavLink[] Links = new BlazyNavMenu.BlazyNavLink[]

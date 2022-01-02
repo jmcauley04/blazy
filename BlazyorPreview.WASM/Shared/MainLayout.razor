@@ -1,45 +1,91 @@
 ﻿@inherits LayoutComponentBase
+@using Blazyor.Layouts
+@using System.ComponentModel
+@using Blazyor.Components.Abstractions
 
-<Blazyor.Components.Layout.BlazyLayout>
-    <NavFragment>        
-        <div class="nav-wrapper">
-            <NavMenu />
+@switch (layout){
+    case LayoutStyle.Linear:
+        {
+            <BlazyLinearLayout>
+                <TopRowFragment>
+                    @TopRowFragment()
+                </TopRowFragment>
+                <NavFragment>        
+                    <div class="top-nav-wrapper">
+                        <BlazyTopNav Links="@Links" />
+                    </div>
+                </NavFragment>
+                <BodyFragment>
+                    @Body
+                </BodyFragment>
+            </BlazyLinearLayout>
+        }
+        break;
+    case LayoutStyle.SideNav:
+        {
+            <BlazySideNavLayout>
+                <TopRowFragment>
+                    @TopRowFragment()
+                </TopRowFragment>
+                <NavFragment>        
+                    <div class="side-nav-wrapper">
+                        <BlazySideNav Links="@Links" />
+                    </div>
+                </NavFragment>
+                <BodyFragment>
+                    @Body
+                </BodyFragment>
+            </BlazySideNavLayout>            
+        }
+        break;
+}
+
+@code {
+    RenderFragment TopRowFragment() {
+        return __builder =>
+        {        
+            <div class="top-row">
+                <Blazyor.Fragments.BlazyLogo />
+                <a href="https://docs.microsoft.com/aspnet/" target="_blank">About</a>
         </div>
-    </NavFragment>
-    <TopRowFragment>
-        <div class="top-row">
-            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" height="40px" viewBox="0 0 32 32" >
-                <linearGradient id="Gradient2" x1="0" x2="0" y1="0" y2="1">
-                    <stop offset="0%" stop-color="rgb(5, 39, 103)"/>
-                    <stop offset="70%" stop-color="#3a0647 "/>
-                </linearGradient>
-                <mask id="textMask">
-                    <g stroke="white" stroke-width="3" fill="transparent">
-                        <g>
-                            <path d="M2 1 l0 29 c10 0 10 -10 5 -15 q-5 -5 -4 -5 c10 -4 0 -9 -1 -7"></path>    
-                
-                        </g>
-                        <g>
-                            <path d="M14 2 l0 28 17 0"></path>   
-                        </g>
-            
-                        <g transform="scale(.6) translate(0 -14)" style="transform-origin: 100% 50%;">
-                            <path d="M16 17 l12 0 -10 10 12 0" stroke-width="2"></path>   
-                        </g>
-                        <g transform="scale(.4) translate(0 -36)" style="transform-origin: 100% 50%;">
-                            <path d="M16 17 l12 0 -10 10 12 0" stroke-width="2"></path>   
-                        </g>
-                        <g>
-                            <path d="M16 17 l12 0 -10 10 12 0" stroke-width="2"></path>   
-                        </g>
-                    </g>
-                </mask>
-                <rect fill="url(#Gradient2)" height="100%" width="100%" mask="url(#textMask)"></rect>    
-            </svg>
-            <a href="https://docs.microsoft.com/aspnet/" target="_blank">About</a>
-        </div>
-    </TopRowFragment>
-    <BodyFragment>
-        @Body
-    </BodyFragment>
-</Blazyor.Components.Layout.BlazyLayout>
+        };
+    }
+
+    protected override void OnInitialized()
+    {
+        Links = new BlazyNavMenu.BlazyNavLink[]
+            {
+            new () {Text = "HOME", Href = ""},
+            new () {Text = "LAYOUTS", Sublinks = new BlazyNavMenu.BlazyNavLink[]
+                {
+                    new BlazyNavMenu.BlazyNavLink() {Text = "Linear Layout", OnClick = () => SetLayout(LayoutStyle.Linear) },
+                    new BlazyNavMenu.BlazyNavLink() {Text = "Side Nav Layout", OnClick = () => SetLayout(LayoutStyle.SideNav)},
+                }
+            },
+            new () {Text = "BUTTONS", Href = "buttons"},
+            new () {Text = "MODALS", Href = "modals"},
+            new () {Text = "DATAGRID", Href = "datagrid"},
+            new () {Text = "STEPPER", Href = "stepper"},
+            new () {Text = "CODEBOX", Href = "codebox"},
+            new () {Text = "NAVMENU", Href = "navmenu"},
+        };
+
+        base.OnInitialized();
+    }
+
+    BlazyNavMenu.BlazyNavLink[] Links = new BlazyNavMenu.BlazyNavLink[0];
+
+    public enum LayoutStyle
+    {
+        [Description("BlazySideNavLayout")] SideNav,
+        [Description("BlazyLinearLayout")] Linear
+    }
+
+    LayoutStyle layout = LayoutStyle.Linear;
+
+    void SetLayout(LayoutStyle style)
+    {
+        layout = style;
+        StateHasChanged();
+    }
+}

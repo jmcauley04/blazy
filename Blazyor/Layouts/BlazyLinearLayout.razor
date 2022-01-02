@@ -1,0 +1,53 @@
+﻿@using System.ComponentModel
+@using Blazyor.Extensions
+
+<div class="layout-wrapper">  
+
+    @if(TopRowFragment != null || NavFragment != null)
+    {
+        <div class="header">       
+            @if(TopRowFragment != null)
+            {
+                <div>
+                    @TopRowFragment
+                </div>                
+            }
+            @if(NavFragment != null)
+            {
+                <nav>
+                    @NavFragment
+                </nav>                
+            }
+        </div>        
+    }
+
+    <main>        
+        <div>            
+            @BodyFragment
+        </div>
+    </main>               
+
+    @if(FooterFragment != null)
+    {            
+        <footer>
+            <div>
+                @FooterFragment
+            </div>
+        </footer>
+    }
+
+</div>
+
+@code {
+    [Parameter]
+    public RenderFragment? NavFragment { get; set; }
+
+    [Parameter]
+    public RenderFragment? BodyFragment { get; set; }
+
+    [Parameter]
+    public RenderFragment? TopRowFragment { get; set; }
+
+    [Parameter]
+    public RenderFragment? FooterFragment { get; set; }
+}

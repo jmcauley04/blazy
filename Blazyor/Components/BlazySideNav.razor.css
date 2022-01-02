@@ -1,0 +1,70 @@
+﻿::deep ul {
+    list-style: none;
+    position: relative;
+    padding: 0;
+    display: grid;
+}
+
+::deep .nav-item a > .oi {
+    font-size: .9em;
+    padding-left: 1em;
+    padding-bottom: .3em;
+}
+
+::deep .nav-item {
+    font-size: 0.9rem;
+    padding-bottom: 0.2rem;
+}
+
+::deep .sublinks .nav-item:last-child {
+    padding-bottom: 0;
+}
+
+.wrapper > ::deep .nav-item:first-of-type {
+    padding-top: 1rem;
+}
+
+.wrapper > ::deep .nav-item:last-of-type {
+    padding-bottom: 1rem;
+}
+
+::deep .nav-item a {
+    color: #d7d7d7;
+    border-radius: 4px;
+    height: 3rem;
+    display: flex;
+    align-items: center;
+    line-height: 3rem;
+}
+    ::deep .nav-item a.active {
+        background-color: rgba(255,255,255,0.25);
+        color: white;
+    }
+
+    ::deep .nav-item a:hover {
+        background-color: rgba(255,255,255,0.1);
+        color: white;
+    }
+
+.wrapper > ::deep h5 {
+    padding: 1em;
+    color: white;
+}
+
+::deep .nav-item > a > .label {
+    flex-grow: 1;
+}
+
+::deep li > .sublinks {
+    background-color: rgba(0,0,0, .15);
+    max-height: 0;
+    overflow-y: hidden;
+    transition: max-height ease .5s;
+}
+
+@media (min-width: 641px) {
+    .wrapper > ::deep ul {
+        display: grid;
+        padding: .5em;
+    }
+}

@@ -22,8 +22,14 @@ main {
     display: grid;
 }
 
-main * {
-    padding: 1em;
+    main * {
+        padding: 1em;
+    }
+
+.top-row {
+    padding: 0 1em;
+    background-color: #eee;
+    display: none;
 }
 
 nav {
@@ -51,4 +57,7 @@ footer {
         grid-template-columns: auto minmax(min-content, auto);
     }
 
+    .top-row {
+        display: block;
+    }
 }

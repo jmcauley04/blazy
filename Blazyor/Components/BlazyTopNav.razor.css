@@ -1,22 +1,22 @@
-﻿ul {
+﻿::deep ul {
     list-style: none;
     position: relative;
     padding: 0;
 }
 
-.nav-item {
+::deep .nav-item {
     position: relative;
     font-size: 0.8rem;
     padding: 0;
     cursor: pointer;
 }
 
-    .nav-item .nav-item ul {
+    ::deep .nav-item .nav-item ul {
         left: 20%;
         top: 70%;
     }
 
-    .nav-item ::deep a {
+    ::deep .nav-item a {
         color: #666666;
         border-radius: 4px;
         display: flex;
@@ -25,8 +25,7 @@
         padding: .5em 1.5em;
     }
 
-    .nav-item ul {
-        display: none;
+    ::deep .nav-item ul {
         position: absolute;
         border: solid 1px #eee;
         border-radius: 5px;
@@ -36,26 +35,30 @@
         box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 6px -1px, rgba(0, 0, 0, 0.06) 0px 2px 4px -1px;
     }
 
-    .nav-item:hover > ul {
+    ::deep .sublinks {
+        display: none;
+    }
+
+    ::deep .nav-item:hover > .sublinks {
         display: block;
     }
 
-    .nav-item ::deep a.active {
+    ::deep .nav-item a.active {
         background-color: #eee;
     }
 
-    .nav-item ::deep a:hover {
+    ::deep .nav-item a:hover {
         color: black;
     }
-        
-    .nav-item ::deep a > .oi {
+
+    ::deep .nav-item a > .oi {
         font-size: .9em;
         padding-left: 1em;
         padding-bottom: .3em;
         color: gray;
     }
 
-    .nav-item ::deep a > .label {
+    ::deep .nav-item a > .label {
         flex-grow: 1;
     }
 
@@ -63,14 +66,14 @@
 
 @media (min-width: 641px) {
 
-    .wrapper > ul {
+    .wrapper ::deep > ul {
         display: flex;
         flex-wrap: wrap;
         justify-content: left;
     }
 
-    .nav-item .nav-item ul {
+    ::deep .nav-item .nav-item ul {
         left: 20%;
-        top:70%;
+        top: 70%;
     }
 }
