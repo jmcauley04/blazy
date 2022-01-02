@@ -24,6 +24,18 @@
     background-image: linear-gradient(180deg, rgb(5, 39, 103) 0%, #3a0647 70%);
 }
 
+    .side-nav-wrapper ::deep .nav-item a,
+    .side-nav-wrapper ::deep .nav-item .oi {
+        color: #ccc;
+    }
+    .side-nav-wrapper ::deep .nav-item:hover a,
+    .side-nav-wrapper ::deep .nav-item:hover .oi {
+        color: #fff;
+    }
+    .side-nav-wrapper ::deep a.active {
+        color: #fff;
+    }
+
 
 @media (min-width: 641px) {
     .top-nav-wrapper {

@@ -34,16 +34,16 @@
                             @if(EditingItem?.Equals(item) ?? false)
                             {
                                 <BlazyButton>
-                                    <Blazyor.Fragments.BlazyIcon Icon="Fragments.BlazyIcon.IconType.OI_Check" />
+                                    <Blazy.Fragments.BlazyIcon Icon="Fragments.BlazyIcon.IconType.OI_Check" />
                                 </BlazyButton>
                                 <BlazyButton OnClick="Cancel">
-                                    <Blazyor.Fragments.BlazyIcon Icon="Fragments.BlazyIcon.IconType.OI_Ban" />
+                                    <Blazy.Fragments.BlazyIcon Icon="Fragments.BlazyIcon.IconType.OI_Ban" />
                                 </BlazyButton>
                             }
                             else
                             {
                                 <BlazyButton OnClick="() => EditItem(item)">
-                                    <Blazyor.Fragments.BlazyIcon Icon="Fragments.BlazyIcon.IconType.OI_Pencil" />
+                                    <Blazy.Fragments.BlazyIcon Icon="Fragments.BlazyIcon.IconType.OI_Pencil" />
                                 </BlazyButton>
                             }
                         </td>

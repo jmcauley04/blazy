@@ -12,7 +12,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Blazyor\Blazyor.csproj" />
+    <ProjectReference Include="..\Blazy\Blazy.csproj" />
   </ItemGroup>
 
 </Project>

@@ -1,7 +1,7 @@
 ﻿@inherits LayoutComponentBase
-@using Blazyor.Layouts
+@using Blazy.Layouts
 @using System.ComponentModel
-@using Blazyor.Components.Abstractions
+@using Blazy.Components.Abstractions
 
 @switch (layout){
     case LayoutStyle.Linear:
@@ -45,7 +45,7 @@
         return __builder =>
         {        
             <div class="top-row">
-                <Blazyor.Fragments.BlazyLogo />
+                <Blazy.Fragments.BlazyLogo />
                 <a href="https://docs.microsoft.com/aspnet/" target="_blank">About</a>
         </div>
         };
@@ -58,26 +58,8 @@
             new () {Text = "HOME", Href = ""},
             new () {Text = "LAYOUTS", Sublinks = new BlazyNavMenu.BlazyNavLink[]
                 {
-                    new () {Text = "Linear Layout", OnClick = () => SetLayout(LayoutStyle.Linear) },
-                    new () {Text = "Side Nav Layout", OnClick = () => SetLayout(LayoutStyle.SideNav)},
-                    new () {Text = "LAYOUTS", Sublinks = new BlazyNavMenu.BlazyNavLink[]
-                        {
-                            new () {Text = "Linear Layout", OnClick = () => SetLayout(LayoutStyle.Linear) },
-                            new () {Text = "Side Nav Layout", OnClick = () => SetLayout(LayoutStyle.SideNav)},
-                    new () {Text = "LAYOUTS", Sublinks = new BlazyNavMenu.BlazyNavLink[]
-                        {
-                            new () {Text = "Linear Layout", OnClick = () => SetLayout(LayoutStyle.Linear) },
-                            new () {Text = "Side Nav Layout", OnClick = () => SetLayout(LayoutStyle.SideNav)},
-                    new () {Text = "LAYOUTS", Sublinks = new BlazyNavMenu.BlazyNavLink[]
-                        {
-                            new () {Text = "Linear Layout", OnClick = () => SetLayout(LayoutStyle.Linear) },
-                            new () {Text = "Side Nav Layout", OnClick = () => SetLayout(LayoutStyle.SideNav)},
-                        }
-                    },
-                        }
-                    },
-                        }
-                    },
+                    new () {Text = "LINEAR", OnClick = () => SetLayout(LayoutStyle.Linear) },
+                    new () {Text = "SIDE NAV", OnClick = () => SetLayout(LayoutStyle.SideNav)},
                 }
             },
             new () {Text = "BUTTONS", Href = "buttons"},

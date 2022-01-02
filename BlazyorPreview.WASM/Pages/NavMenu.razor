@@ -1,4 +1,4 @@
-﻿@using Blazyor.Components.Abstractions
+﻿@using Blazy.Components.Abstractions
 
 @page "/navmenu"
 <h3>NavMenu</h3>
@@ -6,10 +6,15 @@
 <h5>Flex with Dropdown on Hover</h5>
 <BlazyTopNav Links="@Links" />
 
-<BlazyCodeBox Code="@_code" IsToggled="true" />
+<BlazyCodeBox Code="@_code("BlazyTopNav")" IsToggled="true" />
+
+<h5>Flex with Dropdown on Hover</h5>
+<BlazySideNav Links="@Links" />
+
+<BlazyCodeBox Code="@_code("BlazySideNav")" IsToggled="true" />
 
 @code {
-    string _code = @"<BlazyTopNav Links=""@Links"" />
+    string _code(string navName) => $"<{navName}" + @" Links=""@Links"" />
 
 @code {
     BlazyNavMenu.BlazyNavLink[] Links = new BlazyNavMenu.BlazyNavLink[]

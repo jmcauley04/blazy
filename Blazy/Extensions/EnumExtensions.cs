@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Reflection;
 
-namespace Blazyor.Extensions
+namespace Blazy.Extensions
 {
     public static class EnumExtensions
     {

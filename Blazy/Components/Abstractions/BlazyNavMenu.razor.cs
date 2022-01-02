@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Routing;
 
-namespace Blazyor.Components.Abstractions
+namespace Blazy.Components.Abstractions
 {
     public partial class BlazyNavMenu
     {

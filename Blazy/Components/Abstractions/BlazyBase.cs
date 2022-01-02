@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Blazyor.Components.Abstractions
+namespace Blazy.Components.Abstractions
 {
     public class BlazyBase : ComponentBase
     {
