@@ -102,6 +102,10 @@ label.small[b-zk0u5ihue8] {
     display: grid;
 }
 
+.menu-icon[b-0rgaf3baz3] {
+    display: block;
+}
+
 [b-0rgaf3baz3] .nav-item a > .oi {
     font-size: .9em;
     padding-left: 1em;
@@ -111,17 +115,18 @@ label.small[b-zk0u5ihue8] {
 [b-0rgaf3baz3] .nav-item {
     font-size: 0.9rem;
     padding-bottom: 0.2rem;
+    cursor: pointer;
 }
 
 [b-0rgaf3baz3] .sublinks .nav-item:last-child {
     padding-bottom: 0;
 }
 
-.wrapper[b-0rgaf3baz3] >  .nav-item:first-of-type {
+.wrapper > div:last-of-type[b-0rgaf3baz3] >  .nav-item:first-of-type {
     padding-top: 1rem;
 }
 
-.wrapper[b-0rgaf3baz3] >  .nav-item:last-of-type {
+.wrapper > div:last-of-type[b-0rgaf3baz3] >  .nav-item:last-of-type {
     padding-bottom: 1rem;
 }
 
@@ -143,10 +148,6 @@ label.small[b-zk0u5ihue8] {
         color: white;
     }
 
-.wrapper[b-0rgaf3baz3] >  h5 {
-    padding: 1em;
-    color: white;
-}
 
 [b-0rgaf3baz3] .nav-item > a > .label {
     flex-grow: 1;
@@ -159,10 +160,47 @@ label.small[b-zk0u5ihue8] {
     transition: max-height ease .5s;
 }
 
+.wrapper > div:first-of-type[b-0rgaf3baz3] {
+    display: flex;
+    align-items: center;
+    color: white;
+    padding: 1em;
+}
+
+.wrapper[b-0rgaf3baz3]  .oi {
+    color: white;
+}
+
+.wrapper h5[b-0rgaf3baz3] {
+    flex-grow: 1;
+}
+
+.menu-list[b-0rgaf3baz3] {
+    display: none;
+}
+
+    .menu-list.visible[b-0rgaf3baz3] {
+        display: block;
+    }
+
 @media (min-width: 641px) {
-    .wrapper[b-0rgaf3baz3] >  ul {
+    .menu-list[b-0rgaf3baz3] >  ul {
         display: grid;
         padding: .5em;
+    }
+
+    .menu-list[b-0rgaf3baz3] {
+        display: block;
+    }
+
+    [b-0rgaf3baz3] ul ul {
+        border-left: 1px solid rgba(0,0,0,.5);
+        border-bottom: 1px solid rgba(0,0,0,.5);
+        margin-left: .2em;
+    }
+
+    .menu-icon[b-0rgaf3baz3] {
+        display: none;
     }
 }
 /* _content/Blazyor/Components/BlazyStepper.razor.rz.scp.css */
