@@ -1,7 +1,28 @@
 ﻿@inherits BlazyNavMenu
 
 <div class="wrapper">    
-    <h5>Blazy Components</h5>
-    <Blazyor.Components.Abstractions.BlazyNavMenu Links="Links" />
+    <div>        
+        <h5>@HeaderText</h5>
+        <div class="menu-icon">
+            <BlazyButton OnClick="ToggleOpen">
+                <Blazyor.Fragments.BlazyIcon Icon="BlazyIcon.IconType.Menu" />
+            </BlazyButton>
+        </div>
+    </div>
+    <div class="menu-list @(isOpen ? "visible" : "")">        
+        <Blazyor.Components.Abstractions.BlazyNavMenu Links="Links" />
+    </div>
 
 </div>
+
+@code {
+    [Parameter]
+    public string HeaderText { get; set; } = string.Empty;
+
+    bool isOpen = false;
+
+    void ToggleOpen()
+    {
+        isOpen = !isOpen;
+    }
+}

@@ -29,7 +29,7 @@
                 </TopRowFragment>
                 <NavFragment>        
                     <div class="side-nav-wrapper">
-                        <BlazySideNav Links="@Links" />
+                        <BlazySideNav Links="@Links" HeaderText="Blazy Components" />
                     </div>
                 </NavFragment>
                 <BodyFragment>
@@ -58,8 +58,26 @@
             new () {Text = "HOME", Href = ""},
             new () {Text = "LAYOUTS", Sublinks = new BlazyNavMenu.BlazyNavLink[]
                 {
-                    new BlazyNavMenu.BlazyNavLink() {Text = "Linear Layout", OnClick = () => SetLayout(LayoutStyle.Linear) },
-                    new BlazyNavMenu.BlazyNavLink() {Text = "Side Nav Layout", OnClick = () => SetLayout(LayoutStyle.SideNav)},
+                    new () {Text = "Linear Layout", OnClick = () => SetLayout(LayoutStyle.Linear) },
+                    new () {Text = "Side Nav Layout", OnClick = () => SetLayout(LayoutStyle.SideNav)},
+                    new () {Text = "LAYOUTS", Sublinks = new BlazyNavMenu.BlazyNavLink[]
+                        {
+                            new () {Text = "Linear Layout", OnClick = () => SetLayout(LayoutStyle.Linear) },
+                            new () {Text = "Side Nav Layout", OnClick = () => SetLayout(LayoutStyle.SideNav)},
+                    new () {Text = "LAYOUTS", Sublinks = new BlazyNavMenu.BlazyNavLink[]
+                        {
+                            new () {Text = "Linear Layout", OnClick = () => SetLayout(LayoutStyle.Linear) },
+                            new () {Text = "Side Nav Layout", OnClick = () => SetLayout(LayoutStyle.SideNav)},
+                    new () {Text = "LAYOUTS", Sublinks = new BlazyNavMenu.BlazyNavLink[]
+                        {
+                            new () {Text = "Linear Layout", OnClick = () => SetLayout(LayoutStyle.Linear) },
+                            new () {Text = "Side Nav Layout", OnClick = () => SetLayout(LayoutStyle.SideNav)},
+                        }
+                    },
+                        }
+                    },
+                        }
+                    },
                 }
             },
             new () {Text = "BUTTONS", Href = "buttons"},

@@ -8,7 +8,7 @@
     RenderFragment RenderLink(IEnumerable<BlazyNavLink> links) {
         return __builder =>
         {
-            <ul>
+            <ul @onclick:stopPropagation>
                 @foreach (var lm in links)
                 {
                     if (lm.Sublinks == null && lm.OnClick == null)
@@ -21,20 +21,20 @@
                     }
                     else if (lm.Sublinks == null && lm.OnClick != null)
                     {
-                        <li class="nav-item">            
-                            <NavLink class="nav-link" @onclick="@(() => lm.OnClick!.Invoke())" Match="@lm.LinkMatch">
+                        <li class="nav-item" @onclick="@(() => lm.OnClick!.Invoke())">            
+                            <NavLink class="nav-link" Match="@lm.LinkMatch">
                                 <span class="label">@lm.Text</span>
                             </NavLink>
                         </li>                    
                     }
                     else
                     {
-                        <li class="nav-item" @onclick="() => SetSublinkStyle(lm)"> 
+                        <li class="nav-item" @onclick="() => lm.IsOpen = !lm.IsOpen"> 
                             <NavLink class="nav-link">
                                 <span class="label">@lm.Text</span> <BlazyIcon Icon="BlazyIcon.IconType.Caret_Bottom" />
                             </NavLink>
-                            <div class="sublinks" style="@lm.SublinksStyle">
-                                @RenderLink(lm.Sublinks)
+                            <div class="sublinks" style="@sublinkStyle(lm)">
+                                @RenderLink(lm.Sublinks!)
                             </div>
                         </li>
                     }

@@ -20,15 +20,26 @@ namespace Blazyor.Components.Abstractions
 
             public NavLinkMatch LinkMatch { get; set; } = NavLinkMatch.All;
 
-            public string SublinksStyle { get; set; } = string.Empty;
+            public bool IsOpen { get; set; } = false;
         }
 
-        void SetSublinkStyle(BlazyNavLink navlink)
+        string sublinkStyle(BlazyNavLink navLink) => $"max-height: {52 * countOpenSublinks(navLink)}px;";
+
+        int countOpenSublinks(BlazyNavLink link)
         {
-            if (string.IsNullOrEmpty(navlink.SublinksStyle))
-                navlink.SublinksStyle = $"max-height: {52 * navlink.Sublinks!.Count()}px;";
+            int i = 0;
+
+            if (link.IsOpen)
+            {
+                foreach (var sublink in link.Sublinks!.Where(x => x.IsOpen))
+                    i += countOpenSublinks(sublink);
+
+                i += link.Sublinks!.Count();
+            }
             else
-                navlink.SublinksStyle = string.Empty;
+                return 0;
+
+            return i;
         }
     }
 }
