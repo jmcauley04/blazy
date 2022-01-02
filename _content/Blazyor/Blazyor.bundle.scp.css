@@ -94,81 +94,75 @@ label.small[b-zk0u5ihue8] {
     line-height: 1em;
     font-size: 1.5em;
 }
-/* _content/Blazyor/Components/BlazyNavMenu.razor.rz.scp.css */
-ul[b-0sv9o39pmh] {
+/* _content/Blazyor/Components/BlazySideNav.razor.rz.scp.css */
+[b-0rgaf3baz3] ul {
     list-style: none;
     position: relative;
     padding: 0;
+    display: grid;
 }
 
-.nav-item[b-0sv9o39pmh] {
-    position: relative;
-    font-size: 0.8rem;
-    padding: 0;
-    cursor: pointer;
+[b-0rgaf3baz3] .nav-item a > .oi {
+    font-size: .9em;
+    padding-left: 1em;
+    padding-bottom: .3em;
 }
 
-    .nav-item .nav-item ul[b-0sv9o39pmh] {
-        left: 20%;
-        top: 70%;
+[b-0rgaf3baz3] .nav-item {
+    font-size: 0.9rem;
+    padding-bottom: 0.2rem;
+}
+
+[b-0rgaf3baz3] .sublinks .nav-item:last-child {
+    padding-bottom: 0;
+}
+
+.wrapper[b-0rgaf3baz3] >  .nav-item:first-of-type {
+    padding-top: 1rem;
+}
+
+.wrapper[b-0rgaf3baz3] >  .nav-item:last-of-type {
+    padding-bottom: 1rem;
+}
+
+[b-0rgaf3baz3] .nav-item a {
+    color: #d7d7d7;
+    border-radius: 4px;
+    height: 3rem;
+    display: flex;
+    align-items: center;
+    line-height: 3rem;
+}
+    [b-0rgaf3baz3] .nav-item a.active {
+        background-color: rgba(255,255,255,0.25);
+        color: white;
     }
 
-    .nav-item[b-0sv9o39pmh]  a {
-        color: #666666;
-        border-radius: 4px;
-        display: flex;
-        align-items: center;
-        line-height: 1.2rem;
-        padding: .5em 1.5em;
+    [b-0rgaf3baz3] .nav-item a:hover {
+        background-color: rgba(255,255,255,0.1);
+        color: white;
     }
 
-    .nav-item ul[b-0sv9o39pmh] {
-        display: none;
-        position: absolute;
-        border: solid 1px #eee;
-        border-radius: 5px;
-        z-index: 10;
-        background-color: white;
-        line-height: 1rem;
-        box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 6px -1px, rgba(0, 0, 0, 0.06) 0px 2px 4px -1px;
-    }
+.wrapper[b-0rgaf3baz3] >  h5 {
+    padding: 1em;
+    color: white;
+}
 
-    .nav-item:hover > ul[b-0sv9o39pmh] {
-        display: block;
-    }
+[b-0rgaf3baz3] .nav-item > a > .label {
+    flex-grow: 1;
+}
 
-    .nav-item[b-0sv9o39pmh]  a.active {
-        background-color: #eee;
-    }
-
-    .nav-item[b-0sv9o39pmh]  a:hover {
-        color: black;
-    }
-        
-    .nav-item[b-0sv9o39pmh]  a > .oi {
-        font-size: .9em;
-        padding-left: 1em;
-        padding-bottom: .3em;
-        color: gray;
-    }
-
-    .nav-item[b-0sv9o39pmh]  a > .label {
-        flex-grow: 1;
-    }
-
-
+[b-0rgaf3baz3] li > .sublinks {
+    background-color: rgba(0,0,0, .15);
+    max-height: 0;
+    overflow-y: hidden;
+    transition: max-height ease .5s;
+}
 
 @media (min-width: 641px) {
-
-    .wrapper > ul[b-0sv9o39pmh] {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: left;
-    }
-
-    .nav-item .nav-item ul[b-0sv9o39pmh] {
-        left: 20%;
-        top:70%;
+    .wrapper[b-0rgaf3baz3] >  ul {
+        display: grid;
+        padding: .5em;
     }
 }
 /* _content/Blazyor/Components/BlazyStepper.razor.rz.scp.css */
@@ -261,58 +255,209 @@ thead[b-s9ga4saq99]  tr:nth-child(2n+1) {
 tbody[b-s9ga4saq99]  tr:nth-child(2n+1){
     background-color: #eee;
 }
-/* _content/Blazyor/Components/Layout/BlazyLayout.razor.rz.scp.css */
-.page[b-csqws5mrtt] {
+/* _content/Blazyor/Components/BlazyTopNav.razor.rz.scp.css */
+[b-av864d0wxu] ul {
+    list-style: none;
+    position: relative;
+    padding: 0;
+}
+
+[b-av864d0wxu] .nav-item {
+    position: relative;
+    font-size: 0.8rem;
+    padding: 0;
+    cursor: pointer;
+}
+
+    [b-av864d0wxu] .nav-item .nav-item ul {
+        left: 20%;
+        top: 70%;
+    }
+
+    [b-av864d0wxu] .nav-item a {
+        color: #666666;
+        border-radius: 4px;
+        display: flex;
+        align-items: center;
+        line-height: 1.2rem;
+        padding: .5em 1.5em;
+    }
+
+    [b-av864d0wxu] .nav-item ul {
+        position: absolute;
+        border: solid 1px #eee;
+        border-radius: 5px;
+        z-index: 10;
+        background-color: white;
+        line-height: 1rem;
+        box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 6px -1px, rgba(0, 0, 0, 0.06) 0px 2px 4px -1px;
+    }
+
+    [b-av864d0wxu] .sublinks {
+        display: none;
+    }
+
+    [b-av864d0wxu] .nav-item:hover > .sublinks {
+        display: block;
+    }
+
+    [b-av864d0wxu] .nav-item a.active {
+        background-color: #eee;
+    }
+
+    [b-av864d0wxu] .nav-item a:hover {
+        color: black;
+    }
+
+    [b-av864d0wxu] .nav-item a > .oi {
+        font-size: .9em;
+        padding-left: 1em;
+        padding-bottom: .3em;
+        color: gray;
+    }
+
+    [b-av864d0wxu] .nav-item a > .label {
+        flex-grow: 1;
+    }
+
+
+
+@media (min-width: 641px) {
+
+    .wrapper[b-av864d0wxu]  > ul {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: left;
+    }
+
+    [b-av864d0wxu] .nav-item .nav-item ul {
+        left: 20%;
+        top: 70%;
+    }
+}
+/* _content/Blazyor/Layouts/BlazyLinearLayout.razor.rz.scp.css */
+.layout-wrapper[b-km4otfv74y] {
+    display: grid;
+    min-height: 100vh;
+    grid-template-rows: repeat(2, min-content);
+    justify-items: stretch;
+}
+
+.header[b-km4otfv74y] {
+    border-bottom: 1px solid #eee;
+    margin-bottom: 1em;
+}
+
+.header[b-km4otfv74y],
+main[b-km4otfv74y],
+footer[b-km4otfv74y] {
+    display: grid;
+    justify-items: stretch;
+}
+
+footer[b-km4otfv74y] {
+    background-color: lightgray;
+}
+
+@media (min-width: 641px) {
+    main[b-km4otfv74y],
+    .header[b-km4otfv74y],
+    footer[b-km4otfv74y] {
+        justify-items: center;
+    }
+    main > *[b-km4otfv74y],
+    .header > *[b-km4otfv74y],
+    footer > *[b-km4otfv74y] {
+        width: 641px;
+    }
+}
+
+@media (min-width: 768px) {
+    main > *[b-km4otfv74y],
+    .header > *[b-km4otfv74y],
+    footer > *[b-km4otfv74y] {
+        width: 768px;
+    }
+}
+
+@media (min-width: 992px) {
+    main > *[b-km4otfv74y],
+    .header > *[b-km4otfv74y],
+    footer > *[b-km4otfv74y] {
+        width: 992px;
+    }
+
+}
+
+
+@media (min-width: 1200px) {
+    main > *[b-km4otfv74y],
+    .header > *[b-km4otfv74y],
+    footer > *[b-km4otfv74y] {
+        width: 1200px;
+    }
+}
+/* _content/Blazyor/Layouts/BlazySideNavLayout.razor.rz.scp.css */
+.page[b-w0visa9yoy] {
     display: grid;
     grid-template-columns: 1fr;
     grid-auto-rows: min-content;
     height: 100vh;
 }
 
-.span-rows-2[b-csqws5mrtt] {
+.span-rows-2[b-w0visa9yoy] {
     grid-row: span 2;
 }
 
-.span-cols-2[b-csqws5mrtt] {
+.span-cols-2[b-w0visa9yoy] {
     grid-column: span 2;
 }
 
-.span-cols-3[b-csqws5mrtt] {
+.span-cols-3[b-w0visa9yoy] {
     grid-column: span 3;
 }
 
-main[b-csqws5mrtt] {
+main[b-w0visa9yoy] {
     overflow-y: auto;
     display: grid;
 }
 
-main *[b-csqws5mrtt] {
-    padding: 1em;
+    main *[b-w0visa9yoy] {
+        padding: 1em;
+    }
+
+.top-row[b-w0visa9yoy] {
+    padding: 0 1em;
+    background-color: #eee;
+    display: none;
 }
 
-nav[b-csqws5mrtt] {
+nav[b-w0visa9yoy] {
     grid-column: 1 / -1;
 }
 
-footer[b-csqws5mrtt] {
+footer[b-w0visa9yoy] {
     grid-column: 1 / -1;
     background-color: lightgray;
 }
 
 @media (min-width: 641px) {
-    .page[b-csqws5mrtt] {
+    .page[b-w0visa9yoy] {
         grid-template-columns: auto 1fr;
         grid-template-rows: auto 1fr auto;
     }
 
-    nav[b-csqws5mrtt] {
+    nav[b-w0visa9yoy] {
         min-height: 100vh;
         display: grid;
         grid-column: 1;
     }
 
-    main[b-csqws5mrtt] {
+    main[b-w0visa9yoy] {
         grid-template-columns: auto minmax(min-content, auto);
     }
 
+    .top-row[b-w0visa9yoy] {
+        display: block;
+    }
 }
