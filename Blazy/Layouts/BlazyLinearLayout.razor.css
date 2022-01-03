@@ -10,6 +10,10 @@
     margin-bottom: 1em;
 }
 
+main {
+    min-height: 50vh;
+}
+
 .header,
 main,
 footer {

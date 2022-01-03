@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk.Razor">
+﻿<Project Sdk="Microsoft.NET.Sdk.Razor">
 
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
@@ -12,6 +12,10 @@
 	<PackageTags>blazor; blazor components; blazor class library; bootstrap;</PackageTags>
 	<PackageReleaseNotes>initial release</PackageReleaseNotes>
 	<PackageLicenseExpression>MIT</PackageLicenseExpression>
+	<Authors>Michael Cauley</Authors>	  
+	<PackageIcon>icon.png</PackageIcon>
+	<PackageReadmeFile>readme.md</PackageReadmeFile>
+	<Version>1.0.1</Version>
   </PropertyGroup>
 
 
@@ -22,6 +26,17 @@
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="6.0.0" />
     <PackageReference Include="Microsoft.CodeAnalysis.CSharp" Version="4.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="icon.png">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+    <None Update="readme.md">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
   </ItemGroup>
 
 </Project>

@@ -22,6 +22,10 @@ main {
     display: grid;
 }
 
+    main > article {
+        min-height: 60vh;
+    }
+
     main * {
         padding: 1em;
     }

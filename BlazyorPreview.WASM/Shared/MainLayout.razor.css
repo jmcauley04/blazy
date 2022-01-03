@@ -36,9 +36,30 @@
         color: #fff;
     }
 
+    footer {
+        display: grid;
+        padding-top: 4em;
+    }
+
+    footer ul,
+    footer p {
+        list-style: none;
+        padding-left: 1em;
+    }
+
+    footer h5 {
+        font-weight: bold;
+    }
 
 @media (min-width: 641px) {
     .top-nav-wrapper {
         float: right;
+    }
+}
+
+@media (min-width: 992px) {
+
+    footer {
+        grid-template-columns: 1fr 2fr;
     }
 }

@@ -18,6 +18,9 @@
                 <BodyFragment>
                     @Body
                 </BodyFragment>
+                <FooterFragment>                    
+                    @FooterFragment()
+                </FooterFragment>
             </BlazyLinearLayout>
         }
         break;
@@ -35,6 +38,9 @@
                 <BodyFragment>
                     @Body
                 </BodyFragment>
+                <FooterFragment>
+                    @FooterFragment()
+                </FooterFragment>
             </BlazySideNavLayout>            
         }
         break;
@@ -50,6 +56,35 @@
         </div>
         };
     }
+    RenderFragment FooterFragment() {
+        return __builder =>
+        {
+            <footer class="footer">
+                <div>
+                    <h5>Michael Cauley</h5>
+                    <ul>
+                        <li>Software Engineer</li>
+                        <li><a href="mailto:jmcauley04@gmail.com">jmcauley04@gmail.com</a></li>
+                        <li><a href="https://github.com/jmcauley04">GitHub</a></li>
+                        <li><a href="https://github.com/jmcauley04/blazy">Blazy Repo</a></li>
+                    </ul>
+                </div>
+                <div>                    
+                    <h5>Project Summary</h5>
+                    <p>
+                        @footerText
+                    </p>
+                </div>
+            </footer>
+        };
+    }
+
+    string footerText = @"Blazy is an open-source project of passion. The intent of the project is to create high-quality, user-friendly components that 
+help users transition from older front-ends to Blazor.  Blazor is a massive improvement to the .NET stack allowing C# developers to design and create in the web space 
+with almost as much capability as JavaScript and in the event that C# alone is not enough, it allows the developer to surgically utilize JavaScript as needed.  Blazor
+client is built on the rock-solid browser technology, Web Assembly, and runs entirely and natively in the browser.  Blazor server continues to provide a means for 
+creating frontends computed on a server and delivered to a client using a continuous connection over a websocket via SignalR.  These two technologies allow developers to
+create an ASP.NET hosted API and deliver to the frontend using precisely the same shared models for both use-cases.";
 
     protected override void OnInitialized()
     {
