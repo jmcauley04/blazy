@@ -4,6 +4,14 @@
     <TargetFramework>net6.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
+	<PackageLicenseExpression>MIT</PackageLicenseExpression>
+	<Description>A blazor component library that utilizes bootstrap v5 and css isolation exclusively.</Description>
+	<PackageProjectUrl>https://jmcauley04.github.io/blazy/</PackageProjectUrl>
+	<RepositoryUrl>https://github.com/jmcauley04/blazy</RepositoryUrl>
+	<RepositoryType>git</RepositoryType>
+	<PackageTags>blazor; blazor components; blazor class library; bootstrap;</PackageTags>
+	<PackageReleaseNotes>initial release</PackageReleaseNotes>
+	<PackageLicenseExpression>MIT</PackageLicenseExpression>
   </PropertyGroup>
 
 
