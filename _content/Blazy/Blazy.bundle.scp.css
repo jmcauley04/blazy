@@ -389,6 +389,10 @@ tbody[b-k6wgan9gug]  tr:nth-child(2n+1){
     margin-bottom: 1em;
 }
 
+main[b-i00d3nsjaj] {
+    min-height: 50vh;
+}
+
 .header[b-i00d3nsjaj],
 main[b-i00d3nsjaj],
 footer[b-i00d3nsjaj] {
@@ -462,6 +466,10 @@ main[b-jbcff1laqx] {
     overflow-y: auto;
     display: grid;
 }
+
+    main > article[b-jbcff1laqx] {
+        min-height: 60vh;
+    }
 
     main *[b-jbcff1laqx] {
         padding: 1em;

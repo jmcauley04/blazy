@@ -39,10 +39,31 @@
         color: #fff;
     }
 
+    footer[b-zkiscx8m1c] {
+        display: grid;
+        padding-top: 4em;
+    }
+
+    footer ul[b-zkiscx8m1c],
+    footer p[b-zkiscx8m1c] {
+        list-style: none;
+        padding-left: 1em;
+    }
+
+    footer h5[b-zkiscx8m1c] {
+        font-weight: bold;
+    }
 
 @media (min-width: 641px) {
     .top-nav-wrapper[b-zkiscx8m1c] {
         float: right;
+    }
+}
+
+@media (min-width: 992px) {
+
+    footer[b-zkiscx8m1c] {
+        grid-template-columns: 1fr 2fr;
     }
 }
 /* /Shared/NavMenu.razor.rz.scp.css */
