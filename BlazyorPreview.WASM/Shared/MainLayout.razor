@@ -75,15 +75,15 @@
                         @footerText
                     </p>
                 </div>
-            </footer>
+        </footer>
         };
     }
 
     string footerText = @"Blazy is an open-source project of passion. The intent of the project is to create high-quality, user-friendly components that 
-help users transition from older front-ends to Blazor.  Blazor is a massive improvement to the .NET stack allowing C# developers to design and create in the web space 
+help C# developers transition from non-C# front-ends to Blazor.  Blazor is a massive improvement to the .NET stack allowing C# developers to design and create in the web space 
 with almost as much capability as JavaScript and in the event that C# alone is not enough, it allows the developer to surgically utilize JavaScript as needed.  Blazor
-client is built on the rock-solid browser technology, Web Assembly, and runs entirely and natively in the browser.  Blazor server continues to provide a means for 
-creating frontends computed on a server and delivered to a client using a continuous connection over a websocket via SignalR.  These two technologies allow developers to
+client is built on the rock-solid browser technology, Web Assembly, and runs entirely and natively in the browser while Blazor server continues to provide a means for 
+creating frontends computed on a server and delivered to a client over a continuous connection established by websockets using SignalR.  These two technologies allow developers to
 create an ASP.NET hosted API and deliver to the frontend using precisely the same shared models for both use-cases.";
 
     protected override void OnInitialized()
@@ -97,12 +97,17 @@ create an ASP.NET hosted API and deliver to the frontend using precisely the sam
                     new () {Text = "SIDE NAV", OnClick = () => SetLayout(LayoutStyle.SideNav)},
                 }
             },
-            new () {Text = "BUTTONS", Href = "buttons"},
-            new () {Text = "MODALS", Href = "modals"},
+            new () {Text = "SIMPLE", Sublinks = new BlazyNavMenu.BlazyNavLink[]
+                {
+                    new () {Text = "BUTTONS", Href = "buttons"},
+                    new () {Text = "ALERTS", Href = "alerts"},
+                    new () {Text = "CODEBOX", Href = "codebox"},     
+                    new () {Text = "MODALS", Href = "modals"},           
+                }
+            },
             new () {Text = "DATAGRID", Href = "datagrid"},
             new () {Text = "STEPPER", Href = "stepper"},
-            new () {Text = "CODEBOX", Href = "codebox"},
-            new () {Text = "NAVMENU", Href = "navmenu"},
+            new () {Text = "NAVMENUS", Href = "navmenus"},
         };
 
         base.OnInitialized();

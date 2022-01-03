@@ -51,6 +51,14 @@
         font-weight: bold;
     }
 
+    .top-row ::deep svg {
+        height: 40px;
+    }
+
+    footer a {
+        text-decoration: none;
+    }
+
 @media (min-width: 641px) {
     .top-nav-wrapper {
         float: right;

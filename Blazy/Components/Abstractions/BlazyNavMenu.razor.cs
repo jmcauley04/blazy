@@ -20,7 +20,7 @@ namespace Blazy.Components.Abstractions
 
             public NavLinkMatch LinkMatch { get; set; } = NavLinkMatch.All;
 
-            public bool IsOpen { get; set; } = false;
+            internal bool IsOpen { get; set; } = false;
         }
 
         string sublinkStyle(BlazyNavLink navLink) => $"max-height: {52 * countOpenSublinks(navLink)}px;";

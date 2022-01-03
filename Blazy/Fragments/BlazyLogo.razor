@@ -1,28 +1,31 @@
-﻿<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" height="40px" viewBox="0 0 32 32" >
-    <linearGradient id="Gradient2" x1="0" x2="0" y1="0" y2="1">
-        <stop offset="0%" stop-color="rgb(5, 39, 103)"/>
-        <stop offset="70%" stop-color="#3a0647 "/>
+﻿<svg 
+    xmlns="http://www.w3.org/2000/svg" 
+    xmlns:xlink="http://www.w3.org/1999/xlink" 
+    viewBox="0 0 192 192" >
+    
+  <defs>
+    <linearGradient id="grad1" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:rgb(5, 39, 103);stop-opacity:1" />
+      <stop offset="70%" style="stop-color:#3a0647 ;stop-opacity:1" />
     </linearGradient>
-    <mask id="textMask">
-        <g stroke="white" stroke-width="3" fill="transparent">
-            <g>
-                <path d="M2 1 l0 29 c10 0 10 -10 5 -15 q-5 -5 -4 -5 c10 -4 0 -9 -1 -7"></path>    
-                
-            </g>
-            <g>
-                <path d="M14 2 l0 28 17 0"></path>   
-            </g>
-            
-            <g transform="scale(.6) translate(0 -14)" style="transform-origin: 100% 50%;">
-                <path d="M16 17 l12 0 -10 10 12 0" stroke-width="2"></path>   
-            </g>
-            <g transform="scale(.4) translate(0 -36)" style="transform-origin: 100% 50%;">
-                <path d="M16 17 l12 0 -10 10 12 0" stroke-width="2"></path>   
-            </g>
-            <g>
-                <path d="M16 17 l12 0 -10 10 12 0" stroke-width="2"></path>   
-            </g>
-        </g>
+  </defs>
+
+    <mask id="z-mask">
+        <path stroke="white"
+            stroke-width="0" 
+            fill="white" 
+            d="M24 10 L180 10 180 40 65 152 168 152 168 182 12 182 12 152 125 39.5 24 40" />
     </mask>
-    <rect fill="url(#Gradient2)" height="100%" width="100%" mask="url(#textMask)"></rect>    
+
+    <g stroke="white" stroke-width="40" fill="transparent">
+        <path stroke="white"
+            stroke-width="0" 
+            fill="white" 
+            d="M19 5 L185 5 185 45 80 147 173 147 173 187 7 187 7 147 7 147 110 45 19 45" />
+        
+    </g>
+
+    <rect width="100%" height="100%" mask="url(#z-mask)" fill="url(#grad1)" />
+
+    
 </svg>

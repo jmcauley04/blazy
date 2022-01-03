@@ -1,0 +1,48 @@
+﻿@page "/alerts"
+
+<PageTitle>Blazy Alerts</PageTitle>
+<h3>Alerts</h3>
+
+<h5>Permanent</h5>
+@foreach(var type in Enum.GetValues<BlazyAlert.AlertType>())
+{    
+    <BlazyAlert Type="type">
+        <strong>@strongText(type)</strong> @text(type)
+    </BlazyAlert> 
+}
+
+<h5>Dismissible</h5>
+@foreach(var type in Enum.GetValues<BlazyAlert.AlertType>())
+{    
+    <BlazyAlert Type="@type" IsDismissible="true">
+        <strong>@strongText(type)</strong> @text(type) Dismissable.
+    </BlazyAlert> 
+}
+
+<h5>3 second timeout</h5>
+@foreach(var type in Enum.GetValues<BlazyAlert.AlertType>())
+{    
+    <BlazyAlert Type="type" TimeoutDelay="3">
+        <strong>@strongText(type)</strong> @text(type)
+    </BlazyAlert> 
+}
+
+@code {
+    string strongText(BlazyAlert.AlertType type) => type switch
+    {
+        BlazyAlert.AlertType.Success => "Success!",
+        BlazyAlert.AlertType.Info => "Info!",
+        BlazyAlert.AlertType.Warning => "Warning!",
+        BlazyAlert.AlertType.Danger => "Danger!",
+        _ => ""
+    };
+
+    string text(BlazyAlert.AlertType type) => type switch
+    {
+        BlazyAlert.AlertType.Success => "Indicates a successful or positive action.",
+        BlazyAlert.AlertType.Info => "This alert box could indicate a neutral informative change or action.",
+        BlazyAlert.AlertType.Warning => "This alert box could indicate a warning that might need attention.",
+        BlazyAlert.AlertType.Danger => "This alert box could indicate a dangerous or potentially negative action.",
+        _ => ""
+    };
+}
