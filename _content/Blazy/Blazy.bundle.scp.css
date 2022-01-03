@@ -51,6 +51,24 @@ pre[b-0pojzpnsi2] {
     width: 100%;
     overflow-x: auto;
 }
+/* _content/Blazy/Components/BlazyDirectory.razor.rz.scp.css */
+.folder-content[b-fcs6253gzr] {
+    margin-left: .4em;
+    padding-left: .5em;
+    border-left: 1px solid lightgray;
+}
+
+[b-fcs6253gzr] .oi {
+    padding-right: .5em;
+}
+
+[b-fcs6253gzr] .oi-folder {
+    color: rgb(255, 231, 146);
+}
+
+[b-fcs6253gzr] .oi-file {
+    color: rgb(146, 231, 255);
+}
 /* _content/Blazy/Components/BlazyInputText.razor.rz.scp.css */
 div[b-38r0xga2ej] {
     position: relative;
@@ -424,6 +442,7 @@ footer[b-i00d3nsjaj] {
 
 footer[b-i00d3nsjaj] {
     background-color: lightgray;
+    margin-top: 1em;
 }
 
 @media (min-width: 641px) {

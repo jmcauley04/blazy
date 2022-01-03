@@ -1,5 +1,27 @@
 @import '_content/Blazy/Blazy.bundle.scp.css';
 
+/* /Pages/Index.razor.rz.scp.css */
+
+ul[b-171dupdzg0] {
+    list-style: none;
+    padding: 0;
+}
+
+h5[b-171dupdzg0] {
+    margin-top: 2em;
+}
+
+h6[b-171dupdzg0] {
+    margin-top: 1em;
+}
+
+a[b-171dupdzg0]{
+    text-decoration: none;
+}
+
+.blazy-directory[b-171dupdzg0] {
+    padding-left: 1em;
+}
 /* /Shared/MainLayout.razor.rz.scp.css */
 .top-row[b-zkiscx8m1c] {
     height: 3.5rem;
