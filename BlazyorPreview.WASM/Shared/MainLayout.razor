@@ -90,24 +90,29 @@ create an ASP.NET hosted API and deliver to the frontend using precisely the sam
     {
         Links = new BlazyNavMenu.BlazyNavLink[]
             {
-            new () {Text = "HOME", Href = ""},
+            new () {Text = "HOME", Href = "" },
             new () {Text = "LAYOUTS", Sublinks = new BlazyNavMenu.BlazyNavLink[]
                 {
                     new () {Text = "LINEAR", OnClick = () => SetLayout(LayoutStyle.Linear) },
                     new () {Text = "SIDE NAV", OnClick = () => SetLayout(LayoutStyle.SideNav)},
                 }
             },
-            new () {Text = "SIMPLE", Sublinks = new BlazyNavMenu.BlazyNavLink[]
+            new () {Text = "BASIC COMPONENTS", Sublinks = new BlazyNavMenu.BlazyNavLink[]
                 {
-                    new () {Text = "BUTTONS", Href = "buttons"},
                     new () {Text = "ALERTS", Href = "alerts"},
+                    new () {Text = "BUTTONS", Href = "buttons"},
                     new () {Text = "CODEBOX", Href = "codebox"},     
                     new () {Text = "MODALS", Href = "modals"},           
                 }
             },
-            new () {Text = "DATAGRID", Href = "datagrid"},
-            new () {Text = "STEPPER", Href = "stepper"},
-            new () {Text = "NAVMENUS", Href = "navmenus"},
+            new () {Text = "ADVANCED COMPONENTS", Sublinks = new BlazyNavMenu.BlazyNavLink[]
+                {
+                    new () {Text = "DATAGRID", Href = "datagrid"},
+                    new () {Text = "STEPPER", Href = "stepper"},
+                    new () {Text = "NAVMENUS", Href = "navmenus"},
+                }
+            },
+            new () {Text="ICONS", Href="icons" },
         };
 
         base.OnInitialized();

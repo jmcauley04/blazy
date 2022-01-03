@@ -1,0 +1,29 @@
+﻿@page "/icons"
+<PageTitle>Icons</PageTitle>
+
+<h3>Icons</h3>
+
+<BlazyCodeBox Code="@_code" />
+<small>The <code>Type</code> value is shown under the icon and is strongly typed as an Enum.</small>
+
+<h5><a href="https://useiconic.com/open">Open Iconic</a></h5>
+<BlazyInputText Label="Filter" @bind-Value="oiFilter" />
+<ul>
+    @foreach(var iconType in Enum.GetValues<Blazy.Fragments.BlazyIcon.IconType>()
+        .Where(x => string.IsNullOrEmpty(oiFilter) || x.ToString().ToUpper().Contains(oiFilter.ToUpper()))
+        .OrderBy(x => x.ToString())
+    )
+    {
+        <li>
+            <Blazy.Fragments.BlazyIcon Icon="iconType" />
+            <small>@iconType.ToString()</small>
+        </li>
+    }
+</ul>
+
+@code {
+    string oiFilter;
+
+    string _code = @"@using Blazy.Fragments
+<BlazyIcon Icon=""BlazyIcon.IconType.{Type}"" />";
+}

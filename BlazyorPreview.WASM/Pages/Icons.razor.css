@@ -1,0 +1,45 @@
+﻿
+h3,
+h5 {
+    margin-bottom: 1em;
+}
+
+h5 {
+    margin-top: 2em;
+}
+
+ul {
+    margin-top: 1em;
+    list-style: none;
+    grid-template-columns: repeat(3, 1fr);
+    padding: 0;
+    display: grid;
+    gap: 1em;
+}
+
+li {
+    display: grid;
+    row-gap: .5em;
+    place-items: center;
+    padding: 1em 0;
+    border: 1px solid #ddd;
+}
+
+li ::deep .oi {
+    font-size: 2em;
+}
+
+small {
+    font-size: .7em;
+}
+
+@media (min-width: 768px) {
+    ul {
+        grid-template-columns: repeat(4, 1fr);
+    }
+}
+@media (min-width: 1200px) {
+    ul {
+        grid-template-columns: repeat(5, 1fr);
+    }
+}

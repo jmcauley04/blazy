@@ -37,6 +37,6 @@
         public string Name { get; }
         public bool IsFolder { get; }
         public IEnumerable<FileOrFolder>? FilesOrFolders { get; }
-        public BlazyIcon.IconType Icon => FilesOrFolders != null || IsFolder ? BlazyIcon.IconType.Folder : BlazyIcon.IconType.File;
+        public BlazyIcon.IconType Icon => FilesOrFolders != null || IsFolder ? BlazyIcon.IconType.oi_folder : BlazyIcon.IconType.oi_file;
     }
 }

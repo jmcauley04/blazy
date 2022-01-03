@@ -6,9 +6,9 @@
 <h5>Permanent</h5>
 @foreach(var type in Enum.GetValues<BlazyAlert.AlertType>())
 {    
-    <BlazyAlert Type="type">
-        <strong>@strongText(type)</strong> @text(type)
-    </BlazyAlert> 
+        <BlazyAlert Type="type">
+            <strong>@strongText(type)</strong> @text(type)
+        </BlazyAlert> 
 }
 
 <h5>Dismissible</h5>
@@ -45,4 +45,8 @@
         BlazyAlert.AlertType.Danger => "This alert box could indicate a dangerous or potentially negative action.",
         _ => ""
     };
+
+    string htmlInput = @"<BlazyAlert Type=""BlazyAlert.AlertType.Success"">
+    <strong>test</strong> endText
+</BlazyAlert>";
 }
