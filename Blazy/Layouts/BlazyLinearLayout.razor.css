@@ -23,6 +23,7 @@ footer {
 
 footer {
     background-color: lightgray;
+    margin-top: 1em;
 }
 
 @media (min-width: 641px) {

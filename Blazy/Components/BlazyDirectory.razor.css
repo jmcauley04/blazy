@@ -1,0 +1,17 @@
+﻿.folder-content {
+    margin-left: .4em;
+    padding-left: .5em;
+    border-left: 1px solid lightgray;
+}
+
+::deep .oi {
+    padding-right: .5em;
+}
+
+::deep .oi-folder {
+    color: rgb(255, 231, 146);
+}
+
+::deep .oi-file {
+    color: rgb(146, 231, 255);
+}

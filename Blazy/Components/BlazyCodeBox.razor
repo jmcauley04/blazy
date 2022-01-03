@@ -26,6 +26,9 @@
     [Parameter]
     public bool IsToggled { get; set; } = false;
 
+    [Parameter]
+    public bool ShowLineNumbers { get; set; } = true;
+
     bool _hidden = true;
 
     List<TextSpan>? ColoredSpans;
@@ -166,7 +169,7 @@
     string AddLineNumbers(string text)
     {
         var lineIndex = 1;
-        string lineIndexNumber(int i) => $"<div style='{Colors[SyntaxColor.Blue]} padding-right: 1em; text-align: right;'>{i}</div><div>";
+        string lineIndexNumber(int i) => $"<div style='{Colors[SyntaxColor.Blue]} padding-right: 1em; text-align: right;'>{(ShowLineNumbers ? i.ToString() : string.Empty)}</div><div>";
         var maxRepeat = 200;
         var repeats = 0;
         var result = lineIndexNumber(lineIndex++) + text;

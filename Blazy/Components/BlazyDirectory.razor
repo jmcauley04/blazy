@@ -1,0 +1,42 @@
+﻿<div class="wrapper">
+    @renderFileOrFolder(FilesOrFolders)
+</div>
+
+@code {
+    RenderFragment renderFileOrFolder(IEnumerable<FileOrFolder> fileOrFolders)
+    {
+        return __builder =>
+        {
+            @if(fileOrFolders != null)
+            {            
+                @foreach(var fileOrFolder in fileOrFolders)
+                {
+                    <span><Blazy.Fragments.BlazyIcon Icon="fileOrFolder.Icon" />@fileOrFolder.Name</span>
+                    @if (FilesOrFolders != null)
+                    {        
+                        <div class="folder-content">        
+                            @renderFileOrFolder(fileOrFolder.FilesOrFolders!)
+                        </div>
+                    }        
+                }
+            }
+        };
+    }
+
+    [Parameter, EditorRequired]
+    public IEnumerable<FileOrFolder> FilesOrFolders { get; set; } = new List<FileOrFolder>();
+
+    public class FileOrFolder
+    {
+        public FileOrFolder(string name, IEnumerable<FileOrFolder>? filesOrFolders = null, bool isFolder = false)
+        {
+            Name = name;
+            IsFolder = isFolder;
+            FilesOrFolders = filesOrFolders;
+        }
+        public string Name { get; }
+        public bool IsFolder { get; }
+        public IEnumerable<FileOrFolder>? FilesOrFolders { get; }
+        public BlazyIcon.IconType Icon => FilesOrFolders != null || IsFolder ? BlazyIcon.IconType.Folder : BlazyIcon.IconType.File;
+    }
+}

@@ -1,0 +1,21 @@
+﻿
+ul {
+    list-style: none;
+    padding: 0;
+}
+
+h5 {
+    margin-top: 2em;
+}
+
+h6 {
+    margin-top: 1em;
+}
+
+a{
+    text-decoration: none;
+}
+
+.blazy-directory {
+    padding-left: 1em;
+}

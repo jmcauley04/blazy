@@ -3,8 +3,56 @@
 
 <PageTitle>Blazy Components</PageTitle>
 
-<h1>Hello, world!</h1>
+<h1>Blazy Components</h1>
 
-Welcome to your new app.
+<p>    
+    Using Blazy components is intended to be easy.  Blazy uses two other free resources that can be installed using node.  These resources are typically included with the default
+    Blazor templates.
+</p>
+<ul>
+    <li>
+        <h5><a href="https://getbootstrap.com/docs/5.0/getting-started/introduction/">Bootstrap v5.1.0</a></h5>
+            
+        <h6><strong>Node Install CMD</strong></h6>
+        <BlazyCodeBox Code="npm i bootstrap@5.1.0" ShowLineNumbers="false" />
 
-<SurveyPrompt Title="How is Blazor working for you?" />
+        <h6><strong>css reference</strong></h6>
+        <p>This should be your first css reference so that styles can be overridden as needed.</p>
+        <BlazyCodeBox Code="@blazorCssRef" ShowLineNumbers="false" />
+
+    </li>
+    <li>
+        <h5><a href="https://useiconic.com/open">Open Iconic</a></h5>
+            
+        <h6><strong>Node Install CMD</strong></h6>
+        <BlazyCodeBox Code="npm i open-iconic" ShowLineNumbers="false" />
+    </li>
+</ul>
+
+<p>When all is installed, the your <code>wwwroot</code> folder should contain at least the following files</p>
+
+<div class="blazy-directory">
+    <BlazyDirectory FilesOrFolders="fileStructure" />
+</div>
+
+<h5><a href="https://www.nuget.org/packages/Blazy/">Blazy</a></h5>
+<p>Add the Blazy nuget package to your project.</p>
+<BlazyCodeBox Code="@blazyPackageRef" ShowLineNumbers="false" />
+
+@code{
+    string blazorCssRef = @"<link href=""css/bootstrap/bootstrap.min.css"" rel=""stylesheet"" />";
+
+    string blazyPackageRef = @"<PackageReference Include=""Blazy"" />";
+
+    BlazyDirectory.FileOrFolder[] fileStructure = new BlazyDirectory.FileOrFolder[] {
+        new("wwwroot", new BlazyDirectory.FileOrFolder[] {
+            new("bootstrap", new BlazyDirectory.FileOrFolder[] {
+                new("bootstrap.min.css") }),
+            new("open-iconic", new BlazyDirectory.FileOrFolder[] {
+                new("font", new BlazyDirectory.FileOrFolder[] {
+                    new("css", isFolder: true),
+                    new("fonts", isFolder: true)
+            }
+            )})})};
+}
+
