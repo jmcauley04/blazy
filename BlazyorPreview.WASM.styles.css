@@ -1,5 +1,51 @@
 @import '_content/Blazy/Blazy.bundle.scp.css';
 
+/* /Pages/Icons.razor.rz.scp.css */
+
+h3[b-0uo5rxi49x],
+h5[b-0uo5rxi49x] {
+    margin-bottom: 1em;
+}
+
+h5[b-0uo5rxi49x] {
+    margin-top: 2em;
+}
+
+ul[b-0uo5rxi49x] {
+    margin-top: 1em;
+    list-style: none;
+    grid-template-columns: repeat(3, 1fr);
+    padding: 0;
+    display: grid;
+    gap: 1em;
+}
+
+li[b-0uo5rxi49x] {
+    display: grid;
+    row-gap: .5em;
+    place-items: center;
+    padding: 1em 0;
+    border: 1px solid #ddd;
+}
+
+li[b-0uo5rxi49x]  .oi {
+    font-size: 2em;
+}
+
+small[b-0uo5rxi49x] {
+    font-size: .7em;
+}
+
+@media (min-width: 768px) {
+    ul[b-0uo5rxi49x] {
+        grid-template-columns: repeat(4, 1fr);
+    }
+}
+@media (min-width: 1200px) {
+    ul[b-0uo5rxi49x] {
+        grid-template-columns: repeat(5, 1fr);
+    }
+}
 /* /Pages/Index.razor.rz.scp.css */
 
 ul[b-171dupdzg0] {
