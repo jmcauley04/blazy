@@ -1,0 +1,43 @@
+﻿
+<div class="accordion">
+    <CascadingValue Value="this">
+        @ChildContent
+        @foreach(var item in Items)
+        {            
+            <div class="accordion-item">
+                <h2 class="accordion-header">
+                    <button class="accordion-button" type="button">
+                        @item.Title
+                    </button>
+                </h2>
+                <div class="accordion-collapse collapse show">
+                    <div class="accordion-body">
+                        @if(item.ChildContent != null)
+                        {
+                            @item.ChildContent
+                        }            
+                    </div>
+                </div>
+            </div>
+        }
+    </CascadingValue>
+</div>
+
+@code {
+    [Parameter, EditorRequired]
+    public RenderFragment? ChildContent { get; set; }
+
+    List<BlazyAccordionItem> Items { get; set; } = new();
+        
+    public void AddItem(BlazyAccordionItem item)
+    {
+        Items.Add(item);
+        StateHasChanged();
+    }
+
+    public void RemoveItem(BlazyAccordionItem item)
+    {
+        Items.Remove(item);
+        StateHasChanged();
+    }
+}

@@ -5,6 +5,8 @@
 
 <h1>Blazy Components</h1>
 
+<BlazyCodeBox Code="@Usings" />
+
 <p>    
     Using Blazy components is intended to be easy.  Blazy uses two other free resources that can be installed using node.  These resources are typically included with the default
     Blazor templates.
@@ -44,6 +46,16 @@
 
     string blazyPackageRef = @"<PackageReference Include=""Blazy"" />";
 
+    string Usings => @"@using Blatomic.Effects
+@using Blatomic.Services.ColorScheme
+@using Blatomic.Components.Buttons
+@using Blatomic.Components.Notification
+@using Blatomic.Components.Steppers
+@using Blatomic.Components.Drag
+@using Blatomic.Components.Modals
+@using Blatomic.Components.Progress
+@using Blatomic.Components.Guides
+";
     BlazyDirectory.FileOrFolder[] fileStructure = new BlazyDirectory.FileOrFolder[] {
         new("wwwroot", new BlazyDirectory.FileOrFolder[] {
             new("bootstrap", new BlazyDirectory.FileOrFolder[] {
