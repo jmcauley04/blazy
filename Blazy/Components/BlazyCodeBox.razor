@@ -177,7 +177,7 @@
         int nextFind = result.IndexOf(Environment.NewLine, 0);
         while(nextFind > -1 && repeats < maxRepeat)
         {
-            string codeSide = result.Substring(Math.Min(nextFind + 1, result.Length));
+            string codeSide = result.Substring(Math.Min(nextFind + Environment.NewLine.Length, result.Length));
             result = result.Substring(0, nextFind) + $"</div>{Environment.NewLine}{lineIndexNumber(lineIndex++)}" + codeSide;
             nextFind = result.IndexOf(Environment.NewLine, nextFind + lineIndex.ToString().Length + 6);
             repeats++;
