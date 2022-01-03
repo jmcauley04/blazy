@@ -1,8 +1,14 @@
 .top-row {
     height: 3.5rem;
-    display: flex;
+    display: grid;
+    grid-template-columns: 1fr max-content;
     align-items: center;
+    justify-items: center;
     column-gap: 2em;
+}
+
+.top-row span {
+    font-size: 2em;
 }
 
 .top-row a{
@@ -62,6 +68,10 @@
 @media (min-width: 641px) {
     .top-nav-wrapper {
         float: right;
+    }
+
+    .top-row{
+        justify-items: start;
     }
 }
 
