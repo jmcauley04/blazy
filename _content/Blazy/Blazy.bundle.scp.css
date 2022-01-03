@@ -135,9 +135,6 @@ label.small[b-38r0xga2ej] {
     font-size: 1.5em;
 }
 /* _content/Blazy/Components/BlazySideNav.razor.rz.scp.css */
-.wrapper[b-srzesod9gk] {
-    width: fit-content;
-}
 [b-srzesod9gk] ul {
     list-style: none;
     position: relative;
@@ -227,6 +224,9 @@ label.small[b-38r0xga2ej] {
     }
 
 @media (min-width: 641px) {
+    .wrapper[b-srzesod9gk] {
+        width: fit-content;
+    }
     .menu-list[b-srzesod9gk] >  ul {
         display: grid;
         padding: .5em;
