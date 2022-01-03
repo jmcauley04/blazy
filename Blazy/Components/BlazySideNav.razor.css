@@ -1,7 +1,4 @@
-﻿.wrapper {
-    width: fit-content;
-}
-::deep ul {
+﻿::deep ul {
     list-style: none;
     position: relative;
     padding: 0;
@@ -90,6 +87,9 @@
     }
 
 @media (min-width: 641px) {
+    .wrapper {
+        width: fit-content;
+    }
     .menu-list > ::deep ul {
         display: grid;
         padding: .5em;
