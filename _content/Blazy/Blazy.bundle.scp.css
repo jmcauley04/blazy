@@ -1,3 +1,25 @@
+/* _content/Blazy/Components/BlazyAlert.razor.rz.scp.css */
+.close[b-ywh5ac23sp] {
+    text-decoration: none;
+    color: rgba(0,0,0,.4);
+    font-size: 1.5em;
+    line-height:1em;
+    cursor: pointer;
+    transition: opacity linear 1s;
+}
+
+.fade[b-ywh5ac23sp] {
+    opacity: 0;
+}
+
+.close:hover[b-ywh5ac23sp] {
+    color: rgba(0,0,0,.8);
+}
+
+.alert[b-ywh5ac23sp] {
+    display: grid;
+    grid-template-columns: auto min-content;
+}
 /* _content/Blazy/Components/BlazyButton.razor.rz.scp.css */
 button:focus[b-bpoxhbm3cp] {
     outline: none;
@@ -466,10 +488,6 @@ main[b-jbcff1laqx] {
     overflow-y: auto;
     display: grid;
 }
-
-    main > article[b-jbcff1laqx] {
-        min-height: 60vh;
-    }
 
     main *[b-jbcff1laqx] {
         padding: 1em;
