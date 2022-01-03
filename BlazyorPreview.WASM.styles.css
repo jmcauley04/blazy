@@ -71,9 +71,15 @@ a[b-171dupdzg0]{
 /* /Shared/MainLayout.razor.rz.scp.css */
 .top-row[b-zkiscx8m1c] {
     height: 3.5rem;
-    display: flex;
+    display: grid;
+    grid-template-columns: 1fr max-content;
     align-items: center;
+    justify-items: center;
     column-gap: 2em;
+}
+
+.top-row span[b-zkiscx8m1c] {
+    font-size: 2em;
 }
 
 .top-row a[b-zkiscx8m1c]{
@@ -133,6 +139,10 @@ a[b-171dupdzg0]{
 @media (min-width: 641px) {
     .top-nav-wrapper[b-zkiscx8m1c] {
         float: right;
+    }
+
+    .top-row[b-zkiscx8m1c]{
+        justify-items: start;
     }
 }
 
