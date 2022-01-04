@@ -6,11 +6,11 @@
         {            
             <div class="accordion-item">
                 <h2 class="accordion-header">
-                    <button class="accordion-button" type="button">
+                    <button class="accordion-button @(item.IsOpen ? "" : "collapsed")" type="button" @onclick="() => OpenItem(item)">
                         @item.Title
                     </button>
                 </h2>
-                <div class="accordion-collapse collapse show">
+                <div class="accordion-collapse  @(item.IsOpen ? "show" : "collapse")">
                     <div class="accordion-body">
                         @if(item.ChildContent != null)
                         {
@@ -28,9 +28,16 @@
     public RenderFragment? ChildContent { get; set; }
 
     List<BlazyAccordionItem> Items { get; set; } = new();
-        
+    BlazyAccordionItem? _openedItem;
+
     public void AddItem(BlazyAccordionItem item)
     {
+        if(_openedItem == null)
+        {
+            _openedItem = item;
+            _openedItem.IsOpen = true;
+        }
+
         Items.Add(item);
         StateHasChanged();
     }
@@ -39,5 +46,21 @@
     {
         Items.Remove(item);
         StateHasChanged();
+    }
+
+    void OpenItem(BlazyAccordionItem item)
+    {
+        if(_openedItem == item)
+        {
+            item.IsOpen = false;
+            _openedItem = null;
+            return;
+        }
+
+        if(_openedItem != null)        
+            _openedItem.IsOpen = false;        
+
+        _openedItem = item;
+        _openedItem.IsOpen = true;
     }
 }

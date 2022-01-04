@@ -2,13 +2,15 @@
 
 @code {
     [CascadingParameter]
-    public BlazyAccordion BlazyAccordion { get; set; }
+    public BlazyAccordion? BlazyAccordion { get; set; }
 
     [Parameter]
     public string Title { get; set; } = string.Empty;
 
     [Parameter, EditorRequired]
     public RenderFragment? ChildContent { get; set; }
+
+    public bool IsOpen { get; set; } = false;
 
     protected override void OnInitialized()
     {
