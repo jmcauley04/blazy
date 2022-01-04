@@ -1,8 +1,16 @@
 ﻿@page "/buttons"
+@using Blazy.Enums
 
 <PageTitle>Blazy Buttons</PageTitle>
 <h3>Buttons</h3>
 
+@{
+    string _code = @"<BlazyButton ThemeColor=""Blazy.Enums.ThemeColor.{color}"">{ChildContent}</BlazyButton>";
+}
+<h5>Code</h5>
+<BlazyCodeBox Code="@_code" />
+
+<h5>Examples</h5>
 <BlazyTable>
     <TableHead>
         <tr>
@@ -15,17 +23,13 @@
     <TableBody>
         @foreach(var outline in new []{ false, true })
         {            
-            @foreach(var style in Enum.GetValues<BlazyButton.ButtonStyle>())
+            @foreach(var color in Enum.GetValues<ThemeColor>())
             {
-                @foreach(var type in Enum.GetValues<BlazyButton.ButtonType>())
-                {
-                    <tr>
-                        <td>@style.GetDescription()</td>
-                        <td>@type.GetDescription()</td>
-                        <td>@outline</td>
-                        <td><BlazyButton Style="style" Type="type" Outline="outline" OnClick="OnClick">Example</BlazyButton></td>
-                    </tr>
-                }
+                <tr>
+                    <td>@color.GetDescription()</td>
+                    <td>@outline</td>
+                    <td><BlazyButton ThemeColor="color" Outline="outline" OnClick="OnClick">Button</BlazyButton></td>
+                </tr>                
             }
         }
     </TableBody>

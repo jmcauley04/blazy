@@ -1,6 +1,20 @@
 ﻿@page "/accordions"
 <PageTitle>Accordions</PageTitle>
 <h3>Accordions</h3>
+@{
+    string _code = @"<BlazyAccordion>
+    <BlazyAccordionItem Title=""Accordion Item 1"">
+        <p>This is an accordion item</p>
+    </BlazyAccordionItem>
+    <BlazyAccordionItem Title=""Accordion Item 2"">
+        <p>This is an accordion item</p>
+    </BlazyAccordionItem>
+</BlazyAccordion>";
+}
+<h5>Code</h5>
+<BlazyCodeBox Code="@_code" />
+
+<h5>Examples</h5>
 
 <BlazyAccordion>
     <BlazyAccordionItem Title="Accordion Item 1">

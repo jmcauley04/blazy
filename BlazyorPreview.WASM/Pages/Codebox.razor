@@ -3,6 +3,18 @@
 <PageTitle>Blazy Codeboxes</PageTitle>
 <h3>Codebox</h3>
 
+@{
+    string _codeex = @"@{
+    string _code = @""public string Name { get; set;}
+    public string Email { get; set;}""
+}
+
+<BlazyCodeBox Code=""@_code"" />";
+}
+<h5>Code</h5>
+<BlazyCodeBox Code="@_codeex" />
+
+<h5>Example</h5>
 <BlazyCodeBox Code="@_code" />
 
 @code {

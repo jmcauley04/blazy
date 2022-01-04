@@ -21,10 +21,10 @@
             <div class="modal-footer">
                 @if(ModalFooter == null)
                 {
-                    <BlazyButton Style="BlazyButton.ButtonStyle.Secondary" OnClick="Cancel" Disabled="@working">Close</BlazyButton>
+                    <BlazyButton ThemeColor="ThemeColor.Secondary" OnClick="Cancel" Disabled="@working">Close</BlazyButton>
                     @if(OnSave.HasDelegate)
                     {
-                        <BlazyButton Style="BlazyButton.ButtonStyle.Primary" OnClick="Save" Disabled="@(working || !CanSave)">Save changes</BlazyButton>                         
+                        <BlazyButton ThemeColor="ThemeColor.Primary" OnClick="Save" Disabled="@(working || !CanSave)">Save changes</BlazyButton>                         
                     }
                 }
                 else
