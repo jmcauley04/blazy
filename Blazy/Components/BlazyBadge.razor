@@ -1,0 +1,20 @@
+﻿<span class="badge bg-@ThemeColor.ToString().ToLower()">
+    @Text
+</span>
+
+@code {
+    public enum BadgeType
+    {
+        Default,
+        Rounded,
+    }
+
+    [Parameter]
+    public string Text { get; set; } = string.Empty;
+
+    [Parameter]
+    public BadgeType Type { get; set; } = BadgeType.Default;
+
+    [Parameter]
+    public ThemeColor ThemeColor { get; set; } = ThemeColor.Transparent;
+}

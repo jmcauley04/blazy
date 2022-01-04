@@ -1,0 +1,34 @@
+﻿@page "/badges"
+<PageTitle>Badges</PageTitle>
+
+<h3>Badges</h3>
+
+@{
+    string _code = @"<BlazyBadge Text=""{string}"" ThemeColor=""Blazy.Enums.ThemeColor.{color}"" Type=""BlazyBadge.BadgeType.{type}"" />";
+}
+<h5>Code</h5>
+<BlazyCodeBox Code="@_code" />
+
+<h5>Examples</h5>
+<BlazyTable>
+    <TableHead>
+        <tr>
+            <th>Theme Color</th>
+            <th>Badge Type</th>
+            <th>Badge</th>
+        </tr>
+    </TableHead>
+    <TableBody>
+        @foreach(var type in Enum.GetValues<BlazyBadge.BadgeType>())
+        {
+            @foreach(var color in Enum.GetValues<Blazy.Enums.ThemeColor>())
+            {
+                <tr>
+                    <td>@color.GetDescription()</td>
+                    <td>@type.GetDescription()</td>
+                    <td><BlazyBadge Text="Badge" ThemeColor="color" Type="type" /></td>
+                </tr>
+            }
+        }
+    </TableBody>
+</BlazyTable>

@@ -22,24 +22,11 @@
         Reset
     }
 
-    public enum ButtonStyle
-    {
-        Transparent,
-        Primary,
-        Secondary,
-        Success,
-        Danger,
-        Warning,
-        Info,
-        Light,
-        Dark
-    }
-
     [Parameter]
     public ButtonType Type { get; set; } = ButtonType.Button;
 
     [Parameter]
-    public ButtonStyle Style { get; set; } = ButtonStyle.Transparent;
+    public ThemeColor ThemeColor { get; set; } = ThemeColor.Transparent;
 
     [Parameter]
     public bool Outline { get; set; } = false;
@@ -53,7 +40,7 @@
     [Parameter]
     public bool Disabled { get; set; }
 
-    private string btnClass => $"btn btn-{(Outline ? "outline-" : string.Empty)}{Style.ToString().ToLower()}";
+    private string btnClass => $"btn btn-{(Outline ? "outline-" : string.Empty)}{ThemeColor.ToString().ToLower()}";
 
     private bool isLoading;
 
