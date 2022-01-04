@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net.Http.Json;
+﻿using System.Net.Http.Json;
 
 namespace Blazy.Abstractions
 {
@@ -12,7 +9,7 @@ namespace Blazy.Abstractions
 
         protected abstract string _baseEndpoint { get; }
 
-        public BaseHttpClient(THttpClient client)
+        protected BaseHttpClient(THttpClient client)
         {
             _client = client;
         }
@@ -22,7 +19,7 @@ namespace Blazy.Abstractions
         /// <summary>
         /// Use to hit an endpoint without getting items back
         /// </summary>
-        public async Task BaseGetAsync(string endpoint, CancellationToken ct = default)
+        protected async Task BaseGetAsync(string endpoint, CancellationToken ct = default)
         {
             var response = await _client.GetAsync(endpoint, ct);
 
@@ -35,7 +32,7 @@ namespace Blazy.Abstractions
         /// <summary>
         /// Use to get item(s) from an api endpoint
         /// </summary>
-        public async Task<TItem> BaseGetAsync<TItem>(string endpoint, CancellationToken ct = default)
+        protected async Task<TItem> BaseGetAsync<TItem>(string endpoint, CancellationToken ct = default)
         {
             var response = await _client.GetAsync(endpoint, ct);
 
@@ -52,7 +49,7 @@ namespace Blazy.Abstractions
         /// <summary>
         /// Use to updating an existing item from an api endpoint
         /// </summary>
-        public async Task BasePutAsync<TItem>(string endpoint, TItem item, CancellationToken ct = default)
+        protected async Task BasePutAsync<TItem>(string endpoint, TItem item, CancellationToken ct = default)
         {
             var response = await _client.PutAsJsonAsync(endpoint, item, ct);
 
@@ -69,7 +66,7 @@ namespace Blazy.Abstractions
         /// <summary>
         /// Use to create a new item and getting an item returned from an api endpoint
         /// </summary>
-        public async Task<TItem> BasePostAsync<TItem>(string endpoint, TItem item, CancellationToken ct = default)
+        protected async Task<TItem> BasePostAsync<TItem>(string endpoint, TItem item, CancellationToken ct = default)
         {
             var response = await _client.PostAsJsonAsync(endpoint, item, ct);
 
@@ -86,7 +83,7 @@ namespace Blazy.Abstractions
         /// <summary>
         /// Use to delete an item from an api endpoint
         /// </summary>
-        public async Task BaseDeleteAsync(string endpoint, CancellationToken ct = default)
+        protected async Task BaseDeleteAsync(string endpoint, CancellationToken ct = default)
         {
             var response = await _client.DeleteAsync(endpoint, ct);
 
