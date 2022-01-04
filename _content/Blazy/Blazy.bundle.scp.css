@@ -195,9 +195,6 @@ label.small[b-38r0xga2ej] {
 
 [b-srzesod9gk] li > .sublinks {
     background-color: rgba(0,0,0, .1);
-    max-height: 0;
-    overflow-y: hidden;
-    transition: max-height ease .5s;
 }
 
 .wrapper > div:first-of-type[b-srzesod9gk] {
@@ -238,7 +235,6 @@ label.small[b-38r0xga2ej] {
 
     [b-srzesod9gk] ul ul {
         border-left: 1px solid rgba(0,0,0,.5);
-        border-bottom: 1px solid rgba(0,0,0,.5);
         margin-left: .2em;
     }
 
@@ -415,6 +411,15 @@ tbody[b-k6wgan9gug]  tr:nth-child(2n+1){
         left: 20%;
         top: 70%;
     }
+}
+/* _content/Blazy/Effects/BlazyHeightTransition.razor.rz.scp.css */
+.collapsable[b-pwf4fm5tu4] {
+    transition: max-height ease .5s;
+    overflow-y: hidden;
+}
+
+.collapsed[b-pwf4fm5tu4] {
+    max-height: 0;
 }
 /* _content/Blazy/Layouts/BlazyLinearLayout.razor.rz.scp.css */
 .layout-wrapper[b-i00d3nsjaj] {
