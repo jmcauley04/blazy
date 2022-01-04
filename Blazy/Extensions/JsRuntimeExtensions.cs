@@ -7,11 +7,11 @@ namespace Blazy.Extensions
     {
         internal static async Task<IJSObjectReference> Import(
             this IJSRuntime jsRuntime,
-            string path)
+            string wwwrootpath)
         {
             var module = await jsRuntime.InvokeAsync<IJSObjectReference>(
                 "import",
-                Path.Combine($"./_content/Blazy/", path)
+                Path.Combine($"./_content/Blazy/", wwwrootpath)
             );
             return module;
         }

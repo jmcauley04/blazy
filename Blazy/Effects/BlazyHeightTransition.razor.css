@@ -2,7 +2,3 @@
     transition: max-height ease .5s;
     overflow-y: hidden;
 }
-
-.collapsed {
-    max-height: 0;
-}
