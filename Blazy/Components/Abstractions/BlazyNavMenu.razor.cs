@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Components.Routing;
 
 namespace Blazy.Components.Abstractions
 {
-    public partial class BlazyNavMenu
+    public partial class BlazyNavMenu : ComponentBase
     {
         [Parameter]
         public IEnumerable<BlazyNavLink> Links { get; set; } = new List<BlazyNavLink>();
@@ -23,23 +23,5 @@ namespace Blazy.Components.Abstractions
             internal bool IsOpen { get; set; } = false;
         }
 
-        string sublinkStyle(BlazyNavLink navLink) => $"max-height: {52 * countOpenSublinks(navLink)}px;";
-
-        int countOpenSublinks(BlazyNavLink link)
-        {
-            int i = 0;
-
-            if (link.IsOpen)
-            {
-                foreach (var sublink in link.Sublinks!.Where(x => x.IsOpen))
-                    i += countOpenSublinks(sublink);
-
-                i += link.Sublinks!.Count();
-            }
-            else
-                return 0;
-
-            return i;
-        }
     }
 }

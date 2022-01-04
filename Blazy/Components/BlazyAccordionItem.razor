@@ -1,0 +1,28 @@
+﻿@implements IDisposable
+
+@code {
+    [CascadingParameter]
+    public BlazyAccordion? BlazyAccordion { get; set; }
+
+    [Parameter]
+    public string Title { get; set; } = string.Empty;
+
+    [Parameter, EditorRequired]
+    public RenderFragment? ChildContent { get; set; }
+
+    public bool IsOpen { get; set; } = false;
+
+    protected override void OnInitialized()
+    {
+        if(BlazyAccordion != null)        
+            BlazyAccordion.AddItem(this);
+        
+        base.OnInitialized();
+    }
+    
+    public void Dispose()
+    {
+        if (BlazyAccordion != null)
+            BlazyAccordion.RemoveItem(this);
+    }
+}

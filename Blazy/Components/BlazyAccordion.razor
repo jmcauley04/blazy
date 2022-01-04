@@ -1,0 +1,68 @@
+﻿
+<div class="accordion">
+    <CascadingValue Value="this">
+        @ChildContent
+        @foreach(var item in Items)
+        {            
+            <div class="accordion-item">
+                <h2 class="accordion-header">
+                    <button class="accordion-button @(item.IsOpen ? "" : "collapsed")" type="button" @onclick="() => OpenItem(item)">
+                        @item.Title
+                    </button>
+                </h2>
+                <BlazyHeightTransition Collapsed="!item.IsOpen">                    
+                    <div class="accordion-collapse">
+                        <div class="accordion-body">
+                            @if(item.ChildContent != null)
+                            {
+                                @item.ChildContent
+                            }            
+                        </div>
+                    </div>
+                </BlazyHeightTransition>
+            </div>
+        }
+    </CascadingValue>
+</div>
+
+@code {
+    [Parameter, EditorRequired]
+    public RenderFragment? ChildContent { get; set; }
+
+    List<BlazyAccordionItem> Items { get; set; } = new();
+    BlazyAccordionItem? _openedItem;
+
+    public void AddItem(BlazyAccordionItem item)
+    {
+        if(_openedItem == null)
+        {
+            _openedItem = item;
+            _openedItem.IsOpen = true;
+        }
+
+        Items.Add(item);
+        StateHasChanged();
+    }
+
+    public void RemoveItem(BlazyAccordionItem item)
+    {
+        Items.Remove(item);
+        StateHasChanged();
+    }
+
+    void OpenItem(BlazyAccordionItem item)
+    {
+        if(_openedItem == item)
+        {
+            item.IsOpen = false;
+            _openedItem = null;
+            return;
+        }
+
+        if(_openedItem != null)        
+            _openedItem.IsOpen = false;        
+
+        _openedItem = item;
+        _openedItem.IsOpen = true;
+    }
+}
