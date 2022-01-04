@@ -56,13 +56,15 @@
         {
             item.IsOpen = false;
             _openedItem = null;
-            return;
+        }
+        else
+        {            
+            if(_openedItem != null)        
+                _openedItem.IsOpen = false;        
+
+            _openedItem = item;
+            _openedItem.IsOpen = true;
         }
 
-        if(_openedItem != null)        
-            _openedItem.IsOpen = false;        
-
-        _openedItem = item;
-        _openedItem.IsOpen = true;
     }
 }
