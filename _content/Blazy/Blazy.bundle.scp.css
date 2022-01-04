@@ -417,10 +417,6 @@ tbody[b-k6wgan9gug]  tr:nth-child(2n+1){
     transition: max-height ease .5s;
     overflow-y: hidden;
 }
-
-.collapsed[b-pwf4fm5tu4] {
-    max-height: 0;
-}
 /* _content/Blazy/Layouts/BlazyLinearLayout.razor.rz.scp.css */
 .layout-wrapper[b-i00d3nsjaj] {
     display: grid;
