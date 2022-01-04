@@ -10,14 +10,16 @@
                         @item.Title
                     </button>
                 </h2>
-                <div class="accordion-collapse  @(item.IsOpen ? "show" : "collapse")">
-                    <div class="accordion-body">
-                        @if(item.ChildContent != null)
-                        {
-                            @item.ChildContent
-                        }            
+                <BlazyHeightTransition Collapsed="!item.IsOpen">                    
+                    <div class="accordion-collapse">
+                        <div class="accordion-body">
+                            @if(item.ChildContent != null)
+                            {
+                                @item.ChildContent
+                            }            
+                        </div>
                     </div>
-                </div>
+                </BlazyHeightTransition>
             </div>
         }
     </CascadingValue>

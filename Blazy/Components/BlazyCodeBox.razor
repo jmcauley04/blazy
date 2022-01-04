@@ -2,6 +2,7 @@
 @using Microsoft.CodeAnalysis.CSharp
 @using Microsoft.CodeAnalysis.CSharp.Syntax
 @using Microsoft.CodeAnalysis.Text
+@using System.Text
 
 @if(IsToggled){    
     <BlazyButton OnClick="ToggleCode">@(_hidden ? "Show code" : "Hide code")</BlazyButton>
@@ -41,7 +42,9 @@
         LightBlue,
         Yellow,
         Pink,
-        Brown
+        Brown,
+        Comment,
+        White,
     }
 
     Dictionary<SyntaxColor, string> Colors = new Dictionary<SyntaxColor, string>
@@ -52,6 +55,8 @@
             {SyntaxColor.Pink, "color: rgb(216, 150, 180);"},
             {SyntaxColor.Brown, "color: rgb(212, 151, 120);"},
             {SyntaxColor.LightBlue, "color: rgb(154, 220, 254);"},
+            {SyntaxColor.Comment, "color: rgb(87, 166, 74);"},
+            {SyntaxColor.White, "color: white;"}
         };
 
     string Styled(string text, string style) => $"<span style='{style}'>{text}</span>";
@@ -66,115 +71,137 @@
     protected override void OnInitialized()
     {
         if (string.IsNullOrEmpty(_code) && !IsToggled)
-            ColorizeText();
+            GenerateMarkupString();
         base.OnInitialized();
     }
 
     void ToggleCode()
     {
         if (string.IsNullOrEmpty(_code) && _hidden)
-            ColorizeText();
+            GenerateMarkupString();
 
         _hidden = !_hidden;
     }
 
-    void ColorizeText()
+    void GenerateMarkupString()
     {
-        string code = Code ?? string.Empty;
-        code = ColorizeTextKinds(code);
-        _code = AddLineNumbers(code);
+        var root = CSharpSyntaxTree.ParseText(Code).GetRoot();
+        var sb = new StringBuilder();
+
+        TraverseNodes(root, sb);
+        _code = sb.ToString();
     }
 
-    string ColorizeTextKinds(string text)
+    void TraverseNodes(SyntaxNode node, StringBuilder sb)
     {
-        ColoredSpans = new();
-        var root = CSharpSyntaxTree.ParseText(Code).GetRoot();
-        var nodes = root.DescendantNodesAndTokens().ToList();
-        int offset = 0;
-
-        foreach(var node in nodes)
-        {            
-            var span = node.Span;
-            if (ColoredSpans.Any(x => x.OverlapsWith(span)))
-                continue;
-
-            var kind = node.Kind();
-            var parentKind = node.Parent!.Kind();
-
-            int origLength = span.Length;
-            var styledText = string.Empty;
-
-            if (kind.ToString().Contains("Keyword"))
+        int lineNumber = 1;
+        AddLineNumber(sb, lineNumber++);
+        foreach (var token in node.DescendantTokens())
+        {
+            if (token.IsMissing)
             {
-                if (parentKind.ToString().Contains("Statement") || parentKind.ToString().Contains("Clause") || parentKind.ToString().Contains("Label"))
-                    styledText = Styled(text.Substring(span.Start + offset, span.End - span.Start), Colors[SyntaxColor.Pink]);
-                else
-                    styledText = Styled(text.Substring(span.Start + offset, span.End - span.Start), Colors[SyntaxColor.Blue]);
+                continue;
             }
-            else if (kind == SyntaxKind.Attribute)
-                styledText = Styled(text.Substring(span.Start + offset, span.End - span.Start), Colors[SyntaxColor.Green]);
-            else if (kind == SyntaxKind.StringLiteralExpression)
-                styledText = Styled(text.Substring(span.Start + offset, span.End - span.Start), Colors[SyntaxColor.Brown]);
-            else
-            {                
-                SyntaxKind? nextKind = null;
-                SyntaxKind? prevKind = null;
-                try
-                {
-                    nextKind = nodes[nodes.IndexOf(node) + 1].Kind();
-                }
-                catch
-                {
-                    nextKind = null;
-                }
-                try
-                {
-                    prevKind = nodes[nodes.IndexOf(node) - 2].Kind();
-                }
-                catch
-                {
-                    prevKind = null;
-                }
-                switch (node.Kind())
-                {
-                    case SyntaxKind.IdentifierToken:
-                        if (nextKind == SyntaxKind.ArgumentList)
-                            styledText = Styled(text.Substring(span.Start + offset, span.End - span.Start), Colors[SyntaxColor.Yellow]);
-                        else if (nextKind == SyntaxKind.DotToken)
-                            styledText = Styled(text.Substring(span.Start + offset, span.End - span.Start), Colors[SyntaxColor.Green]);
-                        else if (prevKind != SyntaxKind.DotToken)
-                            styledText = Styled(text.Substring(span.Start + offset, span.End - span.Start), Colors[SyntaxColor.LightBlue]);
-                        else
-                            continue;
-                        break;
-                    case SyntaxKind.IdentifierName:
-                        if (parentKind.ToString().Contains("Expression"))
-                            continue;
-                        else                        
-                            styledText = Styled(text.Substring(span.Start + offset, span.End - span.Start), Colors[SyntaxColor.Blue]);                        
-                        break;
-                    default:
-                        continue;
-                }
+            foreach (var trivia in token.LeadingTrivia)
+            {
+                ParseTrivia(trivia, sb, ref lineNumber);
             }
-
-            ColoredSpans.Add(span);
-            text = text.Substring(0, span.Start + offset) + styledText + text.Substring(span.End + offset);
-            offset += styledText.Length - origLength;
+            ParseToken(token, sb);
+            foreach (var trivia in token.TrailingTrivia)
+            {
+                ParseTrivia(trivia, sb, ref lineNumber);
+            }
         }
 
-        return text;
+        sb.Append("</span>");
     }
 
-    string AddLineNumbers(string text)
+    void ParseTrivia(SyntaxTrivia trivia, StringBuilder sb, ref int lineNumber)
+    {        
+        var loweredSyntax = trivia.Kind().ToString().ToLower();
+        if (loweredSyntax.Contains("comment"))
+        {
+            sb.Append(Styled(trivia.ToString(), Colors[SyntaxColor.Comment]));
+        }
+        else if (trivia.Kind() == SyntaxKind.EndOfLineTrivia)
+        {
+            sb.Append(trivia.ToString());
+            sb.Append("</span>");
+            AddLineNumber(sb, lineNumber++);
+        }
+        else
+        {
+            sb.Append(trivia.ToString());
+        }
+    }
+
+    void ParseToken(SyntaxToken token, StringBuilder sb)
     {
-        var lineIndex = 1;
-        string lineIndexNumber(int i) => $"<div style='{Colors[SyntaxColor.Blue]} padding-right: 1em; text-align: right;'>{(ShowLineNumbers ? i.ToString() : string.Empty)}</div>";
-        var result = string.Empty;
+        var previousToken = token.GetPreviousToken().ToString();
+        var nextToken = token.GetNextToken().ToString();
+        var tokenString = token.ToString();
+        if (nextToken == ">" && previousToken == "/" 
+        || previousToken == "<" && tokenString != "/"
+        || previousToken == "[" && nextToken == "]")
+        {
+            sb.Append(Styled(tokenString, Colors[SyntaxColor.Green]));
+        }
+        else if (token.Kind().ToString().Contains("Keyword"))
+        {
+            var parentKind = token.Parent!.Kind();
+            if (parentKind.ToString().Contains("Statement") || parentKind.ToString().Contains("Clause") || parentKind.ToString().Contains("Label"))
+                sb.Append(Styled(tokenString, Colors[SyntaxColor.Pink]));
+            else
+                sb.Append(Styled(tokenString, Colors[SyntaxColor.Blue]));
+        }
+        else if (nextToken == "(")
+        {
+            sb.Append(Styled(tokenString, Colors[SyntaxColor.Yellow]));
+        }
+        else if (nextToken == "=")
+        {
+            sb.Append(Styled(tokenString, Colors[SyntaxColor.LightBlue]));
+        }
+        else if (previousToken == ".")
+        {
+            sb.Append(Styled(tokenString, Colors[SyntaxColor.White]));            
+        }
+        else if (nextToken == "." && token.Text != ")")
+        {
+            sb.Append(Styled(tokenString, Colors[SyntaxColor.Blue]));                    
+        }
+        else if (token.Text == "var")
+        {            
+            sb.Append(Styled(tokenString, Colors[SyntaxColor.Blue])); 
+        }
+        else
+        {
+            var style = SyntaxStyle(token.Kind().ToString());
+            sb.Append(Styled(tokenString, style));
+        }        
+    }
 
-        foreach(var line in text.Split(Environment.NewLine))        
-            result += lineIndexNumber(lineIndex++) + $"<div>{line}</div>";        
+    string SyntaxStyle(string syntax)
+    {
+        var loweredSyntax = syntax.ToLower();
+        if (loweredSyntax.Contains("keyword"))
+        {
+            return Colors[SyntaxColor.Pink];
+        }
+        else if (loweredSyntax.Contains("string"))
+        {
+            return Colors[SyntaxColor.Brown];
+        }
+        else if (loweredSyntax.Contains("comment"))
+        {
+            return Colors[SyntaxColor.Comment];
+        }
+        else 
+            return Colors[SyntaxColor.White];
+    }
 
-        return result;
+    void AddLineNumber(StringBuilder sb, int lineNumber)
+    {
+        sb.Append($"<span style='{Colors[SyntaxColor.Blue]} padding-right: 1em; text-align: right;'>{(ShowLineNumbers ? lineNumber.ToString() : string.Empty)}</span><span>");
     }
 }

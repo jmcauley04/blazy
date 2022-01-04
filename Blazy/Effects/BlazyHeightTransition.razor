@@ -1,0 +1,38 @@
+﻿@using Microsoft.JSInterop
+@inject IJSRuntime js
+
+<div @ref="htmlRef" class="collapsable" style="max-height: @(Collapsed ? "0" : $"{height}px");">
+    @if(ChildContent != null)
+    {
+        @ChildContent        
+    }
+</div>
+
+@code {
+    [Parameter, EditorRequired]
+    public RenderFragment? ChildContent { get; set; }
+
+    [Parameter]
+    public bool Collapsed { get; set; }
+
+    ElementReference htmlRef;
+    IJSObjectReference? module;
+    bool hasRun;
+    int height = 0;
+
+    protected override async Task OnInitializedAsync()
+    {
+        if (module == null)
+            module = await js.Import(this);
+    }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (!hasRun && module != null)
+        {
+            hasRun = true;
+            height = await module.InvokeAsync<int>("getScrollHeight", htmlRef);
+            StateHasChanged();
+        }
+    }
+}
