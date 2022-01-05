@@ -1,9 +1,16 @@
 ﻿
 <div class="blazy-progress-bar">
-    <div class="blazy-progress bg-primary" style="width: 75%">75%</div>
+    <div class="blazy-progress bg-@Color.ToString().ToLower()" style="width: @percentage%">
+        <span>@percentage%</span>
+    </div>
 </div>
 
 @code {
     [Parameter]
-    public ThemeColor Color { get; set; }
+    public ThemeColor Color { get; set; } = ThemeColor.Primary;
+
+    [Parameter]
+    public int Percentage { get; set; }
+
+    int percentage => Percentage.Clamp(0, 100);
 }

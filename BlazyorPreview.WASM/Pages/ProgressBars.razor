@@ -2,8 +2,34 @@
 <PageTitle>Progress Bars</PageTitle>
 <h3>Progress Bars</h3>
 
-<BlazyProgressBar />
+<h5>Code</h5>
+@{
+string _code = @"<BlazyProgressBar Percentage=""@percentage"" Color=""color"" />";
+}
+<BlazyCodeBox Code="@_code" />
+
+<h5>Examples</h5>
+
+<h6>Set the percentage</h6>
+<input type="number" @bind-value="percentage" />
+<BlazyTable>
+    <TableHead>
+        <tr>
+            <th>Color</th>
+            <th>Progress Bar</th>
+        </tr>
+    </TableHead>
+    <TableBody>
+        @foreach(var color in Enum.GetValues<Blazy.Enums.ThemeColor>())
+        {            
+            <tr>
+                <td>@color.GetDescription()</td>
+                <td><BlazyProgressBar Percentage="@percentage" Color="color" /></td>
+            </tr>
+        }
+    </TableBody>
+</BlazyTable>
 
 @code {
-
+    int percentage = 30;
 }

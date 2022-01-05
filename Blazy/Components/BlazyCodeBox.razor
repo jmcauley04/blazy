@@ -98,6 +98,7 @@
         AddLineNumber(sb, lineNumber++);
         foreach (var token in node.DescendantTokens())
         {
+            Console.WriteLine(token.Text);
             if (token.IsMissing)
             {
                 continue;
