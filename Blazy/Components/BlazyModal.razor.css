@@ -13,3 +13,12 @@
     line-height: 1em;
     font-size: 1.5em;
 }
+
+.modal-footer {
+    display: flex;
+    float:right;
+}
+
+    .modal-footer > ::deep * {
+        flex: 1 0 150px;
+    }

@@ -7,10 +7,20 @@
     disabled="@(isLoading || Disabled)"
     @onclick="onClick" >
 
-    @if(ChildContent != null)
+    @if (isLoading)
     {
-        @ChildContent
+        <span class="spinner">        
+            <BlazySpinner ThemeColor="@spinnerTheme" />
+        </span>
     }
+    else
+    {        
+        @if(ChildContent != null)
+        {
+            @ChildContent
+        }        
+    }    
+    
 
 </button>
 
@@ -59,4 +69,9 @@
             isLoading = false;
         }
     }
+
+    ThemeColor spinnerTheme => ThemeColor switch
+    {
+        _ => ThemeColor.Transparent
+    };
 }

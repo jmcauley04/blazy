@@ -1,22 +1,20 @@
-﻿@page "/progressbars"
-<PageTitle>Progress Bars</PageTitle>
-<h3>Progress Bars</h3>
+﻿@page "/spinners"
+<PageTitle>Spinners</PageTitle>
+<h3>Spinners</h3>
 
 <h5>Code</h5>
 @{
-string _code = @"<BlazyProgressBar Percentage=""@percentage"" Color=""color"" />";
+    string _code = "";
 }
 <BlazyCodeBox Code="@_code" />
 
 <h5>Examples</h5>
 
-<h6>Set the percentage</h6>
-<input type="number" @bind-value="percentage" />
 <BlazyTable>
     <TableHead>
         <tr>
             <th>Color</th>
-            <th>Progress Bar</th>
+            <th>Spinner</th>
         </tr>
     </TableHead>
     <TableBody>
@@ -24,12 +22,8 @@ string _code = @"<BlazyProgressBar Percentage=""@percentage"" Color=""color"" />
         {            
             <tr>
                 <td>@color.GetDescription()</td>
-                <td><BlazyProgressBar Percentage="@percentage" ThemeColor="color" /></td>
+                <td><BlazySpinner ThemeColor="color" /></td>
             </tr>
         }
     </TableBody>
 </BlazyTable>
-
-@code {
-    int percentage = 30;
-}

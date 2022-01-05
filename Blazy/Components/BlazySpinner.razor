@@ -1,0 +1,8 @@
+﻿<div class="spinner-border text-@ThemeColor.ToString().ToLower()" role="status">
+  <span class="visually-hidden">Loading...</span>
+</div>
+
+@code {
+    [Parameter]
+    public ThemeColor ThemeColor { get; set; } = ThemeColor.Primary;
+}
