@@ -134,6 +134,37 @@ label.small[b-38r0xga2ej] {
     line-height: 1em;
     font-size: 1.5em;
 }
+/* _content/Blazy/Components/BlazyProgressBar.razor.rz.scp.css */
+.blazy-progress-bar[b-ocarvij1vz] {
+    display: grid;
+    min-height: 1.2em;
+    background-color: #eee;
+    border-radius: .3em;
+    border: 1px solid #ccc;
+}
+
+.blazy-progress[b-ocarvij1vz] {
+    display: grid;
+    background-image: linear-gradient( 45deg,rgba(255,255,255,.15) 25%,transparent 25%,transparent 50%,rgba(255,255,255,.15) 50%,rgba(255,255,255,.15) 75%,transparent 75%,transparent);
+    background-size: 1rem 1rem;
+    -webkit-animation: 1s linear infinite progress-bar-stripes;
+    animation: 1s linear infinite progress-bar-stripes;
+    line-height: 1em;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: .8em;
+    color: white;
+    padding-top: .2em;
+    border-radius: .3em;
+}
+
+.bg-light[b-ocarvij1vz],
+.bg-transparent[b-ocarvij1vz] {
+    color: black;
+    border-right: 1px solid #aaa;
+    background-image: linear-gradient( 45deg,rgba(0,0,0,.15) 25%,transparent 25%,transparent 50%,rgba(0,0,0,.15) 50%,rgba(0,0,0,.15) 75%,transparent 75%,transparent);
+}
 /* _content/Blazy/Components/BlazySideNav.razor.rz.scp.css */
 [b-srzesod9gk] ul {
     list-style: none;
