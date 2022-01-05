@@ -30,6 +30,22 @@ button.btn-transparent:hover[b-bpoxhbm3cp],
 button.btn-outline-transparent:hover[b-bpoxhbm3cp] {
    background-color: rgb(0,0,0,.1);
 }
+
+button[b-bpoxhbm3cp] {
+    height: 2.4em;
+    display: grid;
+    place-items: center;
+}
+
+.spinner[b-bpoxhbm3cp]  div {
+    height: 1.2em;
+    width: 1.2em;
+}
+
+.spinner[b-bpoxhbm3cp] {
+    display: grid;
+    place-items: center;
+}
 /* _content/Blazy/Components/BlazyCodeBox.razor.rz.scp.css */
 div[b-0pojzpnsi2] {
     background-color: rgba(30,30,30);
@@ -134,6 +150,15 @@ label.small[b-38r0xga2ej] {
     line-height: 1em;
     font-size: 1.5em;
 }
+
+.modal-footer[b-mc11ulbb4g] {
+    display: flex;
+    float:right;
+}
+
+    .modal-footer[b-mc11ulbb4g] >  * {
+        flex: 1 0 150px;
+    }
 /* _content/Blazy/Components/BlazyProgressBar.razor.rz.scp.css */
 .blazy-progress-bar[b-ocarvij1vz] {
     display: grid;

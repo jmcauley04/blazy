@@ -7,8 +7,8 @@
   "linkerEnabled": true,
   "resources": {
     "assembly": {
-      "Blazy.dll": "sha256-oBND2aJVshDBCDe+wSdB3HXh77\/B0OkVjAiPL08fPCU=",
-      "BlazyorPreview.WASM.dll": "sha256-oDlBoiulwl57\/FEXjfOK8ZT5el5LnJuzR6kiBhy9KXM=",
+      "Blazy.dll": "sha256-oGUCyo8hiYmb\/HPqZPJnHXSi8+1\/4ausJLcTMRqPpBs=",
+      "BlazyorPreview.WASM.dll": "sha256-lg9hgKz\/aQ9PmQVcciWWWVd6eF4XJAwVuggYbuqi5nM=",
       "Microsoft.AspNetCore.Components.dll": "sha256-pSZP161ZlGPxAcCgwbJ+u3XXdwnB9DOa036Bxx2lt0U=",
       "Microsoft.AspNetCore.Components.Web.dll": "sha256-xH9qYs6ek7r\/\/Gsn2x4Mhkqote\/Y7Hb8gXwLwV7rFXY=",
       "Microsoft.AspNetCore.Components.WebAssembly.dll": "sha256-Ph2ZOl\/LOY2cCUG\/S2iA61YUWIsDlcAHFxzdTG43rPw=",
