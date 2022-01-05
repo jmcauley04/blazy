@@ -1,0 +1,22 @@
+﻿.blazy-progress-bar {
+    display: grid;
+    min-height: 1.2em;
+    background-color: #eee;
+    border-radius: .3em;
+}
+
+.blazy-progress {
+    display: grid;
+    background-image: linear-gradient( 45deg,rgba(255,255,255,.15) 25%,transparent 25%,transparent 50%,rgba(255,255,255,.15) 50%,rgba(255,255,255,.15) 75%,transparent 75%,transparent);
+    background-size: 1rem 1rem;
+    -webkit-animation: 1s linear infinite progress-bar-stripes;
+    animation: 1s linear infinite progress-bar-stripes;
+    line-height: 1em;
+    align-items: center;
+    justify-content: center;
+    text-overflow: clip;
+    font-weight: bold;
+    font-size: .8em;
+    color: white;
+    padding-top: .2em;
+}
