@@ -7,7 +7,7 @@
                     var index = i;
                     var step = Steps[i];
                     <li>
-                        <BlazyButton Disabled="index > 0 && !Steps[index-1].IsValid()" OnClick="() => MoveToStep(index)">
+                        <BlazyButton Disabled="index > 0 && !previousSteps(index).All(x => x.IsValid())" OnClick="() => MoveToStep(index)">
                             <div class="d-flex">
                                 @if(index == selectedIndex)
                                 {
@@ -25,23 +25,25 @@
                             </div>
                         </BlazyButton>
                         <div class="content-holder">
-                            <div class="content @(index == selectedIndex ? "" : "collapsed")">
-                                @step.ChildContent
-                                <div class="btn-bar">
-                                    @if(index > 0)
-                                    {                                
-                                        <BlazyButton OnClick="() => MoveToStep(index - 1)"><strong>Back</strong></BlazyButton>
-                                    }
-                                    @if(index < Steps.Count - 1)
-                                    {
-                                        <BlazyButton OnClick="() => MoveToStep(index + 1)" Disabled="!step.IsValid()"><strong>Next</strong></BlazyButton>
-                                    }
-                                    else
-                                    {
-                                        <BlazyButton OnClick="() => MoveToStep(0)"><strong>Reset</strong></BlazyButton>                                
-                                    }
+                            <BlazyHeightTransition Collapsed="@(index != selectedIndex)">
+                                <div class="content">
+                                    @step.ChildContent
+                                    <div class="btn-bar">
+                                        @if(index > 0)
+                                        {                                
+                                            <BlazyButton OnClick="() => MoveToStep(index - 1)"><strong>Back</strong></BlazyButton>
+                                        }
+                                        @if(index < Steps.Count - 1)
+                                        {
+                                            <BlazyButton OnClick="() => MoveToStep(index + 1)" Disabled="!step.IsValid()"><strong>Next</strong></BlazyButton>
+                                        }
+                                        else
+                                        {
+                                            <BlazyButton OnClick="() => MoveToStep(0)"><strong>Reset</strong></BlazyButton>                                
+                                        }
+                                    </div>
                                 </div>
-                            </div>
+                            </BlazyHeightTransition>
                         </div>       
                     </li>         
                 }
@@ -59,6 +61,8 @@
     private int selectedIndex = 0;
 
     List<BlazyStepperStep> Steps { get; set; } = new();
+
+    IEnumerable<BlazyStepperStep> previousSteps(int index) => Steps.Where(x => Steps.IndexOf(x) < index);
 
     public void AddStep(BlazyStepperStep step)
     {

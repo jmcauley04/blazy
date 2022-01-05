@@ -1,8 +1,24 @@
 ﻿@page "/modals"
+@using Blazy.Enums
 
 <PageTitle>Blazy Modals</PageTitle>
 <h3>Modals</h3>
 
+@{
+    string _code = @"//isOpen is bound to something controlled from within the page.  Setting it to true will open the modal.
+<BlazyModal @bind-IsOpen=""{IsOpen bool}"" MaxWidth=""BlazyModal.Width.{width}"">
+    <ModalHeader>
+        {ModalHeader ChildContent}
+    </ModalHeader>
+    <ModalBody>
+        {ModalBody ChildContent}
+    </ModalBody>    
+</BlazyModal>";
+}
+<h5>Code</h5>
+<BlazyCodeBox Code="@_code" />
+
+<h5>Examples</h5>
 <BlazyTable>
     <TableHead>
         <tr>
@@ -19,7 +35,7 @@
                 <tr>
                     <td>@width.GetDescription()</td>
                     <td>@saveable</td>
-                    <td><BlazyButton Style="BlazyButton.ButtonStyle.Primary" OnClick="() => OpenModal(width, saveable)">Test</BlazyButton></td>
+                    <td><BlazyButton ThemeColor="ThemeColor.Primary" OnClick="() => OpenModal(width, saveable)">Test</BlazyButton></td>
                 </tr>                
             }
         }

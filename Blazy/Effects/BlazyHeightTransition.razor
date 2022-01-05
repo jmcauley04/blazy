@@ -1,0 +1,70 @@
+﻿@using Microsoft.JSInterop
+@inject IJSRuntime js
+
+<CascadingValue Value="this">
+    <div @ref="htmlRef" class="collapsable" style="max-height: @heightText;">
+        @if(ChildContent != null)
+        {
+            @ChildContent        
+        }
+    </div>
+</CascadingValue>
+
+@code {
+    [Parameter, EditorRequired]
+    public RenderFragment? ChildContent { get; set; }
+
+    [CascadingParameter]
+    public BlazyHeightTransition? Parent { get; set; }
+
+    [Parameter]
+    public bool Collapsed { get; set; }
+
+    ElementReference htmlRef;
+    IJSObjectReference? module;
+    bool hasRun;
+    int height = 0;
+    string heightText => height > 0 ? $"{height}px" : "0";
+
+    protected override async Task OnInitializedAsync()
+    {
+        if (module == null)
+            module = await js.Import(this);
+    }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (!hasRun && module != null)
+        {
+            hasRun = true;
+            await TryUpdateHeight();
+        }
+    }
+
+    protected override async Task OnParametersSetAsync()
+    {
+        if (hasRun)
+            await TryUpdateHeight();
+    }
+
+    public async Task TryUpdateHeight(int offSet = 0)
+    {
+        var newHeight = Collapsed ? 0 : await module!.InvokeAsync<int>("getScrollHeight", htmlRef) + offSet;
+
+        if (newHeight != height)
+        {
+            height = newHeight;
+
+            if(Parent != null)
+            {
+                await Parent.TryUpdateHeight(height);
+            }
+        }
+
+        if (Parent == null)
+        {
+            await Task.Delay(10);
+            await InvokeAsync(StateHasChanged);
+        }
+    }
+}
