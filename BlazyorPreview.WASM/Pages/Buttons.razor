@@ -15,7 +15,6 @@
     <TableHead>
         <tr>
             <th>Rank</th>
-            <th>Type</th>
             <th>Outline</th>
             <th>Button</th>
         </tr>
@@ -28,7 +27,7 @@
                 <tr>
                     <td>@color.GetDescription()</td>
                     <td>@outline</td>
-                    <td><BlazyButton ThemeColor="color" Outline="outline" OnClick="OnClick">Button</BlazyButton></td>
+                    <td><BlazyButton CssStyle="min-width: 100px;" ThemeColor="color" Outline="outline" OnClick="OnClick">Button</BlazyButton></td>
                 </tr>                
             }
         }
