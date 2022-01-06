@@ -423,6 +423,35 @@ thead[b-k6wgan9gug]  tr:nth-child(2n+1) {
 tbody[b-k6wgan9gug]  tr:nth-child(2n+1){
     background-color: #eee;
 }
+/* _content/Blazy/Components/BlazyToast.razor.rz.scp.css */
+
+.blazy-dot[b-nskv6peobn] {
+    width: 1em;
+    height: 1em;
+    border-radius: 100%;
+    margin-right: .5em;
+}
+
+.msg-qty-badge[b-nskv6peobn] {
+    position: absolute;
+    display: grid;
+    place-items: center;
+    line-height: 1em;
+    color: white;
+    font-weight: bold;
+    top: .6em;
+    border: 1px solid white;
+    height: 1.3em;
+    width: 1.3em;
+    right: .6em;
+    border-radius: 100%;
+}
+
+.msg-qty-badge > span[b-nskv6peobn] {
+    font-size: .7em;
+    padding-right: .4em;
+    padding-top: .1em;
+}
 /* _content/Blazy/Components/BlazyTopNav.razor.rz.scp.css */
 [b-tcgvireyia] ul {
     list-style: none;

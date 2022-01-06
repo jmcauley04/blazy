@@ -7,8 +7,8 @@
   "linkerEnabled": true,
   "resources": {
     "assembly": {
-      "Blazy.dll": "sha256-jiT9tQCNpe13R0yHlvAWa0Vm6Q5iXSEDHQmJneAhzT4=",
-      "BlazyorPreview.WASM.dll": "sha256-ZOkM\/LLaJdf24woUrWBeCnplHJVaX8aXdQ2NpHuTbdQ=",
+      "Blazy.dll": "sha256-DcYNDtnCJIje+J+NIr3sJ6oPpT4cXFPEhe0Q3tBvm\/o=",
+      "BlazyorPreview.WASM.dll": "sha256-6thhXIAgT4nDFDs0+25xm30un0lTsTBt9m5EhOkghfc=",
       "Microsoft.AspNetCore.Components.dll": "sha256-79IirWYAtRMcfiZJxmxKHHzc4NQFlOWSvdBWouqrATo=",
       "Microsoft.AspNetCore.Components.Web.dll": "sha256-xH9qYs6ek7r\/\/Gsn2x4Mhkqote\/Y7Hb8gXwLwV7rFXY=",
       "Microsoft.AspNetCore.Components.WebAssembly.dll": "sha256-Ph2ZOl\/LOY2cCUG\/S2iA61YUWIsDlcAHFxzdTG43rPw=",
@@ -47,7 +47,7 @@
       "System.Net.Http.Json.dll": "sha256-Lb3PG4UPddseNBHzTN+Wxcv7Wd1dynuRwNFXOCkOs\/U=",
       "System.Net.Primitives.dll": "sha256-R8E7iySN1pAQhPLouDlyFJ9IaUNThdMB\/HizJSy+XHE=",
       "System.ObjectModel.dll": "sha256-eoMB4LyqNsuUwNZUHCsHiusulMYU+FBSiDRKebrtiaQ=",
-      "System.Private.CoreLib.dll": "sha256-1RNN3L+NK5Ziutxqm\/FZvseMmIlJbph0GGrYb9VOfhc=",
+      "System.Private.CoreLib.dll": "sha256-84XpOzGkOJANjYGE1lbj7QCyhZ9CqkFAsNc45D+TtBo=",
       "System.Private.Runtime.InteropServices.JavaScript.dll": "sha256-U3xP94XuZ1H8IRffJYLTmWHwFgQoF3e\/VMZAr8BFsnE=",
       "System.Private.Uri.dll": "sha256-CTyq2e6ztMLvFW18SUopqIxOzq7fu9TxlUgdyGT5TDc=",
       "System.Private.Xml.dll": "sha256-ySb1kpGLrcZcH7mv\/A0RWh6S+Xlt9tIqLeU8ftEdI2c=",
@@ -56,7 +56,7 @@
       "System.Reflection.Primitives.dll": "sha256-Wwmd2jdfR6vcExAwGKBvfJZodEbtuRnJeqmD6gQa6Yc=",
       "System.Resources.ResourceManager.dll": "sha256-i2I4ImWNaGBUxNZ\/KA7iEvtEuWahPM0mcgLQz4OFvyA=",
       "System.Runtime.CompilerServices.Unsafe.dll": "sha256-mpBEFcbgT9iurK6mXwyJlv8J9BavVlPwZdyxEvxo6qw=",
-      "System.Runtime.dll": "sha256-mu54FMON\/xL2w7gwvZiQPsgGC3zq7dq79Q7ZyDykZE0=",
+      "System.Runtime.dll": "sha256-5dcGzXjgyKaD0z32aB0cjuzEkmZUR20pu8sCKeg9EJs=",
       "System.Runtime.Extensions.dll": "sha256-2iGWn4REMrRytLYgsBQx7jhbNUc2SsNDN0MAaH0evxU=",
       "System.Runtime.InteropServices.dll": "sha256-PA0YyWnQNmphTkmzad2DkJ0EO8V\/aHfzECR\/YsF0iOk=",
       "System.Runtime.Loader.dll": "sha256-RdTaB0nzfIFWpvZNb92AUunDlDBrW7tvIG5qjGGxUbM=",
