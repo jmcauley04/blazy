@@ -3,12 +3,12 @@
 
 <PageTitle>Blazy Datagrids</PageTitle>
 <h3>Datagrid</h3>
-
-
-<BlazyDataGrid 
-    TItem="WeatherForecast"
-    Context="forecast"
-    Datasource="forecasts">
+@{
+    string _codeex = @"<BlazyDataGrid 
+    TItem=""WeatherForecast""
+    Context=""forecast""
+    Datasource=""forecasts""
+    OnSave=""SaveForecast"">
     <DataGridHead>        
         <th>Date</th>
         <th>Temp. (C)</th>
@@ -22,10 +22,48 @@
         <td>@forecast.Summary</td>
     </RowTemplate>
     <EditRowTemplate>
-        <td><input type="date" value="@forecast.Date" /></td>
-        <td><input type="number" value="@forecast.TemperatureC" /></td>
-        <td><input type="number" value="@forecast.TemperatureF" /></td>
-        <td><input type="text" value="@forecast.Summary" /></td>
+        <td><input type=""date"" value=""@forecast.Date"" /></td>
+        <td><input type=""number"" value=""@forecast.TemperatureC"" /></td>
+        <td>@forecast.TemperatureF</td>
+        <td><input type=""text"" value=""@forecast.Summary"" /></td>
+    </EditRowTemplate>
+</BlazyDataGrid>
+
+
+@code{
+    async Task SaveForecast(WeatherForecast forecast)
+    {
+        //save to database, etc
+        await Task.Delay(1000);
+    }
+}";
+}
+<h5>Code</h5>
+<BlazyCodeBox Code="@_codeex" />
+
+<h5>Result</h5>
+<BlazyDataGrid 
+    TItem="WeatherForecast"
+    Context="forecast"
+    Datasource="forecasts"
+    OnSave="SaveForecast">
+    <DataGridHead>        
+        <th>Date</th>
+        <th>Temp. (C)</th>
+        <th>Temp. (F)</th>
+        <th>Summary</th>
+    </DataGridHead>
+    <RowTemplate>
+        <td>@forecast.Date.ToShortDateString()</td>
+        <td>@forecast.TemperatureC</td>
+        <td>@forecast.TemperatureF</td>
+        <td>@forecast.Summary</td>
+    </RowTemplate>
+    <EditRowTemplate>
+        <td><input type="date" @bind-value="forecast.Date" /></td>
+        <td><input type="number" @bind-value="forecast.TemperatureC" /></td>
+        <td>@forecast.TemperatureF</td>
+        <td><input type="text" @bind-value="forecast.Summary" /></td>
     </EditRowTemplate>
 </BlazyDataGrid>
 
@@ -37,7 +75,13 @@
     {
         forecasts = await Http.GetFromJsonAsync<WeatherForecast[]>("sample-data/weather.json");
     }
-    
+
+    async Task SaveForecast(WeatherForecast forecast)
+    {
+        //do a database thing here
+        await Task.Delay(1000);
+    }
+
     public class WeatherForecast
     {
         public DateTime Date { get; set; }

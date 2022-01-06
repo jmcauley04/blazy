@@ -69,3 +69,16 @@ ul {
 strong {
     font-size: .8em;
 }
+
+button {
+    background-color: transparent;
+    border: none;
+}
+
+button:hover {
+    background-color: rgba(100,100,100,.1);
+}
+
+    button:disabled > div {
+        opacity: .65;
+    }
