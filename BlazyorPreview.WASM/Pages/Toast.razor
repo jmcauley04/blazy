@@ -1,0 +1,61 @@
+﻿@page "/toast"
+<PageTitle>Toast</PageTitle>
+<h3>Toast</h3>
+
+
+
+<h5>Code</h5>
+@{
+    string _codeapprazor = @"<Found Context=""routeData"">
+    <BlazyToast CascadeValue=""true"">
+        <RouteView RouteData=""@routeData"" DefaultLayout=""@typeof(MainLayout)"" />
+        <FocusOnNavigate RouteData=""@routeData"" Selector=""h1"" />
+    </BlazyToast>
+</Found>";
+}
+<BlazyCodeBox Title="App.razor" Code="@_codeapprazor" />
+
+@{
+    string _codecomponent = @"[CascadingParameter]
+public BlazyToast? BlazyToast { get; set; }
+
+void ShowToast()
+{
+    if (BlazyToast != null)
+        BlazyToast.AddMessage(toastMessage, toastTitle, themeColor: selection);
+}";
+}
+<div class="my-5"></div>
+<BlazyCodeBox Title="Any component" Code="@_codecomponent" />
+
+<h5>Try it</h5>
+<select @onchange="SetSelection">
+    @foreach(var color in Enum.GetValues<Blazy.Enums.ThemeColor>())
+    {
+        <option value="@color">@color.ToString()</option>
+    }
+</select>
+
+<BlazyInputText @bind-Value="toastTitle" Label="Toast Message" />
+<BlazyInputText @bind-Value="toastMessage" Label="Toast Message" />
+<BlazyButton OnClick="ShowToast">Show Toast</BlazyButton>
+
+@code {
+    [CascadingParameter]
+    public BlazyToast? BlazyToast { get; set; }
+
+    string toastTitle = "Title Message";
+    string toastMessage = string.Empty;
+    Blazy.Enums.ThemeColor selection = Blazy.Enums.ThemeColor.Primary;
+
+    void ShowToast()
+    {
+        if (BlazyToast != null)
+            BlazyToast.AddMessage(toastMessage, toastTitle, themeColor: selection);
+    }
+
+    void SetSelection(ChangeEventArgs args)
+    {
+        selection = (Blazy.Enums.ThemeColor)args.Value!;
+    }
+}
