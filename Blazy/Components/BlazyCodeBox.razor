@@ -3,6 +3,8 @@
 @using Microsoft.CodeAnalysis.CSharp.Syntax
 @using Microsoft.CodeAnalysis.Text
 @using System.Text
+@using Microsoft.JSInterop
+@inject IJSRuntime js
 
 @if(IsToggled){    
     <BlazyButton OnClick="ToggleCode">@(_hidden ? "Show code" : "Hide code")</BlazyButton>
@@ -10,7 +12,11 @@
 
 @if(!IsToggled || !_hidden)
 {
-    <div>
+    <div class="wrapper">
+        <div class="header-bar">
+            <span>@Title</span>
+            <BlazyButton OnClick="CopyTextToClipboard" ThemeColor="ThemeColor.Transparent">Copy</BlazyButton>
+        </div>
         @if(!string.IsNullOrEmpty(Code))
         {        
             <pre>
@@ -21,6 +27,9 @@
 }
 
 @code {
+    [Parameter]
+    public string Title { get; set; } = string.Empty;
+
     [Parameter]
     public string Code { get; set; } = string.Empty;
 
@@ -34,6 +43,7 @@
 
     List<TextSpan>? ColoredSpans;
     string _code = string.Empty;
+    IJSObjectReference? module;
 
     enum SyntaxColor
     {
@@ -68,11 +78,22 @@
         Method,
     }
 
+    protected override async Task OnInitializedAsync()
+    {
+        if (module == null)
+            module = await js.Import("clipboard.js");
+    }
+
     protected override void OnInitialized()
     {
         if (string.IsNullOrEmpty(_code) && !IsToggled)
             GenerateMarkupString();
         base.OnInitialized();
+    }
+
+    private async Task CopyTextToClipboard()
+    {
+        await module!.InvokeVoidAsync("copyText", Code);
     }
 
     void ToggleCode()

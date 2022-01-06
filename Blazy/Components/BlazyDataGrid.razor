@@ -30,10 +30,10 @@
 
                     @if(EditRowTemplate != null)
                     {
-                        <td>
-                            @if(EditingItem?.Equals(item) ?? false)
+                        <td class="d-flex">
+                            @if((EditingItem?.Equals(item) ?? false) || (SavingItem?.Equals(item) ?? false))
                             {
-                                <BlazyButton>
+                                <BlazyButton OnClick="Save">
                                     <Blazy.Fragments.BlazyIcon Icon="Fragments.BlazyIcon.IconType.oi_check" />
                                 </BlazyButton>
                                 <BlazyButton OnClick="Cancel">
@@ -55,27 +55,46 @@
 </BlazyTable>
 
 @code {
-    [Parameter]
+    [Parameter, EditorRequired]
     public IEnumerable<TItem>? Datasource { get; set; }
 
-    [Parameter]
+    [Parameter, EditorRequired]
     public RenderFragment? DataGridHead { get; set; }
 
-    [Parameter]
+    [Parameter, EditorRequired]
     public RenderFragment<TItem>? RowTemplate { get; set; }
 
     [Parameter]
     public RenderFragment<TItem>? EditRowTemplate { get; set; }
 
+    [Parameter]
+    public EventCallback<TItem> OnSave { get; set; }
+
     private TItem? EditingItem;
+    private TItem? SavingItem;
+    private string originalItemJson = string.Empty;
 
     void EditItem(TItem item)
     {
+        originalItemJson = System.Text.Json.JsonSerializer.Serialize<TItem>(item);
         EditingItem = item;
     }
 
     void Cancel()
     {
+        var origItem = System.Text.Json.JsonSerializer.Deserialize<TItem>(originalItemJson);
+
+        foreach (var prop in typeof(TItem).GetProperties().Where(x => x.CanWrite))
+            prop.SetValue(EditingItem, prop.GetValue(origItem));
+
         EditingItem = default(TItem);
+    }
+
+    async Task Save()
+    {
+        SavingItem = EditingItem;
+        EditingItem = default(TItem);
+        await OnSave.InvokeAsync(EditingItem);
+        SavingItem = default(TItem);
     }
 }

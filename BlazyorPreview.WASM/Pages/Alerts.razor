@@ -4,6 +4,16 @@
 <h3>Alerts</h3>
 
 <h5>Permanent</h5>
+@{
+    string _codePermanent = @"<BlazyAlert Type=""type"">
+    <strong>@strongText(type)</strong> @text(type)
+</BlazyAlert>";
+}
+
+<BlazyCodeBox Code="@_codePermanent" />
+
+<h5>Examples</h5>
+
 @foreach(var type in Enum.GetValues<BlazyAlert.AlertType>())
 {    
         <BlazyAlert Type="type">
@@ -12,6 +22,15 @@
 }
 
 <h5>Dismissible</h5>
+@{
+    string _codeDismissibles = @"<BlazyAlert Type=""type"" IsDismissible=""true"">
+    <strong>@strongText(type)</strong> @text(type)
+</BlazyAlert>";
+}
+
+<BlazyCodeBox Code="@_codeDismissibles" />
+
+<h5>Examples</h5>
 @foreach(var type in Enum.GetValues<BlazyAlert.AlertType>())
 {    
     <BlazyAlert Type="@type" IsDismissible="true">
@@ -20,6 +39,15 @@
 }
 
 <h5>3 second timeout</h5>
+@{
+    string _codeTimeout = @"<BlazyAlert Type=""type"" TimeoutDelay=""3"">
+    <strong>@strongText(type)</strong> @text(type)
+</BlazyAlert>";
+}
+
+<BlazyCodeBox Code="@_codeTimeout" />
+
+<h5>Examples</h5>
 @foreach(var type in Enum.GetValues<BlazyAlert.AlertType>())
 {    
     <BlazyAlert Type="type" TimeoutDelay="3">

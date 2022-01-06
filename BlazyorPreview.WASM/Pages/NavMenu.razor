@@ -4,15 +4,20 @@
 <PageTitle>Blazy NavMenus</PageTitle>
 <h3>NavMenu</h3>
 
+
 <h5>Flex with Dropdown on Hover</h5>
 <BlazyTopNav Links="@Links" />
 
-<BlazyCodeBox Code="@_code("BlazyTopNav")" IsToggled="true" />
+<h5>Code</h5>
+<BlazyCodeBox Code="@_code("BlazyTopNav")" />
+
 
 <h5>Flex with Dropdown on Hover</h5>
 <BlazySideNav Links="@Links" />
 
-<BlazyCodeBox Code="@_code("BlazySideNav")" IsToggled="true" />
+<h5>Code</h5>
+<BlazyCodeBox Code="@_code("BlazySideNav")" />
+
 
 @code {
     string _code(string navName) => $"<{navName}" + @" Links=""@Links"" />

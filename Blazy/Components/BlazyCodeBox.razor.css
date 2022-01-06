@@ -1,7 +1,28 @@
-﻿div {
+﻿.wrapper {
     background-color: rgba(30,30,30);
-    padding: 1em;
     display: grid;
+}
+
+.wrapper, .header-bar {
+    border-top-left-radius: .5em;
+    border-top-right-radius: .5em;
+}
+
+.header-bar {
+    background-color: rgba(255,255,255,.2);
+    margin-bottom: 1em;
+    display: flex;
+    align-items: center;
+}
+
+.header-bar span:first-of-type {
+    flex-grow: 1;
+    padding-left: 1em;
+    color: white;
+}
+
+.header-bar ::deep button {
+    color: white;
 }
 
 p {
@@ -12,9 +33,10 @@ p {
 pre {
     color: white;
     margin: 0;
-    padding: 0;
     display: grid;
     grid-template-columns: max-content auto;
     width: 100%;
     overflow-x: auto;
+    padding: 1em;
+    padding-top: 0;
 }
