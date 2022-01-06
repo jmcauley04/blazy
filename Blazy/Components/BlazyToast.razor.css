@@ -1,0 +1,28 @@
+﻿
+.blazy-dot {
+    width: 1em;
+    height: 1em;
+    border-radius: 100%;
+    margin-right: .5em;
+}
+
+.msg-qty-badge {
+    position: absolute;
+    display: grid;
+    place-items: center;
+    line-height: 1em;
+    color: white;
+    font-weight: bold;
+    top: .6em;
+    border: 1px solid white;
+    height: 1.3em;
+    width: 1.3em;
+    right: .6em;
+    border-radius: 100%;
+}
+
+.msg-qty-badge > span {
+    font-size: .7em;
+    padding-right: .4em;
+    padding-top: .1em;
+}

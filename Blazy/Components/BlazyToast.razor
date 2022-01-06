@@ -1,0 +1,122 @@
+﻿
+@if (CascadeValue)
+{
+    <CascadingValue Value="this">
+
+        @ChildContent
+
+    </CascadingValue>    
+}
+
+<div class="position-fixed bottom-0 end-0 p-3" style="z-index: 1000">
+    @if(firstMessage != null)
+    {
+        <div class="toast show" role="alert">
+            @if(Messages.Count > 1)
+            {
+                <div class="msg-qty-badge bg-danger">
+                    <span>+@(Messages.Count - 1)</span>
+                </div>                    
+            }
+            <div class="toast-header">
+                <div class="blazy-dot bg-@firstMessage.ThemeColor.ToString().ToLower()"></div>
+                <strong class="me-auto">@firstMessage.Title</strong>
+                <small>@firstMessage.Subtitle</small>
+                <button type="button" class="btn-close" @onclick="() => Close(firstMessage)"></button>
+            </div>
+            <div class="toast-body">
+                @firstMessage.Text
+            </div>
+        </div>
+    }
+</div>
+
+@code {
+    [Parameter]
+    public RenderFragment? ChildContent { get; set; }
+
+    [Parameter]
+    public bool CascadeValue { get; set; } = false;
+
+    private List<Message> Messages = new();
+
+    private Message? firstMessage => Messages.FirstOrDefault();
+
+    void Close(Message message)
+    {
+        if (message != null && Messages.Contains(message))
+        {
+            if (message.cts != null)
+            {
+                message.cts.Cancel();
+                message.cts.Dispose();
+            }
+            Messages.Remove(message);
+
+            StartMessage();
+
+            StateHasChanged();
+        }
+    }
+
+    void StartMessage()
+    {        
+        if (firstMessage != null)
+        {
+            firstMessage!.CloseTask?.Start();
+            if (string.IsNullOrEmpty(firstMessage.Subtitle))
+            {
+                var secondsAgo = (int)(DateTime.Now - firstMessage.CreatedAt).TotalSeconds;
+
+                firstMessage.Subtitle = secondsAgo > 60 ? firstMessage.CreatedAt.ToShortTimeString() : 
+                                        secondsAgo > 1 ? $"{secondsAgo} seconds ago" : 
+                                        "just now";
+            }
+            StateHasChanged();
+        }
+    }
+
+    public void AddMessage(string text, 
+        string title,
+        string subtitle = "", 
+        int delayMilliseconds = 3000,
+        ThemeColor themeColor = ThemeColor.Primary)
+    {
+        var message = new Message()
+            {
+                Text = text,
+                Title = title,
+                Subtitle = subtitle,
+                ThemeColor = themeColor
+            };
+
+        Messages.Add(message);
+
+        if (delayMilliseconds > 0)
+        {
+            message.cts = new CancellationTokenSource();
+            message.CloseTask = new Task(async () =>
+                {
+                    await Task.Delay(delayMilliseconds);
+                    if (!message.cts.Token.IsCancellationRequested && Messages.Contains(message))                    
+                        Close(message);                    
+                });
+        }
+
+        if (firstMessage != message)
+            StateHasChanged();
+        else
+            StartMessage();      
+    }
+
+    class Message
+    {
+        public string Title = string.Empty;
+        public string Subtitle = string.Empty;
+        public string Text = string.Empty;
+        public DateTime CreatedAt = DateTime.Now;
+        public ThemeColor ThemeColor = ThemeColor.Primary;
+        public CancellationTokenSource? cts;
+        public Task? CloseTask;
+    }
+}
