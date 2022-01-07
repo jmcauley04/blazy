@@ -1,5 +1,5 @@
 ﻿<div class="@(isValidated ? "valid-input" : "invalid-input")">    
-    <label class="@labelClass" for="@guid">@Label</label>
+    <label class="@focusClass @smallClass" for="@guid">@Label</label>
     <input 
         id="@guid"
         value="@Value" 
@@ -12,6 +12,8 @@
 @code {
     string placeholder = string.Empty;
     string labelClass = string.Empty;
+    string focusClass = string.Empty;
+    string smallClass => string.IsNullOrEmpty(Value) && string.IsNullOrEmpty(focusClass) ? "" : "small";
     bool isValidated = false;
     Guid guid = Guid.NewGuid();
 
@@ -30,6 +32,7 @@
     [Parameter]
     public Func<bool>? IsValid { get; set; }
 
+
     private void OnChange(ChangeEventArgs args)
     {
         ValueChanged.InvokeAsync(args.Value?.ToString());
@@ -42,16 +45,12 @@
     private void SetFocus()
     {
         placeholder = Placeholder;
-        labelClass = "small focused";
+        focusClass = "focused";
     }
 
     private void UnsetFocus()
     {
         placeholder = string.Empty;
-
-        if (string.IsNullOrEmpty(Value))
-            labelClass = string.Empty;
-        else
-            labelClass = "small";
+        focusClass = string.Empty;
     }
 }

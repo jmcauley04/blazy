@@ -1,0 +1,14 @@
+﻿.ex-toast {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 1em;
+}
+
+.try-it-form {
+    display: grid;
+    gap: 1em;
+}
+
+.try-it-form label {
+    display: grid;
+}
