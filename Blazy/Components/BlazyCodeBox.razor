@@ -117,6 +117,7 @@
     {
         int lineNumber = 1;
         AddLineNumber(sb, lineNumber++);
+
         foreach (var token in node.DescendantTokens())
         {
             if (token.IsMissing)
@@ -124,7 +125,7 @@
                 continue;
             }
             foreach (var trivia in token.LeadingTrivia)
-            {
+            {                
                 ParseTrivia(trivia, sb, ref lineNumber);
             }
             ParseToken(token, sb);
@@ -158,12 +159,13 @@
 
     void ParseToken(SyntaxToken token, StringBuilder sb)
     {
+        var tokenString = token.ToString();
+        var result = sb.ToString();
         var previousToken = token.GetPreviousToken().ToString();
         var nextToken = token.GetNextToken().ToString();
-        var tokenString = token.ToString();
-        if (nextToken == ">" && previousToken == "/" 
-        || previousToken == "<" && tokenString != "/"
-        || previousToken == "[" && nextToken == "]")
+        if ((nextToken == ">" && previousToken == "/") 
+        || (previousToken == "<" && tokenString != ">")
+        || (previousToken == "[" && nextToken == "]"))
         {
             sb.Append(Styled(tokenString, Colors[SyntaxColor.Green]));
         }

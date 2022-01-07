@@ -29,29 +29,51 @@ void ShowToast()
 <BlazyCodeBox Title="Any component" Code="@_codecomponent" />
 
 <h5>Try it</h5>
-<select @onchange="SetSelection">
-    @foreach(var color in Enum.GetValues<Blazy.Enums.ThemeColor>())
-    {
-        <option value="@color">@color.ToString()</option>
-    }
-</select>
 
-<BlazyInputText @bind-Value="toastTitle" Label="Toast Message" />
-<BlazyInputText @bind-Value="toastMessage" Label="Toast Message" />
-<BlazyButton OnClick="ShowToast">Show Toast</BlazyButton>
+<div class="try-it-form">
+    <label>
+        <small>Theme</small>
+        <BlazySelect TItem="Blazy.Enums.ThemeColor" TId="Blazy.Enums.ThemeColor"
+            Options="Enum.GetValues<Blazy.Enums.ThemeColor>()"
+            GetId="(item) => item"
+            @bind-SelectedOption="selection">
+            <OptionTemplate>
+                @context.ToString() 
+            </OptionTemplate>
+        </BlazySelect>
+    </label>
 
+    <label>
+        <span>
+            <small>Toast Dismiss Timer (0 = No auto dismiss):</small>
+            <code>[@toastDelay seconds]</code>
+        </span>
+        <input type="range" @bind-value="toastDelay" min="0" max="10" />
+    </label>
+
+    <div class="ex-toast">
+        <div>
+            <BlazyInputText @bind-Value="toastTitle" Label="Title" />
+        </div>
+        <div>
+            <BlazyInputText @bind-Value="toastMessage" Label="Message" />
+        </div>    
+    </div>
+    <BlazyButton OnClick="ShowToast" ThemeColor="Blazy.Enums.ThemeColor.Secondary">Show Toast</BlazyButton>
+</div>
 @code {
     [CascadingParameter]
-    public BlazyToast? BlazyToast { get; set; }
+    public BlazyToast? BlazyToast { get; set; }  
 
     string toastTitle = "Title Message";
     string toastMessage = string.Empty;
-    Blazy.Enums.ThemeColor selection = Blazy.Enums.ThemeColor.Primary;
+    int toastDelay = 3;
+    Blazy.Enums.ThemeColor selection = Blazy.Enums.ThemeColor.Secondary;
 
     void ShowToast()
     {
         if (BlazyToast != null)
-            BlazyToast.AddMessage(toastMessage, toastTitle, themeColor: selection);
+            BlazyToast.AddMessage(toastMessage, toastTitle, themeColor: selection, delayMilliseconds: toastDelay * 1000);
     }
 
     void SetSelection(ChangeEventArgs args)
