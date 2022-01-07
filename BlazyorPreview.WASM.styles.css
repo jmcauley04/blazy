@@ -69,6 +69,21 @@ a[b-171dupdzg0]{
     padding-left: 1em;
 }
 /* /Pages/ProgressBars.razor.rz.scp.css */
+/* /Pages/Toast.razor.rz.scp.css */
+.ex-toast[b-qtadypyfcr] {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 1em;
+}
+
+.try-it-form[b-qtadypyfcr] {
+    display: grid;
+    gap: 1em;
+}
+
+.try-it-form label[b-qtadypyfcr] {
+    display: grid;
+}
 /* /Shared/MainLayout.razor.rz.scp.css */
 .top-row[b-zkiscx8m1c] {
     height: 3.5rem;
