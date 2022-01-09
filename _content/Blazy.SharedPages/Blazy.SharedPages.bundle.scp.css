@@ -11,9 +11,16 @@
 }
 
 .d-grid[b-e9qavcrbdn] {
-    grid-template-columns: 1fr 1fr;
     column-gap: 1em;
     align-items: end;
+}
+
+.d-grid-2-col[b-e9qavcrbdn] {
+    grid-template-columns: repeat(2, 1fr);
+}
+
+.d-grid-3-col[b-e9qavcrbdn] {
+    grid-template-columns: repeat(3, 1fr);
 }
 /* _content/Blazy.SharedPages/Pages/Icons.razor.rz.scp.css */
 

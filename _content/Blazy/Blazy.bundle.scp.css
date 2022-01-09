@@ -149,12 +149,18 @@ label.small[b-38r0xga2ej] {
     border-bottom: 2px solid darkblue;
 }
 
-.valid-input label[b-38r0xga2ej] {
+.valid-input label[b-38r0xga2ej],
+.readonly[b-38r0xga2ej] {
     color: #333;
 }
 
-.valid-input input[b-38r0xga2ej] {
+.valid-input input[b-38r0xga2ej],
+input[readonly][b-38r0xga2ej] {
     border-bottom: 1px solid #333;
+}
+
+input[readonly][b-38r0xga2ej] {
+    color: #666;
 }
 /* _content/Blazy/Components/BlazyModal.razor.rz.scp.css */
 [b-mc11ulbb4g] .btn-close {

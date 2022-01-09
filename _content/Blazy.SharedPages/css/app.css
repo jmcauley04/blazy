@@ -3,6 +3,10 @@ html, body {
     font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
 }
 
+.space {
+    height: 4em;
+}
+
 h5 {
     margin-top: 2em;
 }
