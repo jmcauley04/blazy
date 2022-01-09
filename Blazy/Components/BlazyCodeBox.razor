@@ -78,7 +78,7 @@
         Method,
     }
 
-    protected override async Task OnInitializedAsync()
+    protected override async Task OnAfterRenderAsync(bool firstRender)
     {
         if (module == null)
             module = await js.Import("clipboard.js");

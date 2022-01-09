@@ -1,0 +1,1 @@
+dotnet watch --project Blazy.Server/Blazy.Server.csproj

@@ -20,7 +20,7 @@ jobs:
       
     # publishes Blazor project to the release-folder
     - name: Publish .NET Core Project
-      run: dotnet publish ./BlazyorPreview.WASM/BlazyorPreview.WASM.csproj -c Release -o release
+      run: dotnet publish ./Blazy.WASM/Blazy.WASM.csproj -c Release -o release
     
     # changes the base-tag in index.html from '/' to 'blazy' to match GitHub Pages repository subdirectory
     - name: Change base-tag in index.html from / to blazy

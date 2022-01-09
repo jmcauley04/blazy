@@ -26,18 +26,13 @@
     int height = 0;
     string heightText => height > 0 ? $"{height}px" : "0";
 
-    protected override async Task OnInitializedAsync()
-    {
-        if (module == null)
-            module = await js.Import(this);
-    }
-
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
-        if (!hasRun && module != null)
+        if (module == null)
         {
+            module = await js.Import(this);
             hasRun = true;
-            await TryUpdateHeight();
+            await TryUpdateHeight();            
         }
     }
 
