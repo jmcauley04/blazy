@@ -1,5 +1,15 @@
 @import '_content/Blazy/Blazy.bundle.scp.css';
 
+/* /Pages/FormControls.razor.rz.scp.css */
+.option-template:hover[b-snnak35ns5] {
+    font-weight: bold;
+}
+
+.d-grid[b-snnak35ns5] {
+    grid-template-columns: 1fr 1fr;
+    column-gap: 1em;
+    align-items: end;
+}
 /* /Pages/Icons.razor.rz.scp.css */
 
 h3[b-0uo5rxi49x],

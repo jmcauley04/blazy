@@ -206,11 +206,58 @@ label.small[b-38r0xga2ej] {
     border-radius: .3em;
 }
 
+.blazy-progress > span[b-ocarvij1vz] {
+    overflow: hidden;
+}
+
 .bg-light[b-ocarvij1vz],
 .bg-transparent[b-ocarvij1vz] {
     color: black;
     border-right: 1px solid #aaa;
     background-image: linear-gradient( 45deg,rgba(0,0,0,.15) 25%,transparent 25%,transparent 50%,rgba(0,0,0,.15) 50%,rgba(0,0,0,.15) 75%,transparent 75%,transparent);
+}
+/* _content/Blazy/Components/BlazySelect.razor.rz.scp.css */
+.z-select[b-d3jxbp9q4e] {
+    position: relative;
+    cursor: pointer!important;
+}
+    .z-select[b-d3jxbp9q4e]::after {
+        content: "";
+        border-color: transparent;
+        border-top-color: #c04;
+        border-width: .5em;
+        border-style: solid;
+        width: .5em;
+        height: .5em;
+        position: absolute;
+        right: 1em;
+        top: 1.5em;
+    }
+
+    .z-select[b-d3jxbp9q4e]  > div > input,
+    .z-select[b-d3jxbp9q4e]  > div > label {
+        cursor: pointer;
+    }
+
+    ul[b-d3jxbp9q4e] {
+        list-style: none;
+        padding: 0;
+        position:absolute;
+        width: 100%;
+    }
+
+    li[b-d3jxbp9q4e] {
+        cursor: pointer;
+        padding: 0;
+        font-size: .8em;
+    }
+
+    .z-hover:hover[b-d3jxbp9q4e] {
+        background-color: rgba(0,0,0,.1);
+    }
+
+.z-li-padding[b-d3jxbp9q4e] {
+    padding: .5em;
 }
 /* _content/Blazy/Components/BlazySideNav.razor.rz.scp.css */
 [b-srzesod9gk] ul {
@@ -482,12 +529,8 @@ tbody[b-k6wgan9gug]  tr:nth-child(2n+1){
 
     [b-tcgvireyia] .nav-item ul {
         position: absolute;
-        border: solid 1px #eee;
-        border-radius: 5px;
-        z-index: 10;
-        background-color: white;
         line-height: 1rem;
-        box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 6px -1px, rgba(0, 0, 0, 0.06) 0px 2px 4px -1px;
+        z-index: 10;
     }
 
     [b-tcgvireyia] .sublinks {
@@ -518,6 +561,11 @@ tbody[b-k6wgan9gug]  tr:nth-child(2n+1){
     }
 
 
+.wrapper[b-tcgvireyia]  > ul {
+    border: none;
+    background-color: transparent;
+    box-shadow: none;
+}
 
 @media (min-width: 641px) {
 
@@ -531,6 +579,36 @@ tbody[b-k6wgan9gug]  tr:nth-child(2n+1){
         left: 20%;
         top: 70%;
     }
+}
+/* _content/Blazy/Components/Internal/BlazyStyleProvider.razor.rz.scp.css */
+.blazy-style-provider[b-hgulcptq1g] {
+    --z-primary: rgb(5,39,103) !important;
+    --z-border-primary: #3e547c !important;
+}
+
+[b-hgulcptq1g] .btn-primary {
+    border-color: var(--z-border-primary)!important;
+}
+
+[b-hgulcptq1g] .bg-primary,
+[b-hgulcptq1g] .btn-primary {
+    background-color: var(--z-primary)!important;
+}
+
+[b-hgulcptq1g] .btn-outline-primary {
+    color: var(--z-primary) !important;
+    border-color: var(--z-primary) !important;
+}
+
+[b-hgulcptq1g] .text-primary {
+    color: var(--z-primary) !important;
+}
+
+[b-hgulcptq1g] .z-shadow {
+    background-color: white;
+    border: solid 1px #eee;
+    border-radius: 5px;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 6px -1px, rgba(0, 0, 0, 0.06) 0px 2px 4px -1px;
 }
 /* _content/Blazy/Effects/BlazyHeightTransition.razor.rz.scp.css */
 .collapsable[b-pwf4fm5tu4] {
