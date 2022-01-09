@@ -1,28 +1,31 @@
 ﻿@inherits BlazyBase
 
-<button 
-    class="@btnClass @CssClass" 
-    style="@CssStyle"
-    type="@Type"
-    disabled="@(isLoading || Disabled)"
-    @onclick="onClick" >
+<Blazy.Components.Internal.BlazyStyleProvider>
 
-    @if (isLoading)
-    {
-        <span class="spinner">        
-            <BlazySpinner ThemeColor="@spinnerTheme" />
-        </span>
-    }
-    else
-    {        
-        @if(ChildContent != null)
+    <button 
+        class="@btnClass @CssClass" 
+        style="@CssStyle"
+        type="@Type"
+        disabled="@(isLoading || Disabled)"
+        @onclick="onClick" >
+
+        @if (isLoading)
         {
-            @ChildContent
+            <span class="spinner">        
+                <BlazySpinner ThemeColor="@spinnerTheme" />
+            </span>
+        }
+        else
+        {        
+            @if(ChildContent != null)
+            {
+                @ChildContent
+            }        
         }        
-    }    
-    
 
-</button>
+    </button>
+
+</Blazy.Components.Internal.BlazyStyleProvider>
 
 @code {
     public enum ButtonType

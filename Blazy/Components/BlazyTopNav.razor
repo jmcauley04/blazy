@@ -1,18 +1,23 @@
 ﻿@using Microsoft.AspNetCore.Components.Routing
 @inherits BlazyNavMenu
 
-<div class="wrapper">    
+<Blazy.Components.Internal.BlazyStyleProvider>
     
-    @RenderLink(Links)
+    <div class="wrapper">    
+    
+        @RenderLink(Links)
 
-</div>
+    </div>
+
+</Blazy.Components.Internal.BlazyStyleProvider>
+
 
 @code{
 
     RenderFragment RenderLink(IEnumerable<BlazyNavLink> links) {
         return __builder =>
         {
-            <ul @onclick:stopPropagation>
+            <ul class="z-shadow" @onclick:stopPropagation>
                 @foreach (var lm in links)
                 {
                     if (lm.Sublinks == null && lm.OnClick == null)

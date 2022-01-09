@@ -31,17 +31,15 @@ void ShowToast()
 <h5>Try it</h5>
 
 <div class="try-it-form">
-    <label>
-        <small>Theme</small>
-        <BlazySelect TItem="Blazy.Enums.ThemeColor" TId="Blazy.Enums.ThemeColor"
-            Options="Enum.GetValues<Blazy.Enums.ThemeColor>()"
-            GetId="(item) => item"
-            @bind-SelectedOption="selection">
-            <OptionTemplate>
-                @context.ToString() 
-            </OptionTemplate>
-        </BlazySelect>
-    </label>
+    <BlazySelect TItem="Blazy.Enums.ThemeColor" TId="Blazy.Enums.ThemeColor"
+        Label="Theme"
+        Options="Enum.GetValues<Blazy.Enums.ThemeColor>()"
+        GetId="(item) => item"
+        @bind-SelectedOption="selection">
+        <OptionTemplate>
+            @context.ToString() 
+        </OptionTemplate>
+    </BlazySelect>
 
     <label>
         <span>

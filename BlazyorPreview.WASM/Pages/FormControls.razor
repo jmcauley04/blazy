@@ -1,0 +1,102 @@
+﻿@page "/form-controls"
+<PageTitle>Form Controls</PageTitle>
+<h3>Form Controls</h3>
+
+<h4>BlazySelect</h4>
+<p>
+    The OptionTemplate allows full control over how listed options are rendered.  If custom rendering is not required, the
+    default rendering may be sufficient.
+</p>
+<div class="d-grid">
+    <div>
+        <h5>Code - With default rendering</h5>
+
+        @{
+            string _codeSelect = @"<BlazySelect 
+            TItem=""Blazy.Enums.ThemeColor""
+            Label=""Theme""
+            Options=""@Options""
+            @bind-SelectedOption=""@selection""
+            Display=""@GetThemeColorText"" />
+
+        @code {
+            Blazy.Enums.ThemeColor selection;
+
+            string GetThemeColorText(Blazy.Enums.ThemeColor color) => $""{(int)color} - {color}"";
+
+            IEnumerable<Blazy.Enums.ThemeColor> Options = Enum.GetValues<Blazy.Enums.ThemeColor>();
+        }";
+        }
+        <BlazyCodeBox Code="@_codeSelect" />
+    
+        <h5>Example - With default rendering</h5>
+        <BlazySelect 
+            TItem="Blazy.Enums.ThemeColor"
+            Label="Theme"
+            Options="@Options"
+            @bind-SelectedOption="@selection"
+            Display="@GetThemeColorText" />
+    </div>
+    <div>
+
+        <h5>Code - With OptionTemplate</h5>
+
+        @{
+            string _codeSelectRenderFragment = @"<BlazySelect 
+            TItem=""Blazy.Enums.ThemeColor""
+            Label=""Theme""
+            Options=""@Options""
+            @bind-SelectedOption=""@selection""
+            Display=""@GetThemeColorText"">
+            <OptionTemplate>
+                <div class=""option-template p-1 @GetOptionColors(context)"">@GetThemeColorText(context)</div>
+            </OptionTemplate>
+        </BlazySelect>
+
+
+
+        @code {
+            Blazy.Enums.ThemeColor selection;
+
+            string GetThemeColorText(Blazy.Enums.ThemeColor color) => $""{(int)color} - {color}"";
+
+            IEnumerable<Blazy.Enums.ThemeColor> Options = Enum.GetValues<Blazy.Enums.ThemeColor>();
+
+            string GetOptionColors(Blazy.Enums.ThemeColor color) => color switch {
+                Blazy.Enums.ThemeColor.Transparent => $""bg-{color.ToString().ToLower()} text-dark"",
+                Blazy.Enums.ThemeColor.Light => $""bg-{color.ToString().ToLower()} text-dark"",
+                _ => $""bg-{color.ToString().ToLower()} text-white"",
+            };
+        }";
+        }
+        <BlazyCodeBox Code="@_codeSelectRenderFragment" />
+    
+        <h5>Example - With OptionTemplate</h5>
+        <BlazySelect 
+            TItem="Blazy.Enums.ThemeColor"
+            Label="Theme"
+            Options="@Options"
+            @bind-SelectedOption="@selectionrf"
+            Display="@GetThemeColorText">
+            <OptionTemplate>
+                <div class="option-template p-1 @GetOptionColors(context)">@GetThemeColorText(context)</div>
+            </OptionTemplate>
+        </BlazySelect>
+    </div>
+</div>
+
+
+@code {
+    Blazy.Enums.ThemeColor selection;
+    Blazy.Enums.ThemeColor selectionrf;
+
+    string GetThemeColorText(Blazy.Enums.ThemeColor color) => $"{(int)color} - {color}";
+
+    IEnumerable<Blazy.Enums.ThemeColor> Options = Enum.GetValues<Blazy.Enums.ThemeColor>();
+
+    string GetOptionColors(Blazy.Enums.ThemeColor color) => color switch {
+        Blazy.Enums.ThemeColor.Transparent => $"bg-{color.ToString().ToLower()} text-dark",
+        Blazy.Enums.ThemeColor.Light => $"bg-{color.ToString().ToLower()} text-dark",
+        _ => $"bg-{color.ToString().ToLower()} text-white",
+    };
+}

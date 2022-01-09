@@ -1,4 +1,4 @@
-﻿<div class="@(isValidated ? "valid-input" : "invalid-input")">    
+﻿<div class="@(isValidated ? "valid-input" : "invalid-input")" @onclick=OnClick>    
     <label class="@focusClass @smallClass" for="@guid">@Label</label>
     <input 
         id="@guid"
@@ -6,7 +6,8 @@
         @oninput="OnChange" 
         @onfocus="SetFocus"
         @onfocusout="UnsetFocus"
-        placeholder="@placeholder" />
+        placeholder="@placeholder"
+        readonly="@Readonly" />
 </div>
 
 @code {
@@ -32,6 +33,11 @@
     [Parameter]
     public Func<bool>? IsValid { get; set; }
 
+    [Parameter]
+    public bool Readonly{ get; set; }
+
+    [Parameter]
+    public EventCallback OnClick { get; set; }
 
     private void OnChange(ChangeEventArgs args)
     {
@@ -44,8 +50,11 @@
 
     private void SetFocus()
     {
-        placeholder = Placeholder;
-        focusClass = "focused";
+        if (!Readonly)
+        {
+            placeholder = Placeholder;
+            focusClass = "focused";            
+        }
     }
 
     private void UnsetFocus()
