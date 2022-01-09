@@ -1,0 +1,61 @@
+﻿@page "/form-controls"
+@using Microsoft.JSInterop
+@inject IJSRuntime js
+
+<PageTitle>Form Controls</PageTitle>
+<h3>Form Controls</h3>
+
+<ul>
+    @foreach(var name in new string[]{
+        nameof(BlazySelect<string>), 
+        nameof(BlazyInputText) 
+    })
+    {
+        <li class="z-component" 
+            @onclick="() => ScrollTo(name)">
+            @ComponentDisplay(name)
+        </li>        
+    }
+</ul>
+
+<div @ref="blazySelectRef">
+    <BlazySelectSection SectionName="@ComponentDisplay(nameof(BlazySelect<string>))" />
+</div>
+
+<div class="space"></div>
+
+<div @ref="blazyInputTextRef">
+    <BlazyInputTextSection SectionName="@ComponentDisplay(nameof(BlazyInputText))" />
+</div>
+
+
+<div class="space"></div>
+
+
+@code {
+    string ComponentDisplay(string componentName) => $"<{componentName} />";
+
+
+    IJSObjectReference? module;
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (module == null)
+            module = await js.Import("scrollTo.js");
+    }
+
+    async Task ScrollTo(string componentName)
+    {
+        var element = componentName switch
+        {
+            "BlazySelect" => blazySelectRef,
+            "BlazyInputText" => blazyInputTextRef,
+            _ => throw new Exception("ScrollTo undefined for this element")
+        };
+
+        await module!.InvokeVoidAsync("scrollToY", element);
+    }
+
+    ElementReference blazySelectRef;
+    ElementReference blazyInputTextRef;
+}

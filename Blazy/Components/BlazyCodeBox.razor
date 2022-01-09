@@ -84,11 +84,12 @@
             module = await js.Import("clipboard.js");
     }
 
-    protected override void OnInitialized()
+    protected override void OnParametersSet()
     {
-        if (string.IsNullOrEmpty(_code) && !IsToggled)
+        if (!IsToggled)
             GenerateMarkupString();
-        base.OnInitialized();
+
+        base.OnParametersSet();
     }
 
     private async Task CopyTextToClipboard()

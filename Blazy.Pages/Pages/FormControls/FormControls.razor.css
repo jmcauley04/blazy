@@ -1,0 +1,48 @@
+﻿.option-template:hover {
+    font-weight: bold;
+}
+
+::deep .d-flex {
+    gap: 1em;
+}
+
+::deep .d-grid {
+    column-gap: 1em;
+    align-items: end;
+}
+
+::deep .d-grid-2-col {
+    grid-template-columns: repeat(2, 1fr);
+}
+
+.d-grid-3-col {
+    grid-template-columns: repeat(3, 1fr);
+}
+
+::deep .options-window {
+    border-top: 1px solid #ccc;
+    border-bottom: 1px solid #ccc;
+    padding: 1em;
+    background-color: rgb(58, 192, 176);
+}
+::deep .options-window > h6 {
+    font-weight: bold;
+}
+
+ul {
+    list-style: none;
+    padding: 0;
+    background-color: rgba(30,30,30);
+    padding: .5em;
+    display: flex;
+    column-gap: 1em;
+}
+
+::deep .z-component {
+    color: rgb(58, 192, 176);
+}
+
+li:hover {
+    font-weight: bold;
+    cursor: pointer;
+}

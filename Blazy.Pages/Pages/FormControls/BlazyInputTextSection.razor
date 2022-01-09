@@ -1,0 +1,59 @@
+﻿
+<h4 class="z-component">@SectionName</h4>
+<p>
+    
+</p>
+
+<div class="options-window">    
+    <h6>Options</h6>
+    <div class="d-grid d-grid-2-col">
+        <BlazyInputText Label="Label" Placeholder="Upper-left text" @bind-Value="@_label" />
+        <BlazyInputText Label="Placeholder" Placeholder="Shows on focus" @bind-Value="@_placeholder" />
+    </div>
+    <div class="d-flex my-3">        
+        <label>
+            <input type='checkbox' @bind-value="@_readonly" />
+            Readonly
+        </label>
+        <label>
+            <input type='checkbox' @bind-value="@_masked" />
+            Masked
+        </label>
+    </div>
+</div>
+
+<h5>Example</h5>
+<BlazyInputText 
+    Label="@_label" 
+    Placeholder="@_placeholder" 
+    Readonly="@_readonly"
+    Masked="@_masked"
+    @bind-Value="@_text" />
+
+<h5>Code</h5>
+<BlazyCodeBox Code="@_code" />
+<small><code>Readonly</code> and <code>Masked</code> are false by default</small>
+
+
+@code {
+    [Parameter]
+    public string SectionName { get; set; } = string.Empty;
+
+    string _label = "Input Label";
+    string _text = string.Empty;
+    string _placeholder = "Input placeholder";
+
+    bool _readonly;
+    bool _masked;
+        
+    string _code => $@"<BlazyInputText 
+    Label=""{@_label}"" 
+    Placeholder=""{@_placeholder}"" 
+    Readonly=""{@_readonly}""
+    Masked=""{@_masked}""
+    @bind-Value=""@_text"" />" + @"
+
+@code {    
+    string _text = string.Empty;
+}";
+}

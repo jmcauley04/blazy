@@ -3,9 +3,9 @@ using Microsoft.JSInterop.Implementation;
 
 namespace Blazy.Extensions
 {
-    internal static class JsRuntimeExtensions
+    public static class JsRuntimeExtensions
     {
-        internal static async Task<IJSObjectReference> Import(
+        public static async Task<IJSObjectReference> Import(
             this IJSRuntime jsRuntime,
             string wwwrootpath)
         {
@@ -16,7 +16,7 @@ namespace Blazy.Extensions
             return module;
         }
 
-        internal static async Task<IJSObjectReference> Import<T>(
+        public static async Task<IJSObjectReference> Import<T>(
             this IJSRuntime jsRuntime,
             T instance)
         {
