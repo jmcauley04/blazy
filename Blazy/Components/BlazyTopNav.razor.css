@@ -27,12 +27,8 @@
 
     ::deep .nav-item ul {
         position: absolute;
-        border: solid 1px #eee;
-        border-radius: 5px;
-        z-index: 10;
-        background-color: white;
         line-height: 1rem;
-        box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 6px -1px, rgba(0, 0, 0, 0.06) 0px 2px 4px -1px;
+        z-index: 10;
     }
 
     ::deep .sublinks {
@@ -63,6 +59,11 @@
     }
 
 
+.wrapper ::deep > ul {
+    border: none;
+    background-color: transparent;
+    box-shadow: none;
+}
 
 @media (min-width: 641px) {
 

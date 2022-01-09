@@ -1,10 +1,10 @@
-﻿
-<div class="blazy-progress-bar">
-    <div class="blazy-progress bg-@ThemeColor.ToString().ToLower()" style="width: @percentage%">
-        <span>@percentage%</span>
+﻿<Blazy.Components.Internal.BlazyStyleProvider>
+    <div class="blazy-progress-bar">
+        <div class="blazy-progress bg-@ThemeColor.ToString().ToLower()" style="width: @percentage%">
+            <span>@percentage%</span>
+        </div>
     </div>
-</div>
-
+</Blazy.Components.Internal.BlazyStyleProvider>
 @code {
     [Parameter]
     public ThemeColor ThemeColor { get; set; } = ThemeColor.Primary;

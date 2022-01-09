@@ -1,0 +1,29 @@
+﻿.blazy-style-provider {
+    --z-primary: rgb(5,39,103) !important;
+    --z-border-primary: #3e547c !important;
+}
+
+::deep .btn-primary {
+    border-color: var(--z-border-primary)!important;
+}
+
+::deep .bg-primary,
+::deep .btn-primary {
+    background-color: var(--z-primary)!important;
+}
+
+::deep .btn-outline-primary {
+    color: var(--z-primary) !important;
+    border-color: var(--z-primary) !important;
+}
+
+::deep .text-primary {
+    color: var(--z-primary) !important;
+}
+
+::deep .z-shadow {
+    background-color: white;
+    border: solid 1px #eee;
+    border-radius: 5px;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 6px -1px, rgba(0, 0, 0, 0.06) 0px 2px 4px -1px;
+}

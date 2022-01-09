@@ -1,0 +1,9 @@
+﻿.option-template:hover {
+    font-weight: bold;
+}
+
+.d-grid {
+    grid-template-columns: 1fr 1fr;
+    column-gap: 1em;
+    align-items: end;
+}

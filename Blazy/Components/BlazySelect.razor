@@ -1,41 +1,63 @@
 ﻿@typeparam TItem
-@typeparam TId
 
-<select @bind="SelectedOptionId">
-    <option value=""></option>
-    @if(Options != null && OptionTemplate != null)
-    {
-        @foreach(var option in Options)
-        {
-            <option selected="@(GetId(option)!.Equals(GetId(SelectedOption)))">                
-                @OptionTemplate(option)
-            </option>
-        }
-    }
-</select>
+<Blazy.Components.Internal.BlazyStyleProvider>
+
+    <div class="z-select" @onclick="ToggleOpen">    
+        <BlazyInputText Label="@Label" Value="@SelectedOptionText" Readonly="true" />
+        <ul hidden="@(!IsOpen)" class="z-shadow" @onclick:stopPropagation>        
+            @if(Options != null)
+            {
+                @foreach(var option in Options)
+                {
+                    <li @onclick="async () => await Select(option)" class="@(option!.Equals(SelectedOption) ? "active" : "") @(OptionTemplate == null ? "z-li-padding z-hover" : "")">  
+                        @if(OptionTemplate == null)
+                        {
+                            @Display(option)                            
+                        }
+                        else
+                        {
+                            @OptionTemplate(option)                            
+                        }
+                    </li>
+                }
+            }
+        </ul>
+    </div>
+
+</Blazy.Components.Internal.BlazyStyleProvider>
 
 @code {
+
     [Parameter, EditorRequired]
     public IEnumerable<TItem>? Options { get; set; }
 
     [Parameter, EditorRequired]
-    public RenderFragment<TItem>? OptionTemplate { get; set; }
+    public Func<TItem?, string> Display { get; set; } = null!;
 
-    [Parameter, EditorRequired]
-    public Func<TItem?, TId?> GetId { get; set; } = null!;
+    [Parameter]
+    public RenderFragment<TItem>? OptionTemplate { get; set; }
 
     [Parameter]
     public TItem? SelectedOption { get; set; }
 
     [Parameter]
-    public EventCallback<TItem?> SelectedOptionChanged{ get; set; }
+    public EventCallback<TItem?> SelectedOptionChanged { get; set; }
 
-    TId? selectedOptionId = default(TId?);
-    TId? SelectedOptionId { get => selectedOptionId; set { selectedOptionId = value; SelectOptionIdChanged(value); } }
+    [Parameter]
+    public string Label { get; set; } = string.Empty;
 
-    void SelectOptionIdChanged(TId? value)
+    string SelectedOptionText => Display == null ? string.Empty : Display(SelectedOption);
+    bool IsOpen;
+
+    async Task Select(TItem? option)
     {
-        TItem? selectedItem = Options!.SingleOrDefault(x => GetId(x)!.Equals(value));
-        SelectedOptionChanged.InvokeAsync(selectedItem);
+        SelectedOption = option;
+        await SelectedOptionChanged.InvokeAsync(option);
+        IsOpen = false;
+    }
+
+    void ToggleOpen()
+    {
+        IsOpen = !IsOpen;
     }
 }

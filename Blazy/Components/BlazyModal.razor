@@ -1,40 +1,44 @@
 ﻿@if (IsOpen)
 {
-    <div @onclick="Cancel" class="modal show" tabindex="-1" aria-modal="true" role="dialog" style="display: block; background-color: rgba(0,0,0,.4);">
-        <div @onclick:stopPropagation="true" class="modal-dialog modal-dialog-scrollable @maxWidthClass">
-            <div class="modal-content">
-                @if(ModalHeader != null)
-                {
-                    <div class="modal-header align-items-center">
-                        @ModalHeader            
-                        <BlazyButton OnClick="Cancel" Disabled="@working">
-                            <span aria-hidden="true">&times;</span>
-                        </BlazyButton>
-                    </div>   
-                }
-            <div class="modal-body">
-                @if(ModalBody != null)
-                {
-                    @ModalBody                       
-                }
-            </div>
-            <div class="modal-footer">
-                @if(ModalFooter == null)
-                {
-                    <BlazyButton ThemeColor="ThemeColor.Secondary" OnClick="Cancel" Disabled="@working">Close</BlazyButton>
-                    @if(OnSave.HasDelegate)
+    <Blazy.Components.Internal.BlazyStyleProvider>
+
+        <div @onclick="Cancel" class="modal show" tabindex="-1" aria-modal="true" role="dialog" style="display: block; background-color: rgba(0,0,0,.4);">
+            <div @onclick:stopPropagation="true" class="modal-dialog modal-dialog-scrollable @maxWidthClass">
+                <div class="modal-content">
+                    @if(ModalHeader != null)
                     {
-                        <BlazyButton ThemeColor="ThemeColor.Primary" OnClick="Save" Disabled="@(working || !CanSave)">Save changes</BlazyButton>                         
+                        <div class="modal-header align-items-center">
+                            @ModalHeader            
+                            <BlazyButton OnClick="Cancel" Disabled="@working">
+                                <span aria-hidden="true">&times;</span>
+                            </BlazyButton>
+                        </div>   
                     }
-                }
-                else
-                {
-                    @ModalFooter
-                }
+                <div class="modal-body">
+                    @if(ModalBody != null)
+                    {
+                        @ModalBody                       
+                    }
+                </div>
+                <div class="modal-footer">
+                    @if(ModalFooter == null)
+                    {
+                        <BlazyButton ThemeColor="ThemeColor.Secondary" OnClick="Cancel" Disabled="@working">Close</BlazyButton>
+                        @if(OnSave.HasDelegate)
+                        {
+                            <BlazyButton ThemeColor="ThemeColor.Primary" OnClick="Save" Disabled="@(working || !CanSave)">Save changes</BlazyButton>                         
+                        }
+                    }
+                    else
+                    {
+                        @ModalFooter
+                    }
+                </div>
             </div>
-        </div>
-      </div>
-    </div> 
+          </div>
+        </div> 
+
+    </Blazy.Components.Internal.BlazyStyleProvider>
 }
 
 @code {

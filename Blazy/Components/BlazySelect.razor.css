@@ -1,0 +1,42 @@
+﻿.z-select {
+    position: relative;
+    cursor: pointer!important;
+}
+    .z-select::after {
+        content: "";
+        border-color: transparent;
+        border-top-color: #c04;
+        border-width: .5em;
+        border-style: solid;
+        width: .5em;
+        height: .5em;
+        position: absolute;
+        right: 1em;
+        top: 1.5em;
+    }
+
+    .z-select ::deep > div > input,
+    .z-select ::deep > div > label {
+        cursor: pointer;
+    }
+
+    ul {
+        list-style: none;
+        padding: 0;
+        position:absolute;
+        width: 100%;
+    }
+
+    li {
+        cursor: pointer;
+        padding: 0;
+        font-size: .8em;
+    }
+
+    .z-hover:hover {
+        background-color: rgba(0,0,0,.1);
+    }
+
+.z-li-padding {
+    padding: .5em;
+}
