@@ -7,10 +7,10 @@
   "linkerEnabled": true,
   "resources": {
     "assembly": {
-      "Blazy.dll": "sha256-7P2Y6tUnm8jU09THHOn+\/IlzXPCUup9FgUhuHvovpDQ=",
-      "Blazy.SharedPages.dll": "sha256-7pOAi70Z\/8gjkMIXbT5Ix1N9Mfz4At6YH0yhCPxsFQ8=",
-      "Blazy.WASM.dll": "sha256-N7305qToy2eVOPwkzhsqn9k3oaKeFBDbb51bx0FDJe0=",
-      "Microsoft.AspNetCore.Components.dll": "sha256-chum6\/eNThmwmxZ5b0neVmMCK\/xUghM3WfC5goHw4gA=",
+      "Blazy.dll": "sha256-s2BrxsiFXntqfGb\/GL5tZno1joXMEW\/swi1W+Ar0uDI=",
+      "Blazy.SharedPages.dll": "sha256-t4faPHgv1mSVDxP7DYncKl40E882s07REmYRKkjrHKw=",
+      "Blazy.WASM.dll": "sha256-ivUSud+tgFNGpGe4wZ8FyOx9VgKS805A5WW7cvfb1PA=",
+      "Microsoft.AspNetCore.Components.dll": "sha256-AhrliAzFVlOA6qds7Jq7nEbMCgJJXdCuI1RFU6YT9XM=",
       "Microsoft.AspNetCore.Components.Web.dll": "sha256-5SG3xGO0JbXR15YFD2U\/WNcIC5b8gA+x1oW1bM4VzAc=",
       "Microsoft.AspNetCore.Components.WebAssembly.dll": "sha256-2fbR6RpUxEMnL89Bp4BedWtQJQRpzWAu87gh1UjPAWk=",
       "Microsoft.CodeAnalysis.CSharp.dll": "sha256-hj8dYSfaIYQCpNSpC4voCAKwYxgvndK\/Yi0c4VmwnKI=",
