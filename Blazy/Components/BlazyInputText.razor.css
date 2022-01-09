@@ -39,10 +39,16 @@ label.small {
     border-bottom: 2px solid darkblue;
 }
 
-.valid-input label {
+.valid-input label,
+.readonly {
     color: #333;
 }
 
-.valid-input input {
+.valid-input input,
+input[readonly] {
     border-bottom: 1px solid #333;
+}
+
+input[readonly] {
+    color: #666;
 }
