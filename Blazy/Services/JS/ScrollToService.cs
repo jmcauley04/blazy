@@ -11,7 +11,7 @@ namespace Blazy.Services.JS
         public ValueTask ScrollToY(Microsoft.AspNetCore.Components.ElementReference element)
         {
             if (module is not null)            
-                module.InvokeVoidAsync("ScrollToY", element);
+                return module.InvokeVoidAsync("ScrollToY", element);
 
             throw NullModuleException();
         }
