@@ -46,6 +46,13 @@ button[b-bpoxhbm3cp] {
     display: grid;
     place-items: center;
 }
+/* _content/Blazy/Components/BlazyCode.razor.rz.scp.css */
+code[b-aiyrbt6vod] {
+    color: rgb(86, 156, 214);
+    background-color: rgb(30,30,30);
+    padding: .1em .2em;
+    border-radius: 0.3em;
+}
 /* _content/Blazy/Components/BlazyCodeBox.razor.rz.scp.css */
 .wrapper[b-0pojzpnsi2] {
     background-color: rgba(30,30,30);

@@ -7,9 +7,9 @@
   "linkerEnabled": true,
   "resources": {
     "assembly": {
-      "Blazy.dll": "sha256-s2BrxsiFXntqfGb\/GL5tZno1joXMEW\/swi1W+Ar0uDI=",
-      "Blazy.SharedPages.dll": "sha256-t4faPHgv1mSVDxP7DYncKl40E882s07REmYRKkjrHKw=",
-      "Blazy.WASM.dll": "sha256-ivUSud+tgFNGpGe4wZ8FyOx9VgKS805A5WW7cvfb1PA=",
+      "Blazy.dll": "sha256-v8ntQlGIgHHFBk81LhYBmH+0aonggb6GvOAdIxWNWjM=",
+      "Blazy.SharedPages.dll": "sha256-5d0D9rgLdd4nxYdeOI+ejTiv2yZPSYyZlkfpzF5wOhU=",
+      "Blazy.WASM.dll": "sha256-CPhZO8AmuLJnR21EpeTK0kqXHpAi11LfjlG38u6a3do=",
       "Microsoft.AspNetCore.Components.dll": "sha256-AhrliAzFVlOA6qds7Jq7nEbMCgJJXdCuI1RFU6YT9XM=",
       "Microsoft.AspNetCore.Components.Web.dll": "sha256-5SG3xGO0JbXR15YFD2U\/WNcIC5b8gA+x1oW1bM4VzAc=",
       "Microsoft.AspNetCore.Components.WebAssembly.dll": "sha256-2fbR6RpUxEMnL89Bp4BedWtQJQRpzWAu87gh1UjPAWk=",
@@ -18,7 +18,7 @@
       "Microsoft.Extensions.Configuration.Abstractions.dll": "sha256-zhFtW4kE16TdrpPne9I1Cu9o0KYzrS50VE9MVSifJg4=",
       "Microsoft.Extensions.Configuration.dll": "sha256-QPR+1IXNcA28b\/gXw3uZ8aRigHIZUJ1KWSH02kkCg7Q=",
       "Microsoft.Extensions.Configuration.Json.dll": "sha256-fF3xaP+hT6R3GYUctLIY1ixaXQ8mrHzwWHHf2dKfueU=",
-      "Microsoft.Extensions.DependencyInjection.Abstractions.dll": "sha256-5QqTvvnFOrh83a9zO8LmuDd295HKAZ1OOvl96CP5du8=",
+      "Microsoft.Extensions.DependencyInjection.Abstractions.dll": "sha256-UHhwyFobghePEanJVF\/RRshcu2yig8E\/bTCCrn194ks=",
       "Microsoft.Extensions.DependencyInjection.dll": "sha256-pYDNELbgbO60zgvgH5SP8004wkA0+o\/KlQxFXl\/uS2A=",
       "Microsoft.Extensions.Logging.Abstractions.dll": "sha256-9feaXahc\/8sPAnUzokYnaFZrdWisDpTtWPFxCBnq5EE=",
       "Microsoft.Extensions.Logging.dll": "sha256-aj8Tk1BLrOE4y41oBvw\/VGDdmvACVEpGmiEDNrA7Hco=",

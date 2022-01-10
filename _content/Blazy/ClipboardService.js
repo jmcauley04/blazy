@@ -1,8 +1,8 @@
-﻿export function copyText(text) {
+﻿export function CopyToClipboard(text) {
     navigator.clipboard.writeText(text)
         .then(function () {
-            alert("Copied to clipboard!");
+            return null;
         }).catch(function (error) {
-            alert(error);
+            return error;
         });
 }
