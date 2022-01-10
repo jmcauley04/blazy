@@ -9,51 +9,56 @@
     <div class="d-grid d-grid-2-col">
         <BlazyInputText Label="Label" Placeholder="Upper-left text" @bind-Value="@_label" />
         <BlazyInputText Label="Placeholder" Placeholder="Shows on focus" @bind-Value="@_placeholder" />
+        <BlazyInputNumber Label="Min value" @bind-Value="@_min" />
+        <BlazyInputNumber Label="Max value" @bind-Value="@_max" />
     </div>
     <div class="d-flex my-3">        
         <label>
             <input type='checkbox' @bind-value="@_readonly" />
             Readonly
         </label>
-        <label>
-            <input type='checkbox' @bind-value="@_masked" />
-            Masked
-        </label>
     </div>
 </div>
 
 <h5>Example</h5>
-<BlazyInputText
+<BlazyInputNumber 
     Label="@_label" 
     Placeholder="@_placeholder" 
     Readonly="@_readonly"
-    Masked="@_masked"
-    @bind-Value="@_text" />
-
+    Min="@_min"
+    Max="@_max"
+    @bind-Value="@_int" />
+    
 <h5>Code</h5>
 <BlazyCodeBox Code="@_code" />
-<small><code>Readonly</code> and <code>Masked</code> are <BlazyCode>false</BlazyCode> by default</small>
-
+<small>
+    <code>Readonly</code> is <BlazyCode>false</BlazyCode> by default. 
+    <code>Min</code> and <code>Max</code> are <BlazyCode>null</BlazyCode> by default.
+</small>
 
 @code {
     [Parameter]
     public string SectionName { get; set; } = string.Empty;
 
     string _label = "Input Label";
-    string _text = string.Empty;
+    int _int;
+    int _min = 0;
+    int _max = 10;
     string _placeholder = "Input placeholder";
 
     bool _readonly;
     bool _masked;
-        
-    string _code => $@"<BlazyInputText 
+
+    
+    string _code => $@"<BlazyInputNumber 
     Label=""{@_label}"" 
     Placeholder=""{@_placeholder}"" 
     Readonly=""{@_readonly}""
-    Masked=""{@_masked}""
-    @bind-Value=""@_text"" />" + @"
+    Min=""{@_min}""
+    Max=""{@_max}""
+    @bind-Value=""@_value"" />" + @"
 
 @code {    
-    string _text = " + (string.IsNullOrEmpty(_text) ? "string.Empty" : $"\"{_text}\"") + @";
+    int _value;
 }";
 }
