@@ -1,0 +1,54 @@
+﻿::deep .z-input-angular > div {
+    position: relative;
+}
+
+    ::deep .z-input-angular > div > label {
+        position: absolute;
+        color: #c04;
+        top: 1.2em;
+        left: .8em;
+        transition: top .2s ease-out, font-size .2s ease-out;
+    }
+
+    ::deep .z-input-angular > div > input {
+        padding: 1.6em .8em .4em .8em;
+        border: none;
+        border-bottom: 2px solid #c04;
+        background-color: #f1f1f1;
+        width: 100%;
+    }
+
+        ::deep .z-input-angular > div > input:focus {
+            outline: none;
+        }
+
+    ::deep .z-input-angular > div > label.small {
+        top: .6em;
+        font-size: .8em;
+    }
+
+    ::deep .z-input-angular > div.valid-input label.focused {
+        color: darkblue;
+    }
+
+    ::deep .z-input-angular > div.valid-input input:hover {
+        border-bottom: 2px solid #333;
+    }
+
+    ::deep .z-input-angular > div.valid-input input:focus {
+        border-bottom: 2px solid darkblue;
+    }
+
+    ::deep .z-input-angular > div.valid-input label,
+    ::deep .z-input-angular > div > label.readonly {
+        color: #333;
+    }
+
+    ::deep .z-input-angular > div.valid-input input,
+    ::deep .z-input-angular > div > input[readonly] {
+        border-bottom: 1px solid #333;
+    }
+
+    ::deep .z-input-angular > div > input[readonly] {
+        color: #666;
+    }

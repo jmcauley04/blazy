@@ -1,0 +1,22 @@
+﻿@typeparam TItem
+
+<Blazy.Components.Internal.BlazyInputStyleProvider>
+
+    <div class="z-input-angular">
+        <div class="@(isValidated ? "valid-input" : "invalid-input")" @onclick=OnClick>    
+            <label class="@focusClass @smallClass @readonlyClass" for="@guid">@Label</label>
+            <input 
+                id="@guid"
+                value="@Value" 
+                type="@_typeOverride"
+                @oninput="OnChange" 
+                @onfocus="SetFocus"
+                @onfocusout="UnsetFocus"
+                placeholder="@placeholder"
+                readonly="@Readonly"
+                min="@_min"
+                max="@_max" />
+        </div>
+    </div>
+
+</Blazy.Components.Internal.BlazyInputStyleProvider>

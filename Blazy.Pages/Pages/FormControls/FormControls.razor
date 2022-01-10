@@ -8,7 +8,8 @@
 <ul>
     @foreach(var name in new string[]{
         nameof(BlazySelect<string>), 
-        nameof(BlazyInputText) 
+        nameof(BlazyInputText) , 
+        nameof(BlazyInputNumber) 
     })
     {
         <li class="z-component" 
@@ -28,6 +29,11 @@
     <BlazyInputTextSection SectionName="@ComponentDisplay(nameof(BlazyInputText))" />
 </div>
 
+<div class="space"></div>
+
+<div @ref="blazyInputNumberRef">
+    <BlazyInputNumberSection SectionName="@ComponentDisplay(nameof(BlazyInputText))" />
+</div>
 
 <div class="space"></div>
 
@@ -53,12 +59,14 @@
         {
             "BlazySelect" => blazySelectRef,
             "BlazyInputText" => blazyInputTextRef,
+            "BlazyInputNumber" => blazyInputNumberRef,
             _ => throw new Exception("ScrollTo undefined for this element")
         };
 
-        scrollToService.ScrollToY(element);
+        await scrollToService.ScrollToY(element);
     }
 
     ElementReference blazySelectRef;
     ElementReference blazyInputTextRef;
+    ElementReference blazyInputNumberRef;
 }
