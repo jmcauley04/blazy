@@ -19,6 +19,10 @@
     float:right;
 }
 
+.modal-footer ::deep .blazy-style-provider > .btn {
+    width: 100%;
+}
+
     .modal-footer > ::deep * {
         flex: 1 0 150px;
     }
