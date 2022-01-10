@@ -19,7 +19,7 @@
             @foreach(var item in Datasource)
             {
                 <tr>
-                    @if((EditingItem?.Equals(item) ?? false) && EditRowTemplate != null)
+                    @if((EditingItem?.Equals(item) ?? false) && EditRowTemplate != null && !openModal)
                     {
                         @EditRowTemplate(item)
                     }
@@ -42,9 +42,16 @@
                             }
                             else
                             {
-                                <BlazyButton OnClick="() => EditItem(item)">
-                                    <Blazy.Fragments.BlazyIcon Icon="Fragments.BlazyIcon.IconType.oi_pencil" />
-                                </BlazyButton>
+                                <div class="z-small-only">
+                                    <BlazyButton OnClick="() => EditItem(item, true)" >
+                                        <Blazy.Fragments.BlazyIcon Icon="Fragments.BlazyIcon.IconType.oi_pencil" />
+                                    </BlazyButton>
+                                </div>
+                                <div class="z-small">
+                                    <BlazyButton OnClick="() => EditItem(item)">
+                                        <Blazy.Fragments.BlazyIcon Icon="Fragments.BlazyIcon.IconType.oi_pencil" />
+                                    </BlazyButton>
+                                </div>
                             }
                         </td>
                     } 
@@ -53,6 +60,34 @@
         }
     </TableBody>
 </BlazyTable>
+
+<BlazyModal 
+    MaxWidth="BlazyModal.Width.Small"
+    CanSave="true" 
+    OnSave="Save" 
+    OnCancel="Cancel"
+    @bind-IsOpen="openModal">
+    <ModalHeader>
+        <strong>Edit Row</strong>
+    </ModalHeader>
+    <ModalBody>
+        <div class="z-modal-edit">            
+            <div>
+                @DataGridHead
+            </div>
+            <div>
+                @if(EditRowTemplate is not null && EditingItem is not null)
+                {                
+                    @EditRowTemplate(EditingItem)
+                }
+                else if(RowTemplate is not null && SavingItem is not null)
+                {
+                    @RowTemplate(SavingItem)                       
+                }
+            </div>
+        </div>
+    </ModalBody>
+</BlazyModal>
 
 @code {
     [Parameter, EditorRequired]
@@ -70,13 +105,15 @@
     [Parameter]
     public EventCallback<TItem> OnSave { get; set; }
 
-    private TItem? EditingItem;
-    private TItem? SavingItem;
-    private string originalItemJson = string.Empty;
+    TItem? EditingItem;
+    TItem? SavingItem;
+    string originalItemJson = string.Empty;
+    bool openModal;
 
-    void EditItem(TItem item)
+    void EditItem(TItem item, bool useModal = false)
     {
         originalItemJson = System.Text.Json.JsonSerializer.Serialize<TItem>(item);
+        openModal = useModal;
         EditingItem = item;
     }
 
