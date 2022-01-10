@@ -15,7 +15,9 @@
     <div class="wrapper">
         <div class="header-bar">
             <span>@Title</span>
-            <BlazyButton OnClick="CopyTextToClipboard" ThemeColor="ThemeColor.Transparent">Copy</BlazyButton>
+            <BlazyButton OnClick="CopyTextToClipboard" ThemeColor="ThemeColor.Transparent" Disabled="_copied">
+                @(_copied ? "Copied!" : "Copy")
+            </BlazyButton>
         </div>
         @if(!string.IsNullOrEmpty(Code))
         {        
@@ -40,10 +42,11 @@
     public bool ShowLineNumbers { get; set; } = true;
 
     bool _hidden = true;
+    bool _copied = false;
 
     List<TextSpan>? ColoredSpans;
     string _code = string.Empty;
-    IJSObjectReference? module;
+    ClipboardService? clipboardService;
 
     enum SyntaxColor
     {
@@ -80,8 +83,11 @@
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
-        if (module == null)
-            module = await js.Import("clipboard.js");
+        if(clipboardService == null)
+        {
+            clipboardService = new ClipboardService(js);
+            await clipboardService.Import();
+        }
     }
 
     protected override void OnParametersSet()
@@ -94,7 +100,21 @@
 
     private async Task CopyTextToClipboard()
     {
-        await module!.InvokeVoidAsync("copyText", Code);
+        if (clipboardService != null)
+        {            
+            await clipboardService.CopyToClipboard(Code);
+
+            _copied = true;
+
+            var task = new Task(async () =>
+            {
+                await Task.Delay(1500);
+                _copied = false;
+                await InvokeAsync(StateHasChanged);
+            });
+
+            task.Start();
+        }
     }
 
     void ToggleCode()

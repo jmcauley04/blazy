@@ -35,13 +35,16 @@
 @code {
     string ComponentDisplay(string componentName) => $"<{componentName} />";
 
-
+    ScrollToService? scrollToService;
     IJSObjectReference? module;
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
-        if (module == null)
-            module = await js.Import("scrollTo.js");
+        if (scrollToService is null)
+        {
+            scrollToService = new ScrollToService(js);
+            await scrollToService.Import();
+        }
     }
 
     async Task ScrollTo(string componentName)
@@ -53,7 +56,7 @@
             _ => throw new Exception("ScrollTo undefined for this element")
         };
 
-        await module!.InvokeVoidAsync("scrollToY", element);
+        scrollToService.ScrollToY(element);
     }
 
     ElementReference blazySelectRef;
