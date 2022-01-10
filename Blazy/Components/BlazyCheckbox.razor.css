@@ -1,0 +1,35 @@
+﻿label {
+    display: inline-flex;
+    align-items: center;
+    cursor: pointer;
+}
+
+label > span {
+    display: grid;
+    place-items: center;
+    user-select: none;
+}
+
+.z-checkbox-frame {
+    border-bottom: .1em solid #666;
+    height: 1em;
+    width: 1em;
+    display: inline-block;
+    z-index: 1;
+}
+
+.z-text {
+    padding-left: .5em;
+}
+
+.z-checkbox-bg {
+    height: 1em;
+    width: 1em;
+    position:absolute;
+    display: grid;
+}
+
+.z-checkbox-bg > svg {
+    stroke: red;
+    stroke-width: .2em;
+}

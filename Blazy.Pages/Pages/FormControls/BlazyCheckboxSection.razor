@@ -1,0 +1,29 @@
+﻿
+<h4 class="z-component">@SectionName</h4>
+<p>
+    
+</p>
+
+<h5>Example</h5>
+<BlazyCheckbox 
+    Label="Checkbox Label" 
+    @bind-Value="isChecked" />
+
+<h5>Code</h5>
+<BlazyCodeBox Code="@_code" />
+
+@code {
+    [Parameter]
+    public string SectionName { get; set; } = string.Empty;
+
+    bool isChecked;
+
+    string _code = @"<BlazyCheckbox 
+    Label=""Checkbox Label"" 
+    @bind-Value=""isChecked"" />
+
+@code {
+    bool isChecked;
+}";
+    
+}
