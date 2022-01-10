@@ -96,6 +96,41 @@ pre[b-0pojzpnsi2] {
     padding: 1em;
     padding-top: 0;
 }
+/* _content/Blazy/Components/BlazyDataGrid.razor.rz.scp.css */
+.z-small[b-iobu436mbq] {
+    display: none;
+}
+
+.z-modal-edit[b-iobu436mbq] {
+    display: grid;
+    grid-template-columns: auto auto;
+    justify-content: center;
+}
+
+.z-modal-edit > div[b-iobu436mbq] {
+    display: grid;
+    gap: .5em;
+}
+
+.z-modal-edit > div:last-child[b-iobu436mbq] {
+    justify-content: stretch;
+}
+
+    .z-modal-edit > div:first-child[b-iobu436mbq] {
+        justify-content: end;
+        text-align: right;
+        padding-right: 1em;
+    }
+
+@media (min-width: 641px){
+    .z-small[b-iobu436mbq] {
+        display: block;
+    }
+
+    .z-small-only[b-iobu436mbq] {
+        display: none;
+    }
+}
 /* _content/Blazy/Components/BlazyDirectory.razor.rz.scp.css */
 .folder-content[b-fcs6253gzr] {
     margin-left: .4em;
@@ -134,6 +169,10 @@ pre[b-0pojzpnsi2] {
 .modal-footer[b-mc11ulbb4g] {
     display: flex;
     float:right;
+}
+
+.modal-footer[b-mc11ulbb4g]  .blazy-style-provider > .btn {
+    width: 100%;
 }
 
     .modal-footer[b-mc11ulbb4g] >  * {

@@ -7,9 +7,9 @@
   "linkerEnabled": true,
   "resources": {
     "assembly": {
-      "Blazy.dll": "sha256-uwmZLoxOm1Nm2eJCGUS2kQPjQUrGdWVBh4IWVDOW6Ss=",
-      "Blazy.SharedPages.dll": "sha256-vVzonBld8v+gGUsPGig6uhXu9zWaAtyEqobvzERlwhE=",
-      "Blazy.WASM.dll": "sha256-W0bgUgOwbi483uK\/72TrkttdHQ1o+WQWLMimOC0arh8=",
+      "Blazy.dll": "sha256-1ClAi69BXD+cVfmQv57ePqo5S9zV5Jmt4iG\/cwfh2Y0=",
+      "Blazy.SharedPages.dll": "sha256-U1olZNOwsT4bWxoGy0xwZqbN47E40xuZrDy4SQLCt2w=",
+      "Blazy.WASM.dll": "sha256-NDUqqF0HU8yjB4W\/f6bdgUSunMSyJw+IhqgC8rVq7kY=",
       "Microsoft.AspNetCore.Components.dll": "sha256-AhrliAzFVlOA6qds7Jq7nEbMCgJJXdCuI1RFU6YT9XM=",
       "Microsoft.AspNetCore.Components.Web.dll": "sha256-5SG3xGO0JbXR15YFD2U\/WNcIC5b8gA+x1oW1bM4VzAc=",
       "Microsoft.AspNetCore.Components.WebAssembly.dll": "sha256-2fbR6RpUxEMnL89Bp4BedWtQJQRpzWAu87gh1UjPAWk=",
