@@ -46,6 +46,42 @@ button[b-bpoxhbm3cp] {
     display: grid;
     place-items: center;
 }
+/* _content/Blazy/Components/BlazyCheckbox.razor.rz.scp.css */
+label[b-e80rfjvf8o] {
+    display: inline-flex;
+    align-items: center;
+    cursor: pointer;
+}
+
+label > span[b-e80rfjvf8o] {
+    display: grid;
+    place-items: center;
+    user-select: none;
+}
+
+.z-checkbox-frame[b-e80rfjvf8o] {
+    border-bottom: .1em solid #666;
+    height: 1em;
+    width: 1em;
+    display: inline-block;
+    z-index: 1;
+}
+
+.z-text[b-e80rfjvf8o] {
+    padding-left: .5em;
+}
+
+.z-checkbox-bg[b-e80rfjvf8o] {
+    height: 1em;
+    width: 1em;
+    position:absolute;
+    display: grid;
+}
+
+.z-checkbox-bg > svg[b-e80rfjvf8o] {
+    stroke: red;
+    stroke-width: .2em;
+}
 /* _content/Blazy/Components/BlazyCode.razor.rz.scp.css */
 code[b-aiyrbt6vod] {
     color: rgb(86, 156, 214);
