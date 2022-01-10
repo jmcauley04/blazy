@@ -114,61 +114,6 @@ pre[b-0pojzpnsi2] {
 [b-fcs6253gzr] .oi-file {
     color: rgb(146, 231, 255);
 }
-/* _content/Blazy/Components/BlazyInputText.razor.rz.scp.css */
-div[b-38r0xga2ej] {
-    position: relative;
-}
-
-label[b-38r0xga2ej] {
-    position: absolute;
-    color: #c04;
-    top: 1.2em;
-    left: .8em;
-    transition: top .2s ease-out, font-size .2s ease-out;
-}
-
-input[b-38r0xga2ej] {
-    padding: 1.6em .8em .4em .8em;
-    border: none;
-    border-bottom: 2px solid #c04;
-    background-color: #f1f1f1;
-    width: 100%;
-}
-
-input:focus[b-38r0xga2ej] {
-    outline:none;
-}
-
-label.small[b-38r0xga2ej] {
-    top: .6em;
-    font-size: .8em;
-}
-
-.valid-input label.focused[b-38r0xga2ej] {
-    color: darkblue;
-}
-
-.valid-input input:hover[b-38r0xga2ej] {
-    border-bottom: 2px solid #333;
-}
-
-.valid-input input:focus[b-38r0xga2ej] {
-    border-bottom: 2px solid darkblue;
-}
-
-.valid-input label[b-38r0xga2ej],
-.readonly[b-38r0xga2ej] {
-    color: #333;
-}
-
-.valid-input input[b-38r0xga2ej],
-input[readonly][b-38r0xga2ej] {
-    border-bottom: 1px solid #333;
-}
-
-input[readonly][b-38r0xga2ej] {
-    color: #666;
-}
 /* _content/Blazy/Components/BlazyModal.razor.rz.scp.css */
 [b-mc11ulbb4g] .btn-close {
     background-color: transparent;
@@ -593,6 +538,61 @@ tbody[b-k6wgan9gug]  tr:nth-child(2n+1){
         top: 70%;
     }
 }
+/* _content/Blazy/Components/Internal/BlazyInputStyleProvider.razor.rz.scp.css */
+[b-ktk11rejhi] .z-input-angular > div {
+    position: relative;
+}
+
+    [b-ktk11rejhi] .z-input-angular > div > label {
+        position: absolute;
+        color: #c04;
+        top: 1.2em;
+        left: .8em;
+        transition: top .2s ease-out, font-size .2s ease-out;
+    }
+
+    [b-ktk11rejhi] .z-input-angular > div > input {
+        padding: 1.6em .8em .4em .8em;
+        border: none;
+        border-bottom: 2px solid #c04;
+        background-color: #f1f1f1;
+        width: 100%;
+    }
+
+        [b-ktk11rejhi] .z-input-angular > div > input:focus {
+            outline: none;
+        }
+
+    [b-ktk11rejhi] .z-input-angular > div > label.small {
+        top: .6em;
+        font-size: .8em;
+    }
+
+    [b-ktk11rejhi] .z-input-angular > div.valid-input label.focused {
+        color: darkblue;
+    }
+
+    [b-ktk11rejhi] .z-input-angular > div.valid-input input:hover {
+        border-bottom: 2px solid #333;
+    }
+
+    [b-ktk11rejhi] .z-input-angular > div.valid-input input:focus {
+        border-bottom: 2px solid darkblue;
+    }
+
+    [b-ktk11rejhi] .z-input-angular > div.valid-input label,
+    [b-ktk11rejhi] .z-input-angular > div > label.readonly {
+        color: #333;
+    }
+
+    [b-ktk11rejhi] .z-input-angular > div.valid-input input,
+    [b-ktk11rejhi] .z-input-angular > div > input[readonly] {
+        border-bottom: 1px solid #333;
+    }
+
+    [b-ktk11rejhi] .z-input-angular > div > input[readonly] {
+        color: #666;
+    }
 /* _content/Blazy/Components/Internal/BlazyStyleProvider.razor.rz.scp.css */
 .blazy-style-provider[b-hgulcptq1g] {
     --z-primary: rgb(5,39,103) !important;
@@ -623,6 +623,7 @@ tbody[b-k6wgan9gug]  tr:nth-child(2n+1){
     border-radius: 5px;
     box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 6px -1px, rgba(0, 0, 0, 0.06) 0px 2px 4px -1px;
 }
+
 /* _content/Blazy/Effects/BlazyHeightTransition.razor.rz.scp.css */
 .collapsable[b-pwf4fm5tu4] {
     transition: max-height ease .5s;
