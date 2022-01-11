@@ -1,5 +1,6 @@
 .wrapper {
-    border-width: 2px!important;
+    border-width: 2px;
+    border-style: solid;
     border-radius: .5em;
     width: 100%;
     padding: 1em;
@@ -25,17 +26,17 @@ p {
 }
 
 .Freezing {
-    border-color: lightblue!important;
+    border-color: lightblue;
 }
 
 .Bracing {
-    border-color: lightgoldenrodyellow!important;
+    border-color: lightgoldenrodyellow;
 }
 
 .Balmy {
-    border-color: greenyellow!important;
+    border-color: greenyellow;
 }
 
 .Chilly {
-    border-color: blue!important;
+    border-color: blue;
 }

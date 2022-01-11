@@ -6,25 +6,23 @@
 <h3>BlazyItemsList</h3>
 
 <h5>Example</h5>
-<Blazy.Components.Internal.BlazyStyleProvider>
-    <BlazyItemsList 
-        TItem="DataGrid.WeatherForecast"
-        Datasource="forecasts"
-        Context="item">
-        <ItemTemplate>
-            <div class="wrapper z-shadow @item.Summary">
-                <div class="header">@item.Date</div>
-                <dl>
-                    <dt>Temp (F)</dt>
-                    <dd>@item.TemperatureF</dd>
-                    <dt>Temp (C)</dt>
-                    <dd>@item.TemperatureC</dd>
-                </dl>
-                <p>@item.Summary</p>
-            </div>
-        </ItemTemplate>
-    </BlazyItemsList>
-</Blazy.Components.Internal.BlazyStyleProvider>
+<BlazyItemsList 
+    TItem="DataGrid.WeatherForecast"
+    Datasource="forecasts"
+    Context="item">
+    <ItemTemplate>
+        <div class="wrapper @item.Summary">
+            <div class="header">@item.Date</div>
+            <dl>
+                <dt>Temp (F)</dt>
+                <dd>@item.TemperatureF</dd>
+                <dt>Temp (C)</dt>
+                <dd>@item.TemperatureC</dd>
+            </dl>
+            <p>@item.Summary</p>
+        </div>
+    </ItemTemplate>
+</BlazyItemsList>
 
 <h5>Code</h5>
 <BlazyCodeBox Code="@_code" />
@@ -43,25 +41,23 @@
         await Task.Delay(1000);
     }
 
-    string _code = @"<Blazy.Components.Internal.BlazyStyleProvider>
-    <BlazyItemsList 
-        TItem=""DataGrid.WeatherForecast""
-        Datasource=""forecasts""
-        Context=""item"">
-        <ItemTemplate>
-            <div class=""wrapper z-shadow @item.Summary"">
-                <div class=""header"">@item.Date</div>
-                <dl>
-                    <dt>Temp (F)</dt>
-                    <dd>@item.TemperatureF</dd>
-                    <dt>Temp (C)</dt>
-                    <dd>@item.TemperatureC</dd>
-                </dl>
-                <p>@item.Summary</p>
-            </div>
-        </ItemTemplate>
-    </BlazyItemsList>
-</Blazy.Components.Internal.BlazyStyleProvider>
+    string _code = @"<BlazyItemsList 
+    TItem=""DataGrid.WeatherForecast""
+    Datasource=""forecasts""
+    Context=""item"">
+    <ItemTemplate>
+        <div class=""wrapper @item.Summary"">
+            <div class=""header"">@item.Date</div>
+            <dl>
+                <dt>Temp (F)</dt>
+                <dd>@item.TemperatureF</dd>
+                <dt>Temp (C)</dt>
+                <dd>@item.TemperatureC</dd>
+            </dl>
+            <p>@item.Summary</p>
+        </div>
+    </ItemTemplate>
+</BlazyItemsList>
 
 @code{
     private DataGrid.WeatherForecast[]? forecasts;
