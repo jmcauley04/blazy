@@ -1,0 +1,18 @@
+@typeparam TItem
+
+<ul>
+    @if(Datasource is not null && ItemTemplate is not null){
+        @foreach (var item in Datasource)
+        {            
+            <li>@ItemTemplate(item)</li>
+        }
+    }
+</ul>
+
+@code {    
+    [Parameter, EditorRequired]
+    public IEnumerable<TItem>? Datasource { get; set; }
+
+    [Parameter, EditorRequired]
+    public RenderFragment<TItem>? ItemTemplate { get; set; }
+}

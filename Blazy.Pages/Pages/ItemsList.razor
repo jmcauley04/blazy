@@ -1,0 +1,74 @@
+@page "/items-list"
+@using System.Net.Http.Json
+@inject HttpClient Http
+
+<PageTitle>Items List</PageTitle>
+<h3>BlazyItemsList</h3>
+
+<h5>Example</h5>
+<Blazy.Components.Internal.BlazyStyleProvider>
+    <BlazyItemsList 
+        TItem="DataGrid.WeatherForecast"
+        Datasource="forecasts"
+        Context="item">
+        <ItemTemplate>
+            <div class="wrapper z-shadow @item.Summary">
+                <div class="header">@item.Date</div>
+                <dl>
+                    <dt>Temp (F)</dt>
+                    <dd>@item.TemperatureF</dd>
+                    <dt>Temp (C)</dt>
+                    <dd>@item.TemperatureC</dd>
+                </dl>
+                <p>@item.Summary</p>
+            </div>
+        </ItemTemplate>
+    </BlazyItemsList>
+</Blazy.Components.Internal.BlazyStyleProvider>
+
+<h5>Code</h5>
+<BlazyCodeBox Code="@_code" />
+
+@code{
+    private DataGrid.WeatherForecast[]? forecasts;
+
+    protected override async Task OnInitializedAsync()
+    {
+        forecasts = await Http.GetFromJsonAsync<DataGrid.WeatherForecast[]>("sample-data/weather.json");
+    }
+
+    async Task SaveForecast(DataGrid.WeatherForecast forecast)
+    {
+        //do a database thing here
+        await Task.Delay(1000);
+    }
+
+    string _code = @"<Blazy.Components.Internal.BlazyStyleProvider>
+    <BlazyItemsList 
+        TItem=""DataGrid.WeatherForecast""
+        Datasource=""forecasts""
+        Context=""item"">
+        <ItemTemplate>
+            <div class=""wrapper z-shadow @item.Summary"">
+                <div class=""header"">@item.Date</div>
+                <dl>
+                    <dt>Temp (F)</dt>
+                    <dd>@item.TemperatureF</dd>
+                    <dt>Temp (C)</dt>
+                    <dd>@item.TemperatureC</dd>
+                </dl>
+                <p>@item.Summary</p>
+            </div>
+        </ItemTemplate>
+    </BlazyItemsList>
+</Blazy.Components.Internal.BlazyStyleProvider>
+
+@code{
+    private DataGrid.WeatherForecast[]? forecasts;
+
+    protected override async Task OnInitializedAsync()
+    {
+        forecasts = await Http.GetFromJsonAsync<DataGrid.WeatherForecast[]>(""sample-data/weather.json"");
+    }
+}";
+}
