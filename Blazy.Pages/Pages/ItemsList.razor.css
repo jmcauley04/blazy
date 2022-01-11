@@ -1,0 +1,41 @@
+.wrapper {
+    border-width: 2px!important;
+    border-radius: .5em;
+    width: 100%;
+    padding: 1em;
+}
+
+.header {
+    text-align: right;
+    font-weight: bold;
+}
+
+dl {
+    display:flex;
+    gap: 1em;
+}
+
+dd {
+    padding-right: 4em;
+}
+
+p {
+    display: grid;
+    place-items: center;
+}
+
+.Freezing {
+    border-color: lightblue!important;
+}
+
+.Bracing {
+    border-color: lightgoldenrodyellow!important;
+}
+
+.Balmy {
+    border-color: greenyellow!important;
+}
+
+.Chilly {
+    border-color: blue!important;
+}
