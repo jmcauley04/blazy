@@ -185,6 +185,30 @@ pre[b-0pojzpnsi2] {
 [b-fcs6253gzr] .oi-file {
     color: rgb(146, 231, 255);
 }
+/* _content/Blazy/Components/BlazyItemsList.razor.rz.scp.css */
+ul[b-1av0ns6iuk] {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    flex-wrap: wrap;
+    gap: .5em;
+    display:flex;
+    justify-content: stretch;
+}
+
+li[b-1av0ns6iuk] {
+    flex-grow: 1;
+}
+@media (min-width: 641px){
+    ul[b-1av0ns6iuk] {        
+        justify-content: start;
+    }
+
+    li[b-1av0ns6iuk] {
+        flex-grow: 0;
+    }
+    
+}
 /* _content/Blazy/Components/BlazyModal.razor.rz.scp.css */
 [b-mc11ulbb4g] .btn-close {
     background-color: transparent;

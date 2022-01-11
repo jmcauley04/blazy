@@ -122,6 +122,48 @@ a[b-ewqtzchpos] {
 .blazy-directory[b-ewqtzchpos] {
     padding-left: 1em;
 }
+/* _content/Blazy.SharedPages/Pages/ItemsList.razor.rz.scp.css */
+.wrapper[b-lhnu13jkuh] {
+    border-width: 2px!important;
+    border-radius: .5em;
+    width: 100%;
+    padding: 1em;
+}
+
+.header[b-lhnu13jkuh] {
+    text-align: right;
+    font-weight: bold;
+}
+
+dl[b-lhnu13jkuh] {
+    display:flex;
+    gap: 1em;
+}
+
+dd[b-lhnu13jkuh] {
+    padding-right: 4em;
+}
+
+p[b-lhnu13jkuh] {
+    display: grid;
+    place-items: center;
+}
+
+.Freezing[b-lhnu13jkuh] {
+    border-color: lightblue!important;
+}
+
+.Bracing[b-lhnu13jkuh] {
+    border-color: lightgoldenrodyellow!important;
+}
+
+.Balmy[b-lhnu13jkuh] {
+    border-color: greenyellow!important;
+}
+
+.Chilly[b-lhnu13jkuh] {
+    border-color: blue!important;
+}
 /* _content/Blazy.SharedPages/Pages/ProgressBars.razor.rz.scp.css */
 /* _content/Blazy.SharedPages/Pages/Toast.razor.rz.scp.css */
 .ex-toast[b-e73gzb5h8f] {
