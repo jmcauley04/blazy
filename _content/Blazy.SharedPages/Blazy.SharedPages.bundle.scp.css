@@ -124,7 +124,8 @@ a[b-ewqtzchpos] {
 }
 /* _content/Blazy.SharedPages/Pages/ItemsList.razor.rz.scp.css */
 .wrapper[b-lhnu13jkuh] {
-    border-width: 2px!important;
+    border-width: 2px;
+    border-style: solid;
     border-radius: .5em;
     width: 100%;
     padding: 1em;
@@ -150,19 +151,19 @@ p[b-lhnu13jkuh] {
 }
 
 .Freezing[b-lhnu13jkuh] {
-    border-color: lightblue!important;
+    border-color: lightblue;
 }
 
 .Bracing[b-lhnu13jkuh] {
-    border-color: lightgoldenrodyellow!important;
+    border-color: lightgoldenrodyellow;
 }
 
 .Balmy[b-lhnu13jkuh] {
-    border-color: greenyellow!important;
+    border-color: greenyellow;
 }
 
 .Chilly[b-lhnu13jkuh] {
-    border-color: blue!important;
+    border-color: blue;
 }
 /* _content/Blazy.SharedPages/Pages/ProgressBars.razor.rz.scp.css */
 /* _content/Blazy.SharedPages/Pages/Toast.razor.rz.scp.css */
