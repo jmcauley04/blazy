@@ -31,14 +31,11 @@ void ShowToast()
 <h5>Try it</h5>
 
 <div class="try-it-form">
-    <BlazySelect TItem="Blazy.Enums.ThemeColor" TId="Blazy.Enums.ThemeColor"
+    <BlazySelect TItem="Blazy.Enums.ThemeColor"
+        Display="GetDisplayText"
         Label="Theme"
         Options="Enum.GetValues<Blazy.Enums.ThemeColor>()"
-        GetId="(item) => item"
         @bind-SelectedOption="selection">
-        <OptionTemplate>
-            @context.ToString() 
-        </OptionTemplate>
     </BlazySelect>
 
     <label>
@@ -61,7 +58,9 @@ void ShowToast()
 </div>
 @code {
     [CascadingParameter]
-    public BlazyToast? BlazyToast { get; set; }  
+    public BlazyToast? BlazyToast { get; set; }
+
+    string GetDisplayText(Blazy.Enums.ThemeColor color) => color.ToString();
 
     string toastTitle = "Title Message";
     string toastMessage = string.Empty;
@@ -72,10 +71,5 @@ void ShowToast()
     {
         if (BlazyToast != null)
             BlazyToast.AddMessage(toastMessage, toastTitle, themeColor: selection, delayMilliseconds: toastDelay * 1000);
-    }
-
-    void SetSelection(ChangeEventArgs args)
-    {
-        selection = (Blazy.Enums.ThemeColor)args.Value!;
     }
 }
