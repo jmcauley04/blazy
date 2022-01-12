@@ -22,7 +22,7 @@
                 <div class="blazy-dot bg-@firstMessage.ThemeColor.ToString().ToLower()"></div>
                 <strong class="me-auto">@firstMessage.Title</strong>
                 <small>@firstMessage.Subtitle</small>
-                <button type="button" class="btn-close" @onclick="() => Close(firstMessage)"></button>
+                <button type="button" class="btn-close" @onclick="async () => await Close(firstMessage)"></button>
             </div>
             <div class="toast-body">
                 @firstMessage.Text
@@ -42,24 +42,22 @@
 
     private Message? firstMessage => Messages.FirstOrDefault();
 
-    void Close(Message message)
+    async Task Close(Message message)
     {
         if (message != null && Messages.Contains(message))
         {
-            if (message.cts != null)
-            {
+            if (message.cts != null)            
                 message.cts.Cancel();
-                message.cts.Dispose();
-            }
+            
             Messages.Remove(message);
 
-            StartMessage();
+            await StartMessage();
 
-            StateHasChanged();
+            await InvokeAsync(StateHasChanged);
         }
     }
 
-    void StartMessage()
+    async Task StartMessage()
     {        
         if (firstMessage != null)
         {
@@ -72,11 +70,11 @@
                                         secondsAgo > 1 ? $"{secondsAgo} seconds ago" : 
                                         "just now";
             }
-            StateHasChanged();
+            await InvokeAsync(StateHasChanged);
         }
     }
 
-    public void AddMessage(string text, 
+    public async Task AddMessage(string text, 
         string title,
         string subtitle = "", 
         int delayMilliseconds = 3000,
@@ -99,14 +97,14 @@
                 {
                     await Task.Delay(delayMilliseconds);
                     if (!message.cts.Token.IsCancellationRequested && Messages.Contains(message))                    
-                        Close(message);                    
+                        await Close(message);                    
                 });
         }
 
         if (firstMessage != message)
-            StateHasChanged();
+            await InvokeAsync(StateHasChanged);
         else
-            StartMessage();      
+            await StartMessage();      
     }
 
     class Message

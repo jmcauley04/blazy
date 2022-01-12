@@ -21,8 +21,7 @@ public BlazyToast? BlazyToast { get; set; }
 
 void ShowToast()
 {
-    if (BlazyToast != null)
-        BlazyToast.AddMessage(toastMessage, toastTitle, themeColor: selection);
+    BlazyToast?.AddMessage(toastMessage, toastTitle, themeColor: selection);
 }";
 }
 <div class="my-5"></div>
@@ -67,9 +66,8 @@ void ShowToast()
     int toastDelay = 3;
     Blazy.Enums.ThemeColor selection = Blazy.Enums.ThemeColor.Secondary;
 
-    void ShowToast()
+    async Task ShowToast()
     {
-        if (BlazyToast != null)
-            BlazyToast.AddMessage(toastMessage, toastTitle, themeColor: selection, delayMilliseconds: toastDelay * 1000);
+        await BlazyToast?.AddMessage(toastMessage, toastTitle, themeColor: selection, delayMilliseconds: toastDelay * 1000);
     }
 }
