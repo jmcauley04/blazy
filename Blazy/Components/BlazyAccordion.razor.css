@@ -1,0 +1,23 @@
+﻿
+.accordion-header {
+    cursor: pointer;
+    position: relative;
+    border-bottom: 1px solid #eee;
+    padding: .5em;
+}
+
+.accordion-chevron {
+    position: absolute;
+    top: .5em;
+    right: .5em;
+    font-size: .8em;
+    transition: transform ease .3s;
+}
+
+.accordion-header.collapsed .accordion-chevron {
+    transform: rotate(-180deg);
+}
+
+.accordion-title {
+    font-size: .7em;
+}

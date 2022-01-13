@@ -4,10 +4,14 @@
 @{
     string _code = @"<BlazyAccordion>
     <BlazyAccordionItem Title=""Accordion Item 1"">
-        <p>This is an accordion item</p>
+        <Body>            
+            <p>This is an accordion item</p>
+        </Body>
     </BlazyAccordionItem>
     <BlazyAccordionItem Title=""Accordion Item 2"">
-        <p>This is an accordion item</p>
+        <Body>            
+            <p>This is an accordion item</p>
+        </Body>
     </BlazyAccordionItem>
 </BlazyAccordion>";
 }
@@ -18,13 +22,37 @@
 
 <BlazyAccordion>
     <BlazyAccordionItem Title="Accordion Item 1">
-        <p>This is an accordion item</p>
+        <Body>            
+            <p>This is an accordion item</p>
+        </Body>
     </BlazyAccordionItem>
-    <BlazyAccordionItem Title="Accordion Item 2">
-        <p>This is an accordion item</p>
+    <BlazyAccordionItem Title="Accordion Item 2">        
+        <Body>            
+            <p>This is an accordion item</p>
+        </Body>
     </BlazyAccordionItem>
 </BlazyAccordion>
 
+
+
+<BlazyAccordion>
+    <BlazyAccordionItem>
+        <Head>
+            <h3 style="margin:0;">This is the head</h3>
+        </Head>
+        <Body>            
+            <p>This is an accordion item</p>
+        </Body>
+    </BlazyAccordionItem>
+    <BlazyAccordionItem>        
+        <Head>
+            <h3 style="margin:0;">This is the head</h3>
+        </Head>
+        <Body>            
+            <p>This is an accordion item</p>
+        </Body>
+    </BlazyAccordionItem>
+</BlazyAccordion>
 @code {
 
 }

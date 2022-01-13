@@ -1,6 +1,6 @@
 @typeparam TItem
 
-<ul>
+<ul style="@ulStyle">
     @if(Datasource is not null && ItemTemplate is not null){
         @foreach (var item in Datasource)
         {            
@@ -9,10 +9,15 @@
     }
 </ul>
 
-@code {    
+@code {
     [Parameter, EditorRequired]
     public IEnumerable<TItem>? Datasource { get; set; }
 
     [Parameter, EditorRequired]
     public RenderFragment<TItem>? ItemTemplate { get; set; }
+
+    [Parameter, EditorRequired]
+    public string? ItemWidth { get; set; }
+
+    string ulStyle => string.IsNullOrEmpty(ItemWidth) ? "" : $"grid-template-columns: repeat(auto-fill, {ItemWidth});";
 }

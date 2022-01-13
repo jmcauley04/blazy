@@ -4,9 +4,16 @@
     
 </p>
 
+<div class="options-window">    
+    <h6>Options</h6>
+    <div class="d-grid d-grid-2-col">
+        <BlazyInputText Label="Label" Placeholder="Upper-left text" @bind-Value="@_label" />
+    </div>
+</div>
+
 <h5>Example</h5>
 <BlazyCheckbox 
-    Label="Checkbox Label" 
+    Label="@_label" 
     @bind-Value="isChecked" />
 
 <h5>Code</h5>
@@ -16,11 +23,12 @@
     [Parameter]
     public string SectionName { get; set; } = string.Empty;
 
+    string _label = "Checkbox Label";
     bool isChecked;
 
-    string _code = @"<BlazyCheckbox 
-    Label=""Checkbox Label"" 
-    @bind-Value=""isChecked"" />
+    string _code => $@"<BlazyCheckbox 
+    Label=""{_label}"" 
+    @bind-Value=""isChecked"" />" + @"
 
 @code {
     bool isChecked;

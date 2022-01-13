@@ -5,10 +5,13 @@
     public BlazyAccordion? BlazyAccordion { get; set; }
 
     [Parameter]
+    public RenderFragment? Head { get; set; }
+
+    [Parameter]
     public string Title { get; set; } = string.Empty;
 
     [Parameter, EditorRequired]
-    public RenderFragment? ChildContent { get; set; }
+    public RenderFragment? Body { get; set; }
 
     public bool IsOpen { get; set; } = false;
 

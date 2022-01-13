@@ -1,4 +1,5 @@
-﻿
+﻿@using System.Timers
+
 @if (CascadeValue)
 {
     <CascadingValue Value="this">
@@ -22,7 +23,7 @@
                 <div class="blazy-dot bg-@firstMessage.ThemeColor.ToString().ToLower()"></div>
                 <strong class="me-auto">@firstMessage.Title</strong>
                 <small>@firstMessage.Subtitle</small>
-                <button type="button" class="btn-close" @onclick="async () => await Close(firstMessage)"></button>
+                <button type="button" class="btn-close" @onclick="async () => CloseMessage(firstMessage)"></button>
             </div>
             <div class="toast-body">
                 @firstMessage.Text
@@ -42,26 +43,11 @@
 
     private Message? firstMessage => Messages.FirstOrDefault();
 
-    async Task Close(Message message)
-    {
-        if (message != null && Messages.Contains(message))
-        {
-            if (message.cts != null)            
-                message.cts.Cancel();
-            
-            Messages.Remove(message);
-
-            await StartMessage();
-
-            await InvokeAsync(StateHasChanged);
-        }
-    }
-
-    async Task StartMessage()
+    void StartMessage()
     {        
         if (firstMessage != null)
         {
-            firstMessage!.CloseTask?.Start();
+            firstMessage.StartTimer();
             if (string.IsNullOrEmpty(firstMessage.Subtitle))
             {
                 var secondsAgo = (int)(DateTime.Now - firstMessage.CreatedAt).TotalSeconds;
@@ -70,13 +56,13 @@
                                         secondsAgo > 1 ? $"{secondsAgo} seconds ago" : 
                                         "just now";
             }
-            await InvokeAsync(StateHasChanged);
         }
+        InvokeAsync(StateHasChanged);
     }
 
-    public async Task AddMessage(string text, 
+    public void AddMessage(string text, 
         string title,
-        string subtitle = "", 
+        string subtitle = "",                        
         int delayMilliseconds = 3000,
         ThemeColor themeColor = ThemeColor.Primary)
     {
@@ -85,36 +71,85 @@
                 Text = text,
                 Title = title,
                 Subtitle = subtitle,
-                ThemeColor = themeColor
+                ThemeColor = themeColor,    
+                DelayMilliseconds = delayMilliseconds
             };
+
+        message.Elapsed += TimedRemove;
+
+        if (delayMilliseconds > 0)
+            message.InitializeTimer();
 
         Messages.Add(message);
 
-        if (delayMilliseconds > 0)
-        {
-            message.cts = new CancellationTokenSource();
-            message.CloseTask = new Task(async () =>
-                {
-                    await Task.Delay(delayMilliseconds);
-                    if (!message.cts.Token.IsCancellationRequested && Messages.Contains(message))                    
-                        await Close(message);                    
-                });
-        }
-
         if (firstMessage != message)
-            await InvokeAsync(StateHasChanged);
+            InvokeAsync(StateHasChanged);
         else
-            await StartMessage();      
+            StartMessage();      
     }
 
-    class Message
+    void CloseMessage(Message message)
+    {
+        message.Elapsed -= TimedRemove;
+        Messages.Remove(message);
+        message.Dispose();
+
+        if (firstMessage is null)
+            InvokeAsync(StateHasChanged);
+        else
+            StartMessage();
+    }
+
+    private void TimedRemove(object? sender, ElapsedEventArgs e)
+    {
+        if (sender == null)
+            return;
+
+        CloseMessage((Message)sender);
+    }
+
+    class Message : IDisposable
     {
         public string Title = string.Empty;
         public string Subtitle = string.Empty;
         public string Text = string.Empty;
+        public int DelayMilliseconds;
         public DateTime CreatedAt = DateTime.Now;
         public ThemeColor ThemeColor = ThemeColor.Primary;
-        public CancellationTokenSource? cts;
-        public Task? CloseTask;
+
+        public event ElapsedEventHandler? Elapsed;
+        private System.Timers.Timer? timer;
+
+        private void TimerOver(object? sender, ElapsedEventArgs e)
+        {
+            Elapsed?.Invoke(sender, e);
+        }
+
+        public void InitializeTimer()
+        {
+            timer = new Timer(DelayMilliseconds)
+                {
+                    AutoReset = false,
+                    Enabled = true,
+                };
+
+            StopTimer();
+            timer.Elapsed += (s, e) => Elapsed?.Invoke(this, e);
+        }
+
+        public void StopTimer()
+        {
+            timer?.Stop();
+        }
+
+        public void StartTimer()
+        {
+            timer?.Start();
+        }
+
+        public void Dispose()
+        {
+            timer?.Dispose();
+        }
     }
 }

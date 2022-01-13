@@ -66,8 +66,8 @@ void ShowToast()
     int toastDelay = 3;
     Blazy.Enums.ThemeColor selection = Blazy.Enums.ThemeColor.Secondary;
 
-    async Task ShowToast()
+    void ShowToast()
     {
-        await BlazyToast?.AddMessage(toastMessage, toastTitle, themeColor: selection, delayMilliseconds: toastDelay * 1000);
+        BlazyToast?.AddMessage(toastMessage, toastTitle, themeColor: selection, delayMilliseconds: toastDelay * 1000);
     }
 }
