@@ -1,3 +1,27 @@
+/* _content/Blazy/Components/BlazyAccordion.razor.rz.scp.css */
+
+.accordion-header[b-iwov8dssxv] {
+    cursor: pointer;
+    position: relative;
+    border-bottom: 1px solid #eee;
+    padding: .5em;
+}
+
+.accordion-chevron[b-iwov8dssxv] {
+    position: absolute;
+    top: .5em;
+    right: .5em;
+    font-size: .8em;
+    transition: transform ease .3s;
+}
+
+.accordion-header.collapsed .accordion-chevron[b-iwov8dssxv] {
+    transform: rotate(-180deg);
+}
+
+.accordion-title[b-iwov8dssxv] {
+    font-size: .7em;
+}
 /* _content/Blazy/Components/BlazyAlert.razor.rz.scp.css */
 .close[b-ywh5ac23sp] {
     text-decoration: none;
@@ -190,24 +214,9 @@ ul[b-1av0ns6iuk] {
     list-style: none;
     margin: 0;
     padding: 0;
-    flex-wrap: wrap;
     gap: .5em;
-    display:flex;
-    justify-content: stretch;
-}
-
-li[b-1av0ns6iuk] {
-    flex-grow: 1;
-}
-@media (min-width: 641px){
-    ul[b-1av0ns6iuk] {        
-        justify-content: start;
-    }
-
-    li[b-1av0ns6iuk] {
-        flex-grow: 0;
-    }
-    
+    display: grid;
+    justify-content: center;
 }
 /* _content/Blazy/Components/BlazyModal.razor.rz.scp.css */
 [b-mc11ulbb4g] .btn-close {
