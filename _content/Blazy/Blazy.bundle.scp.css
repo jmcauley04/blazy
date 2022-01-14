@@ -70,6 +70,110 @@ button[b-bpoxhbm3cp] {
     display: grid;
     place-items: center;
 }
+/* _content/Blazy/Components/BlazyChart.razor.rz.scp.css */
+
+
+.graph .labels.x-labels[b-bo86q0zsbx] {
+    text-anchor: middle;
+}
+
+.graph .labels.y-labels[b-bo86q0zsbx] {
+    text-anchor: end;
+}
+
+
+.graph[b-bo86q0zsbx] {
+    width:100%;
+}
+
+    .graph .grid[b-bo86q0zsbx] {
+        stroke: #ccc;
+        stroke-dasharray: 0;
+        stroke-width: 1;
+    }
+
+.labels[b-bo86q0zsbx] {
+    font-size: 12px;
+    color: #eee;
+}
+
+.label-title[b-bo86q0zsbx] {
+    font-weight: bold;
+    text-transform: uppercase;
+    font-size: 12px;
+    fill: black;
+}
+
+.data-line[b-bo86q0zsbx] {
+    stroke: red;
+    stroke-width: 1;
+    fill: transparent;
+}
+
+.data-points[b-bo86q0zsbx] {
+    fill: #E66;
+    stroke-width: 0;
+}
+
+
+figcaption[b-bo86q0zsbx] {
+    font-size: 22px;
+    font-weight: bold;
+    text-align: center;
+}
+.data-points > circle[b-bo86q0zsbx] {
+    position: relative;
+    display: inline-block;
+    text-align: center;
+    width: 200px;
+    margin: 0 -75px;
+}
+
+
+.point[b-bo86q0zsbx] {
+    cursor: pointer;
+    position: relative;
+}
+
+.point > text[b-bo86q0zsbx] {
+    display: none;
+    font-size: .7em;
+    position: absolute;
+    bottom: 0;
+    font-family: monospace;
+    background-image: green;
+}
+
+    .point > text.visible[b-bo86q0zsbx],
+    .point.selected > text[b-bo86q0zsbx] {
+        display: block;
+    }
+    .point:hover[b-bo86q0zsbx] {
+        z-index: 10;
+    }
+
+    .point:hover > circle[b-bo86q0zsbx],
+    .point:hover > text[b-bo86q0zsbx] {
+        fill: #F33;
+    }
+.point:hover > text[b-bo86q0zsbx] {
+    display: block;
+}
+
+    .point.selected > circle[b-bo86q0zsbx],
+    .point.selected > text[b-bo86q0zsbx] {
+        fill: red;
+    }
+
+.selected-data text:first-child[b-bo86q0zsbx]{
+    fill: #333;
+}
+
+.selected-data text:last-child[b-bo86q0zsbx] {
+    fill: red;
+    font-weight: bold;
+    font-family: monospace;
+}
 /* _content/Blazy/Components/BlazyCheckbox.razor.rz.scp.css */
 label[b-e80rfjvf8o] {
     display: inline-flex;
