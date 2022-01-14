@@ -1,0 +1,183 @@
+﻿<figure>
+    <figcaption>
+        @ChartTitle
+    </figcaption>
+    <svg class="graph"
+        xmlns="http://www.w3.org/2000/svg" 
+        xmlns:xlink="http://www.w3.org/1999/xlink" 
+        viewBox="@minViewX @minViewY @maxViewX @maxViewY">    
+        
+      <defs>
+        <filter x="-0.1" y="-0.1" width="1.2" height="1.2" id="solid">
+          <feFlood flood-color="rgba(0,0,0,.9)" result="bg" />
+          <feMerge>
+            <feMergeNode in="bg"/>
+            <feMergeNode in="SourceGraphic"/>
+          </feMerge>
+        </filter>
+      </defs>
+
+        <g class="grid x-grid">
+            <line x1="@MinViewX" x2="@MinViewX" y1="@SvgY(MinViewY)" y2="@SvgY(MaxViewY)"></line>
+        </g>
+        <g class="grid y-grid">
+            <line x1="@MinViewX" x2="@MaxViewX" y1="@SvgY(MinViewY)" y2="@SvgY(MinViewY)"></line>
+        </g>
+
+        <g class="data-line">        
+            @if(Data != null)
+            {
+                <path d="@GetPath()">
+                </path>                         
+            }      
+        </g>    
+
+        <g class="data-points">
+            @if (Data != null)
+            {
+                @foreach (var point in Data.Where(x => x != SelectedPoint))
+                {
+                    var tooltipLabel = $"{point.X}, {point.Y}";
+                    <g class="point @(point == SelectedPoint ? "selected" : string.Empty)" @onclick="() => SelectPoint(point)">
+                        <circle cx="@point.X" cy="@SvgY(point.Y)" r="4"></circle>
+                        <text filter="url(#solid)" class="@(ShowLabels ? "visible" : string.Empty)" x="@(point.X - labelOffsetX(tooltipLabel))" y="@SvgY(point.Y + 15)">@tooltipLabel</text>
+                    </g>
+                }
+                if(SelectedPoint is not null)
+                {                    
+                    var tooltipLabel = $"{SelectedPoint.X}, {SelectedPoint.Y}";
+                    <g class="point selected" @onclick="() => SelectPoint(SelectedPoint)">
+                        <circle cx="@SelectedPoint.X" cy="@SvgY(SelectedPoint.Y)" r="4"></circle>
+                        <text filter="url(#solid)" class="visible" x="@(SelectedPoint.X - labelOffsetX(tooltipLabel))" y="@SvgY(SelectedPoint.Y + 15)">@tooltipLabel</text>
+                    </g>
+                }
+            }
+        </g>
+
+        <g class="labels x-labels">
+            @foreach(var xLabel in XAxisLabels())
+            {
+                @xLabel
+            }
+            @XAxisTitleMarkup
+        </g>
+        <g class="labels y-labels">
+            @foreach(var yLabel in YAxisLabels())
+            {
+                @yLabel
+            }
+            @YAxisTitleMarkup
+        </g>
+
+        <g class="selected-data" transform="translate(@MinViewX, @xAxisTitleY)">
+            <text>Selection: </text>
+            <text x="80">@(SelectedPoint is not null ? $"({SelectedPoint.X}, {SelectedPoint.Y})" : "")</text>
+        </g>
+
+    </svg>
+</figure>
+
+@code {
+    [Parameter]
+    public string ChartTitle { get; set; } = string.Empty;
+
+    [Parameter]
+    public string XAxisTitle { get; set; } = string.Empty;
+
+    [Parameter]
+    public string YAxisTitle{ get; set; } = string.Empty;
+
+    [Parameter]
+    public DataPoint? SelectedPoint { get; set; }
+
+    [Parameter]
+    public EventCallback<DataPoint> SelectedPointChanged { get; set; }
+
+    [Parameter, EditorRequired]
+    public IEnumerable<DataPoint>? Data { get; set; }
+
+    [Parameter, EditorRequired]
+    public int MaxViewX { get; set; }
+
+    [Parameter, EditorRequired]
+    public int MaxViewY { get; set; }
+
+    [Parameter]
+    public int MinViewX { get; set; }
+
+    [Parameter]
+    public int MinViewY { get; set; }
+
+    [Parameter]
+    public bool ShowLabels { get; set; }
+
+    IEnumerable<MarkupString> XAxisLabels()
+    {
+        int x = MinViewX;
+
+        while (x <= MaxViewX)
+        {
+            yield return new MarkupString($@"<text x=""{x}"" y=""{xLabelOffset}"" style=""{axisLabelStyle}"">{x}</text>");
+            x += 50;
+        }
+    }
+
+    IEnumerable<MarkupString> YAxisLabels()
+    {
+        int y = MinViewY;
+
+        while (y <= MaxViewY)
+        {
+            yield return new MarkupString($@"<text x=""{yLabelOffset}"" y=""calc({SvgY(y - 4)}"" style=""{axisLabelStyle}"">{y}</text>");
+            y += 50;
+        }
+    }
+
+    MarkupString XAxisTitleMarkup => new MarkupString($@"<text x=""{xAxisTitleX}"" y=""{xAxisTitleY}"">{XAxisTitle}</text>");
+    MarkupString YAxisTitleMarkup => new MarkupString($@"<text x=""{yAxisTitleX}"" y=""{yAxisTitleY}"" style=""{yAxisTitleStyle}"">{YAxisTitle}</text>");
+    string yAxisTitleStyle => $"transform-origin: {yAxisTitleX}px {yAxisTitleY}px; transform: rotate(-90deg);";
+    string axisLabelStyle => "font-size: .8em; fill: #666;";
+    decimal labelOffsetX(string label) => label.Length * 2.7m;
+
+    private const int _viewOffset = 60;
+    int maxViewX => MaxViewX + 2 * _viewOffset; 
+    int maxViewY => MaxViewY + 2 * _viewOffset;
+    int minViewX => MinViewX - _viewOffset;
+    int minViewY => MinViewY - _viewOffset;
+    int viewWidth => MaxViewX - MinViewX;
+    int viewHeight => MaxViewY - MinViewY;
+    int SvgY(int y) => MaxViewY - y;
+    int fontSizePx => 10;
+
+    int yLabelOffset => -5;
+    int xLabelOffset => SvgY(-15);
+
+    int yAxisTitleX => yLabelOffset - 35;
+    int yAxisTitleY => (MaxViewY + MinViewY) / 2;
+
+    int xAxisTitleX => (MaxViewX + MinViewX) / 2;
+    int xAxisTitleY => xLabelOffset + 35;
+
+    public class DataPoint
+    {
+        public DataPoint(int x, int y)
+        {
+            X = x;
+            Y = y;
+        }
+        public int X { get; set; }
+        public int Y { get; set; }
+    }
+
+
+    string GetPath() => Data?.Select(x => $"{x.X} {SvgY(x.Y)}")
+                            .Aggregate($"M{Data.First().X} {SvgY(Data.First().Y)} L", (a, b) => $"{a} {b}") ?? string.Empty;
+
+    void SelectPoint(DataPoint point)
+    {
+        if (SelectedPointChanged.HasDelegate)
+            SelectedPointChanged.InvokeAsync(point);
+        else
+            SelectedPoint = point;
+    }
+}

@@ -1,0 +1,103 @@
+﻿
+
+.graph .labels.x-labels {
+    text-anchor: middle;
+}
+
+.graph .labels.y-labels {
+    text-anchor: end;
+}
+
+
+.graph {
+    width:100%;
+}
+
+    .graph .grid {
+        stroke: #ccc;
+        stroke-dasharray: 0;
+        stroke-width: 1;
+    }
+
+.labels {
+    font-size: 12px;
+    color: #eee;
+}
+
+.label-title {
+    font-weight: bold;
+    text-transform: uppercase;
+    font-size: 12px;
+    fill: black;
+}
+
+.data-line {
+    stroke: red;
+    stroke-width: 1;
+    fill: transparent;
+}
+
+.data-points {
+    fill: #E66;
+    stroke-width: 0;
+}
+
+
+figcaption {
+    font-size: 22px;
+    font-weight: bold;
+    text-align: center;
+}
+.data-points > circle {
+    position: relative;
+    display: inline-block;
+    text-align: center;
+    width: 200px;
+    margin: 0 -75px;
+}
+
+
+.point {
+    cursor: pointer;
+    position: relative;
+}
+
+.point > text {
+    display: none;
+    font-size: .7em;
+    position: absolute;
+    bottom: 0;
+    font-family: monospace;
+    background-image: green;
+}
+
+    .point > text.visible,
+    .point.selected > text {
+        display: block;
+    }
+    .point:hover {
+        z-index: 10;
+    }
+
+    .point:hover > circle,
+    .point:hover > text {
+        fill: #F33;
+    }
+.point:hover > text {
+    display: block;
+}
+
+    .point.selected > circle,
+    .point.selected > text {
+        fill: red;
+    }
+
+.selected-data text:first-child{
+    fill: #333;
+}
+
+.selected-data text:last-child {
+    fill: red;
+    font-weight: bold;
+    font-family: monospace;
+}
