@@ -1,4 +1,6 @@
-﻿
+﻿.graph {
+    user-select: none;
+}
 
 .graph .labels.x-labels {
     text-anchor: middle;
@@ -72,7 +74,8 @@ figcaption {
 }
 
     .point > text.visible,
-    .point.selected > text {
+    .point.selected > text,
+    .point.nearest > text {
         display: block;
     }
     .point:hover {
@@ -91,13 +94,18 @@ figcaption {
     .point.selected > text {
         fill: red;
     }
+    .point.nearest > circle,
+    .point.nearest > text {
+        fill: #fcc;
+    }
 
-.selected-data text:first-child{
+.selected-data text {
     fill: #333;
+    font-family: monospace;
 }
 
-.selected-data text:last-child {
-    fill: red;
-    font-weight: bold;
+.select-box text {
+    fill: #666;
+    font-size: .7em;
     font-family: monospace;
 }

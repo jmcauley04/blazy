@@ -7,6 +7,8 @@ namespace Blazy.Services.JS
         public static IServiceCollection AddJS(this IServiceCollection services)
         {
             services.AddTransient<ClipboardService>();
+            services.AddTransient<ScrollToService>();
+            services.AddTransient<ElementCoordinatesService>();
             return services;
         }
     }    
