@@ -71,7 +71,9 @@ button[b-bpoxhbm3cp] {
     place-items: center;
 }
 /* _content/Blazy/Components/BlazyChart.razor.rz.scp.css */
-
+.graph[b-bo86q0zsbx] {
+    user-select: none;
+}
 
 .graph .labels.x-labels[b-bo86q0zsbx] {
     text-anchor: middle;
@@ -145,7 +147,8 @@ figcaption[b-bo86q0zsbx] {
 }
 
     .point > text.visible[b-bo86q0zsbx],
-    .point.selected > text[b-bo86q0zsbx] {
+    .point.selected > text[b-bo86q0zsbx],
+    .point.nearest > text[b-bo86q0zsbx] {
         display: block;
     }
     .point:hover[b-bo86q0zsbx] {
@@ -164,14 +167,19 @@ figcaption[b-bo86q0zsbx] {
     .point.selected > text[b-bo86q0zsbx] {
         fill: red;
     }
+    .point.nearest > circle[b-bo86q0zsbx],
+    .point.nearest > text[b-bo86q0zsbx] {
+        fill: #fcc;
+    }
 
-.selected-data text:first-child[b-bo86q0zsbx]{
+.selected-data text[b-bo86q0zsbx] {
     fill: #333;
+    font-family: monospace;
 }
 
-.selected-data text:last-child[b-bo86q0zsbx] {
-    fill: red;
-    font-weight: bold;
+.select-box text[b-bo86q0zsbx] {
+    fill: #666;
+    font-size: .7em;
     font-family: monospace;
 }
 /* _content/Blazy/Components/BlazyCheckbox.razor.rz.scp.css */
