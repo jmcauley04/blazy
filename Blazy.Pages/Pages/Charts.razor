@@ -7,8 +7,10 @@
     @if(Data != null)
     {
         <BlazyChart Data="Data"
-            MaxViewX="@maxViewX"
-            MaxViewY="@maxViewY"
+            MaxViewX="@zoomViewX"
+            MaxViewY="@zoomViewY"
+            MinViewX="0"
+            MinViewY="0"
             ChartTitle="Blazy Line Chart Title"
             XAxisTitle="x-axis title"
             YAxisTitle="y-axis title"
@@ -23,10 +25,12 @@
 @code {
     BlazyChart.DataPoint[]? Data;
 
+    int zoomViewX = 400;
+    int zoomViewY = 150;
     const int maxViewX = 800;
     const int maxViewY = 300;
-    const int minViewX = 0;
-    const int minViewY = 0;
+    const int minViewX = -50;
+    const int minViewY = -30;
     bool ShowValueLabels;
 
     protected override void OnInitialized()

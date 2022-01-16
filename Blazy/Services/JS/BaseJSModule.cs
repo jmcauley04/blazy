@@ -19,6 +19,8 @@ namespace Blazy.Services.JS
             referenceCount++;
         }
 
+        public bool IsImported => module != null;
+
         protected IJSRuntime JSRuntime { get; set; }
         protected IJSObjectReference? module;
 

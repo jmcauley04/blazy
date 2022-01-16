@@ -13,6 +13,15 @@
         @onmousemove="MouseMove"
         @onmousedown="MouseDown"
         @onmouseup="MouseUp">    
+        <mask id="chartSpace">
+            <!-- Everything under a white pixel will be visible -->
+            <rect x="@viewboxStart.X" y="@viewboxStart.Y" width="@(viewboxEnd.X - viewboxStart.X)" height="@(viewboxEnd.Y - viewboxStart.Y)" fill="black" />
+
+            <!-- Everything under a black pixel will be invisible -->
+            <rect x="0" y="0" width="@(MaxViewX - MinViewX)" height="@(MaxViewY - MinViewY)" fill="white" />
+        </mask>
+        
+        <rect x="0" y="0" width="@(MaxViewX - MinViewX)" height="@(MaxViewY - MinViewY)" fill="#eee" />
         
         <defs>
         <filter x="-0.1" y="-0.1" width="1.2" height="1.2" id="solid">
@@ -25,10 +34,10 @@
         </defs>
 
         <g class="grid x-grid">
-            <line x1="@MinViewX" x2="@MinViewX" y1="@AsCoordinate(MinViewY)" y2="@AsCoordinate(MaxViewY)"></line>
+            <line x1="0" x2="0" y1="@AsCoordinate(0)" y2="@AsCoordinate(MaxViewY)"></line>
         </g>
         <g class="grid y-grid">
-            <line x1="@MinViewX" x2="@MaxViewX" y1="@AsCoordinate(MinViewY)" y2="@AsCoordinate(MinViewY)"></line>
+            <line x1="0" x2="@MaxViewX" y1="@AsCoordinate(0)" y2="@AsCoordinate(0)"></line>
         </g>
         
         @*cursor tooltip*@
@@ -76,7 +85,7 @@
             </g>
         }
 
-        <g class="data-line">        
+        <g class="data-line" mask="url(#chartSpace)">        
             @if(Data != null)
             {
                 <path d="@GetPath()">
@@ -89,14 +98,17 @@
             {
                 @foreach (var point in Data)
                 {
-                    <g class="point @(point == SelectedPoint ? "selected" : point == nearestPoint ? "nearest" : string.Empty)">
-                        <circle cx="@point.X" cy="@AsCoordinate(point.Y)" r="4"></circle>
+                    <g class="point @(point == SelectedPoint ? "selected" : point == nearestPoint ? "nearest" : string.Empty)" mask="url(#chartSpace)">
+                        <circle cx="@point.X" cy="@AsCoordinate(point.Y)" r=".5%"></circle>
                     </g>
                 }
                 @if (ShowLabels)
                 {                    
                     @foreach (var point in Data.Where(x => x != SelectedPoint))
                     {
+                        if (!OnChart(point.X, point.Y))
+                            continue;
+
                         var tooltipLabel = $"{point.X}, {point.Y}";
                         <g class="point @(point == SelectedPoint ? "selected" : point == nearestPoint ? "nearest" : string.Empty)">
                             <text filter="url(#solid)" class="@(ShowLabels ? "visible" : string.Empty)" x="@(point.X - labelOffsetX(tooltipLabel))" y="@AsCoordinate(point.Y + 15)">@tooltipLabel</text>
@@ -125,17 +137,17 @@
             {
                 @xLabel
             }
-            @XAxisTitleMarkup
+            <text class="axis-title" x="@xAxisTitle.X" y="@xAxisTitle.Y">@XAxisTitle</text>
         </g>
         <g class="labels y-labels">
             @foreach(var yLabel in YAxisLabels())
             {
                 @yLabel
             }
-            @YAxisTitleMarkup
+            <text class="axis-title" x="@yAxisTitle.X" y="@yAxisTitle.Y" style="@yAxisTitleStyle">@YAxisTitle</text>            
         </g>
 
-        <g class="selected-data" transform="translate(@MinViewX, @xAxisTitle.Y)">
+        <g class="selected-data" transform="translate(0, @xAxisTitle.Y)">
             <text>@(SelectedPoint is null ? nearestPoint is null ? "" : $"Nearest Point: ({nearestPoint.X}, {nearestPoint.Y})" : $"Selected Point: ({SelectedPoint.X}, {SelectedPoint.Y})")</text>
         </g>
 
@@ -166,6 +178,12 @@
 
     [Parameter, EditorRequired]
     public int MaxViewY { get; set; }
+
+    //[Parameter, EditorRequired]
+    //public int MinViewX { get; set; }
+
+    //[Parameter, EditorRequired]
+    //public int MinViewY { get; set; }
 
     [Parameter]
     public int MinViewX { get; set; }
@@ -220,6 +238,7 @@
     DataPoint? mouseOverLocation;
     DataPoint? mouseDownLocation;
     DataPoint? mouseUpLocation;
+    (DataPoint, DataPoint) ZoomState => (new DataPoint(MinViewX, MinViewY), new DataPoint(MaxViewX, MaxViewY));
 
     protected override void OnInitialized()
     {
@@ -284,10 +303,13 @@
             SelectedPoint = point;
     }
 
-    bool OnChart(int x, int y) => x >= 0 && y >= 0 && x <= MaxViewX && y <= MaxViewY;
+    bool OnChart(int x, int y) => x >= MinViewX && y >= MinViewY && x <= MaxViewX && y <= MaxViewY;
 
     async Task MouseMove(MouseEventArgs e)
     {
+        if (coordinatesService is null || !coordinatesService.IsImported)
+            return;
+
         var result = await coordinatesService.GetCoordinates(SvgRef);
 
         var xScaleFactor = result.Width / (viewboxEnd.X - viewboxStart.X - _viewOffset);
@@ -320,8 +342,11 @@
 
             foreach(var pt in Data)
             {
+                if (!OnChart(pt.X, pt.Y))
+                    continue;
+
                 var distToPointSqrd = Math.Pow(pt.X - mouseOverLocation.X, 2) + Math.Pow(pt.Y - AsCoordinate(mouseOverLocation.Y), 2);
-                Console.WriteLine($"before selectred point {distToPointSqrd}, ({pt.X}, {pt.Y})");
+
                 if (distToPointSqrd < nearestDistance)
                 {
                     nearestPt = pt;
@@ -330,8 +355,6 @@
             }
 
             nearestPoint = nearestPt;
-            if (nearestPoint is not null)
-                Console.WriteLine($"before selectred point {nearestPoint.X}, {nearestPoint.Y}");
         }
     }
 
