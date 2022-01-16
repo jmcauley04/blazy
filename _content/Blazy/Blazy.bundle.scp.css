@@ -95,14 +95,14 @@ button[b-bpoxhbm3cp] {
     }
 
 .labels[b-bo86q0zsbx] {
-    font-size: 12px;
+    font-size: .6em;
     color: #eee;
 }
 
 .label-title[b-bo86q0zsbx] {
     font-weight: bold;
     text-transform: uppercase;
-    font-size: 12px;
+    font-size: .6em;
     fill: black;
 }
 
@@ -119,17 +119,11 @@ button[b-bpoxhbm3cp] {
 
 
 figcaption[b-bo86q0zsbx] {
-    font-size: 22px;
+    font-size: 1.1em;
     font-weight: bold;
     text-align: center;
 }
-.data-points > circle[b-bo86q0zsbx] {
-    position: relative;
-    display: inline-block;
-    text-align: center;
-    width: 200px;
-    margin: 0 -75px;
-}
+
 
 
 .point[b-bo86q0zsbx] {
@@ -174,6 +168,7 @@ figcaption[b-bo86q0zsbx] {
 
 .selected-data text[b-bo86q0zsbx] {
     fill: #333;
+    font-size: .5em;
     font-family: monospace;
 }
 
@@ -181,6 +176,10 @@ figcaption[b-bo86q0zsbx] {
     fill: #666;
     font-size: .7em;
     font-family: monospace;
+}
+
+.axis-title[b-bo86q0zsbx] {
+    font-size: .7em;
 }
 /* _content/Blazy/Components/BlazyCheckbox.razor.rz.scp.css */
 label[b-e80rfjvf8o] {
