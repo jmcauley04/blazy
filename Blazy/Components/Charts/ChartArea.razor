@@ -1,0 +1,119 @@
+﻿@using Blazy.Utility
+
+<svg class="svg">
+    <defs>
+        <filter x="-0.1" y="-0.1" width="1.2" height="1.2" id="solid">
+            <feFlood flood-color="rgba(0,0,0,.9)" result="bg" />
+            <feMerge>
+                <feMergeNode in="bg"/>
+                <feMergeNode in="SourceGraphic"/>
+            </feMerge>
+        </filter>
+    </defs>
+    <g transform="translate(@Padding @Padding)">    
+    
+        <mask id="chartSpace">
+            <!-- Everything under a black pixel will be invisible -->
+            <rect x="@(-Padding)" y="@(-Padding)"  width="100%" height="100%" fill="black" />
+            
+            <!-- Everything under a white pixel will be visible -->
+            <rect x="0" y="0" width="@Size.X" height="@Size.Y" fill="white" />
+        </mask>
+        <rect width="@Size.X" height="@Size.Y" fill="#eee"></rect>    
+
+       
+        @if(Data != null)
+        {
+            <g class="chart-data" mask="url(#chartSpace)" fill="none" stroke="red">     
+                <path d="@GetPath()">
+                </path>         
+
+                @foreach (var point in Data)
+                {
+                    <g stroke="black" stroke-width="@(point == SelectedPoint ? "1" : "0")" class="point" mask="url(#chartSpace)">
+                        <circle cx="@(point.X - Start.X)" cy="@(Size.Y - point.Y + Start.Y)" r="@(point == NearestPoint ? ".8%" : ".5%")" fill="red"></circle>
+                    </g>
+                }
+
+            </g>    
+            @if (ShowLabels)
+            {
+                @foreach (var point in Data.Where(x => x != SelectedPoint && x != NearestPoint))
+                {
+                    if (!OnChart(point)){
+                        continue;
+                    }
+                    <DataLabel Point="point" />
+                }                
+            }
+
+            @if(SelectedPoint is not null)
+            {            
+                <DataLabel Point="SelectedPoint" />
+            }
+
+            @if(NearestPoint is not null && NearestPoint != SelectedPoint)
+            {            
+                <DataLabel Point="NearestPoint" />
+            }
+        }               
+    </g>
+</svg>
+@code {
+    [CascadingParameter(Name = "Start")]
+    public Point Start { get; set; }
+
+    [CascadingParameter(Name = "Size")]
+    public Point Size { get; set; }
+
+    [CascadingParameter(Name = "Padding")]
+    public int Padding { get; set; }
+
+    [Parameter]
+    public IEnumerable<Point>? Data { get; set; }    
+
+    [Parameter]
+    public Point? SelectedPoint { get; set; }
+
+    [Parameter]
+    public EventCallback<Point> SelectedPointChanged { get; set; }
+
+    [Parameter]
+    public bool ShowLabels { get; set; }
+
+    [Parameter]
+    public Point? MouseoverChartCoord { get => mouseoverChartCoord; set { mouseoverChartCoord = value; OnMouseMove(); } }
+
+    [Parameter]
+    public Point? MousedownChartCoord { get; set; }
+
+    [Parameter]
+    public int Precision { get; set; }
+
+    [Parameter, EditorRequired]
+    public Func<Point, Point> GetNearestPoint { get; set; }
+
+    [Parameter, EditorRequired]
+    public Func<Point, bool> OnChart { get; set; }
+
+    private Point? mouseoverChartCoord;
+
+    public Point? NearestPoint { get; set; }
+
+    string GetPath() => Data?.Select(x => $"{x.X - Start.X} {Size.Y - x.Y + Start.Y}")
+                            .Aggregate($"M{Data.First().X - Start.X} {Size.Y - Data.First().Y + Start.Y} L", (a, b) => $"{a} {b}") ?? string.Empty;
+
+    public void OnMouseMove()
+    {
+        SetProximityPoint();
+    }
+
+    void SetProximityPoint()
+    {
+        if (MouseoverChartCoord is null)
+            NearestPoint = null;
+
+        else      
+            NearestPoint = GetNearestPoint(MouseoverChartCoord);        
+    }
+}

@@ -1,5 +1,6 @@
 ﻿.graph {
     user-select: none;
+    aspect-ratio: 10/5;
 }
 
 .graph .labels.x-labels {
@@ -21,29 +22,11 @@
         stroke-width: 1;
     }
 
-.labels {
+::deep .chart-coord {
     font-size: .6em;
-    color: #eee;
+    text-anchor: middle;
+    fill: #666;
 }
-
-.label-title {
-    font-weight: bold;
-    text-transform: uppercase;
-    font-size: .6em;
-    fill: black;
-}
-
-.data-line {
-    stroke: red;
-    stroke-width: 1;
-    fill: transparent;
-}
-
-.data-points {
-    fill: #E66;
-    stroke-width: 0;
-}
-
 
 figcaption {
     font-size: 1.1em;
@@ -51,60 +34,15 @@ figcaption {
     text-align: center;
 }
 
-
-
-.point {
-    cursor: pointer;
-    position: relative;
-}
-
-.point > text {
-    display: none;
-    font-size: .7em;
+.reset-button {
     position: absolute;
-    bottom: 0;
-    font-family: monospace;
-    background-image: green;
+    top: 2em;
+    right: .5em;
+    color: #666;
+    cursor: pointer;
 }
 
-    .point > text.visible,
-    .point.selected > text,
-    .point.nearest > text {
-        display: block;
-    }
-    .point:hover {
-        z-index: 10;
-    }
-
-    .point:hover > circle,
-    .point:hover > text {
-        fill: #F33;
-    }
-.point:hover > text {
-    display: block;
+.reset-button:hover {
+    color: black;
 }
 
-    .point.selected > circle,
-    .point.selected > text {
-        fill: red;
-    }
-    .point.nearest > circle,
-    .point.nearest > text {
-        fill: #fcc;
-    }
-
-.selected-data text {
-    fill: #333;
-    font-size: .5em;
-    font-family: monospace;
-}
-
-.select-box text {
-    fill: #666;
-    font-size: .7em;
-    font-family: monospace;
-}
-
-.axis-title {
-    font-size: .7em;
-}

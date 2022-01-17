@@ -1,0 +1,82 @@
+﻿@using Blazy.Utility
+<g transform="translate(@Padding @Padding)">
+
+    @if(MouseOverCoordinate is not null)
+    {  
+        <g>
+            <text 
+                class="chart-coord"
+                x="@(AsXCoordinate(MouseOverCoordinate.X))" 
+                y="@(AsYCoordinate(MouseOverCoordinate.Y + 5))">
+                @MouseOverCoordinate</text>
+        </g>
+        @if(MouseDownCoordinate is not null)
+        {
+            <g>                            
+                <text 
+                    class="chart-coord"
+                    x="@AsXCoordinate(MouseDownCoordinate.X)" 
+                    y="@AsYCoordinate(MouseDownCoordinate.Y + 5)">
+                    @MouseDownCoordinate</text>
+            </g>
+                    
+            <line stroke="#ccc" 
+                x1="@AsXCoordinate(MouseDownCoordinate.X)" 
+                x2="@AsXCoordinate(MouseOverCoordinate.X)" 
+                y1="@AsYCoordinate(MouseOverCoordinate.Y)" 
+                y2="@AsYCoordinate(MouseOverCoordinate.Y)"></line>
+            <line stroke="#ccc" 
+                x1="@AsXCoordinate(MouseOverCoordinate.X)" 
+                x2="@AsXCoordinate(MouseOverCoordinate.X)" 
+                y1="@AsYCoordinate(MouseDownCoordinate.Y)" 
+                y2="@AsYCoordinate(MouseOverCoordinate.Y)"></line>        
+            <line stroke="#ccc" 
+                x1="@AsXCoordinate(MouseDownCoordinate.X)" 
+                x2="@AsXCoordinate(MouseOverCoordinate.X)" 
+                y1="@AsYCoordinate(MouseDownCoordinate.Y)" 
+                y2="@AsYCoordinate(MouseDownCoordinate.Y)"></line>
+            <line stroke="#ccc" 
+                x1="@AsXCoordinate(MouseDownCoordinate.X)" 
+                x2="@AsXCoordinate(MouseDownCoordinate.X)" 
+                y1="@AsYCoordinate(MouseDownCoordinate.Y)" 
+                y2="@AsYCoordinate(MouseOverCoordinate.Y)"></line>       
+        }
+        else
+        {                    
+            <line stroke="#ccc" 
+                x1="0" 
+                x2="@AsXCoordinate(MouseOverCoordinate.X)" 
+                y1="@AsYCoordinate(MouseOverCoordinate.Y)" 
+                y2="@AsYCoordinate(MouseOverCoordinate.Y)"></line>
+            <line stroke="#ccc" 
+                x1="@AsXCoordinate(MouseOverCoordinate.X)" 
+                x2="@AsXCoordinate(MouseOverCoordinate.X)" 
+                y1="@Size.Y" 
+                y2="@AsYCoordinate(MouseOverCoordinate.Y)"></line>
+        }           
+    }
+</g>        
+
+@code {
+    [CascadingParameter(Name = "Start")]
+    public Point Start { get; set; }
+
+    [CascadingParameter(Name = "Size")]
+    public Point Size { get; set; }
+
+    [CascadingParameter(Name = "Padding")]
+    public int Padding { get; set; }
+
+    [CascadingParameter(Name = "AsXCoordinate")]
+    public Func<double, double> AsXCoordinate { get; set; }
+
+    [CascadingParameter(Name = "AsYCoordinate")]
+    public Func<double, double> AsYCoordinate { get; set; }
+
+    [Parameter]
+    public Point? MouseOverCoordinate { get; set; }
+
+    [Parameter]
+    public Point? MouseDownCoordinate { get; set; }
+
+}

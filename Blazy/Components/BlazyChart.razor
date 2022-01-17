@@ -1,159 +1,55 @@
 ﻿@using Microsoft.JSInterop
+@using Blazy.Utility
+@using System.Runtime.CompilerServices
+@using Blazy.Components.Charts
 
-<figure>
+<CascadingValue Value="@View.P1" Name="Start">
+<CascadingValue Value="@View.P2" Name="Size">
+<CascadingValue Value="@Padding" Name="Padding">
+<CascadingValue Value="@AsXCoordinate" Name="AsXCoordinate">
+<CascadingValue Value="@AsYCoordinate" Name="AsYCoordinate">
+
+<figure class="position-relative">
     <figcaption>
         @ChartTitle
     </figcaption>
     <svg class="graph"
         xmlns="http://www.w3.org/2000/svg" 
         xmlns:xlink="http://www.w3.org/1999/xlink" 
-        viewBox="@viewboxStart.X @viewboxStart.Y @viewboxEnd.X @viewboxEnd.Y"
+        viewBox="0 0 @(View.P2.X + 2 * Padding) @(View.P2.Y + 2 * Padding)"
         style="border: 1px solid black;"
         @ref="SvgRef"
         @onmousemove="MouseMove"
         @onmousedown="MouseDown"
         @onmouseup="MouseUp">    
-        <mask id="chartSpace">
-            <!-- Everything under a white pixel will be visible -->
-            <rect x="@viewboxStart.X" y="@viewboxStart.Y" width="@(viewboxEnd.X - viewboxStart.X)" height="@(viewboxEnd.Y - viewboxStart.Y)" fill="black" />
+                
+        <Axes
+            XAxisTitle="@XAxisTitle" 
+            YAxisTitle="@YAxisTitle" />
 
-            <!-- Everything under a black pixel will be invisible -->
-            <rect x="0" y="0" width="@(MaxViewX - MinViewX)" height="@(MaxViewY - MinViewY)" fill="white" />
-        </mask>
+        <ChartArea 
+            Data="@Data"
+            MouseoverChartCoord="@mouseOverChartCoord"
+            SelectedPoint="@SelectedPoint"
+            ShowLabels="@ShowLabels"
+            GetNearestPoint="@GetNearestPoint"
+            OnChart="@OnChart" />      
         
-        <rect x="0" y="0" width="@(MaxViewX - MinViewX)" height="@(MaxViewY - MinViewY)" fill="#eee" />
-        
-        <defs>
-        <filter x="-0.1" y="-0.1" width="1.2" height="1.2" id="solid">
-            <feFlood flood-color="rgba(0,0,0,.9)" result="bg" />
-            <feMerge>
-                <feMergeNode in="bg"/>
-                <feMergeNode in="SourceGraphic"/>
-            </feMerge>
-        </filter>
-        </defs>
-
-        <g class="grid x-grid">
-            <line x1="0" x2="0" y1="@AsCoordinate(0)" y2="@AsCoordinate(MaxViewY)"></line>
-        </g>
-        <g class="grid y-grid">
-            <line x1="0" x2="@MaxViewX" y1="@AsCoordinate(0)" y2="@AsCoordinate(0)"></line>
-        </g>
-        
-        @*cursor tooltip*@
-        @if(mouseOverLocation is not null)
-        {  
-            var tooltipLabel = $"{mouseOverLocation.X}, {AsCoordinate(mouseOverLocation.Y)}";
-            <g class="point">
-                <text class="visible" x="@((int)mouseOverLocation.X - labelOffsetX(tooltipLabel))" y="@((int)mouseOverLocation.Y + 30)">@tooltipLabel</text>
-            </g>
-            <g class="select-box">        
-                @if(mouseDownLocation is null)
-                {         
-                    <line x1="0" x2="@mouseOverLocation.X" y1="@mouseOverLocation.Y" y2="@mouseOverLocation.Y"></line>
-                    <line x1="@mouseOverLocation.X" x2="@mouseOverLocation.X" y1="@AsCoordinate(0)" y2="@mouseOverLocation.Y"></line>
-                }
-                else if(mouseUpLocation is null)
-                {          
-                    if(mouseDownLocation.X != mouseOverLocation.X && mouseDownLocation.Y != mouseOverLocation.Y)
-                    {
-                        var mouseDownTooltip = $"{mouseDownLocation.X}, {AsCoordinate(mouseDownLocation.Y)}";
-                        <g>
-                            <rect stroke="#ccc" fill="transparent" stroke-width="1" 
-                                x="@Math.Min(mouseDownLocation.X, mouseOverLocation.X)" 
-                                y="@Math.Min(mouseDownLocation.Y, mouseOverLocation.Y)" 
-                                width="@Math.Abs(mouseOverLocation.X - mouseDownLocation.X)" 
-                                height="@Math.Abs(mouseOverLocation.Y - mouseDownLocation.Y)"></rect>
-                    
-                            <text x="@((int)mouseDownLocation.X - labelOffsetX(mouseDownTooltip))" y="@((int)mouseDownLocation.Y - 5)">@mouseDownTooltip</text>    
-                        </g>
-                    }
-                }
-            </g>                
-        }
-        @if(mouseUpLocation is not null && mouseDownLocation is not null)
-        {            
-            var mouseDownTooltip = $"{mouseDownLocation.X}, {AsCoordinate(mouseDownLocation.Y)}";
-            <g class="select-box">
-                <rect stroke="#ccc" fill="transparent" stroke-width="1"
-                    x="@Math.Min(mouseDownLocation.X, mouseUpLocation.X)" 
-                    y="@Math.Min(mouseDownLocation.Y, mouseUpLocation.Y)" 
-                    width="@Math.Abs(mouseUpLocation.X - mouseDownLocation.X)" 
-                    height="@Math.Abs(mouseUpLocation.Y - mouseDownLocation.Y)"></rect>
-                    
-                <text x="@((int)mouseDownLocation.X - labelOffsetX(mouseDownTooltip))" y="@((int)mouseDownLocation.Y - 5)">@mouseDownTooltip</text>       
-            </g>
-        }
-
-        <g class="data-line" mask="url(#chartSpace)">        
-            @if(Data != null)
-            {
-                <path d="@GetPath()">
-                </path>                         
-            }      
-        </g>    
-
-        <g class="data-points">
-            @if (Data != null)
-            {
-                @foreach (var point in Data)
-                {
-                    <g class="point @(point == SelectedPoint ? "selected" : point == nearestPoint ? "nearest" : string.Empty)" mask="url(#chartSpace)">
-                        <circle cx="@point.X" cy="@AsCoordinate(point.Y)" r=".5%"></circle>
-                    </g>
-                }
-                @if (ShowLabels)
-                {                    
-                    @foreach (var point in Data.Where(x => x != SelectedPoint))
-                    {
-                        if (!OnChart(point.X, point.Y))
-                            continue;
-
-                        var tooltipLabel = $"{point.X}, {point.Y}";
-                        <g class="point @(point == SelectedPoint ? "selected" : point == nearestPoint ? "nearest" : string.Empty)">
-                            <text filter="url(#solid)" class="@(ShowLabels ? "visible" : string.Empty)" x="@(point.X - labelOffsetX(tooltipLabel))" y="@AsCoordinate(point.Y + 15)">@tooltipLabel</text>
-                        </g>
-                    }
-                }
-                if(SelectedPoint is not null)
-                {                    
-                    var tooltipLabel = $"{SelectedPoint.X}, {SelectedPoint.Y}";
-                    <g class="point selected">
-                        <text filter="url(#solid)" class="visible" x="@(SelectedPoint.X - labelOffsetX(tooltipLabel))" y="@AsCoordinate(SelectedPoint.Y + 15)">@tooltipLabel</text>
-                    </g>
-                }
-                if(nearestPoint is not null)
-                {                    
-                    var tooltipLabel = $"{nearestPoint.X}, {nearestPoint.Y}";
-                    <g class="point selected">
-                        <text filter="url(#solid)" class="visible" x="@(nearestPoint.X - labelOffsetX(tooltipLabel))" y="@AsCoordinate(nearestPoint.Y + 15)">@tooltipLabel</text>
-                    </g>
-                }
-            }
-        </g>
-
-        <g class="labels x-labels">
-            @foreach(var xLabel in XAxisLabels())
-            {
-                @xLabel
-            }
-            <text class="axis-title" x="@xAxisTitle.X" y="@xAxisTitle.Y">@XAxisTitle</text>
-        </g>
-        <g class="labels y-labels">
-            @foreach(var yLabel in YAxisLabels())
-            {
-                @yLabel
-            }
-            <text class="axis-title" x="@yAxisTitle.X" y="@yAxisTitle.Y" style="@yAxisTitleStyle">@YAxisTitle</text>            
-        </g>
-
-        <g class="selected-data" transform="translate(0, @xAxisTitle.Y)">
-            <text>@(SelectedPoint is null ? nearestPoint is null ? "" : $"Nearest Point: ({nearestPoint.X}, {nearestPoint.Y})" : $"Selected Point: ({SelectedPoint.X}, {SelectedPoint.Y})")</text>
-        </g>
+        <MouseTooltip 
+            MouseDownCoordinate="@mouseDownChartCoord"
+            MouseOverCoordinate="@mouseOverChartCoord" />
 
     </svg>
+    <span class="reset-button" @onclick="ResetZoom" hidden="@(View.Equals(new(Start,Size)))">        
+        <BlazyIcon Icon="BlazyIcon.IconType.oi_resize_both" />
+    </span>
 </figure>
 
+</CascadingValue>
+</CascadingValue>
+</CascadingValue>
+</CascadingValue>
+</CascadingValue>
 @code {
     [Parameter]
     public string ChartTitle { get; set; } = string.Empty;
@@ -165,31 +61,21 @@
     public string YAxisTitle{ get; set; } = string.Empty;
 
     [Parameter]
-    public DataPoint? SelectedPoint { get; set; }
+    public Point? SelectedPoint { get; set; }
 
     [Parameter]
-    public EventCallback<DataPoint> SelectedPointChanged { get; set; }
+    public EventCallback<Point> SelectedPointChanged { get; set; }
 
     [Parameter, EditorRequired]
-    public IEnumerable<DataPoint>? Data { get; set; }
-
-    [Parameter, EditorRequired]
-    public int MaxViewX { get; set; }
-
-    [Parameter, EditorRequired]
-    public int MaxViewY { get; set; }
-
-    //[Parameter, EditorRequired]
-    //public int MinViewX { get; set; }
-
-    //[Parameter, EditorRequired]
-    //public int MinViewY { get; set; }
+    public IEnumerable<Point>? Data { get; set; }
 
     [Parameter]
-    public int MinViewX { get; set; }
+    public Point Start { get; set; } = new Point(0, 0);
 
     [Parameter]
-    public int MinViewY { get; set; }
+    public Point Size { get; set; } = new Point(0, 0);
+
+    public Rectangle View { get; set; }
 
     [Parameter]
     public bool ShowLabels { get; set; }
@@ -197,73 +83,41 @@
     [Inject]
     public IJSRuntime JS { get; set; } = null!;
 
-    IEnumerable<MarkupString> XAxisLabels()
-    {
-        int x = MinViewX;
-
-        while (x <= MaxViewX)
-        {
-            yield return new MarkupString($@"<text x=""{x}"" y=""{labelOffsets.Y}"" style=""{axisLabelStyle}"">{x}</text>");
-            x += 50;
-        }
-    }
-
-    IEnumerable<MarkupString> YAxisLabels()
-    {
-        int y = MinViewY;
-
-        while (y <= MaxViewY)
-        {
-            yield return new MarkupString($@"<text x=""{labelOffsets.X}"" y=""calc({AsCoordinate(y - 4)}"" style=""{axisLabelStyle}"">{y}</text>");
-            y += 50;
-        }
-    }
-
     ElementReference SvgRef;
-    DataPoint? nearestPoint;
+    Point? nearestPoint;
     ElementCoordinatesService coordinatesService;
-    MarkupString XAxisTitleMarkup => new MarkupString($@"<text x=""{xAxisTitle.X}"" y=""{xAxisTitle.Y}"">{XAxisTitle}</text>");
-    MarkupString YAxisTitleMarkup => new MarkupString($@"<text x=""{yAxisTitle.X}"" y=""{yAxisTitle.Y}"" style=""{yAxisTitleStyle}"">{YAxisTitle}</text>");
-    string yAxisTitleStyle => $"transform-origin: {yAxisTitle.X}px {yAxisTitle.Y}px; transform: rotate(-90deg);";
-    string axisLabelStyle => "font-size: .8em; fill: #666;";
-    decimal labelOffsetX(string label) => label.Length * 2.7m;
 
-    private const int _viewOffset = 60;
 
-    DataPoint viewboxStart = null!;
-    DataPoint viewboxEnd = null!;
-    DataPoint labelOffsets = null!;
-    DataPoint yAxisTitle = null!;
-    DataPoint xAxisTitle = null!;
-    DataPoint? mouseOverLocation;
-    DataPoint? mouseDownLocation;
-    DataPoint? mouseUpLocation;
-    (DataPoint, DataPoint) ZoomState => (new DataPoint(MinViewX, MinViewY), new DataPoint(MaxViewX, MaxViewY));
+
+    double labelOffsetX(string label) => label.Length * 2.7f;
+
+    private const int Padding = 60;
+
+    Rectangle Viewbox = null!;
+    Rectangle ZoomState => new(Start, Size + Start);
+
+    Point labelOffsets = null!;
+    Point yAxisTitle = null!;
+    Point xAxisTitle = null!;
+    Point? mouseOverChartCoord;
+    Point? mouseDownChartCoord;
 
     protected override void OnInitialized()
     {
-        viewboxStart = new(
-            MinViewX - _viewOffset,
-            MinViewY - _viewOffset);
+        Start ??= new Point(
+            Data.Select(x => x.X).Min(), 
+            Data.Select(x => x.Y).Min());
 
-        viewboxEnd = new(
-            MaxViewX + 2 * _viewOffset,
-            MaxViewY + 2 * _viewOffset);
+        Size ??= new Point(
+            Data.Select(x => x.X).Max() - Start.X,
+            Data.Select(x => x.Y).Max() - Start.Y);
 
-        labelOffsets = new(
-            -5,
-            AsCoordinate(-15)
-        );
+        Viewbox = new Rectangle(
+            new Point(0, 0),
+            new Point(Size.X + 2 * Padding, Size.Y + 2 * Padding)
+            );
 
-        yAxisTitle = new(
-            labelOffsets.X - 35,
-            (MaxViewY + MinViewY) / 2
-        );
-
-        xAxisTitle = new(
-            (MaxViewX + MinViewX) / 2,
-            labelOffsets.Y + 35
-        );
+        View = new(Start, Size);
 
         base.OnInitialized();
     }
@@ -277,33 +131,18 @@
         }
     }
 
-    int AsCoordinate(int y) => MaxViewY - y;
-    int fontSizePx => 10;
-
-    public class DataPoint
+    void SelectPoint(Point? point)
     {
-        public DataPoint(int x, int y)
-        {
-            X = x;
-            Y = y;
-        }
-        public int X { get; set; }
-        public int Y { get; set; }
-    }
+        if (point == SelectedPoint)
+            point = null;
 
-
-    string GetPath() => Data?.Select(x => $"{x.X} {AsCoordinate(x.Y)}")
-                            .Aggregate($"M{Data.First().X} {AsCoordinate(Data.First().Y)} L", (a, b) => $"{a} {b}") ?? string.Empty;
-
-    void SelectPoint(DataPoint? point)
-    {
         if (SelectedPointChanged.HasDelegate)
             SelectedPointChanged.InvokeAsync(point);
         else
             SelectedPoint = point;
-    }
+    }    
 
-    bool OnChart(int x, int y) => x >= MinViewX && y >= MinViewY && x <= MaxViewX && y <= MaxViewY;
+    bool OnChart(Point point) => point >= Start && point <= Start + Size;
 
     async Task MouseMove(MouseEventArgs e)
     {
@@ -312,73 +151,104 @@
 
         var result = await coordinatesService.GetCoordinates(SvgRef);
 
-        var xScaleFactor = result.Width / (viewboxEnd.X - viewboxStart.X - _viewOffset);
-        var yScaleFactor = result.Height / (viewboxEnd.Y - viewboxStart.Y - _viewOffset);
+        var xScaleFactor = result.Width / (Viewbox.Width);
+        var yScaleFactor = result.Height / (Viewbox.Height);
 
-        var xLoc = (int)((e.ClientX - result.Left) / xScaleFactor + viewboxStart.X);
-        var yLoc = (int)((e.ClientY - result.Top) / yScaleFactor + viewboxStart.Y);
+        var mouseLoc = new Point(
+            (e.ClientX - result.Left) / xScaleFactor + ZoomState.P1.X - Padding,
+            AsYCoordinate((e.ClientY - result.Top) / yScaleFactor - Padding)
+        );
 
-        if (OnChart(xLoc, yLoc))
-            mouseOverLocation = new(
-                (int)((e.ClientX - result.Left) / xScaleFactor + viewboxStart.X),
-                (int)((e.ClientY - result.Top) / yScaleFactor + viewboxStart.Y)
-            );
+        if (OnChart(mouseLoc))
+            mouseOverChartCoord = mouseLoc;
         else
-            mouseOverLocation = null;
+            mouseOverChartCoord = null;
+    }
 
-        if (SelectedPoint == null)
-            SetProximityPoint();
+    double AsYCoordinate(double y)
+    {
+        var newY = Size.Y - (y - Start.Y);
+        return newY;
+    }
+
+    double AsXCoordinate(double x)
+    {
+        var newX = x - Start.X;
+        return newX;
     }
 
     void SetProximityPoint()
     {
-        if (mouseOverLocation is null)
+        if (mouseOverChartCoord is null)
             nearestPoint = null;
 
-        else
+        else      
+            nearestPoint = GetNearestPoint(mouseOverChartCoord);        
+    }
+
+    Point? GetNearestPoint(Point point)
+    {
+        int nearestDistance = int.MaxValue;
+        Point? nearestPt = null;
+
+        foreach(var pt in Data)
         {
-            int nearestDistance = int.MaxValue;
-            DataPoint? nearestPt = null;
+            if (!OnChart(pt))
+                continue;
 
-            foreach(var pt in Data)
+            var distToPointSqrd = Math.Pow(pt.X - point.X, 2) + Math.Pow(pt.Y - point.Y, 2);
+
+            if (distToPointSqrd < nearestDistance)
             {
-                if (!OnChart(pt.X, pt.Y))
-                    continue;
-
-                var distToPointSqrd = Math.Pow(pt.X - mouseOverLocation.X, 2) + Math.Pow(pt.Y - AsCoordinate(mouseOverLocation.Y), 2);
-
-                if (distToPointSqrd < nearestDistance)
-                {
-                    nearestPt = pt;
-                    nearestDistance = (int)distToPointSqrd;
-                }
+                nearestPt = pt;
+                nearestDistance = (int)distToPointSqrd;
             }
-
-            nearestPoint = nearestPt;
         }
+
+        return nearestPt;
     }
 
     void MouseDown(MouseEventArgs e)
     {
-        mouseDownLocation = mouseOverLocation;
-        mouseUpLocation = null;
+        mouseDownChartCoord = mouseOverChartCoord;
     }
 
     void MouseUp(MouseEventArgs e)
     {
-        if(mouseOverLocation is not null && mouseDownLocation is not null)
-        {            
-            if (mouseOverLocation!.X == mouseDownLocation!.X || mouseOverLocation!.Y == mouseDownLocation!.Y)
+        if (mouseOverChartCoord is null)
+            mouseDownChartCoord = null;
+
+        if(mouseOverChartCoord is not null && mouseDownChartCoord is not null)
+        {
+            if (mouseOverChartCoord!.X == mouseDownChartCoord!.X || mouseOverChartCoord!.Y == mouseDownChartCoord!.Y)
             {
-                mouseDownLocation = null;
-                
-                if (SelectedPoint is not null)
-                    SelectPoint(null);
-                else
-                    SelectPoint(nearestPoint);
+                SelectPoint(GetNearestPoint(mouseOverChartCoord));
             }
-            else
-                mouseUpLocation = mouseOverLocation;   
+            else //zoom
+            {
+                var bottomLeft = new Point(
+                    Math.Min(mouseDownChartCoord.X, mouseOverChartCoord.X),
+                    Math.Min(mouseDownChartCoord.Y, mouseOverChartCoord.Y)
+                );
+
+                var topRight = new Point(
+                    Math.Max(mouseDownChartCoord.X, mouseOverChartCoord.X),
+                    Math.Max(mouseDownChartCoord.Y, mouseOverChartCoord.Y)
+                );
+
+                View = new(
+                     bottomLeft, //start
+                     topRight - bottomLeft //size
+                );
+                Console.WriteLine(View);
+            }
+
+            mouseDownChartCoord = null;            
         }     
+    }
+
+    void ResetZoom()
+    {
+        View = new(Start, Size);
     }
 }

@@ -1,0 +1,19 @@
+﻿
+.value-labels {
+    fill: #666;
+    font-size: .6em;
+}
+
+.x-value-label {
+    text-anchor: middle;
+}
+
+.y-value-label {
+    text-anchor: end;
+}
+
+.axis-titles {
+    fill: black;
+    font-size: .7em;
+    text-anchor: middle;
+}

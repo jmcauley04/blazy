@@ -1,0 +1,19 @@
+﻿@using Blazy.Utility
+
+<g>
+    <text class="chart-coord"
+        x="@(Point.X - Start.X)" 
+        y="@(Size.Y - Point.Y + Start.Y -10)">
+        @Point</text>
+</g>
+
+@code {
+    [CascadingParameter(Name = "Start")]
+    public Point Start { get; set; }
+
+    [CascadingParameter(Name = "Size")]
+    public Point Size { get; set; }
+
+    [Parameter]
+    public Point Point { get; set; }
+}

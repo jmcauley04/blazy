@@ -1,4 +1,5 @@
-﻿@page "/charts"
+﻿@using Blazy.Utility
+@page "/charts"
 <PageTitle>Blazy Charts</PageTitle>
 <h3>Blazy Charts</h3>
 
@@ -7,10 +8,8 @@
     @if(Data != null)
     {
         <BlazyChart Data="Data"
-            MaxViewX="@zoomViewX"
-            MaxViewY="@zoomViewY"
-            MinViewX="0"
-            MinViewY="0"
+            Start="@ChartStart"
+            Size="@ChartSize"
             ChartTitle="Blazy Line Chart Title"
             XAxisTitle="x-axis title"
             YAxisTitle="y-axis title"
@@ -23,30 +22,32 @@
 </div>
 
 @code {
-    BlazyChart.DataPoint[]? Data;
+    Point[]? Data;
 
-    int zoomViewX = 400;
-    int zoomViewY = 150;
-    const int maxViewX = 800;
-    const int maxViewY = 300;
-    const int minViewX = -50;
-    const int minViewY = -30;
+    Point ChartStart = new(-10, -50);
+    Point ChartSize = new(400, 150);
     bool ShowValueLabels;
 
     protected override void OnInitialized()
     {
-        List<BlazyChart.DataPoint> data = new();
-        int x = minViewX;
-        int y = minViewY;
+        List<Point> data = new();
+        var x = ChartStart.X;
+        var y = ChartStart.Y;
         data.Add(new(x, y));
 
-        while(x < maxViewX)
+        int i = 0;
+        while(i < 20)
         {
-            x = Math.Min(x + Random.Shared.Next(20, 50), maxViewX);
-            y = Math.Max(minViewY, Math.Min(y + Random.Shared.Next(-30, 60), maxViewY));
+            //x = Math.Min(x + Random.Shared.Next(20, 50), 800);
+            //y = Math.Max(-30, Math.Min(y + Random.Shared.Next(-30, 60), 300));
+            x = x + ChartSize.X / 20;
+            y = y + ChartSize.Y / 20;
             data.Add(new(x, y));
+            i++;
         }
         Data = data.ToArray();
+
+        Console.WriteLine($"First Point: {data.FirstOrDefault()}");
 
         base.OnInitialized();
     }

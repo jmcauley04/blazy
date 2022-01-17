@@ -1,0 +1,90 @@
+﻿@using Blazy.Utility
+
+<svg>
+    
+    <g transform="translate(@Padding @Padding)" class="axes" stroke="#ccc" stroke-width="1">
+        <line 
+            x1="0" 
+            x2="@Size.X" 
+            y1="@Size.Y" 
+            y2="@Size.Y"></line>
+        <line 
+            x1="0" 
+            x2="0" 
+            y1="0" 
+            y2="@Size.Y"></line>
+    </g>
+    
+    <g class="value-labels" transform="translate(@Padding @Padding)" >
+            
+        @{
+            double x = 0;
+
+            while (x <= Size.X)
+            {
+                <g class="x-value-label" transform="translate(0 @Size.Y)">
+                    <text x="@x" y="@AxisLabelOffsets.Y">@Math.Round(x + Start.X, Precision)</text>
+                    <line stroke="#ccc"
+                        x1="@x" 
+                        y1="0"
+                        x2="@x"
+                        y2="4"></line>
+                </g>
+                x += 50;
+            }
+        }
+         
+        @{
+            double y = 0;
+
+            while (y <= Size.Y)
+            {
+                <g class="y-value-label">
+                    <text x="@AxisLabelOffsets.X" y="@(Size.Y - y + 3)">@Math.Round(y + Start.Y, Precision)</text>
+                    <line stroke="#ccc"
+                        x1="0" 
+                        y1="@y"
+                        x2="-4"
+                        y2="@y"></line>
+                </g>
+                y += 50;
+            }
+        }
+  
+    </g>
+
+    <g class="axis-titles" transform="translate(@Padding @Padding)" >        
+        <text class="x-axis-title"
+            x="@(Size.X / 2)" 
+            y="@(AxisTitleOffsets.Y + Size.Y)">
+            @XAxisTitle</text>
+        <text class="y-axis-title"
+            x="@AxisTitleOffsets.X" 
+            y="@(Size.Y / 2)"
+            style="transform-origin: @(AxisTitleOffsets.X)px @(Size.Y / 2)px; transform: rotate(-90deg);">
+            @YAxisTitle</text>    
+    </g>
+
+</svg>
+@code {
+    [CascadingParameter(Name = "Start")]
+    public Point Start { get; set; }
+
+    [CascadingParameter(Name = "Size")]
+    public Point Size { get; set; }
+
+    [CascadingParameter(Name = "Padding")]
+    public int Padding { get; set; }
+
+    [Parameter]
+    public string XAxisTitle { get; set; }
+
+    [Parameter]
+    public string YAxisTitle { get; set; }
+
+    [Parameter]
+    public int Precision { get; set; } = 1;
+
+    Point AxisLabelOffsets = new(-8, 15);
+    Point AxisTitleOffsets = new(-40, 40);
+}
