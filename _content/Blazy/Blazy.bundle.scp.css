@@ -73,6 +73,7 @@ button[b-bpoxhbm3cp] {
 /* _content/Blazy/Components/BlazyChart.razor.rz.scp.css */
 .graph[b-bo86q0zsbx] {
     user-select: none;
+    aspect-ratio: 10/5;
 }
 
 .graph .labels.x-labels[b-bo86q0zsbx] {
@@ -94,29 +95,11 @@ button[b-bpoxhbm3cp] {
         stroke-width: 1;
     }
 
-.labels[b-bo86q0zsbx] {
+[b-bo86q0zsbx] .chart-coord {
     font-size: .6em;
-    color: #eee;
+    text-anchor: middle;
+    fill: #666;
 }
-
-.label-title[b-bo86q0zsbx] {
-    font-weight: bold;
-    text-transform: uppercase;
-    font-size: .6em;
-    fill: black;
-}
-
-.data-line[b-bo86q0zsbx] {
-    stroke: red;
-    stroke-width: 1;
-    fill: transparent;
-}
-
-.data-points[b-bo86q0zsbx] {
-    fill: #E66;
-    stroke-width: 0;
-}
-
 
 figcaption[b-bo86q0zsbx] {
     font-size: 1.1em;
@@ -124,63 +107,18 @@ figcaption[b-bo86q0zsbx] {
     text-align: center;
 }
 
-
-
-.point[b-bo86q0zsbx] {
-    cursor: pointer;
-    position: relative;
-}
-
-.point > text[b-bo86q0zsbx] {
-    display: none;
-    font-size: .7em;
+.reset-button[b-bo86q0zsbx] {
     position: absolute;
-    bottom: 0;
-    font-family: monospace;
-    background-image: green;
+    top: 2em;
+    right: .5em;
+    color: #666;
+    cursor: pointer;
 }
 
-    .point > text.visible[b-bo86q0zsbx],
-    .point.selected > text[b-bo86q0zsbx],
-    .point.nearest > text[b-bo86q0zsbx] {
-        display: block;
-    }
-    .point:hover[b-bo86q0zsbx] {
-        z-index: 10;
-    }
-
-    .point:hover > circle[b-bo86q0zsbx],
-    .point:hover > text[b-bo86q0zsbx] {
-        fill: #F33;
-    }
-.point:hover > text[b-bo86q0zsbx] {
-    display: block;
+.reset-button:hover[b-bo86q0zsbx] {
+    color: black;
 }
 
-    .point.selected > circle[b-bo86q0zsbx],
-    .point.selected > text[b-bo86q0zsbx] {
-        fill: red;
-    }
-    .point.nearest > circle[b-bo86q0zsbx],
-    .point.nearest > text[b-bo86q0zsbx] {
-        fill: #fcc;
-    }
-
-.selected-data text[b-bo86q0zsbx] {
-    fill: #333;
-    font-size: .5em;
-    font-family: monospace;
-}
-
-.select-box text[b-bo86q0zsbx] {
-    fill: #666;
-    font-size: .7em;
-    font-family: monospace;
-}
-
-.axis-title[b-bo86q0zsbx] {
-    font-size: .7em;
-}
 /* _content/Blazy/Components/BlazyCheckbox.razor.rz.scp.css */
 label[b-e80rfjvf8o] {
     display: inline-flex;
@@ -758,6 +696,32 @@ tbody[b-k6wgan9gug]  tr:nth-child(2n+1){
         top: 70%;
     }
 }
+/* _content/Blazy/Components/Charts/Axes.razor.rz.scp.css */
+
+.value-labels[b-4ip13tfob6] {
+    fill: #666;
+    font-size: .6em;
+}
+
+.x-value-label[b-4ip13tfob6] {
+    text-anchor: middle;
+}
+
+.y-value-label[b-4ip13tfob6] {
+    text-anchor: end;
+}
+
+.axis-titles[b-4ip13tfob6] {
+    fill: black;
+    font-size: .7em;
+    text-anchor: middle;
+}
+/* _content/Blazy/Components/Charts/ChartArea.razor.rz.scp.css */
+/* _content/Blazy/Components/Charts/DataLabel.razor.rz.scp.css */
+/* _content/Blazy/Components/Charts/MouseTooltip.razor.rz.scp.css */
+
+
+
 /* _content/Blazy/Components/Internal/BlazyInputStyleProvider.razor.rz.scp.css */
 [b-ktk11rejhi] .z-input-angular > div {
     position: relative;
