@@ -1,7 +1,7 @@
 ﻿namespace Blazy.Enums
 {
     public enum ThemeColor
-    {
+    {        
         Transparent,
         Primary,
         Secondary,

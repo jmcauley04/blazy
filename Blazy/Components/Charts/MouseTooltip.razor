@@ -1,59 +1,75 @@
 ﻿@using Blazy.Utility
-<g transform="translate(@Padding @Padding)">
+<g transform="translate(0 @YOffSet)"> 
 
     @if(MouseOverCoordinate is not null)
     {  
-        <g>
+        <g transform="translate(@(MouseOverCoordinate.X) @(- MouseOverCoordinate.Y))">
             <text 
+                y="-5"
                 class="chart-coord"
-                x="@(AsXCoordinate(MouseOverCoordinate.X))" 
-                y="@(AsYCoordinate(MouseOverCoordinate.Y + 5))">
+                transform="scale(@(View.Width / Size.X) @(View.Height / Size.Y))">
                 @MouseOverCoordinate</text>
         </g>
+        
         @if(MouseDownCoordinate is not null)
         {
-            <g>                            
+            <g transform="translate(@(MouseDownCoordinate.X) @(- MouseDownCoordinate.Y))">
                 <text 
+                    y="-5"
                     class="chart-coord"
-                    x="@AsXCoordinate(MouseDownCoordinate.X)" 
-                    y="@AsYCoordinate(MouseDownCoordinate.Y + 5)">
+                    transform="scale(@(View.Width / Size.X) @(View.Height / Size.Y))">
                     @MouseDownCoordinate</text>
             </g>
-                    
-            <line stroke="#ccc" 
-                x1="@AsXCoordinate(MouseDownCoordinate.X)" 
-                x2="@AsXCoordinate(MouseOverCoordinate.X)" 
-                y1="@AsYCoordinate(MouseOverCoordinate.Y)" 
-                y2="@AsYCoordinate(MouseOverCoordinate.Y)"></line>
-            <line stroke="#ccc" 
-                x1="@AsXCoordinate(MouseOverCoordinate.X)" 
-                x2="@AsXCoordinate(MouseOverCoordinate.X)" 
-                y1="@AsYCoordinate(MouseDownCoordinate.Y)" 
-                y2="@AsYCoordinate(MouseOverCoordinate.Y)"></line>        
-            <line stroke="#ccc" 
-                x1="@AsXCoordinate(MouseDownCoordinate.X)" 
-                x2="@AsXCoordinate(MouseOverCoordinate.X)" 
-                y1="@AsYCoordinate(MouseDownCoordinate.Y)" 
-                y2="@AsYCoordinate(MouseDownCoordinate.Y)"></line>
-            <line stroke="#ccc" 
-                x1="@AsXCoordinate(MouseDownCoordinate.X)" 
-                x2="@AsXCoordinate(MouseDownCoordinate.X)" 
-                y1="@AsYCoordinate(MouseDownCoordinate.Y)" 
-                y2="@AsYCoordinate(MouseOverCoordinate.Y)"></line>       
         }
-        else
-        {                    
-            <line stroke="#ccc" 
-                x1="0" 
-                x2="@AsXCoordinate(MouseOverCoordinate.X)" 
-                y1="@AsYCoordinate(MouseOverCoordinate.Y)" 
-                y2="@AsYCoordinate(MouseOverCoordinate.Y)"></line>
-            <line stroke="#ccc" 
-                x1="@AsXCoordinate(MouseOverCoordinate.X)" 
-                x2="@AsXCoordinate(MouseOverCoordinate.X)" 
-                y1="@Size.Y" 
-                y2="@AsYCoordinate(MouseOverCoordinate.Y)"></line>
-        }           
+        
+        <g stroke-width="3" stroke="#ccc"> 
+            @if(MouseDownCoordinate is not null)
+            {                    
+                
+                <line vector-effect="non-scaling-stroke"
+                    x1="@(MouseOverCoordinate.X)" 
+                    x2="@(MouseOverCoordinate.X)" 
+                    y1="@(- MouseDownCoordinate.Y)" 
+                    y2="@(- MouseOverCoordinate.Y)"></line>        
+                <line vector-effect="non-scaling-stroke"
+                    x1="@(MouseDownCoordinate.X)" 
+                    x2="@(MouseDownCoordinate.X)" 
+                    y1="@(- MouseDownCoordinate.Y)" 
+                    y2="@(- MouseOverCoordinate.Y)"></line>   
+
+
+                
+                <line vector-effect="non-scaling-stroke"
+                    x1="@(MouseDownCoordinate.X)" 
+                    x2="@(MouseOverCoordinate.X)" 
+                    y1="@(- MouseOverCoordinate.Y)" 
+                    y2="@(- MouseOverCoordinate.Y)"></line>
+                <line vector-effect="non-scaling-stroke"
+                    x1="@(MouseDownCoordinate.X)" 
+                    x2="@(MouseOverCoordinate.X)" 
+                    y1="@(- MouseDownCoordinate.Y)" 
+                    y2="@(- MouseDownCoordinate.Y)"></line>
+
+            }
+            else
+            {                  
+                    
+                
+                <line vector-effect="non-scaling-stroke"
+                    x1="@(MouseOverCoordinate.X)" 
+                    x2="@(MouseOverCoordinate.X)" 
+                    y1="@(- View.P1.Y)" 
+                    y2="@(- MouseOverCoordinate.Y)"></line>
+
+                  
+                <line vector-effect="non-scaling-stroke"
+                    x1="@View.P1.X" 
+                    x2="@(MouseOverCoordinate.X)" 
+                    y1="@(- MouseOverCoordinate.Y)" 
+                    y2="@(- MouseOverCoordinate.Y)"></line>
+
+            }           
+        </g>
     }
 </g>        
 
@@ -64,14 +80,8 @@
     [CascadingParameter(Name = "Size")]
     public Point Size { get; set; }
 
-    [CascadingParameter(Name = "Padding")]
-    public int Padding { get; set; }
-
-    [CascadingParameter(Name = "AsXCoordinate")]
-    public Func<double, double> AsXCoordinate { get; set; }
-
-    [CascadingParameter(Name = "AsYCoordinate")]
-    public Func<double, double> AsYCoordinate { get; set; }
+    [CascadingParameter(Name = "View")]
+    public Rectangle View { get; set; }
 
     [Parameter]
     public Point? MouseOverCoordinate { get; set; }
@@ -79,4 +89,5 @@
     [Parameter]
     public Point? MouseDownCoordinate { get; set; }
 
+    public double YOffSet => - Start.Y + (View.P1.Y - Start.Y) + View.P2.Y - (Start.Y + Size.Y);
 }

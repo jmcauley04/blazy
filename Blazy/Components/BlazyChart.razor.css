@@ -23,7 +23,7 @@
     }
 
 ::deep .chart-coord {
-    font-size: .6em;
+    font-size: .4em;
     text-anchor: middle;
     fill: #666;
 }
@@ -34,7 +34,7 @@ figcaption {
     text-align: center;
 }
 
-.reset-button {
+.actions-list {
     position: absolute;
     top: 2em;
     right: .5em;

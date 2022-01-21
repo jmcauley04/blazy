@@ -1,64 +1,98 @@
 ﻿@using Blazy.Utility
+@using Microsoft.JSInterop
 
-<svg class="svg">
-    <defs>
-        <filter x="-0.1" y="-0.1" width="1.2" height="1.2" id="solid">
-            <feFlood flood-color="rgba(0,0,0,.9)" result="bg" />
-            <feMerge>
-                <feMergeNode in="bg"/>
-                <feMergeNode in="SourceGraphic"/>
-            </feMerge>
-        </filter>
-    </defs>
-    <g transform="translate(@Padding @Padding)">    
-    
-        <mask id="chartSpace">
-            <!-- Everything under a black pixel will be invisible -->
-            <rect x="@(-Padding)" y="@(-Padding)"  width="100%" height="100%" fill="black" />
-            
-            <!-- Everything under a white pixel will be visible -->
-            <rect x="0" y="0" width="@Size.X" height="@Size.Y" fill="white" />
-        </mask>
-        <rect width="@Size.X" height="@Size.Y" fill="#eee"></rect>    
+<svg viewBox="@View.P1.X @View.P1.Y @View.Width @View.Height"
+    style="overflow: visible;"
+    x="100"
+    y="100"
+    height="600" 
+    width="1400" 
+    preserveAspectRatio="none">
 
+    <mask id="chartMask">        
+        <rect width="100%" height="100%" fill="black"></rect>    
+
+        <g transform="translate(@View.P1.X @(View.P1.Y))">
+        
+            <rect width="100%" height="100%" fill="white"></rect> 
+
+        </g>    
+    </mask>
+
+    <g transform="translate(@View.P1.X @(View.P1.Y))">
+        
+        <rect width="100%" height="100%" fill="#eee"></rect>    
+           
+
+    </g>    
+
+    <g transform="translate(0 @YOffSet) scale(1 -1)" mask="url(#chartMask)">
+        
        
         @if(Data != null)
         {
-            <g class="chart-data" mask="url(#chartSpace)" fill="none" stroke="red">     
-                <path d="@GetPath()">
+            <g fill="none" stroke="red">     
+                <path d="@GetPath()" vector-effect="non-scaling-stroke">
                 </path>         
 
                 @foreach (var point in Data)
                 {
-                    <g stroke="black" stroke-width="@(point == SelectedPoint ? "1" : "0")" class="point" mask="url(#chartSpace)">
-                        <circle cx="@(point.X - Start.X)" cy="@(Size.Y - point.Y + Start.Y)" r="@(point == NearestPoint ? ".8%" : ".5%")" fill="red"></circle>
+                    <g stroke="@(point == SelectedPoint ? "darkred" : "red")" class="point">
+                        <line 
+                            x1="@(point.X)" 
+                            x2="@(point.X)" 
+                            y1="@(point.Y)" 
+                            y2="@(point.Y)" 
+                            stroke-linecap="round"
+                            stroke-width="@(point == NearestPoint || point == SelectedPoint ? "10" : "7")"
+                            vector-effect="non-scaling-stroke" />
                     </g>
                 }
 
-            </g>    
-            @if (ShowLabels)
-            {
-                @foreach (var point in Data.Where(x => x != SelectedPoint && x != NearestPoint))
-                {
-                    if (!OnChart(point)){
-                        continue;
-                    }
-                    <DataLabel Point="point" />
-                }                
-            }
+            </g>   
 
-            @if(SelectedPoint is not null)
-            {            
-                <DataLabel Point="SelectedPoint" />
-            }
-
-            @if(NearestPoint is not null && NearestPoint != SelectedPoint)
-            {            
-                <DataLabel Point="NearestPoint" />
-            }
-        }               
+        }          
     </g>
+
+    <g transform="translate(0 @YOffSet) scale(1 1)">
+    
+        @if (ShowLabels)
+        {
+            @foreach (var point in Data.Where(x => x != SelectedPoint && x != NearestPoint))
+            {
+                if (!OnChart(point)){
+                    continue;
+                }
+                <DataLabel Point="point" />
+            }                
+        }
+
+        @if(SelectedPoint is not null)
+        {            
+            <DataLabel Point="SelectedPoint" />
+        }
+
+        @if(NearestPoint is not null && NearestPoint != SelectedPoint)
+        {            
+            <DataLabel Point="NearestPoint" />
+        }
+    </g>
+        
+    <MouseTooltip 
+        MouseDownCoordinate="@mouseDownChartCoord"
+        MouseOverCoordinate="@mouseOverChartCoord" />
+
+    <g transform="translate(@View.P1.X @(View.P1.Y))"
+        @ref="SvgRef"
+        @onmousemove="MouseMoved"
+        @onmouseup="MouseUp"
+        @onmousedown="MouseDown"
+        @onmouseout="MouseOut">
+        
+        <rect width="100%" height="100%" fill="transparent"></rect>                   
+    </g>    
 </svg>
+
 @code {
     [CascadingParameter(Name = "Start")]
     public Point Start { get; set; }
@@ -66,8 +100,11 @@
     [CascadingParameter(Name = "Size")]
     public Point Size { get; set; }
 
-    [CascadingParameter(Name = "Padding")]
-    public int Padding { get; set; }
+    [CascadingParameter(Name = "View")]
+    public Rectangle View { get; set; }
+
+    [Parameter]
+    public EventCallback<Rectangle> ViewChanged { get; set; }
 
     [Parameter]
     public IEnumerable<Point>? Data { get; set; }    
@@ -82,38 +119,152 @@
     public bool ShowLabels { get; set; }
 
     [Parameter]
-    public Point? MouseoverChartCoord { get => mouseoverChartCoord; set { mouseoverChartCoord = value; OnMouseMove(); } }
-
-    [Parameter]
     public Point? MousedownChartCoord { get; set; }
 
     [Parameter]
     public int Precision { get; set; }
 
-    [Parameter, EditorRequired]
-    public Func<Point, Point> GetNearestPoint { get; set; }
-
-    [Parameter, EditorRequired]
-    public Func<Point, bool> OnChart { get; set; }
+    [Inject]
+    public IJSRuntime JS { get; set; } = null!;
 
     private Point? mouseoverChartCoord;
 
     public Point? NearestPoint { get; set; }
+    Point? mouseOverChartCoord;
+    Point? mouseDownChartCoord;
 
-    string GetPath() => Data?.Select(x => $"{x.X - Start.X} {Size.Y - x.Y + Start.Y}")
-                            .Aggregate($"M{Data.First().X - Start.X} {Size.Y - Data.First().Y + Start.Y} L", (a, b) => $"{a} {b}") ?? string.Empty;
+    ElementReference SvgRef;
+    ElementCoordinatesService coordinatesService;
 
-    public void OnMouseMove()
-    {
-        SetProximityPoint();
-    }
+    string GetPath() => Data?.Select(x => $"{x.X} {x.Y}")
+                            .Aggregate($"M{Data.First().X} {Data.First().Y} L", (a, b) => $"{a} {b}") ?? string.Empty;
 
     void SetProximityPoint()
     {
-        if (MouseoverChartCoord is null)
+        if (mouseOverChartCoord is null)
             NearestPoint = null;
 
         else      
-            NearestPoint = GetNearestPoint(MouseoverChartCoord);        
+            NearestPoint = GetNearestPoint(mouseOverChartCoord);        
     }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if(coordinatesService is null)
+        {
+            coordinatesService = new(JS);
+            await coordinatesService.Import();
+        }
+    }
+
+    async Task MouseMoved(MouseEventArgs e)
+    {
+        if (coordinatesService is null || !coordinatesService.IsImported)
+            return;
+
+        var result = await coordinatesService.GetCoordinates(SvgRef);
+
+        var xScaleFactor = result.Width;
+        var yScaleFactor = result.Height;
+
+        var mouseLoc = new Point(
+            ((e.ClientX - result.Left) / xScaleFactor * View.Width + View.P1.X),
+            View.Height - ((e.ClientY - result.Top)) / yScaleFactor * View.Height + View.P1.Y);
+
+        if (OnChart(mouseLoc))        
+            mouseOverChartCoord = mouseLoc;
+
+        else
+            mouseOverChartCoord = null;
+
+        SetProximityPoint();
+    }
+
+    Point? GetNearestPoint(Point point)
+    {
+        if (Data is null)
+            return null;
+
+        int nearestDistance = int.MaxValue;
+        Point? nearestPt = null;
+
+        foreach(var pt in Data)
+        {
+            if (!OnChart(pt))
+                continue;
+
+            var distToPointSqrd = Math.Pow(pt.X - point.X, 2) + Math.Pow(pt.Y - point.Y, 2);
+
+            if (distToPointSqrd < nearestDistance)
+            {
+                nearestPt = pt;
+                nearestDistance = (int)distToPointSqrd;
+            }
+        }
+
+        return nearestPt;
+    }
+
+    void MouseDown(MouseEventArgs e)
+    {
+        mouseDownChartCoord = mouseOverChartCoord;
+    }
+
+    void MouseUp(MouseEventArgs e)
+    {
+        if (mouseOverChartCoord is null)
+            mouseDownChartCoord = null;
+
+        if(mouseOverChartCoord is not null && mouseDownChartCoord is not null)
+        {
+            if (mouseOverChartCoord!.X == mouseDownChartCoord!.X || mouseOverChartCoord!.Y == mouseDownChartCoord!.Y)
+            {
+                SelectPoint(NearestPoint);
+            }
+            else //zoom
+            {
+                var bottomLeft = new Point(
+                    Math.Min(mouseDownChartCoord.X, mouseOverChartCoord.X),
+                    Math.Min(mouseDownChartCoord.Y, mouseOverChartCoord.Y)
+                );
+
+                var topRight = new Point(
+                    Math.Max(mouseDownChartCoord.X, mouseOverChartCoord.X),
+                    Math.Max(mouseDownChartCoord.Y, mouseOverChartCoord.Y)
+                );
+
+                ViewChanged.InvokeAsync(new(
+                     bottomLeft, //start
+                     topRight //size
+                ));
+                Console.WriteLine(View);
+            }
+
+            mouseDownChartCoord = null;            
+        }     
+    }
+
+    void MouseOut(MouseEventArgs e)
+    {
+        mouseOverChartCoord = null;
+        SetProximityPoint();
+    }
+
+    void SelectPoint(Point? point)
+    {
+        if (point == SelectedPoint)
+            point = null;
+
+        if (SelectedPointChanged.HasDelegate)
+            SelectedPointChanged.InvokeAsync(point);
+        else
+            SelectedPoint = point;
+    }    
+
+    double ScaleX(double x) => (x - Start.X) * (1400 / Size.X);
+    double ScaleY(double y) => 600 - (y - Start.Y) * (600 / Size.Y);
+
+    bool OnChart(Point point) => point >= Start && point <= Start + Size;
+    
+    public double YOffSet => - Start.Y + (View.P1.Y - Start.Y) + View.P2.Y - (Start.Y + Size.Y);
 }

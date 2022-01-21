@@ -1,80 +1,83 @@
 ﻿@using Blazy.Utility
 
-<svg>
-    
-    <g transform="translate(@Padding @Padding)" class="axes" stroke="#ccc" stroke-width="1">
-        <line 
-            x1="0" 
-            x2="@Size.X" 
-            y1="@Size.Y" 
-            y2="@Size.Y"></line>
-        <line 
-            x1="0" 
-            x2="0" 
-            y1="0" 
-            y2="@Size.Y"></line>
-    </g>
-    
-    <g class="value-labels" transform="translate(@Padding @Padding)" >
+
+<svg style="overflow:visible"
+    x="0"
+    y="100"
+    width="100" 
+    height="600" 
+    viewBox="0 0 100 600">
+    <g>
+        <line x1="98" x2="98" y1="0%" y2="100%" stroke="#ccc" stroke-width="4" />
+                
+        <g class="value-labels">
             
-        @{
-            double x = 0;
+            @{
+                double y = View.P1.Y;
 
-            while (x <= Size.X)
-            {
-                <g class="x-value-label" transform="translate(0 @Size.Y)">
-                    <text x="@x" y="@AxisLabelOffsets.Y">@Math.Round(x + Start.X, Precision)</text>
-                    <line stroke="#ccc"
-                        x1="@x" 
-                        y1="0"
-                        x2="@x"
-                        y2="4"></line>
-                </g>
-                x += 50;
+                while (y <= View.P2.Y)
+                {
+                    <g class="y-value-label" transform="translate(85 @ScaleY(y))">
+                        <text x="0" y="3">@Math.Round(y, Precision)</text>
+                        <line stroke="#ccc" stroke-width="4"
+                            x1="15" 
+                            y1="0"
+                            x2="3"
+                            y2="0"></line>
+                    </g>
+
+                    y += View.Height / 3;
+                }
             }
-        }
-         
-        @{
-            double y = 0;
-
-            while (y <= Size.Y)
-            {
-                <g class="y-value-label">
-                    <text x="@AxisLabelOffsets.X" y="@(Size.Y - y + 3)">@Math.Round(y + Start.Y, Precision)</text>
-                    <line stroke="#ccc"
-                        x1="0" 
-                        y1="@y"
-                        x2="-4"
-                        y2="@y"></line>
-                </g>
-                y += 50;
-            }
-        }
-  
+        </g>
     </g>
-
-    <g class="axis-titles" transform="translate(@Padding @Padding)" >        
-        <text class="x-axis-title"
-            x="@(Size.X / 2)" 
-            y="@(AxisTitleOffsets.Y + Size.Y)">
-            @XAxisTitle</text>
-        <text class="y-axis-title"
-            x="@AxisTitleOffsets.X" 
-            y="@(Size.Y / 2)"
-            style="transform-origin: @(AxisTitleOffsets.X)px @(Size.Y / 2)px; transform: rotate(-90deg);">
-            @YAxisTitle</text>    
-    </g>
-
+    
+    <text class="axis-titles y-axis-title"
+        x="50%" 
+        y="50%"
+        style="transform-origin: 50% 50%; transform: rotate(-90deg);">
+        @YAxisTitle</text>    
 </svg>
+
+<svg style="overflow:visible"
+    x="100"
+    y="700"
+    width="1400" 
+    height="100" 
+    viewBox="0 0 1400 100">
+    <g>
+        <line x1="0" x2="100%" y1="2" y2="2" stroke="#ccc" stroke-width="4" />
+        
+        <g class="value-labels">
+            
+            @{
+                double x = View.P1.X;
+
+                while (x <= View.P2.X)
+                {
+                    <g class="x-value-label" transform="translate(@ScaleX(x) 0)">
+                        <text y="25">@Math.Round(x, Precision)</text>
+                        <line stroke="#ccc" stroke-width="4"
+                            x1="0" 
+                            y1="0"
+                            x2="0"
+                            y2="12"></line>
+                    </g>
+
+                    x += View.Width / 8;
+                }
+            }
+        </g>
+    </g>     
+    <text class="axis-titles x-axis-title"
+        x="50%" 
+        y="60%">
+        @XAxisTitle</text>
+</svg>
+
 @code {
-    [CascadingParameter(Name = "Start")]
-    public Point Start { get; set; }
-
-    [CascadingParameter(Name = "Size")]
-    public Point Size { get; set; }
-
-    [CascadingParameter(Name = "Padding")]
-    public int Padding { get; set; }
+    [CascadingParameter(Name = "View")]
+    public Rectangle View { get; set; }
 
     [Parameter]
     public string XAxisTitle { get; set; }
@@ -87,4 +90,7 @@
 
     Point AxisLabelOffsets = new(-8, 15);
     Point AxisTitleOffsets = new(-40, 40);
+
+    double ScaleX(double x) => (x - View.P1.X) * (1400 / View.Width);
+    double ScaleY(double y) => 600 - (y - View.P1.Y) * (600 / View.Height);
 }

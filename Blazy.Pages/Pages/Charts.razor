@@ -16,8 +16,13 @@
             ShowLabels="ShowValueLabels" />    
     }
     
-    <div style="justify-self: center;">        
+    <div class="d-flex" style="justify-self: center; gap: 2em; align-items: center;">        
         <BlazyCheckbox Label="Show Value Labels" @bind-Value="ShowValueLabels" />
+        <label>
+            Points (@points):
+            <input type="range" @bind-value="points" min="2" max="250" />
+        </label>
+        <BlazyButton ThemeColor="ThemeColor.Primary" OnClick="RecalculatePoints">Recalculate Points</BlazyButton>
     </div>
 </div>
 
@@ -27,28 +32,29 @@
     Point ChartStart = new(-10, -50);
     Point ChartSize = new(400, 150);
     bool ShowValueLabels;
+    int points = 100;
 
     protected override void OnInitialized()
     {
+        RecalculatePoints();
+        base.OnInitialized();
+    }
+
+    void RecalculatePoints()
+    {        
         List<Point> data = new();
         var x = ChartStart.X;
         var y = ChartStart.Y;
         data.Add(new(x, y));
 
         int i = 0;
-        while(i < 20)
+        while(x < ChartSize.X + ChartStart.X)
         {
-            //x = Math.Min(x + Random.Shared.Next(20, 50), 800);
-            //y = Math.Max(-30, Math.Min(y + Random.Shared.Next(-30, 60), 300));
-            x = x + ChartSize.X / 20;
-            y = y + ChartSize.Y / 20;
+            x += ChartSize.X / (points - 1);
+            y = Math.Max(ChartStart.Y, Math.Min(y + Random.Shared.Next(-14, 16), ChartSize.Y + ChartStart.Y));
             data.Add(new(x, y));
             i++;
         }
         Data = data.ToArray();
-
-        Console.WriteLine($"First Point: {data.FirstOrDefault()}");
-
-        base.OnInitialized();
     }
 }

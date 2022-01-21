@@ -1,9 +1,9 @@
 ﻿@using Blazy.Utility
 
-<g>
+<g transform="translate(@(Point.X) @(-Point.Y))">
     <text class="chart-coord"
-        x="@(Point.X - Start.X)" 
-        y="@(Size.Y - Point.Y + Start.Y -10)">
+        y="-5"
+        transform="scale(@(View.Width / Size.X) @(View.Height / Size.Y))">
         @Point</text>
 </g>
 
@@ -13,6 +13,9 @@
 
     [CascadingParameter(Name = "Size")]
     public Point Size { get; set; }
+
+    [CascadingParameter(Name = "View")]
+    public Rectangle View { get; set; }
 
     [Parameter]
     public Point Point { get; set; }

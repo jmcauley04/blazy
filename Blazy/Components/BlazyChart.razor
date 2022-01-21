@@ -3,11 +3,10 @@
 @using System.Runtime.CompilerServices
 @using Blazy.Components.Charts
 
-<CascadingValue Value="@View.P1" Name="Start">
-<CascadingValue Value="@View.P2" Name="Size">
-<CascadingValue Value="@Padding" Name="Padding">
-<CascadingValue Value="@AsXCoordinate" Name="AsXCoordinate">
-<CascadingValue Value="@AsYCoordinate" Name="AsYCoordinate">
+<CascadingValue Value="@Start" Name="Start">
+<CascadingValue Value="@Size" Name="Size">
+<CascadingValue Value="@View" Name="View">
+
 
 <figure class="position-relative">
     <figcaption>
@@ -16,12 +15,8 @@
     <svg class="graph"
         xmlns="http://www.w3.org/2000/svg" 
         xmlns:xlink="http://www.w3.org/1999/xlink" 
-        viewBox="0 0 @(View.P2.X + 2 * Padding) @(View.P2.Y + 2 * Padding)"
-        style="border: 1px solid black;"
-        @ref="SvgRef"
-        @onmousemove="MouseMove"
-        @onmousedown="MouseDown"
-        @onmouseup="MouseUp">    
+        viewBox="0 0 1600 800"
+        style="border: 1px solid black;">    
                 
         <Axes
             XAxisTitle="@XAxisTitle" 
@@ -29,24 +24,18 @@
 
         <ChartArea 
             Data="@Data"
-            MouseoverChartCoord="@mouseOverChartCoord"
-            SelectedPoint="@SelectedPoint"
             ShowLabels="@ShowLabels"
-            GetNearestPoint="@GetNearestPoint"
-            OnChart="@OnChart" />      
-        
-        <MouseTooltip 
-            MouseDownCoordinate="@mouseDownChartCoord"
-            MouseOverCoordinate="@mouseOverChartCoord" />
+            ViewChanged="@UpdateView" />      
 
     </svg>
-    <span class="reset-button" @onclick="ResetZoom" hidden="@(View.Equals(new(Start,Size)))">        
-        <BlazyIcon Icon="BlazyIcon.IconType.oi_resize_both" />
-    </span>
+    <div class="actions-list">        
+        <span class="reset-button" @onclick="ResetZoom" hidden="@(View.Equals(new(Start,Start + Size)))">        
+            <BlazyIcon Icon="BlazyIcon.IconType.oi_resize_both" />
+        </span>
+    </div>
+
 </figure>
 
-</CascadingValue>
-</CascadingValue>
 </CascadingValue>
 </CascadingValue>
 </CascadingValue>
@@ -80,27 +69,7 @@
     [Parameter]
     public bool ShowLabels { get; set; }
 
-    [Inject]
-    public IJSRuntime JS { get; set; } = null!;
-
-    ElementReference SvgRef;
-    Point? nearestPoint;
-    ElementCoordinatesService coordinatesService;
-
-
-
     double labelOffsetX(string label) => label.Length * 2.7f;
-
-    private const int Padding = 60;
-
-    Rectangle Viewbox = null!;
-    Rectangle ZoomState => new(Start, Size + Start);
-
-    Point labelOffsets = null!;
-    Point yAxisTitle = null!;
-    Point xAxisTitle = null!;
-    Point? mouseOverChartCoord;
-    Point? mouseDownChartCoord;
 
     protected override void OnInitialized()
     {
@@ -112,143 +81,15 @@
             Data.Select(x => x.X).Max() - Start.X,
             Data.Select(x => x.Y).Max() - Start.Y);
 
-        Viewbox = new Rectangle(
-            new Point(0, 0),
-            new Point(Size.X + 2 * Padding, Size.Y + 2 * Padding)
-            );
-
-        View = new(Start, Size);
+        View = new(Start, Start + Size);
 
         base.OnInitialized();
     }
 
-    protected override async Task OnAfterRenderAsync(bool firstRender)
-    {
-        if(coordinatesService is null)
-        {
-            coordinatesService = new(JS);
-            await coordinatesService.Import();
-        }
-    }
-
-    void SelectPoint(Point? point)
-    {
-        if (point == SelectedPoint)
-            point = null;
-
-        if (SelectedPointChanged.HasDelegate)
-            SelectedPointChanged.InvokeAsync(point);
-        else
-            SelectedPoint = point;
-    }    
-
-    bool OnChart(Point point) => point >= Start && point <= Start + Size;
-
-    async Task MouseMove(MouseEventArgs e)
-    {
-        if (coordinatesService is null || !coordinatesService.IsImported)
-            return;
-
-        var result = await coordinatesService.GetCoordinates(SvgRef);
-
-        var xScaleFactor = result.Width / (Viewbox.Width);
-        var yScaleFactor = result.Height / (Viewbox.Height);
-
-        var mouseLoc = new Point(
-            (e.ClientX - result.Left) / xScaleFactor + ZoomState.P1.X - Padding,
-            AsYCoordinate((e.ClientY - result.Top) / yScaleFactor - Padding)
-        );
-
-        if (OnChart(mouseLoc))
-            mouseOverChartCoord = mouseLoc;
-        else
-            mouseOverChartCoord = null;
-    }
-
-    double AsYCoordinate(double y)
-    {
-        var newY = Size.Y - (y - Start.Y);
-        return newY;
-    }
-
-    double AsXCoordinate(double x)
-    {
-        var newX = x - Start.X;
-        return newX;
-    }
-
-    void SetProximityPoint()
-    {
-        if (mouseOverChartCoord is null)
-            nearestPoint = null;
-
-        else      
-            nearestPoint = GetNearestPoint(mouseOverChartCoord);        
-    }
-
-    Point? GetNearestPoint(Point point)
-    {
-        int nearestDistance = int.MaxValue;
-        Point? nearestPt = null;
-
-        foreach(var pt in Data)
-        {
-            if (!OnChart(pt))
-                continue;
-
-            var distToPointSqrd = Math.Pow(pt.X - point.X, 2) + Math.Pow(pt.Y - point.Y, 2);
-
-            if (distToPointSqrd < nearestDistance)
-            {
-                nearestPt = pt;
-                nearestDistance = (int)distToPointSqrd;
-            }
-        }
-
-        return nearestPt;
-    }
-
-    void MouseDown(MouseEventArgs e)
-    {
-        mouseDownChartCoord = mouseOverChartCoord;
-    }
-
-    void MouseUp(MouseEventArgs e)
-    {
-        if (mouseOverChartCoord is null)
-            mouseDownChartCoord = null;
-
-        if(mouseOverChartCoord is not null && mouseDownChartCoord is not null)
-        {
-            if (mouseOverChartCoord!.X == mouseDownChartCoord!.X || mouseOverChartCoord!.Y == mouseDownChartCoord!.Y)
-            {
-                SelectPoint(GetNearestPoint(mouseOverChartCoord));
-            }
-            else //zoom
-            {
-                var bottomLeft = new Point(
-                    Math.Min(mouseDownChartCoord.X, mouseOverChartCoord.X),
-                    Math.Min(mouseDownChartCoord.Y, mouseOverChartCoord.Y)
-                );
-
-                var topRight = new Point(
-                    Math.Max(mouseDownChartCoord.X, mouseOverChartCoord.X),
-                    Math.Max(mouseDownChartCoord.Y, mouseOverChartCoord.Y)
-                );
-
-                View = new(
-                     bottomLeft, //start
-                     topRight - bottomLeft //size
-                );
-                Console.WriteLine(View);
-            }
-
-            mouseDownChartCoord = null;            
-        }     
-    }
-
     void ResetZoom()
     {
-        View = new(Start, Size);
+        View = new(Start, Start + Size);
     }
+
+    void UpdateView(Rectangle newView) => View = newView;
 }
