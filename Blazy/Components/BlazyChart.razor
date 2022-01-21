@@ -22,7 +22,8 @@
             XAxisTitle="@XAxisTitle" 
             YAxisTitle="@YAxisTitle" />
 
-        <ChartArea 
+        <ChartArea
+            @ref="ChartArea"
             Data="@Data"
             ShowLabels="@ShowLabels"
             ViewChanged="@UpdateView" />      
@@ -66,13 +67,10 @@
 
     public Rectangle View { get; set; }
 
-    [Parameter]
-    public bool ShowLabels { get; set; }
+    ChartArea? ChartArea;
 
-    double labelOffsetX(string label) => label.Length * 2.7f;
-
-    protected override void OnInitialized()
-    {
+    public void ReinitializeChart()
+    {        
         Start ??= new Point(
             Data.Select(x => x.X).Min(), 
             Data.Select(x => x.Y).Min());
@@ -83,6 +81,18 @@
 
         View = new(Start, Start + Size);
 
+        ChartArea?.ReinitializeChartArea();
+        InvokeAsync(StateHasChanged);
+    }
+
+    [Parameter]
+    public bool ShowLabels { get; set; }
+
+    double labelOffsetX(string label) => label.Length * 2.7f;
+
+    protected override void OnInitialized()
+    {
+        ReinitializeChart();
         base.OnInitialized();
     }
 

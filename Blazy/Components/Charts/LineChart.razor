@@ -1,0 +1,58 @@
+﻿
+@if(Data != null)
+{
+    <g fill="none" stroke="red">     
+        <path d="@linePath" vector-effect="non-scaling-stroke">
+        </path>         
+
+        @foreach (var point in Data)
+        {
+            <g stroke="@(point == SelectedPoint ? "darkred" : "red")" class="point">
+                <line 
+                    x1="@(point.X)" 
+                    x2="@(point.X)" 
+                    y1="@(point.Y)" 
+                    y2="@(point.Y)" 
+                    stroke-linecap="round"
+                    stroke-width="@(point == NearestPoint || point == SelectedPoint ? "10" : "7")"
+                    vector-effect="non-scaling-stroke" />
+            </g>
+        }
+
+    </g>   
+
+}          
+
+@code{
+    [Parameter]
+    public IEnumerable<Point>? Data { get; set; }
+
+    [Parameter]
+    public Point? SelectedPoint { get; set; }
+
+    [Parameter]
+    public Point? NearestPoint { get; set; }
+
+    public void ReinitializeChart()
+    {
+        linePath = null;
+        InvokeAsync(StateHasChanged);
+    }
+
+    string? linePath;
+    string GetPath()
+        => Data?.Select(x => $"{x.X} {x.Y}")
+                            .Aggregate($"M{Data.First().X} {Data.First().Y} L", (a, b) => $"{a} {b}") ?? string.Empty;
+
+    protected override bool ShouldRender()
+    {
+        if(linePath is null && Data is not null)
+        {
+            linePath = GetPath();
+            InvokeAsync(StateHasChanged);
+            return true;
+        }
+
+        return false;
+    }
+}

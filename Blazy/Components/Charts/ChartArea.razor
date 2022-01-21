@@ -28,30 +28,12 @@
 
     <g transform="translate(0 @YOffSet) scale(1 -1)" mask="url(#chartMask)">
         
+        <LineChart 
+            @ref="Chart"
+            Data="Data"
+            NearestPoint="NearestPoint"
+            SelectedPoint="SelectedPoint" />
        
-        @if(Data != null)
-        {
-            <g fill="none" stroke="red">     
-                <path d="@GetPath()" vector-effect="non-scaling-stroke">
-                </path>         
-
-                @foreach (var point in Data)
-                {
-                    <g stroke="@(point == SelectedPoint ? "darkred" : "red")" class="point">
-                        <line 
-                            x1="@(point.X)" 
-                            x2="@(point.X)" 
-                            y1="@(point.Y)" 
-                            y2="@(point.Y)" 
-                            stroke-linecap="round"
-                            stroke-width="@(point == NearestPoint || point == SelectedPoint ? "10" : "7")"
-                            vector-effect="non-scaling-stroke" />
-                    </g>
-                }
-
-            </g>   
-
-        }          
     </g>
 
     <g transform="translate(0 @YOffSet) scale(1 1)">
@@ -80,7 +62,8 @@
         
     <MouseTooltip 
         MouseDownCoordinate="@mouseDownChartCoord"
-        MouseOverCoordinate="@mouseOverChartCoord" />
+        MouseOverCoordinate="@mouseOverChartCoord"
+        ShowCoordinates="false" />
 
     <g transform="translate(@View.P1.X @(View.P1.Y))"
         @ref="SvgRef"
@@ -129,23 +112,24 @@
 
     private Point? mouseoverChartCoord;
 
+    LineChart? Chart;
     public Point? NearestPoint { get; set; }
     Point? mouseOverChartCoord;
     Point? mouseDownChartCoord;
+    bool _renderNext = true;
 
     ElementReference SvgRef;
     ElementCoordinatesService coordinatesService;
+    NearestPointAlgorithm nearestPointAlg;
 
-    string GetPath() => Data?.Select(x => $"{x.X} {x.Y}")
-                            .Aggregate($"M{Data.First().X} {Data.First().Y} L", (a, b) => $"{a} {b}") ?? string.Empty;
 
     void SetProximityPoint()
     {
         if (mouseOverChartCoord is null)
             NearestPoint = null;
 
-        else      
-            NearestPoint = GetNearestPoint(mouseOverChartCoord);        
+        else
+            NearestPoint = nearestPointAlg.GetNearestPoint(mouseOverChartCoord);
     }
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
@@ -155,6 +139,20 @@
             coordinatesService = new(JS);
             await coordinatesService.Import();
         }
+    }
+
+    protected override void OnInitialized()
+    {
+        ReinitializeChartArea();
+
+        base.OnInitialized();
+    }
+
+    public void ReinitializeChartArea()
+    {        
+        nearestPointAlg = new(Data);
+        Chart?.ReinitializeChart();
+        InvokeAsync(StateHasChanged);
     }
 
     async Task MouseMoved(MouseEventArgs e)

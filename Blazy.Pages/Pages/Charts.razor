@@ -1,4 +1,5 @@
 ﻿@using Blazy.Utility
+@using Blazy.Utility.Math
 @page "/charts"
 <PageTitle>Blazy Charts</PageTitle>
 <h3>Blazy Charts</h3>
@@ -7,7 +8,9 @@
 
     @if(Data != null)
     {
-        <BlazyChart Data="Data"
+        <BlazyChart 
+            @ref="blazyChart"
+            Data="Data"
             Start="@ChartStart"
             Size="@ChartSize"
             ChartTitle="Blazy Line Chart Title"
@@ -20,9 +23,9 @@
         <BlazyCheckbox Label="Show Value Labels" @bind-Value="ShowValueLabels" />
         <label>
             Points (@points):
-            <input type="range" @bind-value="points" min="2" max="250" />
+            <input disabled type="range" @bind-value="points" min="2" max="100000" />
         </label>
-        <BlazyButton ThemeColor="ThemeColor.Primary" OnClick="RecalculatePoints">Recalculate Points</BlazyButton>
+        <BlazyButton Disabled="true" ThemeColor="ThemeColor.Primary" OnClick="RecalculatePoints">Recalculate Points</BlazyButton>
     </div>
 </div>
 
@@ -32,7 +35,9 @@
     Point ChartStart = new(-10, -50);
     Point ChartSize = new(400, 150);
     bool ShowValueLabels;
-    int points = 100;
+    int points = 10000;
+
+    BlazyChart? blazyChart;
 
     protected override void OnInitialized()
     {
@@ -56,5 +61,8 @@
             i++;
         }
         Data = data.ToArray();
+
+        blazyChart?.ReinitializeChart();
+        InvokeAsync(StateHasChanged);
     }
 }

@@ -2,24 +2,27 @@
 <g transform="translate(0 @YOffSet)"> 
 
     @if(MouseOverCoordinate is not null)
-    {  
-        <g transform="translate(@(MouseOverCoordinate.X) @(- MouseOverCoordinate.Y))">
-            <text 
-                y="-5"
-                class="chart-coord"
-                transform="scale(@(View.Width / Size.X) @(View.Height / Size.Y))">
-                @MouseOverCoordinate</text>
-        </g>
-        
-        @if(MouseDownCoordinate is not null)
+    {
+        @if (ShowCoordinates)
         {
-            <g transform="translate(@(MouseDownCoordinate.X) @(- MouseDownCoordinate.Y))">
+            <g transform="translate(@(MouseOverCoordinate.X) @(- MouseOverCoordinate.Y))">
                 <text 
                     y="-5"
                     class="chart-coord"
                     transform="scale(@(View.Width / Size.X) @(View.Height / Size.Y))">
-                    @MouseDownCoordinate</text>
+                    @MouseOverCoordinate</text>
             </g>
+        
+            @if(MouseDownCoordinate is not null)
+            {
+                <g transform="translate(@(MouseDownCoordinate.X) @(- MouseDownCoordinate.Y))">
+                    <text 
+                        y="-5"
+                        class="chart-coord"
+                        transform="scale(@(View.Width / Size.X) @(View.Height / Size.Y))">
+                        @MouseDownCoordinate</text>
+                </g>
+            }            
         }
         
         <g stroke-width="3" stroke="#ccc"> 
@@ -88,6 +91,9 @@
 
     [Parameter]
     public Point? MouseDownCoordinate { get; set; }
+
+    [Parameter]
+    public bool ShowCoordinates { get; set; }
 
     public double YOffSet => - Start.Y + (View.P1.Y - Start.Y) + View.P2.Y - (Start.Y + Size.Y);
 }
