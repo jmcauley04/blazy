@@ -96,7 +96,7 @@ button[b-bpoxhbm3cp] {
     }
 
 [b-bo86q0zsbx] .chart-coord {
-    font-size: .6em;
+    font-size: .4em;
     text-anchor: middle;
     fill: #666;
 }
@@ -107,7 +107,7 @@ figcaption[b-bo86q0zsbx] {
     text-align: center;
 }
 
-.reset-button[b-bo86q0zsbx] {
+.actions-list[b-bo86q0zsbx] {
     position: absolute;
     top: 2em;
     right: .5em;
@@ -700,7 +700,7 @@ tbody[b-k6wgan9gug]  tr:nth-child(2n+1){
 
 .value-labels[b-4ip13tfob6] {
     fill: #666;
-    font-size: .6em;
+    font-size: .8em;
 }
 
 .x-value-label[b-4ip13tfob6] {
@@ -713,7 +713,7 @@ tbody[b-k6wgan9gug]  tr:nth-child(2n+1){
 
 .axis-titles[b-4ip13tfob6] {
     fill: black;
-    font-size: .7em;
+    font-size: 1.5em;
     text-anchor: middle;
 }
 /* _content/Blazy/Components/Charts/ChartArea.razor.rz.scp.css */
