@@ -6,6 +6,7 @@
 <CascadingValue Value="@Start" Name="Start">
 <CascadingValue Value="@Size" Name="Size">
 <CascadingValue Value="@View" Name="View">
+<CascadingValue Value="@Data">
 
 
 <figure class="position-relative">
@@ -24,7 +25,6 @@
 
         <ChartArea
             @ref="ChartArea"
-            Data="@Data"
             ShowLabels="@ShowLabels"
             ViewChanged="@UpdateView" />      
 
@@ -37,6 +37,7 @@
 
 </figure>
 
+</CascadingValue>
 </CascadingValue>
 </CascadingValue>
 </CascadingValue>
@@ -71,7 +72,7 @@
 
     public async Task Redraw()
     {
-        await Task.Delay(100);
+        await Task.Delay(1);
         ChartArea?.Redraw();      
     }
 

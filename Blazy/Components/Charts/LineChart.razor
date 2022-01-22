@@ -10,7 +10,7 @@
 }          
 
 @code{
-    [Parameter]
+    [CascadingParameter]
     public IEnumerable<Point>? Data { get; set; }
 
     bool redraw = true;
@@ -18,6 +18,8 @@
     string LinePath
         => Data?.Select(x => $"{x.X} {x.Y}")
                             .Aggregate($"M{Data.First().X} {Data.First().Y} L", (a, b) => $"{a} {b}") ?? string.Empty;
+
+
 
     protected override bool ShouldRender()
     {

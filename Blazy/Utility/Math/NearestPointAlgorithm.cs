@@ -7,9 +7,16 @@ namespace Blazy.Utility.Math
         Dictionary<Rectangle, List<Point>> PointsMap = new Dictionary<Rectangle, List<Point>>();
 
         Rectangle _containingSpace;
+        int _columns;
         double _sideLength;
 
         public NearestPointAlgorithm(IEnumerable<Point> points, int columns = 20)
+        {
+            _columns = columns;
+            CalculatePointMap(points);
+        }
+
+        public void CalculatePointMap(IEnumerable<Point> points)
         {
             if (points.Count() == 0)
                 throw new ArgumentException("Algorithm requires at least one point", nameof(points));
@@ -18,17 +25,17 @@ namespace Blazy.Utility.Math
                 new(points.MinBy(p => p.X)!.X, points.MinBy(p => p.Y)!.Y),
                 new(points.MaxBy(p => p.X)!.X, points.MaxBy(p => p.Y)!.Y));
 
-            _sideLength = _containingSpace.Width / columns;
+            _sideLength = _containingSpace.Width / _columns;
 
             // make squares
-            for (var i = 0; i <= columns; i++)
+            for (var i = 0; i <= _columns; i++)
                 for (var j = 0; j <= _containingSpace.Height / _sideLength; j++)
                     PointsMap.Add(
                         GetRectangle(i, j),
                         new List<Point>());
 
             foreach (var point in points)
-                PointsMap[GetSection(point)].Add(point);      
+                PointsMap[GetSection(point)].Add(point);
         }
 
         public Point? GetNearestPoint(Point p)

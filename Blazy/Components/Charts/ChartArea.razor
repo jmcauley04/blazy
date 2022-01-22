@@ -29,12 +29,10 @@
     <g transform="translate(0 @YOffSet) scale(1 -1)" mask="url(#chartMask)">
         
         <LineChart
-            @ref="lineChart"
-            Data="Data" />
+            @ref="lineChart" />
 
         <ScatterChart
-            @ref="scatterChart"
-            Data="Data" />
+            @ref="scatterChart" />
 
         <SpecifiedPoints
             NearestPoint="NearestPoint"
@@ -95,7 +93,7 @@
     [Parameter]
     public EventCallback<Rectangle> ViewChanged { get; set; }
 
-    [Parameter]
+    [CascadingParameter]
     public IEnumerable<Point>? Data { get; set; }    
 
     [Parameter]
@@ -154,7 +152,7 @@
 
         base.OnInitialized();
     }
-
+    
     public void ReinitializeChartArea()
     {        
         nearestPointAlg = new(Data);
@@ -188,7 +186,7 @@
 
         else
             mouseOverChartCoord = null;
-
+            
         SetProximityPoint();
     }
 
@@ -255,7 +253,7 @@
             mouseDownChartCoord = null;            
         }     
     }
-
+    
     void MouseOut(MouseEventArgs e)
     {
         mouseOverChartCoord = null;
