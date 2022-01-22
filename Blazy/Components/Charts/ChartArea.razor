@@ -190,31 +190,6 @@
         SetProximityPoint();
     }
 
-    Point? GetNearestPoint(Point point)
-    {
-        if (Data is null)
-            return null;
-
-        int nearestDistance = int.MaxValue;
-        Point? nearestPt = null;
-
-        foreach(var pt in Data)
-        {
-            if (!OnChart(pt))
-                continue;
-
-            var distToPointSqrd = Math.Pow(pt.X - point.X, 2) + Math.Pow(pt.Y - point.Y, 2);
-
-            if (distToPointSqrd < nearestDistance)
-            {
-                nearestPt = pt;
-                nearestDistance = (int)distToPointSqrd;
-            }
-        }
-
-        return nearestPt;
-    }
-
     void MouseDown(MouseEventArgs e)
     {
         mouseDownChartCoord = mouseOverChartCoord;
