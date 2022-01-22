@@ -163,6 +163,8 @@
     public void Redraw()
     {
         ReinitializeChartArea();
+        SelectedPoint = null;
+        NearestPoint = null;
         lineChart?.Redraw();        
         scatterChart?.Redraw();        
     }
