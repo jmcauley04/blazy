@@ -7,7 +7,7 @@
   "linkerEnabled": true,
   "resources": {
     "assembly": {
-      "Blazy.dll": "sha256-zQ5c\/NsCW1z0KncC5I4kHf62Rav2WrmMMCcjVWFp9eM=",
+      "Blazy.dll": "sha256-CtUNBDStWd0emSt910xiZ+ROmzy8Tl8KJ4C3ztyA2fI=",
       "Blazy.SharedPages.dll": "sha256-ltm+sEfPbLD6l2FiTgo\/AP88B0QQ\/U40j1IsbSuCT78=",
       "Blazy.WASM.dll": "sha256-ru\/uNkIE0o3gDgAdCiGvGQE7rBZY7Hguagf6\/uQinZE=",
       "Microsoft.AspNetCore.Components.dll": "sha256-cCwkAH5WBIy9chZyL+teZy68MsmtuZRO6\/fxwAbtJPM=",
