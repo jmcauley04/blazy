@@ -28,12 +28,18 @@
 
     <g transform="translate(0 @YOffSet) scale(1 -1)" mask="url(#chartMask)">
         
-        <LineChart 
-            @ref="Chart"
-            Data="Data"
+        <LineChart
+            @ref="lineChart"
+            Data="Data" />
+
+        <ScatterChart
+            @ref="scatterChart"
+            Data="Data" />
+
+        <SpecifiedPoints
             NearestPoint="NearestPoint"
             SelectedPoint="SelectedPoint" />
-       
+            
     </g>
 
     <g transform="translate(0 @YOffSet) scale(1 1)">
@@ -112,7 +118,8 @@
 
     private Point? mouseoverChartCoord;
 
-    LineChart? Chart;
+    LineChart? lineChart;
+    ScatterChart? scatterChart;
     public Point? NearestPoint { get; set; }
     Point? mouseOverChartCoord;
     Point? mouseDownChartCoord;
@@ -151,8 +158,13 @@
     public void ReinitializeChartArea()
     {        
         nearestPointAlg = new(Data);
-        Chart?.ReinitializeChart();
-        InvokeAsync(StateHasChanged);
+    }
+
+    public void Redraw()
+    {
+        ReinitializeChartArea();
+        lineChart?.Redraw();        
+        scatterChart?.Redraw();        
     }
 
     async Task MouseMoved(MouseEventArgs e)

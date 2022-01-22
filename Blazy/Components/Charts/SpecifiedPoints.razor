@@ -1,0 +1,24 @@
+﻿@foreach(var point in new Point[]{ NearestPoint, SelectedPoint })
+{
+    if(point is not null)
+    {
+        <g stroke="@(point == SelectedPoint ? "hsl(240, 40%, 20%)" : "hsl(240, 40%, 50%)")" class="point">
+            <line 
+                x1="@(point.X)" 
+                x2="@(point.X)" 
+                y1="@(point.Y)" 
+                y2="@(point.Y)" 
+                stroke-linecap="round"
+                stroke-width="@(point == NearestPoint || point == SelectedPoint ? "10" : "7")"
+                vector-effect="non-scaling-stroke" />
+        </g>
+    }
+}
+
+@code {
+    [Parameter]
+    public Point? SelectedPoint { get; set; }
+
+    [Parameter]
+    public Point? NearestPoint { get; set; }
+}

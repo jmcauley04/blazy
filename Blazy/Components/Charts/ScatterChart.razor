@@ -1,0 +1,38 @@
+﻿
+@foreach (var point in Data)
+{
+    <g stroke="hsl(240, 40%, 50%)" class="point">
+        <line 
+            x1="@(point.X)" 
+            x2="@(point.X)" 
+            y1="@(point.Y)" 
+            y2="@(point.Y)" 
+            stroke-linecap="round"
+            stroke-width="7"
+            vector-effect="non-scaling-stroke" />
+    </g>
+}
+
+
+@code {
+    [Parameter]
+    public IEnumerable<Point>? Data { get; set; }
+
+    bool redraw = true;
+
+    protected override bool ShouldRender()
+    {
+        if(redraw)
+        {
+            redraw = false;
+            return true;        
+        }
+
+        return false;
+    }
+
+    public void Redraw()
+    {
+        redraw = true;
+    }
+}

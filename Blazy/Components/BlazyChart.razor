@@ -69,6 +69,12 @@
 
     ChartArea? ChartArea;
 
+    public async Task Redraw()
+    {
+        await Task.Delay(100);
+        ChartArea?.Redraw();      
+    }
+
     public void ReinitializeChart()
     {        
         Start ??= new Point(
@@ -80,9 +86,6 @@
             Data.Select(x => x.Y).Max() - Start.Y);
 
         View = new(Start, Start + Size);
-
-        ChartArea?.ReinitializeChartArea();
-        InvokeAsync(StateHasChanged);
     }
 
     [Parameter]

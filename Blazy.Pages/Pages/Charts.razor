@@ -23,9 +23,9 @@
         <BlazyCheckbox Label="Show Value Labels" @bind-Value="ShowValueLabels" />
         <label>
             Points (@points):
-            <input disabled type="range" @bind-value="points" min="2" max="100000" />
+            <input type="range" @bind-value="points" min="20" max="10000" />
         </label>
-        <BlazyButton Disabled="true" ThemeColor="ThemeColor.Primary" OnClick="RecalculatePoints">Recalculate Points</BlazyButton>
+        <BlazyButton ThemeColor="ThemeColor.Primary" OnClick="RecalculatePoints">Recalculate Points</BlazyButton>
     </div>
 </div>
 
@@ -35,17 +35,16 @@
     Point ChartStart = new(-10, -50);
     Point ChartSize = new(400, 150);
     bool ShowValueLabels;
-    int points = 10000;
+    int points = 250;
 
     BlazyChart? blazyChart;
 
-    protected override void OnInitialized()
+    protected override async Task OnInitializedAsync()
     {
-        RecalculatePoints();
-        base.OnInitialized();
+        await RecalculatePoints();
     }
 
-    void RecalculatePoints()
+    async Task RecalculatePoints()
     {        
         List<Point> data = new();
         var x = ChartStart.X;
@@ -62,7 +61,7 @@
         }
         Data = data.ToArray();
 
-        blazyChart?.ReinitializeChart();
-        InvokeAsync(StateHasChanged);
+        if (blazyChart is not null)
+            await blazyChart.Redraw();
     }
 }
