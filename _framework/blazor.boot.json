@@ -7,9 +7,9 @@
   "linkerEnabled": true,
   "resources": {
     "assembly": {
-      "Blazy.dll": "sha256-0qvS0PQFiwuYgiTrp16uL\/WsROcrSepZW\/0CvqS1Re4=",
-      "Blazy.SharedPages.dll": "sha256-CVlwBjuGFrrURduKUZUCGra3EiAAG+0W5UERFIyTp0k=",
-      "Blazy.WASM.dll": "sha256-DNnjpdiKGQa1WME4Pg8t8G8jKhSGu\/jwZgq\/8Rz6nP4=",
+      "Blazy.dll": "sha256-GJNgsl5rQyUtFK8RZc7yJ6l+SS9TE9ZBfGrtFrEHq5w=",
+      "Blazy.SharedPages.dll": "sha256-OxMTl\/T9kuoT4EZsbdh3EcIQMGEVPbSY8xt07RUe6s4=",
+      "Blazy.WASM.dll": "sha256-D88ppahkxx2+mYgrpub77Oy6D3EnO4BhlZwCv7aMCwg=",
       "Microsoft.AspNetCore.Components.dll": "sha256-cCwkAH5WBIy9chZyL+teZy68MsmtuZRO6\/fxwAbtJPM=",
       "Microsoft.AspNetCore.Components.Web.dll": "sha256-QBJoQKXAivQAz\/dj19MRPkhh1YndxWOBX1I90IDg\/gk=",
       "Microsoft.AspNetCore.Components.WebAssembly.dll": "sha256-2fbR6RpUxEMnL89Bp4BedWtQJQRpzWAu87gh1UjPAWk=",
@@ -49,7 +49,7 @@
       "System.Net.Http.Json.dll": "sha256-Lb3PG4UPddseNBHzTN+Wxcv7Wd1dynuRwNFXOCkOs\/U=",
       "System.Net.Primitives.dll": "sha256-R8E7iySN1pAQhPLouDlyFJ9IaUNThdMB\/HizJSy+XHE=",
       "System.ObjectModel.dll": "sha256-XNb74V045Ina3D40UN0gaz54gC0hmNz1EKScz6CDTPk=",
-      "System.Private.CoreLib.dll": "sha256-g0uT2fBGPQhSiI2iIzi9gvcKEMB310zidr0p9AI2FGA=",
+      "System.Private.CoreLib.dll": "sha256-JNU02lzS2miOzgVOUS63ISnyFUcztna9J9WoX3\/PcIk=",
       "System.Private.Runtime.InteropServices.JavaScript.dll": "sha256-U3xP94XuZ1H8IRffJYLTmWHwFgQoF3e\/VMZAr8BFsnE=",
       "System.Private.Uri.dll": "sha256-CTyq2e6ztMLvFW18SUopqIxOzq7fu9TxlUgdyGT5TDc=",
       "System.Private.Xml.dll": "sha256-ySb1kpGLrcZcH7mv\/A0RWh6S+Xlt9tIqLeU8ftEdI2c=",

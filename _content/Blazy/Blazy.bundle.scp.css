@@ -205,6 +205,21 @@ pre[b-0pojzpnsi2] {
     padding: 1em;
     padding-top: 0;
 }
+/* _content/Blazy/Components/BlazyConsole.razor.rz.scp.css */
+.blazy-console[b-53g4xjwn29] {
+    background: hsl(0, 0%, 10%);
+    color: white;
+    padding: 0 1em;
+    overflow-y: scroll;
+    height: 100%;
+    width: 100%;
+}
+
+ul[b-53g4xjwn29] {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+}
 /* _content/Blazy/Components/BlazyDataGrid.razor.rz.scp.css */
 .z-small[b-iobu436mbq] {
     display: none;
