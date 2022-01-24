@@ -1,0 +1,46 @@
+﻿<div class="blazy-console">
+    <ul>
+        @foreach(var msg in Messages.OrderByDescending(x => x.CreatedAt))
+        {
+            <li>@(new MarkupString(msg.ToString()))</li>
+        }
+    </ul>
+</div>
+
+
+@code {
+    [Parameter]
+    public int MaxMessages { get; set; } = 50;
+
+    public record class ConsoleMessage(DateTime CreatedAt, string Message, string Header = "")
+    {
+        public override string ToString()
+            => $@"{StyledDate(CreatedAt)} {StyledHeader(Header)}{StyledMessage(Message)}";
+
+        string StyledDate(DateTime datetime) => $@"[<span style=""color: hsl(180, 50%, 50%);"">{datetime.ToString("hh:mm:ss")}</span>]";
+        string StyledHeader(string header) => string.IsNullOrEmpty(Header) ? string.Empty : $@"<span style=""color: hsl(90, 50%, 50%);"">{header}</span>";
+        string StyledMessage(string message) => string.IsNullOrEmpty(Message) ? string.Empty : $": {Message}";
+    }
+
+
+    List<ConsoleMessage> Messages { get; set; } = new();
+
+    public void AddMessage(string msg)
+    {
+        AddMessage("", msg);
+    }
+
+    public void AddMessage(string header, string msg)
+    {        
+        Messages.Add(new(DateTime.Now, msg, header));
+        while (Messages.Count > MaxMessages)
+            Messages.RemoveAt(0);
+
+        StateHasChanged();
+    }
+
+    public void AddSystemMessage(string message)
+    {
+        AddMessage(message, "");        
+    }
+}
