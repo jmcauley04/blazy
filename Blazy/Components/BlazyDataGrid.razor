@@ -111,8 +111,14 @@
     bool openModal;
 
     void EditItem(TItem item, bool useModal = false)
-    {
-        originalItemJson = System.Text.Json.JsonSerializer.Serialize<TItem>(item);
+    {        
+        JsonSerializerOptions options = new()
+        {
+            ReferenceHandler = ReferenceHandler.Preserve,
+            WriteIndented = true
+        };
+        
+        originalItemJson = System.Text.Json.JsonSerializer.Serialize<TItem>(item, options);
         openModal = useModal;
         EditingItem = item;
     }
