@@ -1,0 +1,22 @@
+﻿
+.ribbon {
+    position:absolute;
+    top:0;
+    bottom:0;
+    left:0;
+    right:0;
+    overflow: hidden;
+}
+
+.top-left-ribbon {
+    background-color: blue;
+    height: 30px;
+    width: 100%;
+
+    color: white;
+    display: grid;
+    place-items: center;
+
+    transform: rotate(-45deg) translate(-50%, 100%);
+    transform-origin: 0% 0%;
+}
