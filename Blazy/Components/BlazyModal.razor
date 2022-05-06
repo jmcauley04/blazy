@@ -2,8 +2,8 @@
 {
     <Blazy.Components.Internal.BlazyStyleProvider>
 
-        <div @onclick="Cancel" class="modal show" tabindex="-1" aria-modal="true" role="dialog" style="display: block; background-color: rgba(0,0,0,.4);">
-            <div @onclick:stopPropagation="true" class="modal-dialog modal-dialog-scrollable @maxWidthClass">
+        <div @onmousedown="Cancel" class="modal show" tabindex="-1" aria-modal="true" role="dialog" style="display: block; background-color: rgba(0,0,0,.4);">
+            <div @onmousedown:stopPropagation="true" @onclick:stopPropagation="true" class="modal-dialog modal-dialog-scrollable @maxWidthClass">
                 <div class="modal-content">
                     @if(ModalHeader != null)
                     {
